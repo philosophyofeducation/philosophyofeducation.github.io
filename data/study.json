@@ -1,0 +1,32 @@
+{
+  "updated": "2026-11-14T12:50:00-06:00",
+  "source": "YPT study timer",
+  "goalMinutes": 300,
+  "lifetimeGoalHours": 10000,
+  "subjects": {
+    "coursework": "Coursework",
+    "english": "English",
+    "vocabulary-builder": "Vocabulary Builder",
+    "psychoanalysis": "Psychoanalysis",
+    "poststructuralism": "Poststructuralism",
+    "philosophy-of-language": "Philosophy of Language",
+    "analytic-philosophy": "Analytic Philosophy",
+    "philosophy-of-education": "Philosophy of Education",
+    "final-paper": "Final Paper: Silencing"
+  },
+  "days": {
+    "2026-11-02": {"coursework": 198},
+    "2026-11-03": {"coursework": 248, "english": 47, "final-paper": 6},
+    "2026-11-04": {"coursework": 298, "english": 15},
+    "2026-11-05": {"coursework": 125},
+    "2026-11-06": {"coursework": 70, "english": 6},
+    "2026-11-07": {"psychoanalysis": 170, "english": 56, "coursework": 18, "poststructuralism": 11},
+    "2026-11-08": {"english": 89, "coursework": 9},
+    "2026-11-09": {"english": 52, "psychoanalysis": 27, "coursework": 16},
+    "2026-11-10": {"final-paper": 104, "coursework": 89},
+    "2026-11-11": {"english": 92},
+    "2026-11-12": {"coursework": 118},
+    "2026-11-13": {"philosophy-of-language": 63, "psychoanalysis": 41},
+    "2026-11-14": {"psychoanalysis": 95}
+  }
+}
