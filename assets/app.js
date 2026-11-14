@@ -7,7 +7,7 @@
 
   var REPO = 'philosophyofeducation/philosophyofeducation.github.io';
   var app = document.getElementById('app');
-  var D = { study: null, logs: [], posts: [] };
+  var D = { study: null, logs: [], posts: [], library: [] };
   var LOGS = {};        // date -> log
   var SUBJ = {};        // slug -> name
   var logState = { mode: 'month', anchor: null };
@@ -148,7 +148,7 @@
       '<section class="hero"><div style="display:grid;gap:16px"><span class="kicker">PhD student · Philosophy of Education</span>' +
       '<h1>I study how <em>words wound</em>, and what education can do about it.</h1>' +
       '<p class="lede">This is my notebook: a daily study log, the thoughts I keep by subject, and longer writing about what I read.</p>' +
-      '<div class="btn-row"><a class="btn primary" href="#studylog">Open my study log →</a><a class="btn" href="#subjects">Thoughts by subject</a><a class="btn" href="#blog">Read the blog</a></div></div>' +
+      '<div class="btn-row"><a class="btn primary" href="#studylog">Open my study log →</a><a class="btn" href="#library">Browse my library</a><a class="btn" href="#blog">Read the blog</a></div></div>' +
       '<div class="today-card"><span class="kicker">Today · ' + esc(fmtDate(tk)) + '</span><span class="big">' + hm(tmin) + '</span>' +
       '<div class="bar goal"><span style="width:' + Math.min(100, tmin / g * 100).toFixed(1) + '%"></span></div>' +
       '<span class="muted">' + (tmin >= g ? 'Goal met. Well done.' : hm(g - tmin) + ' to the 5-hour goal') + '</span>' +
@@ -165,8 +165,8 @@
       '<div><div class="sec-head"><h2>Latest writing</h2><a class="more" href="#blog">All posts →</a></div>' +
       (posts.length ? '<div class="post-list">' + posts.map(postItemHTML).join('') + '</div>' : '<div class="empty-state">No posts yet.</div>') + '</div></section>' +
       '<section><div class="sec-head"><h2>Explore</h2></div><div class="grid-cards">' +
-      navCard('#studylog', 'Study Log', 'Hours by day, week, month and year, with what I covered each day.') +
-      navCard('#subjects', 'Subjects', 'My own thoughts, gathered subject by subject.') +
+      navCard('#studylog', 'Study Log', 'Hours by month, week, day and year, and my thoughts by subject.') +
+      navCard('#library', 'Library', 'The books and papers I am reading, shelved and annotated.') +
       navCard('#blog', 'Blog', 'Longer pieces on what I read and think about.') +
       navCard('#research', 'Research', 'Hate speech, linguistic injury, and the task of education.') +
       '</div></section></div>';
@@ -189,7 +189,7 @@
     var sum = sumRange(start, effEnd < start ? start : effEnd);
     var canPrev = start > first, canNext = end < tk;
     var owner = isOwner();
-    var html = '<div class="view"><section style="display:grid;gap:14px"><span class="kicker">Study Log</span><h1>Hours, and what I did with them.</h1></section>' +
+    var html = '<div class="view"><section style="display:grid;gap:14px"><span class="kicker">Study Log</span><h1>Hours, and what I did with them.</h1>' + subNav('overview') + '</section>' +
       '<section style="display:grid;gap:20px"><div class="period"><div class="seg" role="group" aria-label="Period">' +
       ['month', 'week', 'day', 'year'].map(function (m) { return '<button type="button" data-mode="' + m + '" aria-pressed="' + (m === mode) + '">' + m.charAt(0).toUpperCase() + m.slice(1) + '</button>'; }).join('') +
       '</div><div class="stepper"><button type="button" id="prev" aria-label="Previous" ' + (canPrev ? '' : 'disabled') + '>←</button><span class="label">' + esc(label) + '</span><button type="button" id="next" aria-label="Next" ' + (canNext ? '' : 'disabled') + '>→</button><button type="button" class="btn" id="jump-today" style="width:auto;height:34px;padding:0 12px">Today</button></div></div>';
@@ -282,7 +282,7 @@
     var byDate = {}; st.covered.forEach(function (c) { (byDate[c.date] = byDate[c.date] || []).push(c.text); });
     var dates = Object.keys(byDate).sort().reverse();
     var owner = isOwner();
-    app.innerHTML = '<div class="view"><section style="display:grid;gap:12px"><a class="kicker" href="#subjects" style="text-decoration:none">← All subjects</a><h1>' + esc(subjName(slug)) + '</h1></section>' +
+    app.innerHTML = '<div class="view"><section style="display:grid;gap:14px"><span class="kicker">Study Log · Subject</span><h1>' + esc(subjName(slug)) + '</h1>' + subNav(slug) + '</section>' +
       '<section class="tiles"><div class="tile"><span class="label">Total time</span><span class="value">' + hm(st.minutes) + '</span><span class="sub">all time</span></div>' +
       '<div class="tile"><span class="label">Days studied</span><span class="value">' + st.days + '</span><span class="sub">from the timer</span></div>' +
       '<div class="tile hl"><span class="label">My thoughts</span><span class="value">' + st.thoughts.length + '</span><span class="sub">collected below</span></div></section>' +
@@ -301,6 +301,58 @@
       items.push({ label: (s.getMonth() + 1) + '/' + s.getDate(), value: t, tip: 'Week of ' + MON[s.getMonth()] + ' ' + s.getDate() + ': ' + hm(t) });
     }
     barChart(document.getElementById('subj-chart'), items, { label: 'Weekly hours for ' + subjName(slug), height: 200 });
+  }
+
+  function subNav(active) {
+    var st = subjectStats();
+    var order = Object.keys(SUBJ).filter(function (k) { return st[k] && (st[k].minutes > 0 || st[k].covered.length); });
+    return '<nav class="subnav" aria-label="Study log sections"><a href="#studylog"' + (active === 'overview' ? ' aria-current="page"' : '') + '>Overview</a><span class="sep" aria-hidden="true"></span>' +
+      order.map(function (k) { return '<a href="#subject-' + esc(k) + '"' + (active === k ? ' aria-current="page"' : '') + '>' + esc(subjName(k)) + '<span class="num">' + hrs(st[k].minutes) + '</span></a>'; }).join('') + '</nav>';
+  }
+
+  var STATUS = { reading: 'Reading', done: 'Done', 'to-read': 'To read' };
+  var libFilter = 'all';
+  function spineHeight(t) { var h = 0; for (var i = 0; i < t.length; i++) h = (h * 31 + t.charCodeAt(i)) % 997; return 250 + (h % 5) * 12; }
+  function viewLibrary() {
+    var items = D.library.filter(function (b) { return libFilter === 'all' || b.status === libFilter; });
+    var books = items.filter(function (b) { return b.kind === 'book'; }), papers = items.filter(function (b) { return b.kind !== 'book'; });
+    var counts = { reading: 0, done: 0, 'to-read': 0 }; D.library.forEach(function (b) { counts[b.status] = (counts[b.status] || 0) + 1; });
+    app.innerHTML = '<div class="view"><section style="display:grid;gap:14px"><span class="kicker">Library</span><h1>What I\'m reading.</h1>' +
+      '<div class="filters" role="group" aria-label="Filter by status">' + ['all', 'reading', 'done', 'to-read'].map(function (f) { return '<button type="button" data-lf="' + f + '" aria-pressed="' + (f === libFilter) + '">' + (f === 'all' ? 'All' : STATUS[f]) + ' <span class="num">' + (f === 'all' ? D.library.length : (counts[f] || 0)) + '</span></button>'; }).join('') + '</div>' +
+      '<div class="legend"><span><i style="background:#e1ad01"></i>Reading</span><span><i style="background:#111"></i>Done</span><span><i style="background:#fff;border:1px solid #111"></i>To read</span></div></section>' +
+      '<section><div class="sec-head"><h2>Books</h2><span class="muted">' + books.length + '</span></div>' +
+      (books.length ? '<div class="shelf">' + books.map(function (b) {
+        return '<a class="spine s-' + b.status + '" href="#book-' + esc(b.id) + '" style="height:' + spineHeight(b.title) + 'px" title="' + esc(b.title + ' · ' + b.author) + '"><span class="t">' + esc(b.title) + '</span><span class="a">' + esc(b.author.split(',')[0].split(' (')[0]) + '</span></a>';
+      }).join('') + '</div>' : '<div class="empty-state">No books here.</div>') + '</section>' +
+      '<section><div class="sec-head"><h2>Papers</h2><span class="muted">' + papers.length + '</span></div>' +
+      (papers.length ? '<div class="papers">' + papers.map(function (b) {
+        return '<a class="paper s-' + b.status + '" href="#book-' + esc(b.id) + '"><span class="band"><span>' + esc(b.year) + '</span><span>' + STATUS[b.status] + '</span></span><span class="pt">' + esc(b.title) + '</span><span class="pa">' + esc(b.author) + '</span><span class="pv">' + esc(b.venue || '') + '</span></a>';
+      }).join('') + '</div>' : '<div class="empty-state">No papers here.</div>') + '</section></div>';
+    app.querySelectorAll('[data-lf]').forEach(function (b) { b.addEventListener('click', function () { libFilter = b.getAttribute('data-lf'); render(); }); });
+  }
+  function listBlock(title, arr, ordered) {
+    if (!arr || !arr.length) return '';
+    var tag = ordered ? 'ol' : 'ul';
+    return '<div class="lib-block"><h3>' + esc(title) + '</h3><' + tag + '>' + arr.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</' + tag + '></div>';
+  }
+  function viewBook(id) {
+    var b = D.library.find(function (x) { return x.id === id; });
+    if (!b) { app.innerHTML = '<div class="empty-state">That item is not on the shelf. <a href="#library">Back to the library</a></div>'; return; }
+    var left = (b.question ? '<div class="lib-block"><h3>Question</h3><p>' + esc(b.question) + '</p></div>' : '') +
+      listBlock('Main argument', b.argument) + listBlock('Chapters', b.parts) + listBlock('Key concepts', b.concepts) + listBlock('Structure', b.structure, true) +
+      listBlock('Quotes I keep', b.quotes) + listBlock('Related readings', b.related);
+    var mine = (b.mine || []).map(function (t) { return '<p class="thought">' + esc(t) + '</p>'; }).join('') +
+      ((b.questions && b.questions.length) ? '<h3 style="margin-top:20px">Questions I have</h3>' + b.questions.map(function (t) { return '<p class="thought">' + esc(t) + '</p>'; }).join('') : '');
+    app.innerHTML = '<article class="view"><header style="display:grid;gap:12px"><a class="kicker" href="#library" style="text-decoration:none">← Library</a><h1>' + esc(b.title) + '</h1>' +
+      (b.subtitle ? '<p class="lede" style="margin:0">' + esc(b.subtitle) + '</p>' : '') +
+      '<div class="chips"><span class="pill soft">' + esc(b.author) + '</span><span class="pill soft">' + esc(b.year) + '</span>' + (b.venue ? '<span class="pill soft">' + esc(b.venue) + '</span>' : '') +
+      '<span class="pill ' + (b.status === 'reading' ? 'goal' : '') + '">' + STATUS[b.status] + '</span>' + (b.dateRead ? '<span class="pill soft">read ' + esc(fmtDate(b.dateRead, true)) + '</span>' : '') +
+      (b.subject ? '<a class="pill" href="#subject-' + esc(b.subject) + '">' + esc(subjName(b.subject)) + ' →</a>' : '') + '</div>' +
+      (b.keywords ? '<div class="chips">' + b.keywords.map(function (k) { return '<span class="pill soft">' + esc(k) + '</span>'; }).join('') + '</div>' : '') +
+      (b.note ? '<p class="muted" style="margin:0">' + esc(b.note) + '</p>' : '') + '</header>' +
+      (left || mine ? '<section class="two"><div>' + (left || '<div class="empty-state">Notes will appear here as I read.</div>') + '</div><div><div class="sec-head"><h2>My thoughts</h2></div>' + (mine || '<p class="thought empty">My thoughts on this go here.</p>') + '</div></section>' : '<div class="empty-state">Not started yet. Notes will appear here as I read.</div>') +
+      '</article>';
+    window.scrollTo(0, 0);
   }
 
   function postItemHTML(p) {
@@ -342,7 +394,7 @@
       '<p class="lede">I study the wound of hate speech and how education can respond to it, drawing on Austin, Butler, and Derrida.</p></section>' +
       '<section class="two"><div><div class="sec-head"><h2>Research interests</h2></div><div class="chips">' + interests.map(function (i) { return '<span class="pill">' + esc(i) + '</span>'; }).join('') + '</div>' +
       '<div class="sec-head" style="margin-top:32px"><h2>Thesis</h2></div><p style="margin:0"><strong>The Wound of Hate Speech and Educational Response: A Philosophical Inquiry via Judith Butler</strong><br><span class="muted">M.A. thesis, Seoul National University, 2026. Advisor: Duck-Joo Kwak</span></p>' +
-      '<div class="chips" style="margin-top:24px">' + ['philosophy-of-language', 'philosophy-of-education', 'poststructuralism', 'psychoanalysis'].map(function (s) { return '<a class="pill soft" href="#subject-' + s + '">' + esc(subjName(s)) + ' →</a>'; }).join('') + '</div></div>' +
+      '<div class="chips" style="margin-top:24px">' + ['final-paper', 'post-structuralism', 'psychoanalysis', 'philosophy-of-edu'].map(function (s) { return '<a class="pill soft" href="#subject-' + s + '">' + esc(subjName(s)) + ' →</a>'; }).join('') + '</div></div>' +
       '<div><div class="sec-head"><h2>Conference presentations</h2></div>' + cvRows([
         ['Aug 2026', '<strong>When words wound: Linguistic injury and the task of education</strong><br><span class="muted">20th International Network of Philosophers of Education (INPE) Conference, Université du Québec à Montréal, Canada</span>'],
         ['Aug 2026', '<strong>Commencing conversation through commensality: Openness, enjoyment, and hospitality in a divided world</strong> (round table, with H. Jeong and T. Kim)<br><span class="muted">20th INPE Conference, Montréal, Canada</span>'],
@@ -376,14 +428,16 @@
   }
 
   // ---------- router ----------
-  var routes = { home: viewHome, studylog: viewStudyLog, subjects: viewSubjects, blog: viewBlog, research: viewResearch, about: viewAbout };
+  var routes = { home: viewHome, studylog: viewStudyLog, library: viewLibrary, blog: viewBlog, research: viewResearch, about: viewAbout };
   function render() {
     var h = (location.hash || '#home').slice(1);
     if (h === 'owner') { try { localStorage.setItem('owner', '1'); } catch (e) {} location.replace('#home'); return; }
     if (h === 'guest') { try { localStorage.removeItem('owner'); } catch (e) {} location.replace('#home'); return; }
     var section = h;
     if (/^day-\d{4}-\d{2}-\d{2}$/.test(h)) { logState.mode = 'day'; logState.anchor = h.slice(4); section = 'studylog'; viewStudyLog(); }
-    else if (h.indexOf('subject-') === 0) { section = 'subjects'; viewSubject(h.slice(8)); }
+    else if (h === 'subjects') { section = 'studylog'; viewStudyLog(); }
+    else if (h.indexOf('subject-') === 0) { section = 'studylog'; viewSubject(h.slice(8)); }
+    else if (h.indexOf('book-') === 0) { section = 'library'; viewBook(h.slice(5)); }
     else if (h.indexOf('post-') === 0) { var p = D.posts.find(function (x) { return x.slug === h.slice(5); }); section = 'blog'; viewPost(h.slice(5)); }
     else if (routes[h]) { routes[h](); }
     else { section = 'home'; viewHome(); }
@@ -399,9 +453,9 @@
   window.addEventListener('hashchange', function () { render(); window.scrollTo(0, 0); });
 
   function getJSON(p) { return fetch(p, { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw new Error(p); return r.json(); }); }
-  Promise.all([getJSON('data/study.json'), getJSON('logs/index.json').catch(function () { return []; }), getJSON('posts/index.json').catch(function () { return []; })])
+  Promise.all([getJSON('data/study.json'), getJSON('logs/index.json').catch(function () { return []; }), getJSON('posts/index.json').catch(function () { return []; }), getJSON('data/library.json').catch(function () { return { items: [] }; })])
     .then(function (res) {
-      D.study = res[0]; D.logs = res[1]; D.posts = res[2];
+      D.study = res[0]; D.logs = res[1]; D.posts = res[2]; D.library = res[3].items || [];
       SUBJ = Object.assign({}, D.study.subjects || {});
       var byName = {}; Object.keys(SUBJ).forEach(function (k) { byName[SUBJ[k].toLowerCase()] = k; byName[k] = k; });
       D.logs.forEach(function (l) {

@@ -1,32 +1,205 @@
 {
-  "updated": "2026-11-14T12:50:00-06:00",
-  "source": "YPT study timer",
-  "goalMinutes": 300,
-  "lifetimeGoalHours": 10000,
-  "subjects": {
-    "coursework": "Coursework",
-    "english": "English",
-    "vocabulary-builder": "Vocabulary Builder",
-    "psychoanalysis": "Psychoanalysis",
-    "poststructuralism": "Poststructuralism",
-    "philosophy-of-language": "Philosophy of Language",
-    "analytic-philosophy": "Analytic Philosophy",
-    "philosophy-of-education": "Philosophy of Education",
-    "final-paper": "Final Paper: Silencing"
+ "updated": "2026-11-14T13:02-06:00",
+ "source": "YPT study timer",
+ "goalMinutes": 300,
+ "lifetimeGoalHours": 10000,
+ "subjects": {
+  "language": "Language",
+  "post-structuralism": "Post Structuralism",
+  "final-paper": "Final Paper",
+  "psychoanalysis": "Psychoanalysis",
+  "course-work": "Course Work",
+  "personal-research": "Personal Research",
+  "philosophy-of-edu": "Philosophy of Edu"
+ },
+ "days": {
+  "2026-09-03": {
+   "philosophy-of-edu": 6
   },
-  "days": {
-    "2026-11-02": {"coursework": 198},
-    "2026-11-03": {"coursework": 248, "english": 47, "final-paper": 6},
-    "2026-11-04": {"coursework": 298, "english": 15},
-    "2026-11-05": {"coursework": 125},
-    "2026-11-06": {"coursework": 70, "english": 6},
-    "2026-11-07": {"psychoanalysis": 170, "english": 56, "coursework": 18, "poststructuralism": 11},
-    "2026-11-08": {"english": 89, "coursework": 9},
-    "2026-11-09": {"english": 52, "psychoanalysis": 27, "coursework": 16},
-    "2026-11-10": {"final-paper": 104, "coursework": 89},
-    "2026-11-11": {"english": 92},
-    "2026-11-12": {"coursework": 118},
-    "2026-11-13": {"philosophy-of-language": 63, "psychoanalysis": 41},
-    "2026-11-14": {"psychoanalysis": 95}
+  "2026-09-04": {
+   "philosophy-of-edu": 100
+  },
+  "2026-09-16": {
+   "philosophy-of-edu": 53
+  },
+  "2026-09-17": {
+   "philosophy-of-edu": 89
+  },
+  "2026-09-19": {
+   "personal-research": 290
+  },
+  "2026-09-20": {
+   "course-work": 51
+  },
+  "2026-09-21": {
+   "course-work": 37
+  },
+  "2026-09-22": {
+   "personal-research": 128
+  },
+  "2026-09-23": {
+   "course-work": 39
+  },
+  "2026-09-24": {
+   "language": 62
+  },
+  "2026-09-26": {
+   "personal-research": 138
+  },
+  "2026-09-27": {
+   "personal-research": 20
+  },
+  "2026-10-03": {
+   "personal-research": 25
+  },
+  "2026-10-04": {
+   "personal-research": 62
+  },
+  "2026-10-05": {
+   "personal-research": 69
+  },
+  "2026-10-06": {
+   "personal-research": 177,
+   "language": 50
+  },
+  "2026-10-07": {
+   "course-work": 32
+  },
+  "2026-10-08": {
+   "course-work": 85,
+   "language": 53,
+   "personal-research": 19
+  },
+  "2026-10-09": {
+   "personal-research": 59,
+   "language": 53
+  },
+  "2026-10-10": {
+   "personal-research": 269
+  },
+  "2026-10-11": {
+   "personal-research": 191,
+   "course-work": 8
+  },
+  "2026-10-12": {
+   "course-work": 48,
+   "personal-research": 16,
+   "language": 13
+  },
+  "2026-10-13": {
+   "course-work": 129,
+   "language": 68,
+   "personal-research": 45
+  },
+  "2026-10-14": {
+   "course-work": 228,
+   "language": 64
+  },
+  "2026-10-15": {
+   "course-work": 72,
+   "personal-research": 38
+  },
+  "2026-10-16": {
+   "personal-research": 187
+  },
+  "2026-10-17": {
+   "course-work": 440,
+   "personal-research": 157
+  },
+  "2026-10-18": {
+   "personal-research": 130
+  },
+  "2026-10-19": {
+   "personal-research": 77
+  },
+  "2026-10-20": {
+   "personal-research": 227,
+   "course-work": 30
+  },
+  "2026-10-21": {
+   "personal-research": 129,
+   "course-work": 64
+  },
+  "2026-10-22": {
+   "personal-research": 117
+  },
+  "2026-10-23": {
+   "personal-research": 202
+  },
+  "2026-10-24": {
+   "personal-research": 297
+  },
+  "2026-10-25": {
+   "personal-research": 30
+  },
+  "2026-10-26": {
+   "final-paper": 176,
+   "language": 30
+  },
+  "2026-10-28": {
+   "post-structuralism": 258,
+   "language": 42
+  },
+  "2026-10-29": {
+   "course-work": 91
+  },
+  "2026-10-30": {
+   "course-work": 153,
+   "post-structuralism": 72
+  },
+  "2026-10-31": {
+   "psychoanalysis": 72
+  },
+  "2026-11-02": {
+   "course-work": 198
+  },
+  "2026-11-03": {
+   "course-work": 248,
+   "language": 47,
+   "final-paper": 6
+  },
+  "2026-11-04": {
+   "course-work": 298,
+   "language": 15
+  },
+  "2026-11-05": {
+   "course-work": 125
+  },
+  "2026-11-06": {
+   "course-work": 70,
+   "language": 6
+  },
+  "2026-11-07": {
+   "psychoanalysis": 170,
+   "language": 56,
+   "course-work": 18,
+   "post-structuralism": 11
+  },
+  "2026-11-08": {
+   "language": 89,
+   "course-work": 9
+  },
+  "2026-11-09": {
+   "language": 52,
+   "psychoanalysis": 27,
+   "course-work": 16
+  },
+  "2026-11-10": {
+   "final-paper": 104,
+   "course-work": 89
+  },
+  "2026-11-11": {
+   "language": 92
+  },
+  "2026-11-12": {
+   "course-work": 118
+  },
+  "2026-11-13": {
+   "language": 63,
+   "psychoanalysis": 42
+  },
+  "2026-11-14": {
+   "psychoanalysis": 143
   }
+ }
 }

@@ -1,0 +1,272 @@
+{
+ "source": "Reading log (Google Sheets)",
+ "items": [
+  {
+   "id": "lear-love",
+   "kind": "book",
+   "title": "Love and Its Place in Nature",
+   "subtitle": "A Philosophical Interpretation of Freudian Psychoanalysis",
+   "author": "Jonathan Lear",
+   "year": 1990,
+   "status": "reading",
+   "subject": "psychoanalysis",
+   "parts": [
+    "Ch. 1 Introduction (pp. 3–28)",
+    "Ch. 2 Catharsis: Fantasy and Reality (pp. 29–68)",
+    "Ch. 3 The Interpretation of Dreams (pp. 69–97)",
+    "Ch. 4 Interpretation and Transformation: The Case of Little Hans (pp. 98–119)",
+    "Ch. 5 What Is Sex? (pp. 120–155)",
+    "Ch. 6 Where It Was, There I Shall Become (pp. 156–182)",
+    "Ch. 7 Radical Evaluation (pp. 183–222)"
+   ]
+  },
+  {
+   "id": "lear-freud",
+   "kind": "book",
+   "title": "Freud",
+   "author": "Jonathan Lear",
+   "year": 2005,
+   "status": "reading",
+   "subject": "psychoanalysis",
+   "note": "Read with my Sunday psychoanalysis group."
+  },
+  {
+   "id": "collins-bft",
+   "kind": "book",
+   "title": "Black Feminist Thought",
+   "subtitle": "Knowledge, Consciousness, and the Politics of Empowerment (2nd ed.)",
+   "author": "Patricia Hill Collins",
+   "year": 2000,
+   "status": "reading",
+   "dateRead": "2026-10-30",
+   "parts": [
+    "Ch. 11 Black Feminist Epistemology (pp. 251–271) · in progress",
+    "Ch. 4 Mammies, Matriarchs, and Other Controlling Images · to read"
+   ],
+   "question": "What standards decide whose knowledge counts, and what alternative epistemology do U.S. Black women use to validate knowledge?",
+   "argument": [
+    "Knowledge validation in the U.S. is controlled by elite White men, so Black women's knowledge is excluded both institutionally and epistemologically (positivism as the example).",
+    "Black women draw on an alternative epistemology with four dimensions: lived experience, dialogue, ethic of caring, ethic of personal accountability.",
+    "Black feminist thought is partial, situated knowledge; partiality, not universality, is the condition of being heard, and alternative epistemologies challenge the process of validating truth itself."
+   ],
+   "concepts": [
+    "subjugated knowledge: knowledge suppressed within dominant institutions",
+    "knowledge validation processes: institutions + Eurocentric epistemologies that legitimate knowledge",
+    "lived experience as a criterion of meaning: those who lived an experience are more credible (knowledge vs. wisdom)",
+    "dialogue: claims tested in community, not adversarial debate (call-and-response)",
+    "ethic of caring: individual uniqueness, emotion, empathy",
+    "ethic of personal accountability: claims assessed with the speaker's character and values",
+    "outsider-within: Black women in the academy moving between interpretive communities"
+   ],
+   "structure": [
+    "Eurocentric knowledge validation & power (positivism's 4 requirements)",
+    "Lived experience",
+    "Dialogue",
+    "Ethic of caring",
+    "Ethic of personal accountability",
+    "Black women as agents of knowledge (3 groups)",
+    "Toward truth (partiality)",
+    "Method: theoretical argument + Black women's voices, literature, interviews"
+   ]
+  },
+  {
+   "id": "fricker-ei",
+   "kind": "book",
+   "title": "Epistemic Injustice",
+   "subtitle": "Power and the Ethics of Knowing",
+   "author": "Miranda Fricker",
+   "year": 2007,
+   "status": "to-read",
+   "stars": 3,
+   "parts": [
+    "Ch. 1–2 Testimonial Injustice; Prejudice in the Credibility Economy"
+   ]
+  },
+  {
+   "id": "medina-resistance",
+   "kind": "book",
+   "title": "The Epistemology of Resistance",
+   "subtitle": "Gender and Racial Oppression, Epistemic Injustice, and Resistant Imaginations",
+   "author": "José Medina",
+   "year": 2013,
+   "status": "to-read",
+   "stars": 3,
+   "parts": [
+    "Ch. 1 Active Ignorance, Epistemic Others, and Epistemic Friction"
+   ]
+  },
+  {
+   "id": "medina-protest",
+   "kind": "book",
+   "title": "The Epistemology of Protest",
+   "subtitle": "Silencing, Epistemic Activism, and the Communicative Life of Resistance",
+   "author": "José Medina",
+   "year": 2023,
+   "status": "to-read",
+   "stars": 1
+  },
+  {
+   "id": "handbook-ei",
+   "kind": "book",
+   "title": "The Routledge Handbook of Epistemic Injustice",
+   "author": "Ian James Kidd, José Medina, Gaile Pohlhaus Jr. (eds.)",
+   "year": 2017,
+   "status": "to-read",
+   "stars": 1,
+   "note": "Selected chapters only."
+  },
+  {
+   "id": "mw-vocab",
+   "kind": "book",
+   "title": "Merriam-Webster's Vocabulary Builder",
+   "author": "Mary Wood Cornog",
+   "year": 2010,
+   "status": "reading",
+   "subject": "language",
+   "note": "30 units of Greek and Latin roots, two roots a day."
+  },
+  {
+   "id": "well-spoken",
+   "kind": "book",
+   "title": "The Well-Spoken Thesaurus",
+   "author": "Tom Heehler",
+   "year": 2011,
+   "status": "reading",
+   "subject": "language"
+  },
+  {
+   "id": "hp7",
+   "kind": "book",
+   "title": "Harry Potter and the Deathly Hallows",
+   "author": "J.K. Rowling",
+   "year": 2007,
+   "status": "reading",
+   "subject": "language",
+   "note": "Listening on audiobook during my commute."
+  },
+  {
+   "id": "dotson-2011",
+   "kind": "paper",
+   "title": "Tracking Epistemic Violence, Tracking Practices of Silencing",
+   "author": "Kristie Dotson",
+   "year": 2011,
+   "venue": "Hypatia 26(2)",
+   "status": "done",
+   "stars": 3,
+   "dateRead": "2026-10-23",
+   "subject": "final-paper",
+   "keywords": [
+    "epistemic violence",
+    "silencing",
+    "testimonial quieting",
+    "testimonial smothering",
+    "pernicious ignorance",
+    "situated ignorance",
+    "reciprocity"
+   ],
+   "question": "How can we identify and distinguish practices of silencing that members of oppressed groups face when they testify? (p. 236)",
+   "argument": [
+    "Dotson defines epistemic violence as an audience's failure to communicatively reciprocate, owing to pernicious ignorance.",
+    "Using this definition, she distinguishes two practices of silencing: testimonial quieting (the audience fails to recognize the speaker as a knower) and testimonial smothering (the speaker cuts short her own risky testimony).",
+    "Because silencing is located in the audience's failure, the burden of proof shifts away from the silenced speaker."
+   ],
+   "concepts": [
+    "epistemic violence: an audience's failure to communicatively reciprocate, intentionally or not, owing to pernicious ignorance",
+    "pernicious ignorance: reliable ignorance that, in a given context, causes harm",
+    "reliable ignorance: counterfactual incompetence; consistently failing to track the truth in some domain",
+    "testimonial quieting: an audience fails to identify a speaker as a knower",
+    "testimonial smothering: a speaker truncates her own testimony to what the audience demonstrates competence for (coerced self-silencing)",
+    "testimonial competence: the speaker's judgment that an audience has shown it can find her testimony accurately intelligible",
+    "situated ignorance: ignorance that follows from one's social position or epistemic location"
+   ],
+   "structure": [
+    "Hornsby's reciprocity → speakers depend on audiences",
+    "Define epistemic violence + answer 3 objections (incl. the 3-year-old case)",
+    "Testimonial quieting (Collins)",
+    "Testimonial smothering: 3 circumstances (Crenshaw, Harvin, Narayan)",
+    "Conclusion: dispersing the burden of proof",
+    "Method: conceptual analysis + cases"
+   ],
+   "quotes": [
+    "\"Epistemic violence does not require intention, nor does it require capacity.\" (p. 240)"
+   ],
+   "mine": [
+    "Evidence that the harm of hate speech does not end at the moment of utterance but produces later silencing (smothering).",
+    "Shifts the focus from speaker to audience → educational question: a classroom (as audience) must demonstrate testimonial competence to students who have been hurt, and refuse uptake to hate speech.",
+    "Smothering → experiences go unspoken → gaps in hermeneutical resources: support for the vicious cycle of testimonial and hermeneutical injustice."
+   ],
+   "questions": [
+    "If we all see from distorted positions, who can judge an audience's ignorance to be \"pernicious,\" and from what position? (cf. pp. 241, 243 vs. 248)",
+    "What harms of silencing escape a framework built on testimony and truth?",
+    "If harm is context-dependent, what criteria can identify it without inflating the concept or flattening context?",
+    "Is the norm of reciprocity itself an idealization?",
+    "Three-year-old case: must the harm of epistemic violence fall on the speaker, or does any bad outcome count?"
+   ],
+   "related": [
+    "Fricker (2007): testimonial injustice. The hearer judges the speaker's credibility; in Dotson, the speaker judges the hearer's competence (the opposite direction).",
+    "Langton (1993): locutionary silencing; compare with smothering (n. 12).",
+    "Butler (1997): speech forms the subject → grounds for my critique (the reciprocity norm as an idealization)."
+   ]
+  },
+  {
+   "id": "dotson-2014",
+   "kind": "paper",
+   "title": "Conceptualizing Epistemic Oppression",
+   "author": "Kristie Dotson",
+   "year": 2014,
+   "venue": "Social Epistemology 28(2)",
+   "status": "to-read",
+   "stars": 3
+  },
+  {
+   "id": "dotson-2012",
+   "kind": "paper",
+   "title": "A Cautionary Tale: On Limiting Epistemic Oppression",
+   "author": "Kristie Dotson",
+   "year": 2012,
+   "venue": "Frontiers 33(1)",
+   "status": "to-read",
+   "stars": 2
+  },
+  {
+   "id": "maitra-2009",
+   "kind": "paper",
+   "title": "Silencing Speech",
+   "author": "Ishani Maitra",
+   "year": 2009,
+   "venue": "Canadian Journal of Philosophy 39(2)",
+   "status": "to-read",
+   "stars": 2
+  },
+  {
+   "id": "pohlhaus-2012",
+   "kind": "paper",
+   "title": "Relational Knowing and Epistemic Injustice: Toward a Theory of Willful Hermeneutical Ignorance",
+   "author": "Gaile Pohlhaus Jr.",
+   "year": 2012,
+   "venue": "Hypatia 27(4)",
+   "status": "to-read",
+   "stars": 2
+  },
+  {
+   "id": "mills-2007",
+   "kind": "paper",
+   "title": "White Ignorance",
+   "author": "Charles W. Mills",
+   "year": 2007,
+   "venue": "In Sullivan & Tuana (eds.), Race and Epistemologies of Ignorance",
+   "status": "to-read",
+   "stars": 2
+  },
+  {
+   "id": "leslie-2017",
+   "kind": "paper",
+   "title": "The Original Sin of Cognition: Fear, Prejudice, and Generalization",
+   "author": "Sarah-Jane Leslie",
+   "year": 2017,
+   "venue": "Journal of Philosophy 114(8)",
+   "status": "to-read",
+   "stars": 1
+  }
+ ]
+}

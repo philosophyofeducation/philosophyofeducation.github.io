@@ -34,3 +34,9 @@ summary: One line shown in the list
 
 Write in Markdown here.
 ```
+
+## Library
+`data/library.json` lists books (`kind: book`) and papers (`kind: paper`) with `status` reading, done, or to-read. It mirrors the Reading log Google Sheet.
+
+## Syncing study time
+`python3 scripts/ypt_to_study.py <timelines.json>` turns a YPT timeline export into `data/study.json`, mapping old YPT subject names onto the current ones.
