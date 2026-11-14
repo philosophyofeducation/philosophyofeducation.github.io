@@ -10,7 +10,7 @@
   var D = { study: null, logs: [], posts: [] };
   var LOGS = {};        // date -> log
   var SUBJ = {};        // slug -> name
-  var logState = { mode: 'week', anchor: null };
+  var logState = { mode: 'month', anchor: null };
 
   // ---------- helpers ----------
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
@@ -186,10 +186,9 @@
     var sum = sumRange(start, effEnd < start ? start : effEnd);
     var canPrev = start > first, canNext = end < tk;
     var owner = isOwner();
-    var html = '<div class="view"><section style="display:grid;gap:14px"><span class="kicker">Study Log</span><h1>Hours, and what I did with them.</h1>' +
-      '<p class="lede">Study time comes from my YPT timer. Each day I note what I covered and, in mustard, what I think.</p></section>' +
+    var html = '<div class="view"><section style="display:grid;gap:14px"><span class="kicker">Study Log</span><h1>Hours, and what I did with them.</h1></section>' +
       '<section style="display:grid;gap:20px"><div class="period"><div class="seg" role="group" aria-label="Period">' +
-      ['day', 'week', 'month', 'year'].map(function (m) { return '<button type="button" data-mode="' + m + '" aria-pressed="' + (m === mode) + '">' + m.charAt(0).toUpperCase() + m.slice(1) + '</button>'; }).join('') +
+      ['month', 'week', 'day', 'year'].map(function (m) { return '<button type="button" data-mode="' + m + '" aria-pressed="' + (m === mode) + '">' + m.charAt(0).toUpperCase() + m.slice(1) + '</button>'; }).join('') +
       '</div><div class="stepper"><button type="button" id="prev" aria-label="Previous" ' + (canPrev ? '' : 'disabled') + '>←</button><span class="label">' + esc(label) + '</span><button type="button" id="next" aria-label="Next" ' + (canNext ? '' : 'disabled') + '>→</button><button type="button" class="btn" id="jump-today" style="width:auto;height:34px;padding:0 12px">Today</button></div></div>';
     if (mode === 'day') {
       var dm = dayMin(start), lg = LOGS[start];
