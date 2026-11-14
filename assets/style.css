@@ -121,6 +121,11 @@ h3 { font-size: 1.15rem; }
 .log .when { display: grid; gap: 4px; align-content: start; }
 .log .when a { font-family: var(--display); font-size: 1.1rem; font-weight: 600; text-decoration: none; }
 .log .sections { display: grid; gap: 16px; }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; padding-top: 14px; border-top: 1px solid var(--rule); }
+.pair.head { border-top: 0; padding-top: 0; }
+.pair .thoughts .thought:first-child { margin-top: 22px; }
+.log.compact .sections > div + div .thought:first-child { margin-top: 8px; }
+@media (max-width: 720px) { .pair { grid-template-columns: 1fr; gap: 6px; } .pair.head { display: none; } .pair .thoughts .thought:first-child { margin-top: 4px; } }
 .log .subject-name { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; text-decoration: none; }
 .log ul { margin: 6px 0 0; padding-left: 18px; }
 .log li { margin: 2px 0; }

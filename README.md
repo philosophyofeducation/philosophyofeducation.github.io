@@ -1,6 +1,6 @@
 # philosophyofeducation.github.io
 
-Jinny Hyunjin Kim's personal site: study log, thoughts by subject, blog, and life notes.
+Jinny Hyunjin Kim's personal site: study log, thoughts by subject, and blog.
 
 ## How it works
 - `data/study.json` holds study minutes per subject per day, synced from the YPT (열품타) timer.
@@ -27,11 +27,10 @@ Use the subject names from `data/study.json` as headings so time and notes line 
 ---
 title: My title
 date: 2026-11-14
-category: essay        # essay, reading, notes, life
+category: essay        # essay, reading, notes
 subjects: [psychoanalysis]
 summary: One line shown in the list
 ---
 
 Write in Markdown here.
 ```
-Posts with `category: life` appear on the Life page.

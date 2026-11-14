@@ -124,12 +124,16 @@
     opts = opts || {};
     var mins = dayMin(log.date);
     var secs = log.sections.filter(function (s) { return !opts.only || s.slug === opts.only; });
-    return '<article class="log" id="log-' + esc(log.date) + '"><div class="when"><a href="#day-' + esc(log.date) + '">' + esc(fmtDate(log.date)) + '</a>' +
+    var compact = !!opts.hideEmpty;
+    return '<article class="log' + (compact ? ' compact' : '') + '" id="log-' + esc(log.date) + '"><div class="when"><a href="#day-' + esc(log.date) + '">' + esc(fmtDate(log.date)) + '</a>' +
       '<span class="num muted">' + (mins ? hm(mins) : '') + '</span>' + (mins >= goal() ? '<span><span class="pill goal">5h goal met</span></span>' : '') + '</div>' +
-      '<div class="sections">' + secs.map(function (s) {
-        return '<div><a class="subject-name" href="#subject-' + esc(s.slug) + '">' + esc(s.name) + '</a>' +
-          (s.covered.length ? '<ul>' + s.covered.map(function (c) { return '<li>' + esc(c) + '</li>'; }).join('') + '</ul>' : '') +
-          (s.thoughts.length ? s.thoughts.map(function (t) { return '<p class="thought">' + esc(t) + '</p>'; }).join('') : (opts.hideEmpty ? '' : '<p class="thought empty">No thought written yet.</p>')) + '</div>';
+      '<div class="sections">' + (compact ? '' : '<div class="pair head"><span class="kicker">What I covered</span><span class="kicker">My thoughts</span></div>') +
+      secs.map(function (s) {
+        var left = '<div><a class="subject-name" href="#subject-' + esc(s.slug) + '">' + esc(s.name) + '</a>' +
+          (s.covered.length ? '<ul>' + s.covered.map(function (c) { return '<li>' + esc(c) + '</li>'; }).join('') + '</ul>' : '') + '</div>';
+        var right = s.thoughts.length ? '<div class="thoughts">' + s.thoughts.map(function (t) { return '<p class="thought">' + esc(t) + '</p>'; }).join('') + '</div>'
+          : (compact ? '' : '<div class="thoughts"><p class="thought empty">My thought on this goes here.</p></div>');
+        return compact ? left + right : '<div class="pair">' + left + right + '</div>';
       }).join('') + (log.intro ? '<p class="muted">' + esc(log.intro) + '</p>' : '') + '</div></article>';
   }
 
@@ -143,7 +147,7 @@
     var html = '<div class="view">' +
       '<section class="hero"><div style="display:grid;gap:16px"><span class="kicker">PhD student · Philosophy of Education</span>' +
       '<h1>I study how <em>words wound</em>, and what education can do about it.</h1>' +
-      '<p class="lede">This is my notebook: a daily study log, the thoughts I keep by subject, and longer writing about what I read and how I live.</p>' +
+      '<p class="lede">This is my notebook: a daily study log, the thoughts I keep by subject, and longer writing about what I read.</p>' +
       '<div class="btn-row"><a class="btn primary" href="#studylog">Open my study log →</a><a class="btn" href="#subjects">Thoughts by subject</a><a class="btn" href="#blog">Read the blog</a></div></div>' +
       '<div class="today-card"><span class="kicker">Today · ' + esc(fmtDate(tk)) + '</span><span class="big">' + hm(tmin) + '</span>' +
       '<div class="bar goal"><span style="width:' + Math.min(100, tmin / g * 100).toFixed(1) + '%"></span></div>' +
@@ -160,11 +164,10 @@
       (latestLog ? '<div class="log-list">' + logHTML(latestLog, { hideEmpty: true }) + '</div>' : '<div class="empty-state">No logs yet.</div>') + '</div>' +
       '<div><div class="sec-head"><h2>Latest writing</h2><a class="more" href="#blog">All posts →</a></div>' +
       (posts.length ? '<div class="post-list">' + posts.map(postItemHTML).join('') + '</div>' : '<div class="empty-state">No posts yet.</div>') + '</div></section>' +
-      '<section><div class="sec-head"><h2>Explore</h2></div><div class="grid-cards five">' +
+      '<section><div class="sec-head"><h2>Explore</h2></div><div class="grid-cards">' +
       navCard('#studylog', 'Study Log', 'Hours by day, week, month and year, with what I covered each day.') +
       navCard('#subjects', 'Subjects', 'My own thoughts, gathered subject by subject.') +
       navCard('#blog', 'Blog', 'Longer pieces on what I read and think about.') +
-      navCard('#life', 'Life', 'Everyday notes from Champaign–Urbana.') +
       navCard('#research', 'Research', 'Hate speech, linguistic injury, and the task of education.') +
       '</div></section></div>';
     app.innerHTML = html;
@@ -195,8 +198,8 @@
       html += '<div class="tiles"><div class="tile ' + (dm >= goal() ? 'hl' : '') + '"><span class="label">Studied</span><span class="value">' + hm(dm) + '</span><div class="bar goal"><span style="width:' + Math.min(100, dm / goal() * 100) + '%"></span></div><span class="sub">' + (dm >= goal() ? '5h goal met' : Math.round(dm / goal() * 100) + '% of the 5h goal') + '</span></div>' +
         '<div class="tile"><span class="label">Subjects</span><span class="value">' + Object.keys(sum.by).length + '</span><span class="sub">touched today</span></div>' +
         '<div class="tile"><span class="label">Thoughts written</span><span class="value">' + (lg ? lg.sections.reduce(function (n, s) { return n + s.thoughts.length; }, 0) : 0) + '</span><span class="sub">in this day\'s log</span></div></div>' +
-        '<div class="two"><div><div class="sec-head"><h2>By subject</h2></div>' + breakdownHTML(sum.by) + '</div><div><div class="sec-head"><h2>Notes</h2>' + (owner ? '<a class="more" href="' + ghNew('logs', start + '.md', logTemplate(start)) + '" target="_blank" rel="noopener">Write this log ↗</a>' : '') + '</div>' +
-        (lg ? '<div class="log-list">' + logHTML(lg) + '</div>' : '<div class="empty-state">No notes for this day yet.</div>') + '</div></div>';
+        '<div><div class="sec-head"><h2>By subject</h2></div>' + breakdownHTML(sum.by) + '</div><div><div class="sec-head"><h2>Notes</h2>' + (owner ? '<a class="more" href="' + ghNew('logs', start + '.md', logTemplate(start)) + '" target="_blank" rel="noopener">Write this log ↗</a>' : '') + '</div>' +
+        (lg ? '<div class="log-list">' + logHTML(lg) + '</div>' : '<div class="empty-state">No notes for this day yet.</div>') + '</div>';
     } else {
       var avgDays = Math.max(1, sumRange(start, effEnd < start ? start : effEnd).days);
       html += '<div class="tiles"><div class="tile"><span class="label">Total</span><span class="value">' + hm(sum.total) + '</span><span class="sub">' + esc(label) + '</span></div>' +
@@ -284,10 +287,12 @@
       '<div class="tile"><span class="label">Days studied</span><span class="value">' + st.days + '</span><span class="sub">from the timer</span></div>' +
       '<div class="tile hl"><span class="label">My thoughts</span><span class="value">' + st.thoughts.length + '</span><span class="sub">collected below</span></div></section>' +
       '<section><div class="sec-head"><h2>Weekly hours</h2><span class="muted">last 8 weeks</span></div><div class="chart" id="subj-chart"></div></section>' +
-      '<section class="two"><div><div class="sec-head"><h2>My thoughts</h2>' + (owner ? '<a class="more" href="' + ghNew('logs', todayKey() + '.md', logTemplate(todayKey()).replace('Subject name', subjName(slug))) + '" target="_blank" rel="noopener">Add one ↗</a>' : '') + '</div>' +
-      (st.thoughts.length ? st.thoughts.slice().reverse().map(function (t) { return '<div style="margin-bottom:14px"><a class="pill soft" href="#day-' + esc(t.date) + '">' + esc(fmtDate(t.date)) + '</a><p class="thought">' + esc(t.text) + '</p></div>'; }).join('') : '<div class="empty-state">No thoughts yet. In a daily log, write a line starting with &gt; under this subject.</div>') + '</div>' +
+      '<section class="two">' +
       '<div><div class="sec-head"><h2>What I covered</h2></div>' +
-      (dates.length ? '<div class="log-list">' + dates.map(function (d) { return '<article class="log"><div class="when"><a href="#day-' + esc(d) + '">' + esc(fmtDate(d)) + '</a></div><ul style="margin:0">' + byDate[d].map(function (c) { return '<li>' + esc(c) + '</li>'; }).join('') + '</ul></article>'; }).join('') + '</div>' : '<div class="empty-state">Nothing logged yet.</div>') + '</div></section>' +
+      (dates.length ? '<div class="log-list">' + dates.map(function (d) { return '<article class="log"><div class="when"><a href="#day-' + esc(d) + '">' + esc(fmtDate(d)) + '</a></div><ul style="margin:0">' + byDate[d].map(function (c) { return '<li>' + esc(c) + '</li>'; }).join('') + '</ul></article>'; }).join('') + '</div>' : '<div class="empty-state">Nothing logged yet.</div>') + '</div>' +
+      '<div><div class="sec-head"><h2>My thoughts</h2>' + (owner ? '<a class="more" href="' + ghNew('logs', todayKey() + '.md', logTemplate(todayKey()).replace('Subject name', subjName(slug))) + '" target="_blank" rel="noopener">Add one ↗</a>' : '') + '</div>' +
+      (st.thoughts.length ? st.thoughts.slice().reverse().map(function (t) { return '<div style="margin-bottom:14px"><a class="pill soft" href="#day-' + esc(t.date) + '">' + esc(fmtDate(t.date)) + '</a><p class="thought">' + esc(t.text) + '</p></div>'; }).join('') : '<div class="empty-state">No thoughts yet. In a daily log, write a line starting with &gt; under this subject.</div>') + '</div>' +
+      '</section>' +
       (posts.length ? '<section><div class="sec-head"><h2>Related writing</h2></div><div class="post-list">' + posts.map(postItemHTML).join('') + '</div></section>' : '') + '</div>';
     var items = [], mo = monday(pd(todayKey()));
     for (var i = 7; i >= 0; i--) {
@@ -307,7 +312,7 @@
     var cats = ['all'].concat(Array.from(new Set(D.posts.map(function (p) { return p.category; }))));
     var list = D.posts.filter(function (p) { return blogFilter === 'all' || p.category === blogFilter; });
     var owner = isOwner();
-    app.innerHTML = '<div class="view"><section style="display:grid;gap:14px"><span class="kicker">Blog</span><h1>Writing</h1><p class="lede">Essays on what I read, notes in progress, and pieces of everyday life.</p>' +
+    app.innerHTML = '<div class="view"><section style="display:grid;gap:14px"><span class="kicker">Blog</span><h1>Writing</h1><p class="lede">Essays on what I read and notes in progress.</p>' +
       (owner ? '<div class="btn-row"><a class="btn accent" href="' + ghNew('posts', todayKey() + '-new-post.md', postTemplate(todayKey())) + '" target="_blank" rel="noopener">✎ Write a new post</a></div>' : '') + '</section>' +
       '<section><div class="filters" role="group" aria-label="Filter by category">' + cats.map(function (c) { return '<button type="button" data-cat="' + esc(c) + '" aria-pressed="' + (c === blogFilter) + '">' + esc(c.charAt(0).toUpperCase() + c.slice(1)) + '</button>'; }).join('') + '</div></section>' +
       '<section>' + (list.length ? '<div class="post-list">' + list.map(postItemHTML).join('') + '</div>' : '<div class="empty-state">No posts here yet.</div>') + '</section></div>';
@@ -318,7 +323,7 @@
     var i = D.posts.findIndex(function (p) { return p.slug === slug; });
     if (i < 0) { app.innerHTML = '<div class="empty-state">That post could not be found. <a href="#blog">Back to the blog</a></div>'; return; }
     var p = D.posts[i], newer = D.posts[i - 1], older = D.posts[i + 1];
-    app.innerHTML = '<article class="view"><header style="display:grid;gap:12px;max-width:68ch"><a class="kicker" href="' + (p.category === 'life' ? '#life' : '#blog') + '" style="text-decoration:none">← ' + (p.category === 'life' ? 'Life' : 'Blog') + '</a><h1>' + esc(p.title) + '</h1>' +
+    app.innerHTML = '<article class="view"><header style="display:grid;gap:12px;max-width:68ch"><a class="kicker" href="#blog" style="text-decoration:none">← Blog</a><h1>' + esc(p.title) + '</h1>' +
       '<div class="chips"><span class="pill soft">' + esc(fmtDate(p.date, true)) + '</span><span class="pill soft">' + esc(p.category) + '</span>' + p.subjects.map(function (s) { return '<a class="pill" href="#subject-' + esc(s) + '">' + esc(subjName(s)) + '</a>'; }).join('') + '</div></header>' +
       '<div class="prose">' + md(p.body) + '</div>' +
       '<nav class="two" style="border-top:1px solid #111;padding-top:18px">' + (older ? '<a href="#post-' + esc(older.slug) + '" style="text-decoration:none"><span class="kicker">← Older</span><br><strong>' + esc(older.title) + '</strong></a>' : '<span></span>') +
@@ -327,38 +332,51 @@
     window.scrollTo(0, 0);
   }
 
-  function viewLife() {
-    var list = D.posts.filter(function (p) { return p.category === 'life'; });
-    app.innerHTML = '<div class="view"><section style="display:grid;gap:14px"><span class="kicker">Life</span><h1>Outside the library.</h1><p class="lede">Small notes from everyday life in Champaign–Urbana: teaching Korean, tea, cats, food, and the people I learn with.</p>' +
-      (isOwner() ? '<div class="btn-row"><a class="btn accent" href="' + ghNew('posts', todayKey() + '-life.md', postTemplate(todayKey()).replace('category: essay', 'category: life')) + '" target="_blank" rel="noopener">✎ Write a life note</a></div>' : '') + '</section>' +
-      '<section>' + (list.length ? '<div class="post-list">' + list.map(postItemHTML).join('') + '</div>' : '<div class="empty-state">The first life note is still to come.</div>') + '</section></div>';
+  function cvRows(rows) {
+    return '<div class="cv">' + rows.map(function (r) { return '<div class="cv-row"><span class="num muted">' + r[0] + '</span><div>' + r[1] + '</div></div>'; }).join('') + '</div>';
   }
 
   function viewResearch() {
+    var interests = ['Philosophy of education', 'Hate speech and linguistic injury', 'Speech act theory and performativity', 'Subject formation and interpellation', 'Ethics of alterity, hospitality, and recognition', 'Democratic and political education', 'Memory, silencing, and educational responses to hate in post-authoritarian societies'];
     app.innerHTML = '<div class="view"><section style="display:grid;gap:14px"><span class="kicker">Research</span><h1>Language, power, and harm.</h1>' +
-      '<p class="lede">My research asks what happens when words wound in a classroom, and why treating hate speech only as a rule violation misses what education can do about it.</p></section>' +
-      '<section class="two"><div><div class="sec-head"><h2>Questions I work on</h2></div><div class="prose" style="font-size:1.05rem"><ul>' +
-      '<li>How does speech injure, and what kind of injury is it?</li><li>What does speech act theory (Austin) and its critics (Butler, Derrida) offer teachers facing hateful speech?</li><li>How do silencing and epistemic injustice shape who gets heard in school?</li><li>What would it mean to <em>educate</em> after a slur, rather than only to discipline?</li></ul></div>' +
-      '<div class="chips" style="margin-top:12px">' + ['philosophy-of-language', 'philosophy-of-education', 'poststructuralism', 'psychoanalysis'].map(function (s) { return '<a class="pill" href="#subject-' + s + '">' + esc(subjName(s)) + '</a>'; }).join('') + '</div></div>' +
-      '<div><div class="sec-head"><h2>Presentations</h2></div><div class="cv">' +
-      '<div class="cv-row"><span class="num muted">Aug 2026</span><div><strong>When Words Wound: Linguistic Injury and the Task of Education</strong><br><span class="muted">International Network of Philosophers of Education (INPE), Montréal</span></div></div>' +
-      '</div><p class="note">More papers and talks will be listed here.</p></div></section></div>';
+      '<p class="lede">I study the wound of hate speech and how education can respond to it, drawing on Austin, Butler, and Derrida.</p></section>' +
+      '<section class="two"><div><div class="sec-head"><h2>Research interests</h2></div><div class="chips">' + interests.map(function (i) { return '<span class="pill">' + esc(i) + '</span>'; }).join('') + '</div>' +
+      '<div class="sec-head" style="margin-top:32px"><h2>Thesis</h2></div><p style="margin:0"><strong>The Wound of Hate Speech and Educational Response: A Philosophical Inquiry via Judith Butler</strong><br><span class="muted">M.A. thesis, Seoul National University, 2026. Advisor: Duck-Joo Kwak</span></p>' +
+      '<div class="chips" style="margin-top:24px">' + ['philosophy-of-language', 'philosophy-of-education', 'poststructuralism', 'psychoanalysis'].map(function (s) { return '<a class="pill soft" href="#subject-' + s + '">' + esc(subjName(s)) + ' →</a>'; }).join('') + '</div></div>' +
+      '<div><div class="sec-head"><h2>Conference presentations</h2></div>' + cvRows([
+        ['Aug 2026', '<strong>When words wound: Linguistic injury and the task of education</strong><br><span class="muted">20th International Network of Philosophers of Education (INPE) Conference, Université du Québec à Montréal, Canada</span>'],
+        ['Aug 2026', '<strong>Commencing conversation through commensality: Openness, enjoyment, and hospitality in a divided world</strong> (round table, with H. Jeong and T. Kim)<br><span class="muted">20th INPE Conference, Montréal, Canada</span>'],
+        ['Nov 2024', '<strong>Rethinking hate speech and identity: Limits of existing discourses and the need for a new educational approach</strong><br><span class="muted">60th Anniversary International Conference, Korean Philosophy of Education Society, Sungkyunkwan University, Seoul</span>'],
+        ['Aug 2024', '<strong>How to interpret “community” for educational purposes</strong><br><span class="muted">Asian Link of Philosophy of Education (ALPE) Annual Seminar, National Chiayi University, Taiwan</span>']
+      ]) + '<div class="sec-head" style="margin-top:32px"><h2>Other presentations</h2></div>' + cvRows([
+        ['Jun 2025', '<strong>The subject in citation: Revisiting speech act theory from Austin to Derrida</strong><br><span class="muted">Graduate Seminar, Department of Education, Seoul National University</span>']
+      ]) + '</div></section></div>';
   }
 
   function viewAbout() {
     app.innerHTML = '<div class="view"><section style="display:grid;gap:14px"><span class="kicker">About</span><h1>Hi, I\'m Jinny.</h1>' +
-      '<p class="lede">I\'m a PhD student in Education Policy, Organization and Leadership at the University of Illinois Urbana-Champaign, where I study philosophy of education. Before this, I taught elementary school in Seoul.</p></section>' +
-      '<section class="two"><div><div class="sec-head"><h2>Path</h2></div><div class="cv">' +
-      '<div class="cv-row"><span class="num muted">2026–</span><div><strong>PhD, Education Policy, Organization and Leadership</strong><br><span class="muted">University of Illinois Urbana-Champaign</span></div></div>' +
-      '<div class="cv-row"><span class="num muted">2026–</span><div><strong>Teaching Assistant, Korean Language Program</strong><br><span class="muted">UIUC</span></div></div>' +
-      '<div class="cv-row"><span class="num muted">Before</span><div><strong>Elementary school teacher</strong><br><span class="muted">Seoul, Korea</span></div></div>' +
-      '<div class="cv-row"><span class="num muted">MA</span><div><strong>Philosophy of Education</strong><br><span class="muted">Seoul National University</span></div></div></div></div>' +
-      '<div><div class="sec-head"><h2>Why this site</h2></div><p class="prose" style="font-size:1.05rem;margin:0">I keep this notebook in public to stay honest with myself: to show up every day, to write down what I actually think, and to watch the hours add up toward ten thousand.</p>' +
-      '<div class="btn-row" style="margin-top:18px"><a class="btn primary" href="#studylog">See the study log</a><a class="btn" href="#research">Research</a></div></div></section></div>';
+      '<p class="lede">I\'m Hyunjin (Jinny) Kim, a PhD student in Education Policy, Organization &amp; Leadership at the University of Illinois Urbana-Champaign, advised by Rebecca M. Taylor. Before coming here, I taught elementary school in Seoul, where I used picture books and creative writing to work with children on hate speech, discrimination, and identity.</p>' +
+      '<div class="btn-row"><a class="btn primary" href="#research">Research →</a><a class="btn" href="#studylog">Study log</a><a class="btn" href="mailto:hk80@illinois.edu">hk80@illinois.edu</a></div></section>' +
+      '<section class="two"><div><div class="sec-head"><h2>Education</h2></div>' + cvRows([
+        ['2026–', '<strong>Ph.D., Education Policy, Organization &amp; Leadership</strong><br><span class="muted">University of Illinois Urbana-Champaign · Advisor: Rebecca M. Taylor</span>'],
+        ['2026', '<strong>M.A., Foundations of Education (Philosophy of Education)</strong><br><span class="muted">Seoul National University · Advisor: Duck-Joo Kwak</span>'],
+        ['2018', '<strong>B.Ed., Elementary Education</strong><br><span class="muted">Seoul National University of Education</span>']
+      ]) + '<div class="sec-head" style="margin-top:32px"><h2>University teaching</h2></div>' + cvRows([
+        ['2026', '<strong>Teaching Assistant, KOR 203: Intermediate Korean I</strong><br><span class="muted">Korean Language Program, East Asian Languages &amp; Cultures, UIUC</span>'],
+        ['2023–24', '<strong>Speaking Lab Teaching Assistant, College English I</strong><br><span class="muted">Seoul National University · 3 semesters of weekly sessions on academic speaking, argumentation, and presentation</span>']
+      ]) + '</div>' +
+      '<div><div class="sec-head"><h2>Teaching in schools</h2></div>' + cvRows([
+        ['2020–', '<strong>Elementary School Teacher</strong><br><span class="muted">Seoul Metropolitan Office of Education (on study leave since Sep 2026). Workshops with picture books and creative writing on hate speech, discrimination, and identity.</span>'],
+        ['2021, 22', '<strong>Lead Teacher, Picturebook-based Citizenship Project</strong><br><span class="muted">Seoul Metropolitan Office of Education · grades 4–6, exploring love, hate, war, and solidarity</span>'],
+        ['2018–20', '<strong>Contract Teacher and Part-Time Instructor</strong><br><span class="muted">Public elementary schools in Seoul and Gyeonggi Province</span>']
+      ]) + '<div class="sec-head" style="margin-top:32px"><h2>Service</h2></div>' + cvRows([
+        ['2019–20', '<strong>Teacher Community for Engagement on History, Democracy, and Justice</strong><br><span class="muted">Gyeonggi Provincial Office of Education · field experiences at sites of Korea\'s democratization history; forums on human rights and environmental justice</span>'],
+        ['2016', '<strong>Delegate, Global Youth Exchange Program</strong><br><span class="muted">Ministry of Gender Equality and Family &amp; National Youth Policy Institute</span>']
+      ]) + '</div></section></div>';
   }
 
   // ---------- router ----------
-  var routes = { home: viewHome, studylog: viewStudyLog, subjects: viewSubjects, blog: viewBlog, life: viewLife, research: viewResearch, about: viewAbout };
+  var routes = { home: viewHome, studylog: viewStudyLog, subjects: viewSubjects, blog: viewBlog, research: viewResearch, about: viewAbout };
   function render() {
     var h = (location.hash || '#home').slice(1);
     if (h === 'owner') { try { localStorage.setItem('owner', '1'); } catch (e) {} location.replace('#home'); return; }
@@ -366,7 +384,7 @@
     var section = h;
     if (/^day-\d{4}-\d{2}-\d{2}$/.test(h)) { logState.mode = 'day'; logState.anchor = h.slice(4); section = 'studylog'; viewStudyLog(); }
     else if (h.indexOf('subject-') === 0) { section = 'subjects'; viewSubject(h.slice(8)); }
-    else if (h.indexOf('post-') === 0) { var p = D.posts.find(function (x) { return x.slug === h.slice(5); }); section = p && p.category === 'life' ? 'life' : 'blog'; viewPost(h.slice(5)); }
+    else if (h.indexOf('post-') === 0) { var p = D.posts.find(function (x) { return x.slug === h.slice(5); }); section = 'blog'; viewPost(h.slice(5)); }
     else if (routes[h]) { routes[h](); }
     else { section = 'home'; viewHome(); }
     document.querySelectorAll('[data-nav]').forEach(function (a) { if (a.getAttribute('data-nav') === section) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
