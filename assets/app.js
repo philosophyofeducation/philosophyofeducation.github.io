@@ -438,6 +438,16 @@
       met: function (v, g) { return v >= (g.sleepHours || 0); }, goal: function (g) { return g.sleepHours ? g.sleepHours + 'h+' : ''; } },
     { id: 'start', name: 'Started studying', val: function (k) { var t = (D.study.starts || {})[k]; return t ? tmin(t) : null; }, show: tfmt,
       met: function (v, g) { return g.studyStart ? v <= tmin(g.studyStart) : true; }, goal: function (g) { return g.studyStart ? 'by ' + tfmt(tmin(g.studyStart)) + ' · from YPT' : 'from YPT'; } },
+    { id: 'hours', name: 'Studied 5h+', val: function (k) { var ks = Object.keys(D.study.days).sort(); if (!ks.length || k < ks[0] || k > todayKey()) return null; var d = D.study.days[k] || {}, m = 0; for (var x in d) m += d[x]; if (k === todayKey() && m < (D.habits.goals.studyMinutes || 300)) return null; return m; }, show: function (v) { return v == null ? '–' : hm(v); },
+      met: function (v, g) { return v >= (g.studyMinutes || 300); }, goal: function (g) { return hm(g.studyMinutes || 300) + '+ · from YPT'; } },
+    { id: 'phone', name: 'Phone while studying', val: function (k) { var a = (D.study.appMinutes || {})[k]; return a == null ? null : a; }, show: function (v) { return v == null ? '–' : v + ' min'; },
+      met: function (v, g) { return v <= (g.phoneMaxMinutes || 30); }, goal: function (g) { return 'under ' + (g.phoneMaxMinutes || 30) + ' min · from YPT'; } },
+    { id: 'vocab', name: 'Vocabulary Builder', val: function (k, e) { return e && typeof e.vocabBuilder === 'boolean' ? e.vocabBuilder : null; }, show: function (v) { return v == null ? '–' : (v ? 'done' : 'skipped'); },
+      met: function (v) { return v; }, goal: function () { return 'every day'; } },
+    { id: 'analytic', name: 'Analytic philosophy', val: function (k, e) { return e && typeof e.analytic === 'boolean' ? e.analytic : null; }, show: function (v) { return v == null ? '–' : (v ? 'read' : 'skipped'); },
+      met: function (v) { return v; }, goal: function () { return 'every day'; } },
+    { id: 'thought', name: 'Wrote a thought', val: function (k) { var l = D.logs.find(function (x) { return x.date === k; }); if (!l) return null; return l.sections.reduce(function (n, s) { return n + s.thoughts.length; }, 0); }, show: function (v) { return v == null ? '–' : (v ? v + ' in my own words' : 'covered only'); },
+      met: function (v) { return v > 0; }, goal: function () { return 'in my Study Log' } },
     { id: 'exercise', name: 'Exercised', val: function (k, e) { return e && Array.isArray(e.exercise) ? e.exercise : null; }, show: function (v) { return v == null ? '–' : (v.length ? v.join(', ') : 'rest day'); },
       met: function (v) { return v.length > 0; }, goal: function (g) { return g.exerciseDaysPerWeek ? g.exerciseDaysPerWeek + ' days a week' : ''; } },
     { id: 'food', name: 'No processed food', val: function (k, e) { return e && typeof e.processed === 'boolean' ? e.processed : null; }, show: function (v, k) { return v == null ? '–' : (v ? (isWeekend(k) ? 'weekend treat' : 'had some') : 'clean'); },
@@ -445,6 +455,7 @@
     { id: 'fast', name: 'Fasted', val: function (k, e) { return e && e.fastHours != null ? +e.fastHours : null; }, show: function (v) { return v == null ? '–' : v + 'h'; },
       met: function (v, g) { return v >= (g.fastHours || 0); }, goal: function (g) { return g.fastHours ? g.fastHours + 'h+' : ''; } }
   ];
+  function H(id) { return HABITS.find(function (x) { return x.id === id; }); }
   function habitCell(h, k) {
     var e = D.habits.days[k], g = D.habits.goals || {}, v = h.val(k, e);
     if (v == null) return { state: 'none', text: 'no record' };
@@ -487,8 +498,8 @@
     var wkKeys = []; for (var d = monday(pd(tk)); key(d) <= tk; d = addDays(d, 1)) wkKeys.push(key(d));
     function weekVals(id) { var h = HABITS.find(function (x) { return x.id === id; }); return wkKeys.map(function (k) { return h.val(k, D.habits.days[k]); }); }
     var exDays = weekVals('exercise').filter(function (v) { return v && v.length; }).length;
-    var foodRec = wkKeys.filter(function (k) { return habitCell(HABITS[4], k).state !== 'none'; });
-    var clean = foodRec.filter(function (k) { return habitCell(HABITS[4], k).state === 'met'; }).length;
+    var foodRec = wkKeys.filter(function (k) { return habitCell(H('food'), k).state !== 'none'; });
+    var clean = foodRec.filter(function (k) { return habitCell(H('food'), k).state === 'met'; }).length;
     var aFast = avg(weekVals('fast')), aSleep = avg(weekVals('sleep'));
     // streak: consecutive recorded days ending today/yesterday where every recorded habit was met
     var owner = isOwner(), any = Object.keys(D.habits.days || {}).length;
@@ -500,6 +511,8 @@
       tile('Avg wake-up', tfmt(avg(weekVals('wake'))), g.wake ? 'goal: by ' + tfmt(tmin(g.wake)) : '') +
       tile('Avg sleep', aSleep == null ? '–' : aSleep.toFixed(1) + 'h', g.sleepHours ? 'goal: ' + g.sleepHours + 'h+' : '') +
       tile('Avg study start', tfmt(avg(weekVals('start'))), (g.studyStart ? 'goal: by ' + tfmt(tmin(g.studyStart)) + ' · ' : '') + 'from YPT') +
+      tile('Avg study / day', hm(avg(weekVals('hours')) || 0), 'goal: ' + hm(g.studyMinutes || 300) + '+ · from YPT') +
+      tile('Phone while studying', (function () { var a = avg(weekVals('phone')); return a == null ? '–' : Math.round(a) + ' min'; })(), 'daily avg · goal: under ' + (g.phoneMaxMinutes || 30) + ' min') +
       tile('Exercise days', exDays + ' / ' + (g.exerciseDaysPerWeek || 7), 'this week', exDays >= (g.exerciseDaysPerWeek || 99)) +
       tile('Clean-eating days', foodRec.length ? clean + ' / ' + foodRec.length : '–', 'days recorded, weekend treats OK') +
       tile('Avg fasting', aFast == null ? '–' : aFast.toFixed(1) + 'h', g.fastHours ? 'goal: ' + g.fastHours + 'h+' : '') +
@@ -517,16 +530,46 @@
       '<div><div class="sec-head"><h2>Fasting</h2><span class="muted">hours between last and first meal</span></div><div class="chart" id="h-fast"></div></div></section></div>';
     app.innerHTML = html;
     timeChart(document.getElementById('h-morning'), keys, [
-      { name: 'Woke up', color: '#111', get: function (k) { return HABITS[0].val(k, D.habits.days[k]); }, goal: g.wake ? tmin(g.wake) : null },
-      { name: 'Started studying', color: '#e1ad01', get: function (k) { return HABITS[2].val(k); }, goal: g.studyStart ? tmin(g.studyStart) : null }
+      { name: 'Woke up', color: '#111', get: function (k) { return H('wake').val(k, D.habits.days[k]); }, goal: g.wake ? tmin(g.wake) : null },
+      { name: 'Started studying', color: '#e1ad01', get: function (k) { return H('start').val(k); }, goal: g.studyStart ? tmin(g.studyStart) : null }
     ], { label: 'Wake-up and study start times, last 4 weeks' });
-    barChart(document.getElementById('h-fast'), keys.map(function (k) { var v = HABITS[5].val(k, D.habits.days[k]), d = pd(k); return { label: (d.getMonth() + 1) + '/' + d.getDate(), value: v == null ? 0 : v * 60, tip: fmtDate(k) + ': ' + (v == null ? 'no record' : v + 'h') }; }), { goal: g.fastHours ? g.fastHours * 60 : 0, label: 'Fasting hours, last 4 weeks' });
+    barChart(document.getElementById('h-fast'), keys.map(function (k) { var v = H('fast').val(k, D.habits.days[k]), d = pd(k); return { label: (d.getMonth() + 1) + '/' + d.getDate(), value: v == null ? 0 : v * 60, tip: fmtDate(k) + ': ' + (v == null ? 'no record' : v + 'h') }; }), { goal: g.fastHours ? g.fastHours * 60 : 0, label: 'Fasting hours, last 4 weeks' });
   }
 
 
   // ---------- words (Vocabulary Bank) ----------
-  // To read the sheet live, publish the Words tab to the web as CSV and paste the link here.
-  var WORDS_CSV = '';
+  // Live link to the Vocabulary Bank (Google Apps Script web app bound to the sheet).
+  var WORDS_API = '';
+  var MASTERY = 3;
+  function vocabKey() { try { return localStorage.getItem('vocabkey') || ''; } catch (e) { return ''; } }
+  function mapApiRow(r) {
+    var w = { status: r['Status'] || 'new', cat: r['Category'] || '', sub: r['Subcategory'] || '', word: (r['Word'] || '').trim(), en: r['English meaning'] || '', ko: r['Korean meaning'] || '', usage: r['Usage pattern'] || '', ety: r['Etymology'] || '', tip: r['Memory tip'] || '', text: r['Example from text'] || '', source: r['Source'] || '', date: r['Date added'] || '', streak: +r['Quiz streak'] || 0, record: r['Quiz record'] || '', last: r['Last quizzed'] || '' };
+    var ex = r['Another example'] || ''; w.ex = ex ? ex.split(/\n?\s*\d[.)]\s+/).map(function (x) { return x.trim(); }).filter(Boolean) : [];
+    if (/^\(asked/.test(w.source)) w.source = '';
+    return w;
+  }
+  var pending = [];
+  function sendResults() {
+    var k = vocabKey(); if (!WORDS_API || !k || !pending.length) return;
+    var batch = pending.splice(0, pending.length);
+    fetch(WORDS_API, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ token: k, results: batch }) })
+      .then(function (r) { return r.json(); }).then(function (j) { if (!j.ok) throw 0; })
+      .catch(function () { Array.prototype.unshift.apply(pending, batch); setTimeout(sendResults, 8000); });
+  }
+  function record(w, kind, correct) {
+    if (kind === 'quiz') {
+      var rec = (w.record || '0/0').split('/'), right = +rec[0] || 0, tries = +rec[1] || 0; tries++;
+      if (correct) { right++; w.streak = (w.streak || 0) + 1; if (w.streak >= MASTERY) w.status = 'got it'; } else { w.streak = 0; w.status = 'shaky'; }
+      w.record = right + '/' + tries; w.last = todayKey();
+    } else if (!correct) { w.streak = 0; w.status = 'shaky'; }
+    pending.push({ word: w.word, kind: kind, correct: !!correct }); sendResults();
+  }
+  function masteryHTML(w) {
+    if (w.status === 'got it') return '<span class="mastery done" title="Got it">★ Got it</span>';
+    var n = Math.min(MASTERY, w.streak || 0), dots = '';
+    for (var i = 0; i < MASTERY; i++) dots += '<i class="' + (i < n ? 'on' : '') + '"></i>';
+    return '<span class="mastery" title="' + n + ' of ' + MASTERY + ' quiz answers right in a row">' + dots + '</span>';
+  }
   var W = { mode: 'book', cat: '', sub: '', status: '', mine: '', q: '', idx: 0, flip: false, quiz: null };
   function lsGet(k, d) { try { return JSON.parse(localStorage.getItem(k)) || d; } catch (e) { return d; } }
   function lsSet(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
@@ -581,7 +624,7 @@
     return alts.length ? new RegExp('\\b(?:' + alts.join('|') + ')\\b', 'i') : null;
   }
   function makeQuiz(set) {
-    var pool = shuffle(set).slice(0, Math.min(10, set.length)), all = D.words;
+    var sh = shuffle(set), pool = sh.filter(function (w) { return w.status !== 'got it'; }).concat(sh.filter(function (w) { return w.status === 'got it'; })).slice(0, Math.min(10, set.length)), all = D.words;
     return { i: 0, score: 0, picked: null, wrong: [], qs: pool.map(function (w) {
       var types = ['ko', 'en'], re = blankRe(w.word), sent = (w.ex || []).concat(w.text ? [w.text.replace(/^"|"$/g, '')] : []).find(function (x) { return re && re.test(x); });
       if (sent) types.push('blank');
@@ -601,20 +644,20 @@
     var catKeys = Object.keys(cats).sort(function (a, b) { return catNum(a) - catNum(b); });
     var mk = marks(), cnt = { new: 0, shaky: 0, 'got it': 0 }; all.forEach(function (w) { cnt[w.status] = (cnt[w.status] || 0) + 1; });
     var wk = all.filter(function (w) { return w.date && w.date >= key(addDays(new Date(), -6)); }).length;
-    var known = Object.keys(mk).filter(function (k) { return mk[k] === 'knew'; }).length;
+    var got = cnt['got it'] || 0;
     function opt(v, l, cur) { return '<option value="' + esc(v) + '"' + (v === cur ? ' selected' : '') + '>' + esc(l) + '</option>'; }
     var html = '<div class="view"><section style="display:grid;gap:14px"><span class="kicker">Words</span><h1>My word book.</h1>' +
       '<div class="tiles">' +
-      '<div class="tile"><span class="label">Words in the bank</span><span class="value">' + all.length + '</span><span class="sub">from my Vocabulary Bank</span></div>' +
+      '<div class="tile"><span class="label">Words in the bank</span><span class="value">' + all.length + '</span><span class="sub">' + (D.wordsLive ? 'live from my Vocabulary Bank' : 'from my Vocabulary Bank') + '</span></div>' +
       '<div class="tile"><span class="label">Added this week</span><span class="value">' + wk + '</span><span class="sub">last 7 days</span></div>' +
-      '<div class="tile"><span class="label">New · Shaky · Got it</span><span class="value">' + cnt.new + ' · ' + cnt.shaky + ' · ' + (cnt['got it'] || 0) + '</span><span class="sub">status in the sheet</span></div>' +
-      '<div class="tile hl"><span class="label">I knew it</span><span class="value">' + known + ' / ' + all.length + '</span><div class="bar goal"><span style="width:' + (known / Math.max(1, all.length) * 100).toFixed(1) + '%"></span></div><span class="sub">from my flashcards</span></div>' +
+      '<div class="tile"><span class="label">New · Shaky</span><span class="value">' + (cnt.new || 0) + ' · ' + (cnt.shaky || 0) + '</span><span class="sub">still learning</span></div>' +
+      '<div class="tile hl"><span class="label">★ Got it</span><span class="value">' + got + ' / ' + all.length + '</span><div class="bar goal"><span style="width:' + Math.max(0.5, got / Math.max(1, all.length) * 100).toFixed(1) + '%"></span></div><span class="sub">' + MASTERY + ' quiz answers right in a row</span></div>' +
       '</div></section>' +
       '<section class="wtools"><div class="seg" role="tablist" aria-label="Mode">' + [['book', 'Book'], ['cards', 'Flashcards'], ['quiz', 'Quiz'], ['list', 'List']].map(function (m) { return '<button type="button" role="tab" data-wm="' + m[0] + '" aria-selected="' + (W.mode === m[0]) + '">' + m[1] + '</button>'; }).join('') + '</div>' +
       '<div class="wfilters">' +
       '<label>Meaning<select data-wf="group">' + opt('', 'All categories', W.sub ? 's:' + W.sub : (W.cat ? 'c:' + W.cat : '')) + catKeys.map(function (c) { var cur = W.sub ? 's:' + W.sub : (W.cat ? 'c:' + W.cat : ''); return '<optgroup label="' + esc(c) + '">' + opt('c:' + c, 'All of ' + c.replace(/^\d+\.\s*/, ''), cur) + Object.keys(cats[c]).sort(function (a, b) { return catNum(a.replace('-', '.')) - catNum(b.replace('-', '.')) || a.localeCompare(b, undefined, { numeric: true }); }).map(function (s) { return opt('s:' + s, s, cur); }).join('') + '</optgroup>'; }).join('') + '</select></label>' +
       '<label>How well I know it<select data-wf="mine">' + opt('', 'Every word', W.mine) + opt('unseen', 'Not checked yet', W.mine) + opt('notyet', 'Not yet (flashcards)', W.mine) + opt('missed', 'Missed in a quiz', W.mine) + opt('knew', 'I knew it', W.mine) + opt('week', 'Added this week', W.mine) + '</select></label>' +
-      '<label>Sheet status<select data-wf="status">' + opt('', 'Any', W.status) + opt('new', 'new', W.status) + opt('shaky', 'shaky', W.status) + opt('got it', 'got it', W.status) + '</select></label>' +
+      '<label>Status<select data-wf="status">' + opt('', 'Any', W.status) + opt('new', 'New', W.status) + opt('shaky', 'Shaky', W.status) + opt('got it', '★ Got it', W.status) + '</select></label>' +
       '<label>Search<input type="search" data-wf="q" value="' + esc(W.q) + '" placeholder="word or meaning"></label>' +
       '</div><p class="muted wcount">' + set.length + ' word' + (set.length === 1 ? '' : 's') + ' in this set' + (W.cat || W.sub || W.mine || W.status || W.q ? ' · <button type="button" class="linkbtn" data-wclear>clear filters</button>' : '') + '</p></section>' +
       '<section id="wbody"></section></div>';
@@ -632,7 +675,7 @@
       '<h2 class="w-word">' + esc(w.word) + '</h2><div class="w-ko">' + esc(w.ko) + '</div><p class="w-en">' + esc(w.en) + '</p>' +
       (w.usage ? '<div class="w-block"><span class="w-lab">How it\'s used</span><p>' + esc(w.usage) + '</p></div>' : '') +
       (w.ety ? '<div class="w-block"><span class="w-lab">Roots</span><p>' + esc(w.ety) + '</p></div>' : '') +
-      '<div class="pg-foot"><span class="pill ' + (w.status === 'new' ? 'soft' : 'goal') + '">' + esc(w.status) + '</span>' + (mk ? '<span class="pill ' + (mk === 'knew' ? 'goal' : '') + '">' + (mk === 'knew' ? 'I knew it' : 'not yet') + '</span>' : '') + '</div></div>';
+      '<div class="pg-foot">' + masteryHTML(w) + '<span class="pill ' + (w.status === 'shaky' ? '' : 'soft') + '">' + esc(w.status) + '</span>' + (w.record ? '<span class="muted pg-rec">quiz ' + esc(w.record) + ' right</span>' : '') + '</div></div>';
     var right = '<div class="page right">' + (w.tip ? '<div class="w-tip"><span class="w-lab">Memory tip</span><p>' + esc(w.tip) + '</p></div>' : '') +
       (w.text ? '<div class="w-block"><span class="w-lab">Where I met it</span><blockquote>' + esc(w.text) + '</blockquote>' + (w.source ? '<span class="muted w-src">' + esc(w.source) + '</span>' : '') + '</div>' : '') +
       (w.ex && w.ex.length ? '<div class="w-block"><span class="w-lab">Examples</span><ol class="w-ex">' + w.ex.map(function (x) { var re = blankRe(w.word); return '<li>' + (re ? esc(x).replace(re, function (m) { return '<mark>' + m + '</mark>'; }) : esc(x)) + '</li>'; }).join('') + '</ol></div>' : '') + '</div>';
@@ -660,14 +703,14 @@
         '<div class="wnav judge"><button type="button" class="btn" data-wmark="notyet">✗ Not yet</button><button type="button" class="btn accent" data-wmark="knew">✓ I knew it</button></div>' + nav();
       var c = box.querySelector('.fcard'); function flip() { W.flip = !W.flip; c.classList.toggle('flipped', W.flip); }
       c.addEventListener('click', flip); c.addEventListener('keydown', function (e) { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); flip(); } });
-      box.querySelectorAll('[data-wmark]').forEach(function (b) { b.addEventListener('click', function () { var m = marks(); m[w.word] = b.getAttribute('data-wmark'); lsSet('wordmarks', m); if (W.idx < set.length - 1) W.idx++; W.flip = false; drawWordBody(set); }); });
+      box.querySelectorAll('[data-wmark]').forEach(function (b) { b.addEventListener('click', function () { var m = marks(); m[w.word] = b.getAttribute('data-wmark'); lsSet('wordmarks', m); record(w, 'card', m[w.word] === 'knew'); if (W.idx < set.length - 1) W.idx++; W.flip = false; drawWordBody(set); }); });
       bindNav();
     } else if (W.mode === 'quiz') {
       if (!W.quiz) W.quiz = makeQuiz(set);
       var Q = W.quiz;
       if (Q.i >= Q.qs.length) {
         box.innerHTML = '<div class="qdone"><span class="kicker">Quiz done</span><div class="big">' + Q.score + ' / ' + Q.qs.length + '</div>' +
-          (Q.wrong.length ? '<p>Words to look at again:</p><div class="chips">' + Q.wrong.map(function (x) { return '<span class="pill">' + esc(x) + '</span>'; }).join('') + '</div>' : '<p>Every one right. 🎉</p>') +
+          (Q.mastered && Q.mastered.length ? '<p>★ Now got it: ' + Q.mastered.map(esc).join(', ') + '</p>' : '') + (Q.wrong.length ? '<p>Words to look at again:</p><div class="chips">' + Q.wrong.map(function (x) { return '<span class="pill">' + esc(x) + '</span>'; }).join('') + '</div>' : '<p>Every one right. 🎉</p>') +
           '<div class="btn-row"><button type="button" class="btn primary" data-qnew>New quiz</button>' + (Q.wrong.length ? '<button type="button" class="btn" data-qmissed>Study the ones I missed</button>' : '') + '</div></div>';
         box.querySelector('[data-qnew]').addEventListener('click', function () { W.quiz = null; drawWordBody(set); });
         var qm = box.querySelector('[data-qmissed]'); if (qm) qm.addEventListener('click', function () { W.mine = 'missed'; W.mode = 'book'; W.quiz = null; W.idx = 0; viewWords(); });
@@ -675,12 +718,14 @@
       }
       var q = Q.qs[Q.i];
       box.innerHTML = '<div class="quiz"><div class="qhead"><span class="kicker">Question ' + (Q.i + 1) + ' of ' + Q.qs.length + '</span><span class="muted">Score ' + Q.score + '</span></div><div class="bar goal"><span style="width:' + (Q.i / Q.qs.length * 100) + '%"></span></div>' +
-        '<p class="qask">' + q.ask + '</p><div class="qprompt ' + q.type + '">' + esc(q.prompt) + '</div>' +
+        (Q.i === 0 && Q.picked == null && !(WORDS_API && vocabKey()) ? '<p class="muted qnote">Practice mode: results on this device are not saved to the Vocabulary Bank.</p>' : '') + '<p class="qask">' + q.ask + '</p><div class="qprompt ' + q.type + '">' + esc(q.prompt) + '</div>' +
         '<div class="qopts">' + q.opts.map(function (o, i) { var cls = Q.picked == null ? '' : (o.ok ? ' right' : (Q.picked === i ? ' wrong' : '')); return '<button type="button" class="qopt' + cls + '" data-qo="' + i + '"' + (Q.picked == null ? '' : ' disabled') + '>' + esc(o.label) + '</button>'; }).join('') + '</div>' +
-        (Q.picked != null ? '<div class="qfeed"><strong>' + esc(q.w.word) + '</strong> · ' + esc(q.w.ko) + (q.w.tip ? '<br><span class="muted">' + esc(q.w.tip) + '</span>' : '') + '</div><div class="btn-row"><button type="button" class="btn primary" data-qnext>' + (Q.i < Q.qs.length - 1 ? 'Next question →' : 'See my score') + '</button></div>' : '') + '</div>';
+        (Q.picked != null ? '<div class="qfeed">' + masteryHTML(q.w) + ' <strong>' + esc(q.w.word) + '</strong> · ' + esc(q.w.ko) + (q.w.tip ? '<br><span class="muted">' + esc(q.w.tip) + '</span>' : '') + '</div><div class="btn-row"><button type="button" class="btn primary" data-qnext>' + (Q.i < Q.qs.length - 1 ? 'Next question →' : 'See my score') + '</button></div>' : '') + '</div>';
       box.querySelectorAll('[data-qo]').forEach(function (b) { b.addEventListener('click', function () {
         Q.picked = +b.getAttribute('data-qo'); var ms = missed();
-        if (q.opts[Q.picked].ok) { Q.score++; if (ms[q.w.word]) { delete ms[q.w.word]; } } else { Q.wrong.push(q.w.word); ms[q.w.word] = (ms[q.w.word] || 0) + 1; }
+        var ok = q.opts[Q.picked].ok, before = q.w.status;
+        if (ok) { Q.score++; if (ms[q.w.word]) { delete ms[q.w.word]; } } else { Q.wrong.push(q.w.word); ms[q.w.word] = (ms[q.w.word] || 0) + 1; }
+        record(q.w, 'quiz', ok); if (ok && before !== 'got it' && q.w.status === 'got it') Q.mastered = (Q.mastered || []).concat(q.w.word);
         lsSet('wordmissed', ms); drawWordBody(set);
       }); });
       var nx = box.querySelector('[data-qnext]'); if (nx) nx.addEventListener('click', function () { Q.i++; Q.picked = null; drawWordBody(set); });
@@ -688,7 +733,7 @@
       var groups = {}; set.forEach(function (x) { (groups[x.sub || x.cat] = groups[x.sub || x.cat] || []).push(x); });
       var mk = marks();
       box.innerHTML = Object.keys(groups).sort(function (a, b) { return a.localeCompare(b, undefined, { numeric: true }); }).map(function (g) {
-        return '<div class="wgroup"><h3>' + esc(g) + '</h3><div class="wlist">' + groups[g].map(function (x) { return '<button type="button" class="witem" data-wopen="' + esc(x.word) + '"><span class="wi-w">' + esc(x.word) + (mk[x.word] === 'knew' ? ' <span class="dot ok"></span>' : (mk[x.word] === 'notyet' || missed()[x.word] ? ' <span class="dot"></span>' : '')) + '</span><span class="wi-k">' + esc(x.ko) + '</span></button>'; }).join('') + '</div></div>';
+        return '<div class="wgroup"><h3>' + esc(g) + '</h3><div class="wlist">' + groups[g].map(function (x) { return '<button type="button" class="witem" data-wopen="' + esc(x.word) + '"><span class="wi-w">' + esc(x.word) + ' ' + masteryHTML(x) + '</span><span class="wi-k">' + esc(x.ko) + '</span></button>'; }).join('') + '</div></div>';
       }).join('');
       box.querySelectorAll('[data-wopen]').forEach(function (b) { b.addEventListener('click', function () { W.idx = set.findIndex(function (x) { return x.word === b.getAttribute('data-wopen'); }); W.mode = 'book'; viewWords(); window.scrollTo(0, 0); }); });
     }
@@ -704,6 +749,7 @@
   function render() {
     var h = (location.hash || '#home').slice(1);
     if (h === 'owner') { try { localStorage.setItem('owner', '1'); } catch (e) {} location.replace('#home'); return; }
+    if (h.indexOf('key-') === 0) { try { localStorage.setItem('vocabkey', h.slice(4)); localStorage.setItem('owner', '1'); } catch (e) {} location.replace('#words'); return; }
     if (h === 'guest') { try { localStorage.removeItem('owner'); } catch (e) {} location.replace('#home'); return; }
     var section = h;
     if (/^day-\d{4}-\d{2}-\d{2}$/.test(h)) { logState.mode = 'day'; logState.anchor = h.slice(4); section = 'studylog'; viewStudyLog(); }
@@ -725,9 +771,9 @@
   window.addEventListener('hashchange', function () { render(); window.scrollTo(0, 0); });
 
   function getJSON(p) { return fetch(p, { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw new Error(p); return r.json(); }); }
-  Promise.all([getJSON('data/study.json'), getJSON('logs/index.json').catch(function () { return []; }), getJSON('posts/index.json').catch(function () { return []; }), getJSON('data/library.json').catch(function () { return { items: [] }; }), getJSON('data/habits.json').catch(function () { return { goals: {}, days: {} }; }), (WORDS_CSV ? fetch(WORDS_CSV, { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw 0; return r.text(); }).then(function (t) { return { words: wordsFromRows(parseCSV(t)) }; }).catch(function () { return getJSON('data/words.json'); }) : getJSON('data/words.json')).catch(function () { return { words: [] }; })])
+  Promise.all([getJSON('data/study.json'), getJSON('logs/index.json').catch(function () { return []; }), getJSON('posts/index.json').catch(function () { return []; }), getJSON('data/library.json').catch(function () { return { items: [] }; }), getJSON('data/habits.json').catch(function () { return { goals: {}, days: {} }; }), (WORDS_API ? fetch(WORDS_API, { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (j) { return { words: j.rows.map(mapApiRow).filter(function (w) { return w.word; }), live: true }; }).catch(function () { return getJSON('data/words.json'); }) : getJSON('data/words.json')).catch(function () { return { words: [] }; })])
     .then(function (res) {
-      D.study = res[0]; D.logs = res[1]; D.posts = res[2]; D.library = res[3].items || []; D.habits = res[4]; D.words = res[5].words || [];
+      D.study = res[0]; D.logs = res[1]; D.posts = res[2]; D.library = res[3].items || []; D.habits = res[4]; D.words = res[5].words || []; D.wordsLive = !!res[5].live;
       SUBJ = Object.assign({}, D.study.subjects || {});
       var byName = {}; Object.keys(SUBJ).forEach(function (k) { byName[SUBJ[k].toLowerCase()] = k; byName[k] = k; });
       D.logs.forEach(function (l) {

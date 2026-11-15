@@ -352,3 +352,11 @@ footer .shell { display: flex; justify-content: space-between; gap: 16px; flex-w
 .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--ink); vertical-align: 2px; }
 .dot.ok { background: var(--mustard); }
 @media (max-width: 720px) { .wbook { grid-template-columns: 1fr; } .wbook::after { display: none; } .page.right { border-top: 1px dashed var(--rule); } .qopts { grid-template-columns: 1fr; } .page { padding: 22px; } }
+
+.mastery { display: inline-flex; gap: 3px; align-items: center; vertical-align: middle; }
+.mastery i { width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid var(--ink); display: inline-block; }
+.mastery i.on { background: var(--mustard); border-color: var(--mustard); }
+.mastery.done { font-size: 0.75rem; font-weight: 600; background: var(--mustard); padding: 2px 8px; }
+.pg-foot { align-items: center; flex-wrap: wrap; }
+.pg-rec { font-size: 0.78rem; }
+.qnote { margin: 0; font-size: 0.82rem; }

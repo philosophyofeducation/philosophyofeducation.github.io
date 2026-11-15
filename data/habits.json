@@ -4,8 +4,10 @@
   "sleepHours": 7,
   "studyStart": "10:00",
   "exerciseDaysPerWeek": 4,
-  "fastHours": 12
+  "fastHours": 12,
+  "studyMinutes": 300,
+  "phoneMaxMinutes": 30
  },
- "notes": "One entry per day. wake/bed: HH:MM (bed = the time you went to sleep the night before). exercise: list of what you did, [] if none. processed: true if you ate processed food or snacks. fastHours: hours between last meal and first meal. Study start comes from YPT automatically.",
+ "notes": "One entry per day. wake/bed: HH:MM (bed = when I fell asleep the night before). exercise: list of what I did, [] if none. processed: true if I ate processed food or snacks. fastHours: hours between last and first meal. vocabBuilder / analytic: true if I did that day's Vocabulary Builder unit / analytic philosophy reading. Study start, study time and phone use during study come from YPT; 'wrote a thought' comes from the day's Study Log.",
  "days": {}
 }
