@@ -230,10 +230,8 @@
       stat('Reading now', reading.length, done + ' finished', '#library') +
       stat('Thoughts', thoughtsN, 'in my own words', '#studylog') +
       '</div></section>' +
-      '<section class="two"><div><div class="sec-head"><h2>Reading now</h2><a class="more" href="#library">Library →</a></div>' +
-      (reading.length ? '<div class="post-list">' + reading.slice(0, 4).map(function (b) { return '<a class="post-item" href="#book-' + esc(b.id) + '"><span class="muted">' + esc(b.author.split(',')[0]) + '</span><h3>' + esc(b.title) + '</h3></a>'; }).join('') + '</div>' : '<div class="empty-state">Nothing on the desk.</div>') + '</div>' +
-      '<div><div class="sec-head"><h2>Latest writing</h2><a class="more" href="#blog">All posts →</a></div>' +
-      (D.posts.length ? '<div class="post-list">' + D.posts.slice(0, 3).map(postItemHTML).join('') + '</div>' : '<div class="empty-state">No posts yet.</div>') + '</div></section></div>';
+      '<section><div class="sec-head"><h2>Reading now</h2><a class="more" href="#library">Library →</a></div>' +
+      (reading.length ? '<div class="post-list">' + reading.slice(0, 4).map(function (b) { return '<a class="post-item" href="#book-' + esc(b.id) + '"><span class="muted">' + esc(b.author.split(',')[0]) + '</span><h3>' + esc(b.title) + '</h3></a>'; }).join('') + '</div>' : '<div class="empty-state">Nothing on the desk.</div>') + '</section></div>';
     app.innerHTML = html;
     if (canEdit()) bindCheckin(app, function () { var y = window.scrollY; viewHome(); window.scrollTo(0, y); });
     app.querySelectorAll('[data-hm]').forEach(function (bt) { bt.addEventListener('click', function () { var dd = pd(homeState.month + '-01'); dd.setMonth(dd.getMonth() + (+bt.getAttribute('data-hm'))); homeState.month = key(dd).slice(0, 7); viewHome(); }); });
@@ -409,7 +407,7 @@
       '<div><div class="sec-head"><h2>My thoughts</h2>' + (owner ? '<a class="more" href="' + ghNew('logs', todayKey() + '.md', logTemplate(todayKey()).replace('Subject name', subjName(slug))) + '" target="_blank" rel="noopener">Add one ↗</a>' : '') + '</div>' +
       (st.thoughts.length ? st.thoughts.slice().reverse().map(function (t) { return '<div style="margin-bottom:14px"><a class="pill soft" href="#day-' + esc(t.date) + '">' + esc(fmtDate(t.date)) + '</a><p class="thought">' + esc(t.text) + '</p></div>'; }).join('') : '<div class="empty-state">No thoughts yet. In a daily log, write a line starting with &gt; under this subject.</div>') + '</div>' +
       '</section>' +
-      (posts.length ? '<section><div class="sec-head"><h2>Related writing</h2></div><div class="post-list">' + posts.map(postItemHTML).join('') + '</div></section>' : '') + '</div>';
+      '</div>';
     var items = [], mo = monday(pd(todayKey()));
     for (var i = 7; i >= 0; i--) {
       var s = addDays(mo, -7 * i), t = 0;
@@ -912,7 +910,7 @@
   });
 
   // ---------- router ----------
-  var routes = { home: viewHome, studylog: viewStudyLog, library: viewLibrary, habits: viewHabits, words: viewWords, blog: viewBlog };
+  var routes = { home: viewHome, studylog: viewStudyLog, library: viewLibrary, habits: viewHabits, words: viewWords };
   function render() {
     var h = (location.hash || '#home').slice(1);
     if (h === 'owner') { try { localStorage.setItem('owner', '1'); } catch (e) {} location.replace('#home'); return; }
@@ -923,11 +921,11 @@
     else if (h === 'subjects') { section = 'studylog'; viewStudyLog(); }
     else if (h.indexOf('subject-') === 0) { section = 'studylog'; viewSubject(h.slice(8)); }
     else if (h.indexOf('book-') === 0) { section = 'library'; viewBook(h.slice(5)); }
-    else if (h.indexOf('post-') === 0) { var p = D.posts.find(function (x) { return x.slug === h.slice(5); }); section = 'blog'; viewPost(h.slice(5)); }
+    else if (h.indexOf('post-') === 0 || h === 'blog') { location.replace('#home'); return; }
     else if (routes[h]) { routes[h](); }
     else { section = 'home'; viewHome(); }
     document.querySelectorAll('[data-nav]').forEach(function (a) { if (a.getAttribute('data-nav') === section) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
-    var T = { home: '', studylog: 'Study Log', library: 'Library', words: 'Words', habits: 'Habits', blog: 'Blog' };
+    var T = { home: '', studylog: 'Study Log', library: 'Library', words: 'Words', habits: 'Habits' };
     document.title = (T[section] ? T[section] + ' · ' : '') + 'Jinny Hyunjin Kim';
     ownerBar();
   }
