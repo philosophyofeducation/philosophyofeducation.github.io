@@ -461,3 +461,25 @@ footer .shell { display: flex; justify-content: space-between; gap: 16px; flex-w
 @media (max-width: 640px) { .hgrid tbody th { padding-right: 8px; } .hgrid .hg { display: none; } .hgrid .hn { font-size: 0.8rem; white-space: normal; max-width: 92px; } }
 .hgrid thead th:first-child { position: sticky; left: 0; background: var(--paper); z-index: 2; }
 .legend .dotk { width: 8px; height: 8px; border-radius: 50%; }
+
+/* Habit check-in (owner) */
+.checkin { border: 1.5px solid var(--ink); padding: 20px 22px; display: grid; gap: 14px; }
+.ci-head { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.ci-head h2 { font-size: 1.2rem; margin-right: auto; }
+.ci-status { font-size: 0.82rem; min-width: 7em; text-align: right; }
+.ci-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 32px; }
+.ci-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--rule); }
+.ci-row.col { flex-direction: column; align-items: stretch; }
+.ci-lab { font-size: 0.92rem; }
+.ci-lab small { color: var(--mute); }
+.ci-row input[type=time], .ci-addmeal input { font: inherit; font-size: 0.9rem; padding: 6px 8px; border: 1px solid var(--ink); border-radius: 0; background: var(--paper); }
+.seg.sm button { padding: 6px 12px; font-size: 0.85rem; }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.chip { font: inherit; font-size: 0.85rem; padding: 6px 12px; border: 1px solid var(--ink); background: var(--paper); cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--mustard); border-color: var(--mustard); }
+.ci-meals { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; font-size: 0.9rem; }
+.ci-meals li { display: grid; grid-template-columns: 70px 1fr auto; gap: 8px; align-items: center; }
+.ci-meals .mt { font-family: var(--mono); font-size: 0.78rem; color: var(--mute); }
+.ci-addmeal { display: grid; grid-template-columns: 110px 1fr auto auto; gap: 8px; align-items: center; margin-top: 8px; }
+.ci-proc { font-size: 0.82rem; display: flex; gap: 4px; align-items: center; }
+@media (max-width: 760px) { .ci-grid { grid-template-columns: 1fr; } .ci-addmeal { grid-template-columns: 100px 1fr; } }

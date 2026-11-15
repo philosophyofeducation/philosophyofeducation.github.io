@@ -138,6 +138,59 @@
   }
 
   // ---------- views ----------
+  // ---------- habit check-in (owner, saved to the Habits tab of the Vocabulary Bank) ----------
+  var CI = { date: null, status: '' };
+  function canEdit() { return !!(WORDS_API && vocabKey()); }
+  function saveHabit(date, patch) {
+    var cur = D.habits.days[date] = Object.assign({}, D.habits.days[date] || {}, patch);
+    var body = { token: vocabKey(), habit: Object.assign({ date: date }, cur) };
+    CI.status = 'Saving…'; paintStatus();
+    return fetch(WORDS_API, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body) })
+      .then(function (r) { return r.json(); }).then(function (j) { if (!j.ok) throw 0; CI.status = 'Saved ✓'; paintStatus(); })
+      .catch(function () { CI.status = 'Not saved. Check your connection and try again.'; paintStatus(); });
+  }
+  function paintStatus() { var el = document.getElementById('ci-status'); if (el) el.textContent = CI.status; }
+  var EXERCISES = ['swim', 'weights', 'yoga', 'home workout', 'walk'];
+  function checkinHTML() {
+    var tk = todayKey(), y = key(addDays(pd(tk), -1));
+    if (!CI.date) CI.date = tk;
+    var k = CI.date, e = D.habits.days[k] || {}, ex = Array.isArray(e.exercise) ? e.exercise : null;
+    var meals = Array.isArray(e.meals) ? e.meals : [];
+    function yn(field, label) {
+      var v = e[field];
+      return '<div class="ci-row"><span class="ci-lab">' + label + '</span><div class="seg sm">' +
+        '<button type="button" data-ci-bool="' + field + '" data-v="true" aria-pressed="' + (v === true) + '">Done</button>' +
+        '<button type="button" data-ci-bool="' + field + '" data-v="false" aria-pressed="' + (v === false) + '">Not today</button></div></div>';
+    }
+    return '<section class="checkin" id="checkin"><div class="ci-head"><h2>Log my day</h2><div class="seg sm">' +
+      '<button type="button" data-ci-date="' + tk + '" aria-pressed="' + (k === tk) + '">Today</button><button type="button" data-ci-date="' + y + '" aria-pressed="' + (k === y) + '">Yesterday</button></div>' +
+      '<span class="muted ci-status" id="ci-status" aria-live="polite">' + esc(CI.status) + '</span></div>' +
+      '<div class="ci-grid"><div>' +
+      '<div class="ci-row"><span class="ci-lab">Woke up</span><input type="time" data-ci-time="wake" value="' + esc(e.wake || '') + '"></div>' +
+      '<div class="ci-row"><span class="ci-lab">Fell asleep <small>(the night before)</small></span><input type="time" data-ci-time="bed" value="' + esc(e.bed || '') + '"></div>' +
+      yn('vocabBuilder', 'Vocabulary Builder') + yn('analytic', 'Analytic philosophy') +
+      '<div class="ci-row"><span class="ci-lab">Processed food or snacks</span><div class="seg sm"><button type="button" data-ci-bool="processed" data-v="false" aria-pressed="' + (e.processed === false) + '">None</button><button type="button" data-ci-bool="processed" data-v="true" aria-pressed="' + (e.processed === true) + '">Had some</button></div></div>' +
+      '<div class="ci-row col"><span class="ci-lab">Exercise</span><div class="chips">' + EXERCISES.map(function (x) { return '<button type="button" class="chip" data-ci-ex="' + x + '" aria-pressed="' + !!(ex && ex.indexOf(x) >= 0) + '">' + x + '</button>'; }).join('') +
+      '<button type="button" class="chip" data-ci-ex="__rest" aria-pressed="' + !!(ex && !ex.length) + '">rest day</button></div></div>' +
+      '</div><div><div class="ci-row col"><span class="ci-lab">Meals</span><ul class="ci-meals">' +
+      (meals.length ? meals.map(function (m, i) { return '<li><span class="mt">' + (m.time ? tfmt(tmin(m.time)) : '') + '</span><span>' + esc(m.what) + (m.processed ? ' <span class="pill">processed</span>' : '') + '</span><button type="button" class="linkbtn" data-ci-delmeal="' + i + '" aria-label="Remove ' + esc(m.what) + '">remove</button></li>'; }).join('') : '<li class="muted">No meals yet.</li>') +
+      '</ul><form class="ci-addmeal" data-ci-meal><input type="time" name="t" required aria-label="Meal time"><input type="text" name="w" required placeholder="What I ate" aria-label="What I ate"><label class="ci-proc"><input type="checkbox" name="p"> processed</label><button type="submit" class="btn">Add</button></form></div></div></div></section>';
+  }
+  function bindCheckin(root, redraw) {
+    var k = CI.date;
+    root.querySelectorAll('[data-ci-date]').forEach(function (b) { b.addEventListener('click', function () { CI.date = b.getAttribute('data-ci-date'); CI.status = ''; redraw(); }); });
+    root.querySelectorAll('[data-ci-time]').forEach(function (inp) { inp.addEventListener('change', function () { var p = {}; p[inp.getAttribute('data-ci-time')] = inp.value || null; saveHabit(k, p).then(redraw); }); });
+    root.querySelectorAll('[data-ci-bool]').forEach(function (b) { b.addEventListener('click', function () { var f = b.getAttribute('data-ci-bool'), v = b.getAttribute('data-v') === 'true', p = {}; p[f] = (D.habits.days[k] || {})[f] === v ? null : v; saveHabit(k, p).then(redraw); redraw(); }); });
+    root.querySelectorAll('[data-ci-ex]').forEach(function (b) { b.addEventListener('click', function () {
+      var x = b.getAttribute('data-ci-ex'), cur = (D.habits.days[k] || {}).exercise; cur = Array.isArray(cur) ? cur.slice() : [];
+      if (x === '__rest') cur = []; else { var i = cur.indexOf(x); if (i >= 0) cur.splice(i, 1); else cur.push(x); }
+      saveHabit(k, { exercise: cur }).then(redraw); redraw();
+    }); });
+    root.querySelectorAll('[data-ci-delmeal]').forEach(function (b) { b.addEventListener('click', function () { var m = ((D.habits.days[k] || {}).meals || []).slice(); m.splice(+b.getAttribute('data-ci-delmeal'), 1); saveHabit(k, { meals: m }).then(redraw); redraw(); }); });
+    var f = root.querySelector('[data-ci-meal]');
+    if (f) f.addEventListener('submit', function (ev) { ev.preventDefault(); var m = ((D.habits.days[k] || {}).meals || []).slice(); m.push(Object.assign({ time: f.t.value, what: f.w.value.trim() }, f.p.checked ? { processed: true } : {})); m.sort(function (a, b) { return (tmin(a.time) || 0) - (tmin(b.time) || 0); }); saveHabit(k, { meals: m }).then(redraw); redraw(); });
+  }
+
   var homeState = { month: null, sel: null };
   function viewHome() {
     var tk = todayKey(), g = goal();
@@ -159,7 +212,7 @@
     function stat(label, value, sub, href, hl) { return '<a class="stat' + (hl ? ' hl' : '') + '" href="' + href + '"><span class="label">' + label + '</span><span class="value">' + value + '</span><span class="sub">' + sub + '</span></a>'; }
     var html = '<div class="view">' +
       '<section class="home-head"><span class="kicker">Jinny Hyunjin Kim · PhD student, Philosophy of Education</span><h1>I study how <em>words wound</em>, and what education can do about it.</h1></section>' +
-      todayHTML(tk) +
+      todayHTML(tk) + (canEdit() ? checkinHTML() : '') +
       '<section class="home-cal"><div class="hc-cal"><div class="hc-top"><button type="button" class="btn" data-hm="-1" aria-label="Previous month">←</button><h2>' + esc(md.toLocaleString('en-US', { month: 'long', year: 'numeric' })) + '</h2><button type="button" class="btn" data-hm="1" aria-label="Next month"' + (homeState.month >= tk.slice(0, 7) ? ' disabled' : '') + '>→</button></div>' +
       '<div class="cal big">' + ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(function (x) { return '<span class="dow">' + x + '</span>'; }).join('') + calCells(mStart, mEnd, tk) + '</div>' +
       '<div class="legend hc-legend"><span><i style="background:#e1ad01"></i>5h+ studied</span><span><i style="background:#8f8f8f"></i>some study</span><span><i class="dotk"></i>wrote a thought</span><span>Click a day to see it</span></div></div>' +
@@ -182,6 +235,7 @@
       '<div><div class="sec-head"><h2>Latest writing</h2><a class="more" href="#blog">All posts →</a></div>' +
       (D.posts.length ? '<div class="post-list">' + D.posts.slice(0, 3).map(postItemHTML).join('') + '</div>' : '<div class="empty-state">No posts yet.</div>') + '</div></section></div>';
     app.innerHTML = html;
+    if (canEdit()) bindCheckin(app, function () { var y = window.scrollY; viewHome(); window.scrollTo(0, y); });
     app.querySelectorAll('[data-hm]').forEach(function (bt) { bt.addEventListener('click', function () { var dd = pd(homeState.month + '-01'); dd.setMonth(dd.getMonth() + (+bt.getAttribute('data-hm'))); homeState.month = key(dd).slice(0, 7); viewHome(); }); });
     app.querySelectorAll('.cal.big [data-k]').forEach(function (bt) { bt.addEventListener('click', function () { homeState.sel = bt.getAttribute('data-k'); app.querySelectorAll('.cal.big [data-k]').forEach(function (x) { x.classList.toggle('sel', x === bt); x.setAttribute('aria-pressed', x === bt); }); drawDayPanel(homeState.sel); }); });
     drawDayPanel(homeState.sel);
@@ -603,7 +657,8 @@
     function tile(label, value, sub, hl) { return '<div class="tile' + (hl ? ' hl' : '') + '"><span class="label">' + label + '</span><span class="value">' + value + '</span><span class="sub">' + sub + '</span></div>'; }
     var html = '<div class="view"><section style="display:grid;gap:14px"><span class="kicker">Habits</span><h1>Small things, every day.</h1>' +
       '<div class="legend"><span><i style="background:#e1ad01"></i>On target</span><span><i style="background:#fff;border:1.5px solid #111"></i>Recorded, off target</span><span><i style="background:#ececec"></i>No record</span></div>' +
-      (owner ? '<div class="btn-row"><a class="btn accent" href="https://github.com/' + REPO + '/edit/main/data/habits.json" target="_blank" rel="noopener">✎ Edit habits</a></div>' : '') + '</section>' +
+      '</section>' +
+      (canEdit() ? checkinHTML() : '') +
       '<section><div class="sec-head"><h2>This week</h2><span class="muted">since Monday</span></div><div class="tiles">' +
       tile('Avg wake-up', tfmt(avg(weekVals('wake'))), g.wake ? 'goal: by ' + tfmt(tmin(g.wake)) : '') +
       tile('Avg sleep', aSleep == null ? '–' : aSleep.toFixed(1) + 'h', g.sleepHours ? 'goal: ' + g.sleepHours + 'h+' : '') +
@@ -628,6 +683,7 @@
       '<section class="two"><div><div class="sec-head"><h2>Study time</h2><span class="muted">hours a day · mustard = 5h+</span></div><div class="chart" id="h-study"></div></div>' +
       '<div><div class="sec-head"><h2>Fasting</h2><span class="muted">hours between last and first meal</span></div><div class="chart" id="h-fast"></div></div></section>' + mealsHTML(keys) + '</div>';
     app.innerHTML = html;
+    if (canEdit()) bindCheckin(app, function () { var y = window.scrollY; viewHabits(); window.scrollTo(0, y); });
     var gw = app.querySelector('.hgrid-wrap'); if (gw) gw.scrollLeft = gw.scrollWidth;
     timeChart(document.getElementById('h-morning'), keys, [
       { name: 'Woke up', color: '#111', get: function (k) { return H('wake').val(k, D.habits.days[k]); }, goal: g.wake ? tmin(g.wake) : null },
@@ -884,9 +940,10 @@
   window.addEventListener('hashchange', function () { render(); window.scrollTo(0, 0); });
 
   function getJSON(p) { return fetch(p, { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw new Error(p); return r.json(); }); }
-  Promise.all([getJSON('data/study.json'), getJSON('logs/index.json').catch(function () { return []; }), getJSON('posts/index.json').catch(function () { return []; }), getJSON('data/library.json').catch(function () { return { items: [] }; }), getJSON('data/habits.json').catch(function () { return { goals: {}, days: {} }; }), (WORDS_API ? fetch(WORDS_API, { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (j) { return { words: j.rows.map(mapApiRow).filter(function (w) { return w.word; }), live: true }; }).catch(function () { return getJSON('data/words.json'); }) : getJSON('data/words.json')).catch(function () { return { words: [] }; })])
+  Promise.all([getJSON('data/study.json'), getJSON('logs/index.json').catch(function () { return []; }), getJSON('posts/index.json').catch(function () { return []; }), getJSON('data/library.json').catch(function () { return { items: [] }; }), getJSON('data/habits.json').catch(function () { return { goals: {}, days: {} }; }), (WORDS_API ? fetch(WORDS_API, { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (j) { return { words: j.rows.map(mapApiRow).filter(function (w) { return w.word; }), live: true, habits: j.habits || {} }; }).catch(function () { return getJSON('data/words.json'); }) : getJSON('data/words.json')).catch(function () { return { words: [] }; })])
     .then(function (res) {
       D.study = res[0]; D.logs = res[1]; D.posts = res[2]; D.library = res[3].items || []; D.habits = res[4]; D.words = res[5].words || []; D.wordsLive = !!res[5].live;
+      var hb = res[5].habits || {}; D.habits.days = D.habits.days || {}; Object.keys(hb).forEach(function (d) { D.habits.days[d] = Object.assign({}, D.habits.days[d] || {}, hb[d]); });
       SUBJ = Object.assign({}, D.study.subjects || {});
       var byName = {}; Object.keys(SUBJ).forEach(function (k) { byName[SUBJ[k].toLowerCase()] = k; byName[k] = k; });
       D.logs.forEach(function (l) {
