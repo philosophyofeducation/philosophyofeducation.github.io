@@ -7,7 +7,7 @@
 
   var REPO = 'philosophyofeducation/philosophyofeducation.github.io';
   var app = document.getElementById('app');
-  var D = { study: null, logs: [], posts: [], library: [], habits: { goals: {}, days: {} } };
+  var D = { study: null, logs: [], posts: [], library: [], habits: { goals: {}, days: {} }, words: [] };
   var LOGS = {};        // date -> log
   var SUBJ = {};        // slug -> name
   var logState = { mode: 'month', anchor: null };
@@ -168,6 +168,7 @@
       navCard('#studylog', 'Study Log', 'Hours by month, week, day and year, and my thoughts by subject.') +
       navCard('#library', 'Library', 'The books and papers I am reading, shelved and annotated.') +
       navCard('#blog', 'Blog', 'Longer pieces on what I read and think about.') +
+      navCard('#words', 'Words', 'My word book: browse by meaning, flip flashcards, take a quiz.') +
       navCard('#habits', 'Habits', 'Wake-up, sleep, exercise, food and fasting, day by day.') +
       '</div></section></div>';
     app.innerHTML = html;
@@ -522,8 +523,184 @@
     barChart(document.getElementById('h-fast'), keys.map(function (k) { var v = HABITS[5].val(k, D.habits.days[k]), d = pd(k); return { label: (d.getMonth() + 1) + '/' + d.getDate(), value: v == null ? 0 : v * 60, tip: fmtDate(k) + ': ' + (v == null ? 'no record' : v + 'h') }; }), { goal: g.fastHours ? g.fastHours * 60 : 0, label: 'Fasting hours, last 4 weeks' });
   }
 
+
+  // ---------- words (Vocabulary Bank) ----------
+  // To read the sheet live, publish the Words tab to the web as CSV and paste the link here.
+  var WORDS_CSV = '';
+  var W = { mode: 'book', cat: '', sub: '', status: '', mine: '', q: '', idx: 0, flip: false, quiz: null };
+  function lsGet(k, d) { try { return JSON.parse(localStorage.getItem(k)) || d; } catch (e) { return d; } }
+  function lsSet(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+  function marks() { return lsGet('wordmarks', {}); }
+  function missed() { return lsGet('wordmissed', {}); }
+  function parseCSV(t) {
+    var rows = [], row = [], f = '', q = false;
+    for (var i = 0; i < t.length; i++) {
+      var c = t[i];
+      if (q) { if (c === '"') { if (t[i + 1] === '"') { f += '"'; i++; } else q = false; } else f += c; }
+      else if (c === '"') q = true;
+      else if (c === ',') { row.push(f); f = ''; }
+      else if (c === '\n' || c === '\r') { if (c === '\r' && t[i + 1] === '\n') i++; row.push(f); rows.push(row); row = []; f = ''; }
+      else f += c;
+    }
+    if (f || row.length) { row.push(f); rows.push(row); }
+    return rows;
+  }
+  function wordsFromRows(rows) {
+    var K = { 'Status': 'status', 'Category': 'cat', 'Subcategory': 'sub', 'Word': 'word', 'English meaning': 'en', 'Korean meaning': 'ko', 'Usage pattern': 'usage', 'Etymology': 'ety', 'Memory tip': 'tip', 'Example from text': 'text', 'Source': 'source', 'Another example': 'ex', 'Date added': 'date' };
+    var head = rows[0].map(function (h) { return K[h.trim()] || h.trim(); });
+    return rows.slice(1).map(function (r) {
+      var w = {}; head.forEach(function (h, i) { w[h] = (r[i] || '').trim(); });
+      var ex = w.ex ? w.ex.split(/\n?\s*\d[.)]\s+/).map(function (x) { return x.trim(); }).filter(Boolean) : [];
+      w.ex = ex; w.status = w.status || 'new'; if (/^\(asked/.test(w.source)) w.source = '';
+      return w;
+    }).filter(function (w) { return w.word; });
+  }
+  function catNum(c) { var m = /^(\d+)(?:[.-](\d+))?/.exec(c || ''); return m ? (+m[1]) * 100 + (+(m[2] || 0)) : 9999; }
+  function wordSet() {
+    var mk = marks(), ms = missed(), q = W.q.trim().toLowerCase();
+    return D.words.filter(function (w) {
+      if (W.cat && w.cat !== W.cat) return false;
+      if (W.sub && w.sub !== W.sub) return false;
+      if (W.status && w.status !== W.status) return false;
+      if (W.mine === 'notyet' && mk[w.word] !== 'notyet') return false;
+      if (W.mine === 'knew' && mk[w.word] !== 'knew') return false;
+      if (W.mine === 'unseen' && mk[w.word]) return false;
+      if (W.mine === 'missed' && !ms[w.word]) return false;
+      if (W.mine === 'week' && !(w.date && w.date >= key(addDays(new Date(), -6)))) return false;
+      if (q && (w.word + ' ' + w.ko + ' ' + w.en).toLowerCase().indexOf(q) < 0) return false;
+      return true;
+    });
+  }
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function blankRe(word) {
+    var stem = function (p) { var e = p.replace(/[.*+?^${}|[\]\\]/g, '\\$&'); return e.length > 3 ? e.replace(/(e|y)$/i, '') + '[a-z]{0,4}' : e; };
+    var alts = word.replace(/\([^)]*\)/g, ' ').split('/').map(function (a) {
+      var parts = a.trim().split(/\s+/).filter(function (p) { return p && !/^(sb|sth|someone|something|one's|oneself|\.\.\.|~)$/i.test(p); });
+      return parts.length ? parts.map(stem).join('\\s+(?:[a-z]+\\s+)?') : null;
+    }).filter(Boolean).sort(function (a, b) { return b.length - a.length; });
+    return alts.length ? new RegExp('\\b(?:' + alts.join('|') + ')\\b', 'i') : null;
+  }
+  function makeQuiz(set) {
+    var pool = shuffle(set).slice(0, Math.min(10, set.length)), all = D.words;
+    return { i: 0, score: 0, picked: null, wrong: [], qs: pool.map(function (w) {
+      var types = ['ko', 'en'], re = blankRe(w.word), sent = (w.ex || []).concat(w.text ? [w.text.replace(/^"|"$/g, '')] : []).find(function (x) { return re && re.test(x); });
+      if (sent) types.push('blank');
+      var t = types[Math.floor(Math.random() * types.length)];
+      var others = shuffle(all.filter(function (x) { return x.word !== w.word; }));
+      var near = others.filter(function (x) { return x.sub === w.sub || x.cat === w.cat; }).concat(others);
+      var opts = shuffle([w].concat(near.filter(function (x, i, a) { return a.indexOf(x) === i; }).slice(0, 3)));
+      if (t === 'ko') return { w: w, type: t, prompt: w.word, ask: 'What does this word mean?', opts: opts.map(function (o) { return { label: o.ko, ok: o === w }; }) };
+      if (t === 'en') return { w: w, type: t, prompt: w.en, ask: 'Which word fits this meaning?', opts: opts.map(function (o) { return { label: o.word, ok: o === w }; }) };
+      return { w: w, type: t, prompt: sent.replace(re, '_____'), ask: 'Fill in the blank.', opts: opts.map(function (o) { return { label: o.word, ok: o === w }; }) };
+    }) };
+  }
+  function viewWords() {
+    var all = D.words, set = wordSet();
+    if (W.idx >= set.length) W.idx = 0;
+    var cats = {}; all.forEach(function (w) { (cats[w.cat] = cats[w.cat] || {})[w.sub] = 1; });
+    var catKeys = Object.keys(cats).sort(function (a, b) { return catNum(a) - catNum(b); });
+    var mk = marks(), cnt = { new: 0, shaky: 0, 'got it': 0 }; all.forEach(function (w) { cnt[w.status] = (cnt[w.status] || 0) + 1; });
+    var wk = all.filter(function (w) { return w.date && w.date >= key(addDays(new Date(), -6)); }).length;
+    var known = Object.keys(mk).filter(function (k) { return mk[k] === 'knew'; }).length;
+    function opt(v, l, cur) { return '<option value="' + esc(v) + '"' + (v === cur ? ' selected' : '') + '>' + esc(l) + '</option>'; }
+    var html = '<div class="view"><section style="display:grid;gap:14px"><span class="kicker">Words</span><h1>My word book.</h1>' +
+      '<div class="tiles">' +
+      '<div class="tile"><span class="label">Words in the bank</span><span class="value">' + all.length + '</span><span class="sub">from my Vocabulary Bank</span></div>' +
+      '<div class="tile"><span class="label">Added this week</span><span class="value">' + wk + '</span><span class="sub">last 7 days</span></div>' +
+      '<div class="tile"><span class="label">New · Shaky · Got it</span><span class="value">' + cnt.new + ' · ' + cnt.shaky + ' · ' + (cnt['got it'] || 0) + '</span><span class="sub">status in the sheet</span></div>' +
+      '<div class="tile hl"><span class="label">I knew it</span><span class="value">' + known + ' / ' + all.length + '</span><div class="bar goal"><span style="width:' + (known / Math.max(1, all.length) * 100).toFixed(1) + '%"></span></div><span class="sub">from my flashcards</span></div>' +
+      '</div></section>' +
+      '<section class="wtools"><div class="seg" role="tablist" aria-label="Mode">' + [['book', 'Book'], ['cards', 'Flashcards'], ['quiz', 'Quiz'], ['list', 'List']].map(function (m) { return '<button type="button" role="tab" data-wm="' + m[0] + '" aria-selected="' + (W.mode === m[0]) + '">' + m[1] + '</button>'; }).join('') + '</div>' +
+      '<div class="wfilters">' +
+      '<label>Meaning<select data-wf="group">' + opt('', 'All categories', W.sub ? 's:' + W.sub : (W.cat ? 'c:' + W.cat : '')) + catKeys.map(function (c) { var cur = W.sub ? 's:' + W.sub : (W.cat ? 'c:' + W.cat : ''); return '<optgroup label="' + esc(c) + '">' + opt('c:' + c, 'All of ' + c.replace(/^\d+\.\s*/, ''), cur) + Object.keys(cats[c]).sort(function (a, b) { return catNum(a.replace('-', '.')) - catNum(b.replace('-', '.')) || a.localeCompare(b, undefined, { numeric: true }); }).map(function (s) { return opt('s:' + s, s, cur); }).join('') + '</optgroup>'; }).join('') + '</select></label>' +
+      '<label>How well I know it<select data-wf="mine">' + opt('', 'Every word', W.mine) + opt('unseen', 'Not checked yet', W.mine) + opt('notyet', 'Not yet (flashcards)', W.mine) + opt('missed', 'Missed in a quiz', W.mine) + opt('knew', 'I knew it', W.mine) + opt('week', 'Added this week', W.mine) + '</select></label>' +
+      '<label>Sheet status<select data-wf="status">' + opt('', 'Any', W.status) + opt('new', 'new', W.status) + opt('shaky', 'shaky', W.status) + opt('got it', 'got it', W.status) + '</select></label>' +
+      '<label>Search<input type="search" data-wf="q" value="' + esc(W.q) + '" placeholder="word or meaning"></label>' +
+      '</div><p class="muted wcount">' + set.length + ' word' + (set.length === 1 ? '' : 's') + ' in this set' + (W.cat || W.sub || W.mine || W.status || W.q ? ' · <button type="button" class="linkbtn" data-wclear>clear filters</button>' : '') + '</p></section>' +
+      '<section id="wbody"></section></div>';
+    app.innerHTML = html;
+    app.querySelectorAll('[data-wm]').forEach(function (b) { b.addEventListener('click', function () { W.mode = b.getAttribute('data-wm'); W.quiz = null; W.flip = false; viewWords(); }); });
+    app.querySelector('[data-wf="group"]').addEventListener('change', function (e) { var v = e.target.value; W.cat = v.indexOf('c:') === 0 ? v.slice(2) : ''; W.sub = v.indexOf('s:') === 0 ? v.slice(2) : ''; W.idx = 0; W.quiz = null; viewWords(); });
+    ['mine', 'status'].forEach(function (k) { app.querySelector('[data-wf="' + k + '"]').addEventListener('change', function (e) { W[k] = e.target.value; W.idx = 0; W.quiz = null; viewWords(); }); });
+    var qi = app.querySelector('[data-wf="q"]'); qi.addEventListener('change', function () { W.q = qi.value; W.idx = 0; W.quiz = null; viewWords(); });
+    var cl = app.querySelector('[data-wclear]'); if (cl) cl.addEventListener('click', function () { W.cat = W.sub = W.mine = W.status = W.q = ''; W.idx = 0; W.quiz = null; viewWords(); });
+    drawWordBody(set);
+  }
+  function wordPages(w) {
+    var mk = marks()[w.word];
+    var left = '<div class="page left"><div class="pg-top"><span>' + esc(w.sub || w.cat) + '</span>' + (w.date ? '<span>' + esc(w.date) + '</span>' : '') + '</div>' +
+      '<h2 class="w-word">' + esc(w.word) + '</h2><div class="w-ko">' + esc(w.ko) + '</div><p class="w-en">' + esc(w.en) + '</p>' +
+      (w.usage ? '<div class="w-block"><span class="w-lab">How it\'s used</span><p>' + esc(w.usage) + '</p></div>' : '') +
+      (w.ety ? '<div class="w-block"><span class="w-lab">Roots</span><p>' + esc(w.ety) + '</p></div>' : '') +
+      '<div class="pg-foot"><span class="pill ' + (w.status === 'new' ? 'soft' : 'goal') + '">' + esc(w.status) + '</span>' + (mk ? '<span class="pill ' + (mk === 'knew' ? 'goal' : '') + '">' + (mk === 'knew' ? 'I knew it' : 'not yet') + '</span>' : '') + '</div></div>';
+    var right = '<div class="page right">' + (w.tip ? '<div class="w-tip"><span class="w-lab">Memory tip</span><p>' + esc(w.tip) + '</p></div>' : '') +
+      (w.text ? '<div class="w-block"><span class="w-lab">Where I met it</span><blockquote>' + esc(w.text) + '</blockquote>' + (w.source ? '<span class="muted w-src">' + esc(w.source) + '</span>' : '') + '</div>' : '') +
+      (w.ex && w.ex.length ? '<div class="w-block"><span class="w-lab">Examples</span><ol class="w-ex">' + w.ex.map(function (x) { var re = blankRe(w.word); return '<li>' + (re ? esc(x).replace(re, function (m) { return '<mark>' + m + '</mark>'; }) : esc(x)) + '</li>'; }).join('') + '</ol></div>' : '') + '</div>';
+    return left + right;
+  }
+  function drawWordBody(set) {
+    var box = document.getElementById('wbody');
+    if (!set.length) { box.innerHTML = '<div class="empty-state">No words in this set yet.</div>'; return; }
+    var w = set[W.idx];
+    function nav() {
+      return '<div class="wnav"><button type="button" class="btn" data-wprev ' + (W.idx ? '' : 'disabled') + '>← Prev</button><span class="muted">' + (W.idx + 1) + ' / ' + set.length + '</span><button type="button" class="btn" data-wshuffle>Shuffle</button><button type="button" class="btn" data-wnext ' + (W.idx < set.length - 1 ? '' : 'disabled') + '>Next →</button></div>';
+    }
+    function bindNav() {
+      var p = box.querySelector('[data-wprev]'), n = box.querySelector('[data-wnext]'), sh = box.querySelector('[data-wshuffle]');
+      if (p) p.addEventListener('click', function () { W.idx--; W.flip = false; drawWordBody(set); });
+      if (n) n.addEventListener('click', function () { W.idx++; W.flip = false; drawWordBody(set); });
+      if (sh) sh.addEventListener('click', function () { var s2 = shuffle(set); set.length = 0; Array.prototype.push.apply(set, s2); W.idx = 0; W.flip = false; drawWordBody(set); });
+    }
+    if (W.mode === 'book') {
+      box.innerHTML = '<div class="wbook" aria-live="polite">' + wordPages(w) + '</div>' + nav() + '<p class="muted wkeys">Tip: use the ← → keys to turn pages.</p>';
+      bindNav();
+    } else if (W.mode === 'cards') {
+      box.innerHTML = '<div class="fcard' + (W.flip ? ' flipped' : '') + '" tabindex="0" role="button" aria-label="Flip card"><div class="face front"><span class="w-lab">' + esc(w.sub || '') + '</span><h2 class="w-word">' + esc(w.word) + '</h2><span class="muted">Say the meaning, then click to flip</span></div>' +
+        '<div class="face back"><div class="w-ko">' + esc(w.ko) + '</div><p class="w-en">' + esc(w.en) + '</p>' + (w.tip ? '<p class="w-tipline">' + esc(w.tip) + '</p>' : '') + '</div></div>' +
+        '<div class="wnav judge"><button type="button" class="btn" data-wmark="notyet">✗ Not yet</button><button type="button" class="btn accent" data-wmark="knew">✓ I knew it</button></div>' + nav();
+      var c = box.querySelector('.fcard'); function flip() { W.flip = !W.flip; c.classList.toggle('flipped', W.flip); }
+      c.addEventListener('click', flip); c.addEventListener('keydown', function (e) { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); flip(); } });
+      box.querySelectorAll('[data-wmark]').forEach(function (b) { b.addEventListener('click', function () { var m = marks(); m[w.word] = b.getAttribute('data-wmark'); lsSet('wordmarks', m); if (W.idx < set.length - 1) W.idx++; W.flip = false; drawWordBody(set); }); });
+      bindNav();
+    } else if (W.mode === 'quiz') {
+      if (!W.quiz) W.quiz = makeQuiz(set);
+      var Q = W.quiz;
+      if (Q.i >= Q.qs.length) {
+        box.innerHTML = '<div class="qdone"><span class="kicker">Quiz done</span><div class="big">' + Q.score + ' / ' + Q.qs.length + '</div>' +
+          (Q.wrong.length ? '<p>Words to look at again:</p><div class="chips">' + Q.wrong.map(function (x) { return '<span class="pill">' + esc(x) + '</span>'; }).join('') + '</div>' : '<p>Every one right. 🎉</p>') +
+          '<div class="btn-row"><button type="button" class="btn primary" data-qnew>New quiz</button>' + (Q.wrong.length ? '<button type="button" class="btn" data-qmissed>Study the ones I missed</button>' : '') + '</div></div>';
+        box.querySelector('[data-qnew]').addEventListener('click', function () { W.quiz = null; drawWordBody(set); });
+        var qm = box.querySelector('[data-qmissed]'); if (qm) qm.addEventListener('click', function () { W.mine = 'missed'; W.mode = 'book'; W.quiz = null; W.idx = 0; viewWords(); });
+        return;
+      }
+      var q = Q.qs[Q.i];
+      box.innerHTML = '<div class="quiz"><div class="qhead"><span class="kicker">Question ' + (Q.i + 1) + ' of ' + Q.qs.length + '</span><span class="muted">Score ' + Q.score + '</span></div><div class="bar goal"><span style="width:' + (Q.i / Q.qs.length * 100) + '%"></span></div>' +
+        '<p class="qask">' + q.ask + '</p><div class="qprompt ' + q.type + '">' + esc(q.prompt) + '</div>' +
+        '<div class="qopts">' + q.opts.map(function (o, i) { var cls = Q.picked == null ? '' : (o.ok ? ' right' : (Q.picked === i ? ' wrong' : '')); return '<button type="button" class="qopt' + cls + '" data-qo="' + i + '"' + (Q.picked == null ? '' : ' disabled') + '>' + esc(o.label) + '</button>'; }).join('') + '</div>' +
+        (Q.picked != null ? '<div class="qfeed"><strong>' + esc(q.w.word) + '</strong> · ' + esc(q.w.ko) + (q.w.tip ? '<br><span class="muted">' + esc(q.w.tip) + '</span>' : '') + '</div><div class="btn-row"><button type="button" class="btn primary" data-qnext>' + (Q.i < Q.qs.length - 1 ? 'Next question →' : 'See my score') + '</button></div>' : '') + '</div>';
+      box.querySelectorAll('[data-qo]').forEach(function (b) { b.addEventListener('click', function () {
+        Q.picked = +b.getAttribute('data-qo'); var ms = missed();
+        if (q.opts[Q.picked].ok) { Q.score++; if (ms[q.w.word]) { delete ms[q.w.word]; } } else { Q.wrong.push(q.w.word); ms[q.w.word] = (ms[q.w.word] || 0) + 1; }
+        lsSet('wordmissed', ms); drawWordBody(set);
+      }); });
+      var nx = box.querySelector('[data-qnext]'); if (nx) nx.addEventListener('click', function () { Q.i++; Q.picked = null; drawWordBody(set); });
+    } else {
+      var groups = {}; set.forEach(function (x) { (groups[x.sub || x.cat] = groups[x.sub || x.cat] || []).push(x); });
+      var mk = marks();
+      box.innerHTML = Object.keys(groups).sort(function (a, b) { return a.localeCompare(b, undefined, { numeric: true }); }).map(function (g) {
+        return '<div class="wgroup"><h3>' + esc(g) + '</h3><div class="wlist">' + groups[g].map(function (x) { return '<button type="button" class="witem" data-wopen="' + esc(x.word) + '"><span class="wi-w">' + esc(x.word) + (mk[x.word] === 'knew' ? ' <span class="dot ok"></span>' : (mk[x.word] === 'notyet' || missed()[x.word] ? ' <span class="dot"></span>' : '')) + '</span><span class="wi-k">' + esc(x.ko) + '</span></button>'; }).join('') + '</div></div>';
+      }).join('');
+      box.querySelectorAll('[data-wopen]').forEach(function (b) { b.addEventListener('click', function () { W.idx = set.findIndex(function (x) { return x.word === b.getAttribute('data-wopen'); }); W.mode = 'book'; viewWords(); window.scrollTo(0, 0); }); });
+    }
+  }
+  document.addEventListener('keydown', function (e) {
+    if (location.hash !== '#words' || /INPUT|SELECT|TEXTAREA/.test((e.target || {}).tagName) || (W.mode !== 'book' && W.mode !== 'cards')) return;
+    var b = document.querySelector(e.key === 'ArrowRight' ? '[data-wnext]' : (e.key === 'ArrowLeft' ? '[data-wprev]' : null));
+    if (b && !b.disabled) b.click();
+  });
+
   // ---------- router ----------
-  var routes = { home: viewHome, studylog: viewStudyLog, library: viewLibrary, habits: viewHabits, blog: viewBlog };
+  var routes = { home: viewHome, studylog: viewStudyLog, library: viewLibrary, habits: viewHabits, words: viewWords, blog: viewBlog };
   function render() {
     var h = (location.hash || '#home').slice(1);
     if (h === 'owner') { try { localStorage.setItem('owner', '1'); } catch (e) {} location.replace('#home'); return; }
@@ -548,9 +725,9 @@
   window.addEventListener('hashchange', function () { render(); window.scrollTo(0, 0); });
 
   function getJSON(p) { return fetch(p, { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw new Error(p); return r.json(); }); }
-  Promise.all([getJSON('data/study.json'), getJSON('logs/index.json').catch(function () { return []; }), getJSON('posts/index.json').catch(function () { return []; }), getJSON('data/library.json').catch(function () { return { items: [] }; }), getJSON('data/habits.json').catch(function () { return { goals: {}, days: {} }; })])
+  Promise.all([getJSON('data/study.json'), getJSON('logs/index.json').catch(function () { return []; }), getJSON('posts/index.json').catch(function () { return []; }), getJSON('data/library.json').catch(function () { return { items: [] }; }), getJSON('data/habits.json').catch(function () { return { goals: {}, days: {} }; }), (WORDS_CSV ? fetch(WORDS_CSV, { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw 0; return r.text(); }).then(function (t) { return { words: wordsFromRows(parseCSV(t)) }; }).catch(function () { return getJSON('data/words.json'); }) : getJSON('data/words.json')).catch(function () { return { words: [] }; })])
     .then(function (res) {
-      D.study = res[0]; D.logs = res[1]; D.posts = res[2]; D.library = res[3].items || []; D.habits = res[4];
+      D.study = res[0]; D.logs = res[1]; D.posts = res[2]; D.library = res[3].items || []; D.habits = res[4]; D.words = res[5].words || [];
       SUBJ = Object.assign({}, D.study.subjects || {});
       var byName = {}; Object.keys(SUBJ).forEach(function (k) { byName[SUBJ[k].toLowerCase()] = k; byName[k] = k; });
       D.logs.forEach(function (l) {

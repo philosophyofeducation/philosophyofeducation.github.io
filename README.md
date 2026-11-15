@@ -50,3 +50,7 @@ Write in Markdown here.
 ```
 
 `bed` is the time I fell asleep the night before. `exercise` is `[]` on a rest day. Study start time comes from YPT (`starts` in `data/study.json`). Goals live under `goals` at the top of the file.
+
+## Words
+
+The Words page reads `data/words.json`, built from the Vocabulary Bank sheet with `scripts/sheet_to_words.py`. To read the sheet live instead, publish the Words tab to the web as CSV and paste that link into `WORDS_CSV` at the top of the words section in `assets/app.js`. Flashcard and quiz marks ("I knew it", "Not yet", missed words) are kept in the browser, not in the sheet.

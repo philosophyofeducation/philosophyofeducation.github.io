@@ -1,0 +1,2679 @@
+{
+ "source": "Vocabulary Bank (Google Sheets)",
+ "count": 133,
+ "words": [
+  {
+   "status": "new",
+   "cat": "1. Clarity & explanation",
+   "sub": "1-1 Explaining & unpacking",
+   "word": "account for",
+   "en": "1) to explain why something happens; 2) to make up a part or amount of something",
+   "ko": "1) 설명하다, (원인을) 해명하다; 2) (비율을) 차지하다",
+   "usage": "account for + phenomenon (account for the persistence of X); X accounts for 30% of Y; fail to account for + case",
+   "ety": "Old French aconter (to count up), from Latin computare; cf. count, compute, accountability",
+   "tip": "Give an account of it = tell the story of how it came about. A good theory accounts for the data: every case gets an explanation.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "Butler's theory struggles to account for why some slurs lose their power over time."
+   ],
+   "date": "2026-11-06"
+  },
+  {
+   "status": "new",
+   "cat": "1. Clarity & explanation",
+   "sub": "1-1 Explaining & unpacking",
+   "word": "elucidate",
+   "en": "to make something clear by explaining it; to shed light on",
+   "ko": "밝히다, 해명하다, 알기 쉽게 설명하다",
+   "usage": "elucidate + concept / relationship / meaning; elucidate how / why + clause; elucidation (n.); serve to elucidate",
+   "ety": "Latin e- (out) + lucidus (bright, clear), from lux (light); cf. lucid, translucent, illuminate",
+   "tip": "lux = light. To elucidate is to bring a dark idea out into the light. ⚠ explicate = unfold what is implied; elucidate = make what's obscure clear.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "This chapter seeks to elucidate the relationship between speech acts and social harm."
+   ],
+   "date": "2026-11-07"
+  },
+  {
+   "status": "new",
+   "cat": "1. Clarity & explanation",
+   "sub": "1-1 Explaining & unpacking",
+   "word": "explicate",
+   "en": "to explain in detail by unfolding what is implied",
+   "ko": "(함축된 의미를) 풀어 설명하다, 해명하다",
+   "usage": "explicate an idea / a concept; explicate what X means",
+   "ety": "Latin ex- (out) + plicare (to fold): to unfold",
+   "tip": "Same root as implicit / explicit. Explicating turns the implicit into the explicit.",
+   "text": "\"such an attempt to explicate these ideas would invariably result in the unveiling of nuances of meaning\"",
+   "source": "Noddings Ch. 3, p. 45",
+   "ex": [
+    "Chapter 2 explicates Butler's notion of linguistic vulnerability."
+   ],
+   "date": ""
+  },
+  {
+   "status": "new",
+   "cat": "1. Clarity & explanation",
+   "sub": "1-1 Explaining & unpacking",
+   "word": "expository / exposition",
+   "en": "intended to explain or describe something clearly (rather than to tell a story or persuade)",
+   "ko": "설명적인, 해설하는; expository writing = 설명문; exposition = 해설, 상세한 설명",
+   "usage": "expository writing / essay / text / prose; largely / purely expository; expository vs. narrative / persuasive / descriptive; an exposition of + theory",
+   "ety": "Latin ex- (out) + ponere (to put, place), via expositus; cf. expose, expound, exposition, expo, position",
+   "tip": "ex- + ponere = put out → lay your ideas out on the table for everyone to see. Same root as expose, expound, and expo. In papers, 'this section is expository' = 'here I explain others' views; my own argument comes later.' ⚠ expository vs. exploratory (탐색적인).",
+   "text": "",
+   "source": "",
+   "ex": [
+    "My son's homework this week is to write a short expository essay on how volcanoes form.",
+    "The museum's labels are expository, explaining each painting's history in plain language.",
+    "Most news reports are meant to be expository rather than persuasive.",
+    "Fourth graders often find expository texts harder to read than stories.",
+    "The first half of the paper is expository, laying out Austin's speech act theory before applying it to hate speech."
+   ],
+   "date": "2026-11-12"
+  },
+  {
+   "status": "new",
+   "cat": "1. Clarity & explanation",
+   "sub": "1-2 Vagueness",
+   "word": "fuzzy",
+   "en": "unclear, vague, imprecise",
+   "ko": "모호한, 흐릿한",
+   "usage": "fuzzy thinking; a fuzzy concept / distinction",
+   "ety": "Origin uncertain; literally fluffy or blurred",
+   "tip": "Picture a blurry, out-of-focus photo. Its opposite in Ch. 3 is the analysts' favorite word, clarity.",
+   "text": "\"Analytic philosophers accused traditional philosophers of fuzzy thinking\"",
+   "source": "Noddings Ch. 3, p. 46",
+   "ex": [
+    "The policy relies on fuzzy terms like \"respect\" without defining them."
+   ],
+   "date": ""
+  },
+  {
+   "status": "new",
+   "cat": "1. Clarity & explanation",
+   "sub": "1-3 Precision & rigor",
+   "word": "rigor",
+   "en": "strictness and precision in thinking or method; careful exactness",
+   "ko": "엄밀함, 철저함",
+   "usage": "with rigor; methodological / conceptual rigor; a rigorous argument / analysis",
+   "ety": "Latin rigor (stiffness); cf. rigid, rigor mortis",
+   "tip": "Rigorous thinking is stiff and doesn't bend or wobble, like something rigid.",
+   "text": "\"find ways to analyze, or at least discuss with some rigor, the full range of human concerns\"",
+   "source": "Noddings Ch. 3, p. 59",
+   "ex": [
+    "The paper lacks conceptual rigor in defining \"harm.\""
+   ],
+   "date": ""
+  },
+  {
+   "status": "new",
+   "cat": "1. Clarity & explanation",
+   "sub": "1-4 Prominence & importance",
+   "word": "conspicuous / conspicuously / inconspicuous",
+   "en": "easy to see or notice; standing out (sometimes in an unwanted way)",
+   "ko": "눈에 띄는, 두드러진, 뚜렷한",
+   "usage": "conspicuous + noun (a conspicuous absence / sign / omission); be conspicuous by its absence (없어서 오히려 눈에 띄다); conspicuous consumption (과시적 소비); make oneself conspicuous; inconspicuous = 눈에 안 띄는",
+   "ety": "Latin con- (intensive) + specere 'to look' → 'clearly visible'. Same root: inspect, spectacle, perspective, suspicious",
+   "tip": "spec = look (spectacle, inspect) → con-SPIC-uous = 'everyone's eyes land on it.' ⚠ conspicuous (눈에 띄는) vs. inconspicuous (눈에 안 띄는) — not 'conscious'",
+   "text": "",
+   "source": "",
+   "ex": [
+    "She wore a bright red coat, so she was conspicuous in the crowd.",
+    "The cat's food bowl was in a conspicuous spot by the door.",
+    "Put the warning sign in a conspicuous place so everyone can see it.",
+    "Veblen coined the term 'conspicuous consumption' to describe buying luxury goods to display status.",
+    "Students' own languages are conspicuously absent from the school's official curriculum."
+   ],
+   "date": "2026-11-14"
+  },
+  {
+   "status": "new",
+   "cat": "1. Clarity & explanation",
+   "sub": "1-4 Prominence & importance",
+   "word": "integral",
+   "en": "essential to a whole; a necessary part that cannot be removed without changing the whole",
+   "ko": "필수적인, 없어서는 안 될, (전체를 이루는) 핵심적인",
+   "usage": "an integral part / component / element of X; integral to + noun (integral to the plan); become an integral part of X",
+   "ety": "Latin integer (whole, untouched); cf. integer, integrity, integrate, entire",
+   "tip": "integer = whole. An integral part is a piece the whole needs to stay whole. ⚠ integral (필수적인 일부) ≠ integrated (통합된) ≠ integrative (통합적인).",
+   "text": "\"[the Protocols] were used to justify the massacres of Jews during the Russian Civil War and became an integral part of Nazi ideology.\"",
+   "source": "Cassam, Conspiracy Theories, Ch. 1, p. 14",
+   "ex": [
+    "Rice is an integral part of most Korean meals.",
+    "Teamwork is integral to the success of any project.",
+    "Music became an integral part of her daily routine.",
+    "Critical thinking is an integral component of the new curriculum.",
+    "For Butler, the history of a slur's use is integral to its power to wound."
+   ],
+   "date": "2026-11-10"
+  },
+  {
+   "status": "new",
+   "cat": "1. Clarity & explanation",
+   "sub": "1-4 Prominence & importance",
+   "word": "salient",
+   "en": "most noticeable or important; standing out from the rest and drawing attention",
+   "ko": "두드러진, 눈에 띄는, 가장 중요한, 핵심적인",
+   "usage": "a salient feature / point / fact / issue / difference; the most salient aspect; salient to + person or context; make X salient; become salient; salience (n.)",
+   "ety": "Latin salire (to leap); cf. result, assault, sally, somersault",
+   "tip": "salient = leaping out at you. salire (leap) also gives result (leaps back) and assault (leaps at). A salient point jumps out of the text. Note: it means 'stands out', so it can differ from 'important', and in philosophy/psychology 'make X salient' means bring X to attention.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "The most salient feature of the town is its enormous clock tower.",
+    "Let me summarize the salient points of the meeting for those who missed it.",
+    "After the accident, safety became a salient concern for the whole family.",
+    "In a classroom of mostly white students, her race was salient to her in ways it wasn't elsewhere.",
+    "A good abstract states the question and the salient findings, not every detail."
+   ],
+   "date": "2026-11-07"
+  },
+  {
+   "status": "new",
+   "cat": "1. Clarity & explanation",
+   "sub": "1-4 Prominence & importance",
+   "word": "thrust (n./v.)",
+   "en": "(n.) the main point or direction of an argument; a strong push. (v.) to push suddenly and forcefully; to force someone into a situation",
+   "ko": "(n.) 요지, 핵심, 취지; 밀침 (v.) 확 밀다, 밀어 넣다, (상황에) 떠밀다",
+   "usage": "the (main/central) thrust of + argument/paper/policy; thrust something into/at something; be thrust into (a role / the spotlight); thrust upon someone",
+   "ety": "Old Norse þrysta 'to press, compress'. Related: thrusting, (engine) thrust",
+   "tip": "Picture a spear thrust forward: the thrust of an argument is the direction the whole argument pushes toward. Main thrust ≈ gist / main point / upshot",
+   "text": "\"Freud happened on a developmental thrust within the individual toward a rational orientation to the world.\" (here: an inner drive/push in development, 발달적 추동력)",
+   "source": "",
+   "ex": [
+    "He thrust his hands into his pockets to keep them warm.",
+    "She was thrust into the spotlight after her video went viral.",
+    "Many new teachers are thrust into leadership roles before they feel ready.",
+    "The main thrust of the policy is to reduce class sizes.",
+    "The central thrust of Butler's argument is that injurious speech can be resignified rather than simply censored."
+   ],
+   "date": "2026-11-14"
+  },
+  {
+   "status": "new",
+   "cat": "1. Clarity & explanation",
+   "sub": "1-5 Expressing ideas well",
+   "word": "articulate",
+   "en": "v. to express an idea or feeling clearly in words; adj. able to express oneself clearly and well",
+   "ko": "v. (생각을) 분명하게 표현하다, 명료하게 말로 풀어내다 / adj. (말을) 조리 있게 잘하는",
+   "usage": "v. articulate + idea / concern / position / vision; articulate what / how + clause; adj. an articulate speaker / student; articulation (n.); inarticulate (adj.)",
+   "ety": "Latin articulus (small joint), from artus (joint); cf. article, arthritis",
+   "tip": "A joint divides a limb into clear, connected parts. To articulate an idea is to put it into clearly jointed words. ⚠ vs. eloquent: articulate = clear; eloquent = clear AND moving/beautiful.",
+   "text": "",
+   "source": "Heehler, The Well-Spoken Thesaurus",
+   "ex": [
+    "She was too upset to articulate what was wrong.",
+    "He's a very articulate kid; he explains his reasons better than most adults.",
+    "Can you articulate exactly what you want from this job?",
+    "Many students feel hurt by a slur but struggle to articulate why it wounds.",
+    "This paper articulates a theory of linguistic injury that draws on Austin and Butler."
+   ],
+   "date": "2026-11-08"
+  },
+  {
+   "status": "new",
+   "cat": "1. Clarity & explanation",
+   "sub": "1-5 Expressing ideas well",
+   "word": "eloquent / eloquence",
+   "en": "adj. fluent, expressive, and persuasive in speaking or writing; also (of a look or gesture) vividly expressive without words",
+   "ko": "adj. 유창하고 설득력 있는, 웅변의 / n. 웅변, 능변, 유려한 표현력",
+   "usage": "an eloquent speech / speaker / plea / defense of X; speak eloquently about X; an eloquent silence / look; eloquence (n.)",
+   "ety": "Latin e- (out) + loqui (to speak); cf. loquacious, colloquial, soliloquy, interlocutor",
+   "tip": "e-loqui = speaking out, beautifully. Same root as colloquial (speaking together) and interlocutor (one who speaks between). ⚠ Higher than articulate: eloquent speech moves people, not just informs them.",
+   "text": "\"The secret to eloquence\" (back cover)",
+   "source": "Heehler, The Well-Spoken Thesaurus",
+   "ex": [
+    "Her eloquent speech at the funeral left everyone in tears.",
+    "He isn't eloquent, but he's honest, and people trust him.",
+    "The child's silence was more eloquent than any apology.",
+    "King's letter is an eloquent defense of nonviolent resistance.",
+    "Butler writes eloquently about how being named can both wound and constitute the subject."
+   ],
+   "date": "2026-11-08"
+  },
+  {
+   "status": "new",
+   "cat": "1. Clarity & explanation",
+   "sub": "1-6 Complexity & detail",
+   "word": "intricate",
+   "en": "having many small parts or details that fit together in a complicated way; very detailed and complex",
+   "ko": "복잡하게 얽힌, 정교한, 섬세한",
+   "usage": "an intricate pattern / design / plot / argument / relationship; intricately carved / connected / woven; intricacy (n.), the intricacies of X",
+   "ety": "Latin intricare (to entangle), in- (in) + tricae (tricks, perplexities, tangles); cf. extricate (to untangle, get out of)",
+   "tip": "in + tricae = 'tangled in.' Its opposite-direction cousin is extricate (to pull out of a tangle). ⚠ vs. complicated: complicated often = hard and annoying; intricate = complex but finely made, often admired.",
+   "text": "",
+   "source": "Heehler, The Well-Spoken Thesaurus",
+   "ex": [
+    "Her sweater has an intricate pattern of tiny snowflakes.",
+    "The novel's plot is so intricate that I had to draw a chart of the characters.",
+    "Watchmakers spend years learning to assemble such intricate mechanisms.",
+    "Learning a new language means slowly mastering the intricacies of its grammar.",
+    "Butler traces the intricate relationship between being named, being injured, and becoming a subject."
+   ],
+   "date": "2026-11-08"
+  },
+  {
+   "status": "new",
+   "cat": "10. Institutions & rules",
+   "sub": "10-1 Trial periods & discipline",
+   "word": "probation / probationary",
+   "en": "n. (1) a trial period in which someone (a new employee, member, student) must prove they are suitable; (2) a legal sentence letting an offender stay out of prison under supervision; (3) academic probation: a warning status for students whose grades fall too low",
+   "ko": "n. 수습 기간, 시험 채용 기간; (법) 보호관찰; (학업) 학사경고",
+   "usage": "on probation; put / place someone on probation; a probation period; sentenced to X years' probation; academic probation; probation officer; probationary (adj.): a probationary period / teacher; probationer (n.)",
+   "ety": "Latin probatio (a test, proof), from probare (to test, prove); cf. prove, probe, probable, approbation",
+   "tip": "Probation = a \"prove-ation\": a period when you must PROVE yourself. Same root as probe (to test) and prove.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "New hires are on probation for the first three months.",
+    "He was sentenced to two years' probation instead of jail time.",
+    "If your GPA drops below 3.0, you'll be placed on academic probation.",
+    "The club let him back in, but only on probation: one more fight and he's out.",
+    "The university placed the program on probation after it failed to meet accreditation standards."
+   ],
+   "date": "2026-11-09"
+  },
+  {
+   "status": "new",
+   "cat": "10. Institutions & rules",
+   "sub": "10-2 Accusation & the law",
+   "word": "accomplice / complicit / complicity",
+   "en": "a person who helps another to do something wrong or illegal",
+   "ko": "공범, 공모자; complicit = 연루된, 가담한; complicity = 공모, 가담",
+   "usage": "an accomplice to / in + crime; act as an accomplice; an unwitting accomplice; be complicit in + noun; complicity in + noun",
+   "ety": "Latin complex, complicis (closely connected), from com- (together) + plicare (to fold); Middle English 'a complice' → accomplice; cf. complicit, complicated, implicate",
+   "tip": "com + plicare = folded together → someone tangled up with the main wrongdoer. Same plic- as complicated and complicit. ⚠ accomplice (공범) vs. accomplish (성취하다): different roots.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "My little brother was my accomplice in sneaking cookies before dinner.",
+    "The driver of the getaway car was charged as an accomplice.",
+    "Police arrested the hacker and two accomplices.",
+    "A teacher who laughs along with a cruel joke can become an unwitting accomplice to bullying.",
+    "Some theorists argue that institutions that tolerate slurs act as accomplices, lending the speaker their authority."
+   ],
+   "date": "2026-11-12"
+  },
+  {
+   "status": "new",
+   "cat": "10. Institutions & rules",
+   "sub": "10-2 Accusation & the law",
+   "word": "acquit / acquittal",
+   "en": "v. (of a court or jury) to officially declare someone not guilty of a crime; (idiom) acquit oneself well = to perform or behave well",
+   "ko": "v. 무죄를 선고하다, 무죄 방면하다 / n. acquittal: 무죄 선고 / acquit oneself well: (일을) 잘 해내다",
+   "usage": "acquit someone of + charge (acquitted of murder); be acquitted; win an acquittal; acquit oneself well / admirably; ⚠ opposite of convict (유죄 판결하다), nearly opposite of incriminate (죄를 씌우다)",
+   "ety": "Old French aquiter (to settle, free), from Latin ad- (to) + quietare (to make quiet, settle); cf. quit, quiet",
+   "tip": "ac-QUIT: the court lets you QUIT the charge, and you go free and quiet. ⚠ incriminate = makes you look guilty; acquit = the court says 'not guilty.'",
+   "text": "",
+   "source": "",
+   "ex": [
+    "The jury acquitted him after only two hours of deliberation.",
+    "She was acquitted of all charges.",
+    "Despite the acquittal, many people still believed he was guilty.",
+    "The new DNA evidence led to his acquittal.",
+    "Being acquitted in court does not erase the social harm of being publicly accused."
+   ],
+   "date": "2026-11-09"
+  },
+  {
+   "status": "new",
+   "cat": "10. Institutions & rules",
+   "sub": "10-2 Accusation & the law",
+   "word": "conspiracy / conspire / conspirator",
+   "en": "a secret plan by two or more people to do something illegal or harmful; (law) the crime of agreeing to commit a crime",
+   "ko": "음모, 공모; (법) 공모죄",
+   "usage": "conspiracy to + verb (conspiracy to commit fraud); a conspiracy against X; uncover / expose a conspiracy; conspire with someone to do X; a conspiracy of silence",
+   "ety": "Latin con- (together) + spirare (to breathe): 'breathe together'; cf. inspire, respiration, expire, spirit",
+   "tip": "Breathe together': heads so close that their breath mixes while they whisper a secret plan. Cassam's three parts: a small group + in secret + illegal or harmful.",
+   "text": "\"A conspiracy requires a small group of conspirators who work together in secret to do something illegal or harmful.\"",
+   "source": "Cassam, Conspiracy Theories, Ch. 1, p. 3",
+   "ex": [
+    "The two brothers were found guilty of conspiracy to commit fraud.",
+    "Police uncovered a conspiracy to rob the bank.",
+    "There was a conspiracy of silence about the abuse in the team.",
+    "The Gunpowder Plot of 1605 was a real conspiracy to blow up Parliament.",
+    "Calling every coordinated act of resistance a \"conspiracy\" can be a way to delegitimize political protest."
+   ],
+   "date": "2026-11-10"
+  },
+  {
+   "status": "new",
+   "cat": "10. Institutions & rules",
+   "sub": "10-2 Accusation & the law",
+   "word": "decriminalization / decriminalize",
+   "en": "n. the act of making something no longer a criminal offense (it may still be regulated or fined)",
+   "ko": "n. 비범죄화 / v. decriminalize: 비범죄화하다",
+   "usage": "the decriminalization of X; decriminalize drug possession / sex work; ⚠ vs. legalization: decriminalized = no criminal penalty but possibly fines; legalized = fully permitted and regulated; opposite: criminalization / criminalize",
+   "ety": "Latin de- (away, remove) + crimen (charge) + -al + -ize + -ation",
+   "tip": "de + crim = take the crime label AWAY. Not 'allowed' (legalized), just 'no longer a crime.'",
+   "text": "",
+   "source": "",
+   "ex": [
+    "Some cities have moved toward the decriminalization of jaywalking.",
+    "Portugal is known for decriminalizing personal drug possession in 2001.",
+    "Decriminalization is not the same as legalization: you may still pay a fine.",
+    "Activists campaigned for the decriminalization of homosexuality in countries where it was still a crime.",
+    "Debates over hate speech regulation often ask whether criminalization or decriminalization better protects targeted groups."
+   ],
+   "date": "2026-11-09"
+  },
+  {
+   "status": "new",
+   "cat": "10. Institutions & rules",
+   "sub": "10-2 Accusation & the law",
+   "word": "incriminate / incriminating / self-incrimination",
+   "en": "v. to make someone appear guilty of a crime or wrongdoing; to provide evidence of guilt",
+   "ko": "v. 죄를 씌우다, 유죄로 보이게 하다 / incriminating: 유죄를 입증하는 / self-incrimination: 자기부죄",
+   "usage": "incriminate oneself; incriminating evidence / messages / documents; self-incrimination; the right against self-incrimination",
+   "ety": "Latin in- (into) + crimen (charge, accusation); cf. crime, criminal, recrimination, decriminalize",
+   "tip": "in + crim = put the charge INTO someone: you load the crime onto them.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "The suspect refused to answer, fearing he might incriminate himself.",
+    "Police found incriminating text messages on her phone.",
+    "He tried to incriminate his coworker by hiding the money in her desk.",
+    "The Fifth Amendment protects people from being forced to incriminate themselves.",
+    "Students may stay silent about online harassment if speaking up would incriminate their friends."
+   ],
+   "date": "2026-11-09"
+  },
+  {
+   "status": "new",
+   "cat": "10. Institutions & rules",
+   "sub": "10-2 Accusation & the law",
+   "word": "recrimination",
+   "en": "n. an accusation made in response to someone else's accusation; mutual blaming (often plural)",
+   "ko": "n. 맞비난, 서로 책임 전가하기",
+   "usage": "bitter / mutual recriminations; dissolve into recriminations; without recrimination; recriminate (v., rare)",
+   "ety": "Latin re- (back) + criminari (to accuse), from crimen; cf. crime, incriminate",
+   "tip": "re + crim = throw the charge BACK. You blame me, I blame you back, and that's recrimination.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "After the breakup, there were no tears, only bitter recriminations.",
+    "The meeting dissolved into mutual recriminations over who missed the deadline.",
+    "Let's fix the problem instead of wasting time on recriminations.",
+    "After the election loss, the party was consumed by recrimination.",
+    "Restorative approaches aim to move a school community beyond blame and recrimination toward repair."
+   ],
+   "date": "2026-11-09"
+  },
+  {
+   "status": "new",
+   "cat": "10. Institutions & rules",
+   "sub": "10-3 Inheritance & legal procedure",
+   "word": "probate",
+   "en": "n. the legal process of proving that a dead person's will is valid and distributing their property (estate); v. (US) to prove a will officially",
+   "ko": "n. 유언 검인 (절차) / v. (유언장을) 검인하다",
+   "usage": "go through probate; avoid probate; probate court; probate lawyer; the will was probated / admitted to probate; ⚠ not the same as probation",
+   "ety": "Latin probatum (a thing proved), from probare (to test, prove); cf. probation, prove, probe",
+   "tip": "probate = PROVE the will; probation = PROVE yourself. Same root, different 'test.'",
+   "text": "",
+   "source": "",
+   "ex": [
+    "After her grandfather died, the family had to wait months for probate to finish.",
+    "The house can't be sold until the will goes through probate.",
+    "Many Americans set up a living trust to avoid probate.",
+    "A probate court ruled that the handwritten will was valid.",
+    "Probate disputes often show how family conflict gets translated into legal language."
+   ],
+   "date": "2026-11-09"
+  },
+  {
+   "status": "new",
+   "cat": "11. Mind & emotions",
+   "sub": "11-1 Holding back & blocking feelings",
+   "word": "dam up / damming up",
+   "en": "to block something so that it builds up behind a barrier; (fig.) to hold back feelings or energy until pressure builds",
+   "ko": "막아서 가두다, 억눌러 쌓아 두다",
+   "usage": "dam up + water / feelings / energy; dammed-up emotion / anger; be dammed up",
+   "ety": "Old English/Middle Dutch dam (barrier holding back water)",
+   "tip": "Picture a beaver's dam: the water piles up behind it until it finds another way out. Freud pictured feelings the same way: blocked feelings build pressure and leak out as symptoms.",
+   "text": "Hysterical symptoms are supposedly generated by damming up psychical energy which is then channeled into causing a somatic symptom.",
+   "source": "Lear, Love and Its Place in Nature, Ch. 2, p. 44",
+   "ex": [
+    "Beavers dam up the stream to make a pond.",
+    "Fallen trees dammed up the river after the storm.",
+    "She had dammed up her anger for years, and one day it all came out.",
+    "In Freud's early theory, psychical energy that is dammed up finds release in a bodily symptom.",
+    "Lear questions whether emotion is really something that can be dammed up like water."
+   ],
+   "date": "2026-11-09"
+  },
+  {
+   "status": "new",
+   "cat": "11. Mind & emotions",
+   "sub": "11-1 Holding back & blocking feelings",
+   "word": "expenditure",
+   "en": "the spending or using up of money, energy, time, or effort",
+   "ko": "지출, 소비, (에너지의) 소모",
+   "usage": "expenditure of energy / effort / time; public / government expenditure; expend (v.)",
+   "ety": "Latin expendere (to weigh out, pay out), ex- (out) + pendere (to weigh, pay); cf. spend, expense, pension",
+   "tip": "ex + pend = weigh out coins to pay. Spend is a shortened form of the same word. In Freud's energy model, keeping a symptom going costs energy, so it is an expenditure.",
+   "text": "",
+   "source": "Lear, Love and Its Place in Nature, Ch. 2 (around p. 44)",
+   "ex": [
+    "Government expenditure on education rose this year.",
+    "We need to cut our monthly expenditure on eating out.",
+    "Moving all those boxes was a huge expenditure of energy.",
+    "On Freud's model, maintaining a symptom requires a continuous expenditure of psychical energy.",
+    "Lear asks why, if symptoms cost energy, they don't simply die out on their own."
+   ],
+   "date": "2026-11-09"
+  },
+  {
+   "status": "new",
+   "cat": "11. Mind & emotions",
+   "sub": "11-1 Holding back & blocking feelings",
+   "word": "strangulated",
+   "en": "choked off; blocked from flowing out or being expressed",
+   "ko": "막힌, 억눌려 갇힌, 목 졸린",
+   "usage": "strangulated emotion / affect / voice / cry; a strangulated hernia (medical); strangle (v.); strangulation (n.)",
+   "ety": "Latin strangulare (to choke), from Greek strangalē (halter, cord); cf. strangle, string, strict, constrain",
+   "tip": "A strangulated emotion has been 'strangled' before it could speak, like a throat squeezed shut. ⚠ Stronger and more physical than stifled (억눌러 참은).",
+   "text": "\"Freud and Breuer referred to it as 'strangulated emotion.'\"",
+   "source": "Lear, Love and Its Place in Nature, Ch. 2, p. 41",
+   "ex": [
+    "The cat let out a strangulated meow when it got stuck behind the sofa.",
+    "She answered in a strangulated voice, trying not to cry.",
+    "In medicine, a strangulated hernia has its blood supply cut off and needs urgent surgery.",
+    "Freud and Breuer described the trauma's affect as strangulated: never expressed, so it found an outlet in the body.",
+    "Hate speech can leave a strangulated response in its targets, an anger that has no safe place to be spoken."
+   ],
+   "date": "2026-11-09"
+  },
+  {
+   "status": "new",
+   "cat": "11. Mind & emotions",
+   "sub": "11-2 Mind & body",
+   "word": "conversion",
+   "en": "1) a change from one form, use, or belief to another; 2) (psychoanalysis) the turning of mental distress into a physical symptom",
+   "ko": "1) 전환, 변환, 개종; 2) (정신분석) 전환: 마음의 고통이 몸의 증상으로 바뀌는 것",
+   "usage": "conversion of A into B; convert A into B; conversion hysteria / conversion disorder; religious conversion",
+   "ety": "Latin convertere (to turn around), con- (completely) + vertere (to turn); cf. convert, reverse, divert, version",
+   "tip": "con + vert = turn completely around. Mental pain turns around and comes out as bodily pain. ⚠ Lear: at the archaic level no 'leap' from mind to body is needed, because the body is the mind.",
+   "text": "\"A hysterical symptom, Freud thought, represented the conversion of something mental into something physical.\"",
+   "source": "Lear, Love and Its Place in Nature, Ch. 2, p. 39",
+   "ex": [
+    "The bank charges a fee for currency conversion from dollars to won.",
+    "The old factory's conversion into apartments took two years.",
+    "His conversion to Buddhism surprised his family.",
+    "Freud saw Elisabeth von R.'s leg pain as the conversion of mental pain into physical pain.",
+    "Lear argues that the idea of conversion assumes a gap between mind and body that archaic mind does not have."
+   ],
+   "date": "2026-11-09"
+  },
+  {
+   "status": "new",
+   "cat": "11. Mind & emotions",
+   "sub": "11-2 Self-deception & delusion",
+   "word": "deceive / deception / deceit",
+   "en": "to make someone believe something that is not true",
+   "ko": "속이다; deception, deceit = 속임, 기만 (deceive oneself = 자기기만하다)",
+   "usage": "deceive someone (into doing something); deceive oneself; be deceived by + noun; an act of deception; deceptive (adj.)",
+   "ety": "Latin de- (away, from) + capere (to take); cf. conceive, perceive, receive; deceptive, self-deception",
+   "tip": "de- = away → take the truth away from someone. ⚠ deceive (속이다) vs. receive (받다): de- takes away, re- takes back to yourself.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "Don't be deceived by his friendly smile.",
+    "The ad deceived customers into thinking the product was free.",
+    "She deceived herself into believing the relationship would get better.",
+    "Researchers must not deceive participants about the risks of a study.",
+    "Propaganda works by deceiving people while appearing to inform them."
+   ],
+   "date": "2026-11-12"
+  },
+  {
+   "status": "new",
+   "cat": "11. Mind & emotions",
+   "sub": "11-2 Self-deception & delusion",
+   "word": "deluded / delude / delusion",
+   "en": "believing something false despite clear evidence; fooled, often by oneself",
+   "ko": "망상에 빠진, 착각하는 / 속이다 / 망상",
+   "usage": "a deluded + person (a deluded Conspiracy Theorist); be deluded into thinking that + clause; delude oneself (that ...); under the delusion that ...; delusions of grandeur",
+   "ety": "Latin de- (down, away) + ludere (to play): 'play someone false, mock'; cf. illusion, ludicrous, elude, interlude",
+   "tip": "ludere = play. A deluded person has been played: by others or by their own mind. ⚠ deluded (망상에 빠진, sincerely wrong) vs. deceived (속은, tricked by someone else) vs. dishonest (알면서 거짓말).",
+   "text": "\"The deluded Sandy Hook Conspiracy Theorist who sincerely believes that the whole thing was a hoax will be no less effective ...\"",
+   "source": "Cassam, Conspiracy Theories, Ch. 1, p. 11",
+   "ex": [
+    "He's deluded if he thinks he can pass without studying.",
+    "Don't delude yourself; she isn't coming back.",
+    "The patient was under the delusion that someone was following him.",
+    "The CEO was deluded into thinking the product would sell itself.",
+    "A speaker may be deluded rather than malicious, yet his words can still do real harm to the people they target."
+   ],
+   "date": "2026-11-10"
+  },
+  {
+   "status": "new",
+   "cat": "11. Mind & emotions",
+   "sub": "11-3 Pain & suffering",
+   "word": "anguish / anguished",
+   "en": "severe mental or emotional suffering",
+   "ko": "극심한 (정신적) 고통, 괴로움; anguished = 괴로워하는",
+   "usage": "in anguish; cry out in anguish; the anguish of + noun (loss, separation); mental / emotional anguish; an anguished cry / face",
+   "ety": "Latin angustia (narrowness, tightness), from angere (to squeeze, choke); cf. anxiety, anxious, angina",
+   "tip": "angere = to squeeze → a pain that tightens your chest until you can hardly breathe. Same root as anxiety (both feel 'tight'). ⚠ pain = broad (body or mind); anguish = intense, mostly emotional.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "She cried out in anguish when she heard the news.",
+    "His face was twisted with anguish as he waited outside the hospital room.",
+    "The families of the missing passengers spent days in anguish.",
+    "The child's anguished drawings revealed what she could not put into words.",
+    "Victims of hate speech often describe a lasting anguish that the law fails to recognize as harm."
+   ],
+   "date": "2026-11-12"
+  },
+  {
+   "status": "new",
+   "cat": "11. Mind & emotions",
+   "sub": "11-4 Loneliness & sadness",
+   "word": "forlorn / forlornness",
+   "en": "sad and lonely because abandoned or left alone; (of hope or an attempt) unlikely to succeed",
+   "ko": "쓸쓸한, 버림받은 듯 처량한; forlornness = 쓸쓸함, 처량함; forlorn hope = 헛된 희망",
+   "usage": "look / feel / stand forlorn; a forlorn figure / place; a forlorn hope; the forlornness of + noun",
+   "ety": "Old English forloren (utterly lost), past participle of forleosan: for- (completely) + leosan (to lose); cf. German verloren, lose, lost",
+   "tip": "for-lorn = for-lost → completely lost, left behind with nothing. Stronger than lonely: abandoned and visibly pitiful. ⚠ Spelling: for-LORN (not 'folorn').",
+   "text": "",
+   "source": "",
+   "ex": [
+    "A forlorn puppy sat in the rain outside the shop.",
+    "After the guests left, the house felt forlorn and too quiet.",
+    "Waiting for a ceasefire had become a forlorn hope for the villagers.",
+    "The new student stood forlorn at the edge of the playground, unsure whom to approach.",
+    "The forlornness of being repeatedly named as an outsider can leave a child feeling she has no place in the class."
+   ],
+   "date": "2026-11-12"
+  },
+  {
+   "status": "new",
+   "cat": "11. Mind & emotions",
+   "sub": "11-5 Attention & absorption",
+   "word": "engrossment / engrossed",
+   "en": "the state of being completely absorbed; (Noddings) the carer's receptive attention to the cared-for's reality",
+   "ko": "몰입, 전념, (상대에게) 온전히 빠져듦; be engrossed in = ~에 몰두하다; (Noddings) 수용적 몰입",
+   "usage": "be engrossed in + noun/-ing; in (total) engrossment; (Noddings) engrossment and motivational displacement; the one-caring's engrossment in the cared-for",
+   "ety": "Old French en gros (in bulk, wholesale): en- (in) + gros (large, whole); cf. gross, grocer",
+   "tip": "en + gros = taken in whole → pulled entirely into something. Noddings: engrossment (receive the other's reality) + motivational displacement (my energy flows toward their needs) = the core of caring.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "She was so engrossed in her book that she missed her bus stop.",
+    "The kids sat in total engrossment as the magician performed.",
+    "Viewers' engrossment in their phones has changed how people behave in public spaces.",
+    "For Noddings, a teacher's engrossment means receiving what the student is actually feeling, not what the lesson plan expects.",
+    "Responding well to a student hurt by a slur begins with engrossment: listening to how the word landed for her before explaining why it was wrong."
+   ],
+   "date": "2026-11-12"
+  },
+  {
+   "status": "new",
+   "cat": "11. Mind & emotions",
+   "sub": "11-6 Releasing & discharging feelings",
+   "word": "abreact / abreaction",
+   "en": "(psychoanalysis) to release a repressed emotion by reliving and expressing the experience that caused it",
+   "ko": "(감정을) 해소하다, 발산하다; 정화(카타르시스)적 방출",
+   "usage": "abreact + an emotion / a trauma / an affect; abreaction (n.); achieve / bring about abreaction; abreactive (adj.)",
+   "ety": "German abreagieren (Breuer & Freud): ab- 'off, away' + reagieren 'react'; cf. react, reaction, catharsis",
+   "tip": "ab- = off/away: you 'react it off' — the reaction that was stuck finally gets discharged. ⚠ The opposite of 'strangulated' emotion: abreaction is what un-strangles it.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "After the accident, talking it through with friends helped him abreact some of the shock.",
+    "Crying at the funeral let her abreact the grief she had been holding in.",
+    "In early talk therapy, patients abreacted old traumas by recounting them in detail.",
+    "Breuer and Freud believed that hysterical symptoms disappeared once the strangulated affect was abreacted.",
+    "Lear questions whether abreaction alone can explain the cure, since it treats emotion like a fluid to be drained."
+   ],
+   "date": "2026-11-14"
+  },
+  {
+   "status": "new",
+   "cat": "12. Quantity & variety",
+   "sub": "12-1 Range & variety",
+   "word": "array / disarray",
+   "en": "n. a large and impressive range of things; v. to arrange in order",
+   "ko": "(다양한 것들의) 집합, 다수, 배열; v. 배열하다, 늘어세우다; disarray = 혼란, 흐트러짐",
+   "usage": "a (wide / vast / diverse / dazzling) array of + plural noun; array X across / along Y; in disarray",
+   "ety": "Old French areer (to arrange), from Latin ad- (to) + Germanic *raid- (ready, ordered); cf. ready, disarray",
+   "tip": "array = things lined up neatly on display (a shop shelf); disarray = the lines knocked out of order. 'an array of' ≈ 'a range of', but with a picture of things spread out before you.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "The bakery offers a dazzling array of breads and pastries.",
+    "She arrayed her photos neatly across the table.",
+    "The city faces an array of problems, from housing costs to traffic.",
+    "Teachers draw on a wide array of strategies to support multilingual learners.",
+    "Hate speech takes an array of forms, from explicit slurs to coded jokes and images."
+   ],
+   "date": "2026-11-12"
+  },
+  {
+   "status": "new",
+   "cat": "12. Quantity & variety",
+   "sub": "12-2 Intensity & sheer amount",
+   "word": "sheer",
+   "en": "pure, nothing but; used before a noun to stress how great something is",
+   "ko": "순전한, 엄청난, 그야말로",
+   "usage": "sheer + noun: sheer force / luck / size / number / volume / will(power) / joy; by sheer chance",
+   "ety": "Old English scīr (bright, pure, clear); cf. German schier (pure, almost)",
+   "tip": "Sheer fabric is thin and see-through: pure, nothing mixed in. Sheer luck = pure luck, nothing else. ⚠ a sheer cliff = a straight-down drop (separate meaning).",
+   "text": "\"one should not underestimate the sheer force of the pressure, both physical and mental, which Freud exerted on his patients\"",
+   "source": "Lear, Love and Its Place in Nature, Ch. 2, p. 59",
+   "ex": [
+    "We won by sheer luck. Nobody actually played well.",
+    "The sheer size of the library made me feel lost on my first day.",
+    "She finished the marathon through sheer willpower.",
+    "The sheer volume of hate speech online makes case-by-case moderation nearly impossible.",
+    "Lear warns against underestimating the sheer pressure Freud put on his patients."
+   ],
+   "date": "2026-11-14"
+  },
+  {
+   "status": "new",
+   "cat": "2. Arguing, claiming & critiquing",
+   "sub": "2-1 Tone of a dispute",
+   "word": "acrimonious",
+   "en": "angry, bitter, and hostile (of an argument or relationship)",
+   "ko": "신랄한, 험악한, 감정이 격한",
+   "usage": "an acrimonious debate / dispute; become acrimonious",
+   "ety": "Latin acer (sharp, sour); cf. acid, acrid",
+   "tip": "An acrimonious argument leaves a sour, acidic taste.",
+   "text": "\"The argument between traditional philosophers of education and analytic philosophers sometimes became acrimonious.\"",
+   "source": "Noddings Ch. 3, p. 46",
+   "ex": [
+    "The faculty meeting turned acrimonious over the new grading policy."
+   ],
+   "date": ""
+  },
+  {
+   "status": "new",
+   "cat": "2. Arguing, claiming & critiquing",
+   "sub": "2-1 Tone of a dispute",
+   "word": "contested",
+   "en": "disputed; actively argued over, with no agreed answer",
+   "ko": "논쟁적인, 합의되지 않은, 다툼의 대상인",
+   "usage": "a contested concept / term / claim; highly / deeply contested; essentially contested concept (Gallie)",
+   "ety": "Latin contestari (to call to witness), con- (together) + testis (witness); cf. testify, protest",
+   "tip": "A contest has rival sides. A contested concept is a battlefield where groups fight over its meaning. ⚠ controversial = provokes strong reaction; contested = rival definitions or claims in play.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "\"Harm\" remains a contested concept in debates over regulating hate speech."
+   ],
+   "date": "2026-11-06"
+  },
+  {
+   "status": "new",
+   "cat": "2. Arguing, claiming & critiquing",
+   "sub": "2-1 Tone of a dispute",
+   "word": "denounce / denunciation",
+   "en": "to publicly and strongly declare that someone or something is wrong or evil",
+   "ko": "공개적으로 비난하다, 규탄하다 / 비난, 규탄",
+   "usage": "denounce X as Y (denounce the policy as racist); publicly / strongly denounce; denounce someone to the authorities (= report, inform on); denunciation (n.)",
+   "ety": "Latin de- (down, against) + nuntiare (to announce); cf. announce, pronounce, renounce",
+   "tip": "de-nounce = announce against: loud, public condemnation, not quiet criticism. ⚠ denounce (publicly condemn) vs. renounce (give up, reject for oneself).",
+   "text": "\"President George W. Bush denounced outrageous conspiracy theories about 9/11 while his own administration was busy promoting the outrageous conspiracy theory that Iraq was behind 9/11\"",
+   "source": "Cassam, Conspiracy Theories, Ch. 1, p. 1",
+   "ex": [
+    "The UN denounced the attack on civilians.",
+    "She was denounced by her own party for the remarks.",
+    "Students gathered to denounce the tuition hike.",
+    "The church denounced the film as immoral.",
+    "Many scholars have denounced hate speech as a form of violence, while others warn against equating words with physical harm."
+   ],
+   "date": "2026-11-10"
+  },
+  {
+   "status": "new",
+   "cat": "2. Arguing, claiming & critiquing",
+   "sub": "2-1 Tone of a dispute",
+   "word": "polemic / polemical",
+   "en": "n. a strong verbal or written attack on someone's views; adj. aggressively argumentative, written to attack rather than to weigh both sides",
+   "ko": "n. 논박, 논쟁적 글 / adj. 논쟁적인, 공격적인",
+   "usage": "a polemic against + view / person; a polemical essay / tone / style; polemically charged; engage in polemics",
+   "ety": "Greek polemos (war); polemikos (warlike); cf. polemicist",
+   "tip": "polemos = war, so a polemic is war fought with words. ⚠ polemical (attacks one side) ≠ contested (has rival sides) ≠ controversial (provokes strong reaction).",
+   "text": "",
+   "source": "",
+   "ex": [
+    "Read as a polemic against free speech absolutism, the book overstates the case for banning slurs."
+   ],
+   "date": "2026-11-07"
+  },
+  {
+   "status": "new",
+   "cat": "2. Arguing, claiming & critiquing",
+   "sub": "2-10 Strength of an argument",
+   "word": "cogency / cogent",
+   "en": "the quality of being clear, logical, and convincing",
+   "ko": "(논증의) 설득력, 타당성; cogent = 설득력 있는, 논리가 탄탄한",
+   "usage": "a cogent argument / case / critique / explanation; the cogency of + argument/claim; question / doubt the cogency of X; lack cogency; (logic) cogent (inductive) vs. sound (deductive)",
+   "ety": "Latin cogere (to drive together, compel): co- (together) + agere (to drive); cf. cogent, agent, act",
+   "tip": "co + agere = drive together → an argument that herds your thinking into agreement. ⚠ Stronger than plausible (그럴듯한): cogent = hard to resist.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "She gave a cogent explanation of why we should take the train instead of driving.",
+    "His excuse lacked cogency; nobody believed him.",
+    "The report makes a cogent case for raising the minimum wage.",
+    "Students learn to judge the cogency of an argument, not just whether they agree with it.",
+    "Critics doubt the cogency of the claim that counter-speech is always enough to answer hate speech."
+   ],
+   "date": "2026-11-12"
+  },
+  {
+   "status": "new",
+   "cat": "2. Arguing, claiming & critiquing",
+   "sub": "2-10 Strength of an argument",
+   "word": "unassailable / assail",
+   "en": "impossible to attack, challenge, or defeat",
+   "ko": "공격(반박)할 수 없는, 확고한, 난공불락의; assail = 공격하다, (비판을) 퍼붓다",
+   "usage": "an unassailable argument / position / lead / truth; treat X as unassailable; seemingly unassailable; assail X with criticism",
+   "ety": "un- + assail + -able; assail from Latin ad- (toward) + salire (to leap); cf. assault, salient, sally",
+   "tip": "assail = leap at to attack → unassailable = a wall nobody can leap at and take. Same salire (to leap) as salient (already in your bank). ⚠ Stronger than cogent: cogent = hard to refute; unassailable = cannot be refuted. In critique, 'treated as unassailable' = the author is about to challenge it.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "With a 20-point lead at halftime, the team looked unassailable.",
+    "Her alibi was unassailable: three people saw her at the café.",
+    "The company's position in the market once seemed unassailable.",
+    "Teachers should not present textbook claims as unassailable truths.",
+    "Free speech absolutists often treat the \"marketplace of ideas\" as unassailable, but critics ask who is shut out of that market."
+   ],
+   "date": "2026-11-12"
+  },
+  {
+   "status": "new",
+   "cat": "2. Arguing, claiming & critiquing",
+   "sub": "2-11 Valuing & devaluing",
+   "word": "slight (n./v.) / slighted",
+   "en": "(n.) an act that treats someone as unimportant; a snub or insult. (v.) to treat someone with disregard",
+   "ko": "무시, 모욕, 경시 / 무시하다, 얕보다",
+   "usage": "a slight (to/on/against someone); take something as a slight; feel slighted; slight someone (by doing); a perceived slight; no slight intended",
+   "ety": "From the adjective slight 'small, thin, unimportant' (Old English/Old Norse sléttr 'smooth, plain'). To slight someone = to treat them as slight (unimportant). Related: slightly, slighting",
+   "tip": "Same word as 'slight = small': a slight treats you as small, as if you don't matter. ⚠ noun 'a slight' (모욕) vs. adjective 'slight' (약간의)",
+   "text": "\"Anger is caused by a slight and it motivates revenge.\"",
+   "source": "",
+   "ex": [
+    "She felt slighted when her friends made dinner plans without her.",
+    "Forgetting his name at the party was an accidental slight, not an insult.",
+    "He took the late reply as a personal slight.",
+    "No slight intended, but I think the first draft was clearer.",
+    "For Aristotle, anger is a response to a perceived slight, a sense that one has been treated as worthless by someone who should not have done so."
+   ],
+   "date": "2026-11-14"
+  },
+  {
+   "status": "new",
+   "cat": "2. Arguing, claiming & critiquing",
+   "sub": "2-11 Valuing & devaluing",
+   "word": "valorize / valorization",
+   "en": "to give or ascribe value to something; to treat it as admirable (often uncritically)",
+   "ko": "가치를 부여하다, 높이 평가하다, (때로) 치켜세우다·미화하다; valorization = 가치 부여, (마르크스) 가치 증식 (↔ devalue, denigrate)",
+   "usage": "valorize + value / practice / group; valorize X over Y; tend to valorize + noun; the valorization of + noun",
+   "ety": "Latin valor (worth, value), from valere (to be strong, be worth) + -ize; cf. value, evaluate, valid, valiant, devalue",
+   "tip": "valor + -ize = put a value on it (value + -ize). In critical writing, 'X valorizes Y' often hints: Y is praised as good, but should it be?",
+   "text": "",
+   "source": "",
+   "ex": [
+    "Our family has always valorized hard work over talent.",
+    "Some films valorize violence by making the killer look heroic.",
+    "Modern culture tends to valorize being busy, as if rest were a weakness.",
+    "A bilingual curriculum can valorize students' home languages instead of treating them as obstacles.",
+    "When a community valorizes \"saying what you think,\" slurs can be defended as mere honesty."
+   ],
+   "date": "2026-11-12"
+  },
+  {
+   "status": "new",
+   "cat": "2. Arguing, claiming & critiquing",
+   "sub": "2-12 Denying & disowning",
+   "word": "disclaim / disclaimer",
+   "en": "to formally deny that you have responsibility for, knowledge of, or a connection to something",
+   "ko": "(책임·관련을) 부인하다, 거부하다; disclaimer = 면책 조항, 부인 성명",
+   "usage": "disclaim + responsibility / knowledge / any intention to + verb / authorship; disclaim that + clause; issue / add a disclaimer",
+   "ety": "Anglo-French des- 'away, apart' + clamer 'to claim' (Latin clamare 'to call out'); cf. claim, exclaim, proclaim, clamor",
+   "tip": "dis-claim = un-claim: you push a claim away from yourself. ⚠ disclaim (deny it's mine) vs. deny (say it isn't true) vs. renounce (give up something I had).",
+   "text": "",
+   "source": "",
+   "ex": [
+    "The company disclaimed any responsibility for the damage.",
+    "The video starts with a disclaimer that it isn't medical advice.",
+    "She disclaimed any knowledge of the missing files.",
+    "The author disclaims any intention to settle the debate; she only wants to clarify its terms.",
+    "A speaker who disclaims hateful intent does not thereby undo the injury his words have done."
+   ],
+   "date": "2026-11-14"
+  },
+  {
+   "status": "shaky",
+   "cat": "2. Arguing, claiming & critiquing",
+   "sub": "2-2 Hedging & doubt",
+   "word": "alleged",
+   "en": "claimed to be true but not proven",
+   "ko": "(입증되지 않은 채) 주장된, 이른바",
+   "usage": "the alleged + noun (the alleged neutrality); X is alleged to be Y",
+   "ety": "From allege (to claim), via Old French",
+   "tip": "Courtroom: the \"alleged\" thief is claimed guilty, not yet proven.",
+   "text": "\"acknowledgement of the alleged pupil's judgment\" (p. 54); \"the alleged predicament\" (p. 57) / \"the alleged protocols were used to justify the massacres of Jews\" (p. 14); \"for the study of this or that alleged conspiracy\" (p. 25)",
+   "source": "Noddings Ch. 3, pp. 54, 57 / Cassam, Conspiracy Theories, Ch. 1, pp. 14, 25",
+   "ex": [
+    "The alleged thief was released because of a lack of evidence.",
+    "She denied the alleged affair in a press interview.",
+    "The newspaper reported the alleged abuse to the police.",
+    "The alleged neutrality of the method hides its value commitments.",
+    "Holocaust deniers cite alleged \"gaps\" in the evidence while ignoring the vast documentary record."
+   ],
+   "date": ""
+  },
+  {
+   "status": "new",
+   "cat": "2. Arguing, claiming & critiquing",
+   "sub": "2-2 Hedging & doubt",
+   "word": "implausible / plausible",
+   "en": "not seeming reasonable or likely to be true (opp. plausible = seeming reasonable)",
+   "ko": "믿기 어려운, 개연성이 낮은 (반. plausible = 그럴듯한)",
+   "usage": "highly / wildly implausible; implausible by design; it is implausible that + clause; an implausible claim / explanation / excuse; implausibility (n.); syn. far-fetched, improbable",
+   "ety": "im- (not) + Latin plaudere (to clap, applaud); cf. applause, applaud, explode (orig. 'clap off the stage')",
+   "tip": "plausible = worth applause = believable; im-plausible = no applause = hard to believe. ⚠ Don't flip it: plausible = 그럴듯한, implausible = 그럴듯하지 않은.",
+   "text": "\"given the features ... they're unlikely to be true. ... Conspiracy Theories are implausible by design.\"",
+   "source": "Cassam, Conspiracy Theories, Ch. 1, p. 7",
+   "ex": [
+    "His excuse that the dog ate his homework sounded implausible.",
+    "It's implausible that she finished the whole book in one hour.",
+    "The movie's plot was so implausible that nobody in the theater believed it.",
+    "Investigators found the suspect's alibi highly implausible.",
+    "It is implausible to claim that a single slur causes no harm simply because no physical injury occurs."
+   ],
+   "date": "2026-11-10"
+  },
+  {
+   "status": "new",
+   "cat": "2. Arguing, claiming & critiquing",
+   "sub": "2-3 Exposing what's hidden",
+   "word": "ferret out",
+   "en": "to search persistently for something hidden and find it",
+   "ko": "(숨겨진 것을) 찾아내다, 캐내다",
+   "usage": "ferret out + hidden thing (assumptions, values, bias)",
+   "ety": "A ferret is a small animal once used to chase rabbits out of their burrows",
+   "tip": "Picture a ferret digging a hidden value out of its burrow.",
+   "text": "\"a better approach ... is to ferret out these values, confess them, and build one's case frankly on them\"",
+   "source": "Noddings Ch. 3, p. 44",
+   "ex": [
+    "The study ferrets out the hidden curriculum in textbook images."
+   ],
+   "date": ""
+  },
+  {
+   "status": "new",
+   "cat": "2. Arguing, claiming & critiquing",
+   "sub": "2-3 Exposing what's hidden",
+   "word": "manifest / manifestation",
+   "en": "(adj.) clear and obvious to see; (v.) to show itself clearly, so that something inner or abstract (a feeling, quality, symptom, belief) becomes visible in behavior or events / manifestation (n.): a visible sign or form of something underlying",
+   "ko": "(adj.) 명백한, 분명한; (v.) (감정·증상·성질 등이) 겉으로 드러나다, 나타나다 / manifestation = (숨은 것이) 드러난 모습, 발현, 표출, 징후 (≠ 단순한 '현상' phenomenon)",
+   "usage": "X manifests itself in / as Y; X manifests in Y; manifest symptoms / signs of X; a manifest failure / error / injustice; manifestly unfair / absurd / false / a manifestation of X; one / another manifestation of X",
+   "ety": "Latin manifestus ('palpable, caught in the act'), from manus (hand) + -festus (struck); cf. manual, manuscript",
+   "tip": "manus = hand: so plain you could catch or touch it with your hand. Unlike 'show' or 'demonstrate', 'manifest' suggests that something inside surfaces on its own, not that someone deliberately displays it. / manifestation = the tip of the iceberg: the visible part of a hidden X, so always ask 'a manifestation of what?'",
+   "text": "",
+   "source": "(manifestation asked without text context)",
+   "ex": [
+    "His nervousness manifested itself in a tapping foot all through the meeting.",
+    "The illness can manifest as fatigue long before other symptoms appear.",
+    "It was a manifest injustice that the students were never given a chance to respond.",
+    "Her interest in philosophy first manifested in childhood, when she kept asking 'why?' about everything.",
+    "Prejudice rarely announces itself; it manifests in everyday word choices, tone, and who gets interrupted.\n\nmanifestation:",
+    "A fever is a manifestation of the body fighting an infection.",
+    "Her constant joking was a manifestation of her nervousness.",
+    "Graffiti on the mosque was seen as one manifestation of rising hostility toward Muslims.",
+    "Bullying is often a manifestation of deeper problems in a school's culture.",
+    "On this view, a single slur is not an isolated insult but a manifestation of a larger system of subordination."
+   ],
+   "date": "2026-11-07"
+  },
+  {
+   "status": "new",
+   "cat": "2. Arguing, claiming & critiquing",
+   "sub": "2-3 Exposing what's hidden",
+   "word": "shot through with",
+   "en": "thoroughly filled or permeated with something",
+   "ko": "~이 곳곳에 배어 있는, ~로 가득한",
+   "usage": "X is shot through with + noun (values, assumptions, tension)",
+   "ety": "Weaving: to \"shoot\" a thread of another color across the cloth",
+   "tip": "Picture colored threads woven through the whole fabric. Values are woven into analysis.",
+   "text": "\"analytic work and theory itself are both shot through with values\"",
+   "source": "Noddings Ch. 3, p. 44",
+   "ex": [
+    "Her account of school discipline is shot through with assumptions about race."
+   ],
+   "date": ""
+  },
+  {
+   "status": "new",
+   "cat": "2. Arguing, claiming & critiquing",
+   "sub": "2-4 Agreeing & converging",
+   "word": "convergence",
+   "en": "the process or state of coming together toward the same point, view, or conclusion",
+   "ko": "수렴, 합치, 한데 모임",
+   "usage": "a convergence of / between X and Y; points of convergence; converge on / upon + conclusion; converge with + view",
+   "ety": "Latin con- (together) + vergere (to bend, turn toward); cf. diverge, verge",
+   "tip": "Picture lines bending toward one point. ⚠ Opposite: divergence (lines spreading apart).",
+   "text": "",
+   "source": "",
+   "ex": [
+    "There is a striking convergence between Butler's and Langton's accounts of how speech can subordinate."
+   ],
+   "date": ""
+  },
+  {
+   "status": "new",
+   "cat": "2. Arguing, claiming & critiquing",
+   "sub": "2-5 Weighing & discussing",
+   "word": "deliberate",
+   "en": "adj. done on purpose; v. to think about or discuss carefully before deciding",
+   "ko": "adj. 의도적인, 신중한 / v. 숙의하다, 숙고하다",
+   "usage": "adj. a deliberate act / choice; deliberately exclude; v. deliberate about / on / over + issue; deliberative democracy; democratic deliberation",
+   "ety": "Latin de- (thoroughly) + librare (to weigh), from libra (scales); cf. Libra, equilibrium",
+   "tip": "Libra = scales. To deliberate is to weigh reasons on a scale, together. ⚠ Pronunciation: adj. -rət, verb -rayt.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "Students deliberated over whether the school should ban the offensive mascot."
+   ],
+   "date": "2026-11-06"
+  },
+  {
+   "status": "new",
+   "cat": "2. Arguing, claiming & critiquing",
+   "sub": "2-6 Putting forward a claim",
+   "word": "espouse / espoused",
+   "en": "to adopt or publicly support a belief, value, or cause",
+   "ko": "(신념·주의를) 지지하다, 신봉하다, 표방하다; espoused values = (결으로) 표방하는 가치",
+   "usage": "espouse a view / belief / cause / values; espoused theory vs. theory-in-use (Argyris & Schön); espoused vs. enacted values; an espoused commitment to + noun",
+   "ety": "Latin sponsare (to betroth), from spondere (to promise solemnly); cf. spouse, sponsor, respond, responsible",
+   "tip": "Spouse is hidden inside: to espouse a belief = to marry it. ⚠ 'espoused' often hints at a gap between what is professed and what is actually done (espoused vs. enacted).",
+   "text": "",
+   "source": "",
+   "ex": [
+    "My grandmother espoused a simple rule: never waste food.",
+    "He espouses healthy eating but lives on instant noodles.",
+    "The party espouses lower taxes and smaller government.",
+    "Many schools espouse inclusion, yet their discipline data tell a different story.",
+    "A school's espoused commitment to respect means little if teachers let slurs go unchallenged."
+   ],
+   "date": "2026-11-12"
+  },
+  {
+   "status": "new",
+   "cat": "2. Arguing, claiming & critiquing",
+   "sub": "2-6 Putting forward a claim",
+   "word": "posit / positing",
+   "en": "to put forward a claim or assumption as a starting point for argument, without proving it first",
+   "ko": "(전제로) 상정하다, 가정하다, 상정하고 논의를 시작하다",
+   "usage": "posit that + clause; posit X as Y; posit the existence of X; a posited entity / a posited cause; positing (n./gerund): 'in positing X, the author assumes ...'",
+   "ety": "Latin ponere / positus (to put, place); cf. position, position, compose, propose, suppose",
+   "tip": "To posit = to put a claim down on the table as a starting point. Like 'position' (where something is put) and 'suppose' (put under). Stronger than 'suggest', weaker than 'prove'; the claim is assumed, not yet demonstrated.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "Detectives often posit a motive before they have any evidence, so they can test it.",
+    "Let's posit that everyone arrives by 9 a.m.; how should we plan the day?",
+    "Early astronomers posited the existence of an unseen planet to explain Uranus's odd orbit.",
+    "In positing a single 'true' meaning of the text, the author overlooks other readings.",
+    "Austin posits that saying certain words can itself perform an action."
+   ],
+   "date": "2026-11-07"
+  },
+  {
+   "status": "new",
+   "cat": "2. Arguing, claiming & critiquing",
+   "sub": "2-6 Putting forward a claim",
+   "word": "proponent",
+   "en": "a person who argues for or supports an idea, theory, or plan",
+   "ko": "지지자, 옹호자, 주창자",
+   "usage": "a proponent of + idea / view / theory (a proponent of free speech); a leading / strong / vocal proponent; proponents and opponents; opp. opponent, critic",
+   "ety": "Latin pro- (forward) + ponere (to put, place): 'one who puts forward'; cf. propose, proposition, posit, opponent, component",
+   "tip": "pro-pon-ent = puts an idea forward (like propose); op-pon-ent = puts against. ⚠ proponent (지지자) vs. opponent (반대자); 'an insincere proponent' = someone who pushes a view without believing it.",
+   "text": "\"... than an insincere proponent of the same view\"",
+   "source": "Cassam, Conspiracy Theories, Ch. 1, p. 11",
+   "ex": [
+    "She is a strong proponent of eating breakfast every day.",
+    "Proponents of the new subway line say it will cut traffic.",
+    "He became a vocal proponent of remote work during the pandemic.",
+    "Proponents and opponents of the bill debated for hours.",
+    "Proponents of strong free speech protections often worry that banning hate speech will silence minority voices too."
+   ],
+   "date": "2026-11-10"
+  },
+  {
+   "status": "new",
+   "cat": "2. Arguing, claiming & critiquing",
+   "sub": "2-6 Putting forward a claim",
+   "word": "rationale",
+   "en": "the reasons or logic behind a decision, belief, or action",
+   "ko": "근거, (결정·행동의) 이유·논리",
+   "usage": "the rationale behind / for X; provide / offer / explain a rationale; a clear / strong / underlying rationale; the rationale of this study (academic)",
+   "ety": "Latin ratio (reason, calculation) → rationalis; cf. rational, reason, ratio, rationalize",
+   "tip": "rationale = the bundle of reasons behind a choice, the tidy answer to 'Why did you do that?' ⚠ rationale (n., rash-uh-NAL) vs. rational (adj., 합리적인).",
+   "text": "",
+   "source": "Asked while reading Cassam, Conspiracy Theories, Ch. 1",
+   "ex": [
+    "Can you explain the rationale behind the new parking rules?",
+    "The teacher shared her rationale for grouping students by interest.",
+    "The company never gave a clear rationale for the layoffs.",
+    "Each grant proposal must include a rationale explaining why the project matters.",
+    "Cassam's rationale for calling Conspiracy Theories propaganda is that their features make them unlikely to be true, so their real function must lie elsewhere."
+   ],
+   "date": "2026-11-10"
+  },
+  {
+   "status": "new",
+   "cat": "2. Arguing, claiming & critiquing",
+   "sub": "2-7 Putting ideas to use",
+   "word": "deploy",
+   "en": "1) to move troops, people, or resources into position for action; 2) (academic) to bring a concept, argument, or strategy into use for a specific purpose",
+   "ko": "1) (군대·인력·자원을) 배치하다, 투입하다; 2) (개념·논증·전략을 목적에 맞게) 활용하다, 동원하다",
+   "usage": "deploy troops / resources / staff; deploy + concept / argument / strategy / term + to do X; deploy X against Y; be deployed in / as; deployment (n.)",
+   "ety": "Old French desployer (to unfold), Latin dis- (apart) + plicare (to fold); cf. display, explicate, imply",
+   "tip": "de-ploy = unfold: an army unfolding into position, or an author unfolding a concept and putting it to work. ⚠ Not the same as apply (적용하다). deploy suggests strategic, purposeful use; apply = put a rule or theory onto a case.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "The city deployed extra police officers for the marathon.",
+    "The company plans to deploy the new software next month.",
+    "Rescue teams were deployed within hours of the earthquake.",
+    "Butler deploys Austin's notion of the performative to show how speech can injure.",
+    "The term 'free speech' is often deployed to shut down criticism rather than to protect it."
+   ],
+   "date": "2026-11-08"
+  },
+  {
+   "status": "new",
+   "cat": "2. Arguing, claiming & critiquing",
+   "sub": "2-8 Acceptance & acceptability",
+   "word": "palatable / unpalatable",
+   "en": "acceptable or agreeable to someone (literally: pleasant to taste)",
+   "ko": "받아들일 만한, 입맛에 맞는 / 받아들이기 힘든",
+   "usage": "palatable to + someone (palatable to conspiracy theorists); make X more palatable; an unpalatable truth / conclusion",
+   "ety": "palate (roof of the mouth, sense of taste) + -able; cf. palate, palatial (⚠ unrelated: from Palatine Hill)",
+   "tip": "Pleasing to the palate = easy to swallow. An idea that is palatable goes down easily; an unpalatable truth is hard to swallow.",
+   "text": "\"I don't suppose that what I say in this book will be any more palatable to conspiracy theorists and their apologists.\"",
+   "source": "Cassam, Conspiracy Theories, Preface, p. vii",
+   "ex": [
+    "The soup was barely palatable, but we were too hungry to care.",
+    "She tried to make the bad news more palatable by starting with a joke.",
+    "A four-day work week is a palatable idea to most employees.",
+    "The compromise was palatable to both parties, so the bill passed.",
+    "Cassam doubts that his political reading of conspiracy theories will be any more palatable to their defenders than his earlier article was."
+   ],
+   "date": "2026-11-10"
+  },
+  {
+   "status": "new",
+   "cat": "2. Arguing, claiming & critiquing",
+   "sub": "2-9 Making things up",
+   "word": "concoct / concoction",
+   "en": "1) to invent a story, excuse, or plan (often to deceive); 2) to make a dish or drink by mixing ingredients",
+   "ko": "1) (이야기·변명을) 지어내다, 날조하다; 2) (재료를 섞어) 만들다",
+   "usage": "concoct + story / excuse / plan / scheme / myth; concoct X out of / from Y; a myth concocted to serve X; a strange concoction (n.); syn. fabricate, make up, cook up",
+   "ety": "Latin con- (together) + coquere (to cook): 'cook together'; cf. cook, cuisine, precocious, biscuit",
+   "tip": "Cook it up: stir bits of fact and fantasy in one pot until a believable story comes out. Implies deliberate invention, not honest error. ⚠ concoct = mixed together with some effort; fabricate = flatly fake.",
+   "text": "\"The theory that the Holocaust is a myth concocted to serve Jewish interests is.\"",
+   "source": "Cassam, Conspiracy Theories, Ch. 1, p. 5",
+   "ex": [
+    "She concocted a delicious drink out of mango, lime, and mint.",
+    "He concocted an excuse about a flat tire to explain why he was late.",
+    "The children concocted a plan to surprise their teacher on her birthday.",
+    "The tabloid concocted a scandal out of a single blurry photo.",
+    "Some hate groups concoct histories of victimhood to justify hostility toward minorities."
+   ],
+   "date": "2026-11-10"
+  },
+  {
+   "status": "new",
+   "cat": "2. Arguing, claiming & critiquing",
+   "sub": "2-9 Making things up",
+   "word": "hoax",
+   "en": "a trick or false story meant to make people believe something that is not true",
+   "ko": "날조, 사기극, (사람을 속이는) 장난",
+   "usage": "an elaborate hoax; a hoax call / bomb hoax; turn out to be a hoax; claim that X was a hoax; hoax (v.) someone; hoaxer (n.)",
+   "ety": "Probably a shortening of hocus (as in hocus-pocus, a magician's trick words), late 18th c.",
+   "tip": "Hocus-pocus: a magician's trick on a large scale. A hoax is deliberately staged to fool people, not an honest mistake.",
+   "text": "\"Conspiracy Theorists started to claim that the whole episode was an elaborate hoax by the government\"",
+   "source": "Cassam, Conspiracy Theories, Ch. 1, p. 8",
+   "ex": [
+    "The 'free phone' message turned out to be a hoax.",
+    "Police received a bomb hoax and evacuated the station.",
+    "The famous photo of the monster was later revealed as a hoax.",
+    "Some people still claim the moon landing was a hoax.",
+    "Calling a massacre a 'hoax' does more than spread a falsehood; it insults the victims and their grieving families."
+   ],
+   "date": "2026-11-10"
+  },
+  {
+   "status": "new",
+   "cat": "3. Causing & preventing",
+   "sub": "3-1 Bringing about",
+   "word": "induce",
+   "en": "to bring about or cause; to lead someone to do something",
+   "ko": "유발하다, 끌어내다",
+   "usage": "induce + noun (learning, shame); induce someone to do something",
+   "ety": "Latin in- (into) + ducere (to lead); cf. produce, introduce, educate",
+   "tip": "Induce leads learning in; educate (e-ducere) leads it out.",
+   "text": "\"Dewey insisted that teaching should induce learning\"",
+   "source": "Noddings Ch. 3, p. 50",
+   "ex": [
+    "Repeated exposure to slurs can induce a lasting sense of shame."
+   ],
+   "date": ""
+  },
+  {
+   "status": "new",
+   "cat": "3. Causing & preventing",
+   "sub": "3-2 Blocking in advance",
+   "word": "preclude",
+   "en": "to prevent something, or make it impossible in advance",
+   "ko": "미리 막다, 불가능하게 하다",
+   "usage": "preclude + noun; preclude someone from doing something",
+   "ety": "Latin prae- (before) + claudere (to shut); cf. include, exclude, conclude, seclude",
+   "tip": "Shutting the door beforehand. Opposites: allow, permit, make possible.",
+   "text": "\"whether, e.g., the pupil is not systematically precluded from asking 'How?' 'Why?'\"",
+   "source": "Noddings Ch. 3, p. 54",
+   "ex": [
+    "Calling analysis neutral can preclude honest discussion of its values."
+   ],
+   "date": ""
+  },
+  {
+   "status": "new",
+   "cat": "3. Causing & preventing",
+   "sub": "3-3 Persuading & discouraging",
+   "word": "dissuade",
+   "en": "to persuade someone NOT to do something; to talk someone out of a plan or action",
+   "ko": "(설득해서) 단념시키다, 만류하다, ~하지 못하게 하다",
+   "usage": "dissuade someone from doing / from + noun; try / attempt to dissuade; be dissuaded by + reason; dissuasion (n.); dissuasive (adj.)",
+   "ety": "Latin dis- (apart, away) + suadere (to urge, advise); cf. persuade, suave, suasion",
+   "tip": "per-suade = urge someone TOWARD it; dis-suade = urge someone AWAY from it. Same root, opposite direction. ⚠ Always 'dissuade from doing', never 'dissuade to do'. vs. deter: deter works through fear of consequences; dissuade works through advice or argument.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "My friends tried to dissuade me from quitting my job, but I had already decided.",
+    "Nothing could dissuade her from moving abroad for her PhD.",
+    "The heavy rain didn't dissuade the fans from lining up outside the stadium.",
+    "High tuition costs may dissuade first-generation students from applying to graduate school.",
+    "Some argue that school speech codes dissuade students from voicing unpopular views, not just hateful ones."
+   ],
+   "date": "2026-11-08"
+  },
+  {
+   "status": "new",
+   "cat": "3. Causing & preventing",
+   "sub": "3-3 Persuading & discouraging",
+   "word": "exhortation / exhort",
+   "en": "a strong, earnest urging to do something (often moral or sermon-like)",
+   "ko": "간곡한 권고, 열렬한 촉구, 훈계; exhort = 간곡히 권하다, 촉구하다",
+   "usage": "exhort someone to do something; an exhortation to + noun / to do; mere / moral exhortation; despite someone's exhortations",
+   "ety": "Latin ex- (thoroughly) + hortari (to urge, encourage); cf. hortatory",
+   "tip": "ex + hortari = push hard from behind → an urgent, preachy 'You must do this!' ⚠ exhort (push toward doing) vs. dissuade (hold back from doing). In critique, 'mere exhortation' = only telling people to be good, with no real mechanism for change.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "Despite his mother's exhortations, he still didn't clean his room.",
+    "The coach's halftime exhortation fired up the whole team.",
+    "The president's speech was full of exhortations to unity.",
+    "Exhortations to \"be kind\" do little unless schools also change how they handle conflict.",
+    "Critics argue that answering hate speech with moral exhortation alone leaves its structural harms untouched."
+   ],
+   "date": "2026-11-12"
+  },
+  {
+   "status": "new",
+   "cat": "3. Causing & preventing",
+   "sub": "3-4 Wearing down & damaging",
+   "word": "corrosive / corrode / corrosion",
+   "en": "gradually damaging or destroying something (originally: eating away metal)",
+   "ko": "부식시키는, (서서히) 좀먹는 / 해로운",
+   "usage": "corrosive to + noun (corrosive to well-being / trust / democracy); have a corrosive effect on X; corrode + trust / institutions; the corrosion of X",
+   "ety": "Latin cor- (thoroughly) + rodere (to gnaw); cf. rodent, erode, erosion",
+   "tip": "rodere = gnaw, like a rodent. Corrosive damage is slow and hidden, like rust eating through metal. ⚠ corrode (gnawed through, often chemical or moral) vs. erode (worn away from outside, gradually).",
+   "text": "\"A recent study describes their theories as corrosive to societal and individual well-being.\"",
+   "source": "Cassam, Conspiracy Theories, Ch. 1, pp. 1–2",
+   "ex": [
+    "Salt water is highly corrosive to metal car parts.",
+    "Constant criticism can be corrosive to a child's self-confidence.",
+    "Lying, even about small things, has a corrosive effect on a friendship.",
+    "Some scholars argue that misinformation is corrosive to democratic trust.",
+    "Hate speech is corrosive not only to its targets but to the shared norms of a classroom community."
+   ],
+   "date": "2026-11-10"
+  },
+  {
+   "status": "new",
+   "cat": "3. Causing & preventing",
+   "sub": "3-5 Keeping something going",
+   "word": "perpetuate / perpetuation",
+   "en": "to make something (usually bad) continue indefinitely",
+   "ko": "(나쁜 것을) 영속시키다, 계속 이어지게 하다, 존속시키다; perpetuation = 영속화, 지속",
+   "usage": "perpetuate + stereotypes / inequality / injustice / a myth / a cycle of violence; serve to perpetuate; (unwittingly) perpetuate X; the perpetuation of + noun",
+   "ety": "Latin perpetuus (continuous, uninterrupted), from per- (through) + petere (to go toward, seek); cf. perpetual, perpetuity",
+   "tip": "perpetual = endless → perpetuate = keep it going without a break. ⚠ perpetuate (지속시키다) vs. perpetrate (저지르다; perpetrator = 가해자): perpet-U-ate = contin-U-e; perpe-TR-ate = commit TRouble.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "Telling kids \"boys don't cry\" perpetuates old ideas about masculinity.",
+    "Skipping the doctor because you're afraid only perpetuates the worry.",
+    "Housing policies can perpetuate racial segregation for generations.",
+    "Tracking students by ability early may perpetuate the very gaps it claims to address.",
+    "Even \"harmless\" jokes can perpetuate the stereotypes that give slurs their power to wound."
+   ],
+   "date": "2026-11-12"
+  },
+  {
+   "status": "new",
+   "cat": "4. Difficult situations",
+   "sub": "4-1 Struggling to do",
+   "word": "grind",
+   "en": "1) (v.) to crush into small bits or powder; 2) (n.) hard, dull, repetitive work; 3) (v.) to keep working or studying hard at something tedious",
+   "ko": "1) 갈다, 빻다; 2) 고되고 지루한 일, 반복 노동; 3) 꾸준히 힘들게 하다, 열심히 공부하다",
+   "usage": "grind + coffee / grain; the daily grind; a long grind; grind away at + task; grind through + work; grind out + result (힘들게 뽑아내다); grind to a halt (서서히 멈추다)",
+   "ety": "Old English grindan (to crush, rub); cf. grindstone, keep your nose to the grindstone (= work hard nonstop)",
+   "tip": "Picture a millstone going round and round: the same slow, heavy motion, over and over. Grinding work wears you down the way stone wears down grain.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "I grind fresh coffee beans every morning.",
+    "After the holidays, it's back to the daily grind.",
+    "She spent the weekend grinding away at her dissertation proposal.",
+    "Traffic ground to a halt on the highway.",
+    "Doctoral study is less a series of breakthroughs than a long grind of reading, writing, and revising."
+   ],
+   "date": "2026-11-10"
+  },
+  {
+   "status": "new",
+   "cat": "4. Difficult situations",
+   "sub": "4-1 Struggling to do",
+   "word": "hard pressed (to do)",
+   "en": "finding it very difficult to do something",
+   "ko": "~하기 어려운, 곤란한",
+   "usage": "be hard pressed to do something; would be hard pressed to find / explain",
+   "ety": "press (squeeze) + hard (strongly)",
+   "tip": "Someone pressed hard against a wall with no room to move.",
+   "text": "\"Many of us ... would be hard pressed if asked to spell out in simple words the ideas\"",
+   "source": "Noddings Ch. 3, p. 44",
+   "ex": [
+    "You would be hard pressed to find a teacher who has never felt burned out."
+   ],
+   "date": ""
+  },
+  {
+   "status": "new",
+   "cat": "4. Difficult situations",
+   "sub": "4-2 Being stuck",
+   "word": "extricate",
+   "en": "to free someone or something from a tangle, trap, or difficult situation, usually with effort",
+   "ko": "(곤경·얽힘에서) 빼내다, 벗어나게 하다, 구출하다",
+   "usage": "extricate oneself / someone from + situation / place; extricate X from Y; find it hard to extricate oneself; extrication (n.); inextricable / inextricably linked (adj./adv.)",
+   "ety": "Latin ex- (out) + tricae (tangles, perplexities); cf. intricate (tangled in), inextricable",
+   "tip": "ex + tricae = out of the tangle; intricate = in the tangle. ⚠ inextricably linked = so tangled together they can't be separated (very common in academic writing). Implies effort: you struggle out, you don't just leave.",
+   "text": "",
+   "source": "Heehler, The Well-Spoken Thesaurus (via 'intricate')",
+   "ex": [
+    "It took the firefighters an hour to extricate the driver from the wrecked car.",
+    "The cat got tangled in the yarn and couldn't extricate itself.",
+    "He told a small lie and then couldn't extricate himself from it.",
+    "Once a country enters a war, extricating itself can take decades.",
+    "Butler suggests that the subject can never fully extricate itself from the language that wounds it; injury and identity are inextricably linked."
+   ],
+   "date": "2026-11-08"
+  },
+  {
+   "status": "new",
+   "cat": "4. Difficult situations",
+   "sub": "4-2 Being stuck",
+   "word": "predicament",
+   "en": "a difficult situation that is hard to get out of",
+   "ko": "곤경, 곤란한 처지",
+   "usage": "be in a predicament; face a predicament; an intellectual / moral predicament",
+   "ety": "Late Latin praedicamentum (something asserted); cf. predicate",
+   "tip": "Usually \"in a predicament\" or \"face a predicament.\" Intellectual predicament = 지적 곤경.",
+   "text": "\"given their intellectual predicaments\"",
+   "source": "Noddings Ch. 3, p. 57",
+   "ex": [
+    "Many first-year PhD students face the same predicament: too much reading, too little time."
+   ],
+   "date": ""
+  },
+  {
+   "status": "new",
+   "cat": "5. Philosophy & analysis terms",
+   "sub": "5-1 Language & logic",
+   "word": "compatible with / incompatible with",
+   "en": "able to exist or be true together without contradiction",
+   "ko": "~와 양립할 수 있는, ~와 모순되지 않는",
+   "usage": "X is compatible with Y; perfectly / logically compatible with; incompatible with; compatibility (n.)",
+   "ety": "Latin com- (together) + pati (to suffer, endure): 'able to endure together'; cf. patient, passion, sympathy",
+   "tip": "Like a charger compatible with your phone: they fit and work together. In philosophy: two claims can both be true at once.",
+   "text": "\"So 'speculative' as I understand it is compatible with 'already disproved'.\"",
+   "source": "Cassam, Conspiracy Theories, Ch. 1, p. 19",
+   "ex": [
+    "This charger isn't compatible with my new phone.",
+    "Is the software compatible with Windows?",
+    "Their schedules weren't compatible, so they rarely met.",
+    "Free will may be compatible with determinism, some philosophers argue.",
+    "Protecting free speech is compatible with restricting targeted harassment."
+   ],
+   "date": "2026-11-10"
+  },
+  {
+   "status": "new",
+   "cat": "5. Philosophy & analysis terms",
+   "sub": "5-1 Language & logic",
+   "word": "connote / connotation",
+   "en": "(of a word) to suggest an associated feeling or idea beyond its literal meaning",
+   "ko": "함축하다, (부가적 의미·어감을) 내포하다; connotation = 함축, 어감 (↔ denote 직접 가리키다)",
+   "usage": "X connotes Y; connote + feeling / quality / idea; positive / negative connotation; carry (a) connotation(s) of; denote vs. connote",
+   "ety": "Latin con- (together, with) + notare (to mark), from nota (a mark); cf. note, notation, denote, notable",
+   "tip": "con- = with, note = mark → a mark that comes along WITH the word. ⚠ denote = what the word directly points to (dictionary meaning); connote = the feeling that tags along (connotation). Think: denote = directly, connote = context.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "\"Home\" connotes warmth and safety, not just a building.",
+    "For many people, the word \"cheap\" connotes poor quality.",
+    "The label \"illegal\" connotes criminality in a way that \"undocumented\" does not.",
+    "Even when a slur denotes a group neutrally, it connotes contempt toward its members.",
+    "In educational discourse, \"achievement gap\" can connote a deficit in students rather than in the system."
+   ],
+   "date": "2026-11-12"
+  },
+  {
+   "status": "new",
+   "cat": "5. Philosophy & analysis terms",
+   "sub": "5-1 Language & logic",
+   "word": "denote / denotation",
+   "en": "(of a word or sign) to directly refer to or stand for something; to indicate",
+   "ko": "나타내다, 가리키다, 의미하다; denotation = 외연, 사전적 의미 (↔ connotation 함축, 내포)",
+   "usage": "X denotes Y; the term denotes + noun; be denoted by + symbol; used to denote + noun",
+   "ety": "Latin de- (down, completely) + notare (to mark), from nota (a mark, sign); cf. note, notation, connote",
+   "tip": "de + note = 딱 표시해 두다 → 직접 가리키는 뜻. ⚠ denote vs. connote: denote = 사전에 적힌 뜻, connote (con = with) = 같이 따라오는 느낌·함축",
+   "text": "",
+   "source": "",
+   "ex": [
+    "A red light denotes that you must stop.",
+    "On this map, a small star denotes a capital city.",
+    "In the chart, the dotted line denotes the national average.",
+    "The word 'home' denotes a place where one lives, but it connotes warmth and belonging.",
+    "A slur may denote a group neutrally on paper, yet what it does in use goes far beyond what it denotes."
+   ],
+   "date": "2026-11-12"
+  },
+  {
+   "status": "new",
+   "cat": "5. Philosophy & analysis terms",
+   "sub": "5-1 Language & logic",
+   "word": "dialectic / dialectical",
+   "en": "a method of reasoning that advances through the tension between opposing ideas (Socratic questioning; Hegel's movement through contradiction; Marx's dialectical materialism)",
+   "ko": "변증법, (대립을 통한) 논증·사유의 방법; dialectical = 변증법적인, (긴장 속에서) 서로를 만들어 가는",
+   "usage": "Socratic / Hegelian / Marxist dialectic; a dialectic between X and Y; a dialectical relationship / process / tension; dialectical materialism; thesis–antithesis–synthesis (simplified Hegel)",
+   "ety": "Greek dialektikē (art of conversation), from dia- (across, through) + legein (to speak); cf. dialogue, dialect",
+   "tip": "dia + legein = talking back and forth → ideas move forward by answering each other. Same root as dialogue. 'A dialectical relationship' = two things shaping each other through tension, not one simply determining the other. ⚠ thesis–antithesis–synthesis is a textbook simplification of Hegel.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "Our long argument turned into a kind of dialectic: each objection pushed us to a better plan.",
+    "Socratic dialectic exposes contradictions in what people think they know.",
+    "Marx borrowed Hegel's dialectic but grounded it in economic conditions.",
+    "Freire describes a dialectical relationship in which teachers and students learn from each other.",
+    "Butler sees a dialectic between injury and agency: the name that wounds can also become a site of resistance."
+   ],
+   "date": "2026-11-12"
+  },
+  {
+   "status": "new",
+   "cat": "5. Philosophy & analysis terms",
+   "sub": "5-1 Language & logic",
+   "word": "erotetic",
+   "en": "relating to questions and the logic of asking and answering",
+   "ko": "질문의, 질문 논리의",
+   "usage": "an erotetic concept / approach / logic",
+   "ety": "Greek erōtan (to ask)",
+   "tip": "Think of Socrates, who taught in Greek by asking questions. ⚠ Unrelated to \"erotic.\"",
+   "text": "\"Macmillan and Garrison have introduced an 'erotetic' concept of teaching.\"",
+   "source": "Noddings Ch. 3, p. 55",
+   "ex": [
+    "An erotetic approach plans lessons around the questions students ought to ask."
+   ],
+   "date": ""
+  },
+  {
+   "status": "new",
+   "cat": "5. Philosophy & analysis terms",
+   "sub": "5-1 Language & logic",
+   "word": "figurative",
+   "en": "(of words or language) used in a non-literal way, through metaphor or other figures of speech, to suggest a meaning beyond the words themselves",
+   "ko": "비유적인, 비유적 의미의 (↔ 문자 그대로의 literal)",
+   "usage": "figurative language / meaning / sense / expression; in a figurative sense; used figuratively; figuratively speaking; figurative vs. literal",
+   "ety": "Latin figura (shape, form; figure of speech), from fingere (to shape, form); cf. figure, fiction, feign",
+   "tip": "figura = a shape. Figurative language reshapes words so they mean more than they say. A 'figure of speech' is exactly that: words bent into a new shape. ⚠ Opposite: literal. People often misuse 'literally' when they mean 'figuratively' ('I literally died laughing').",
+   "text": "",
+   "source": "Heehler, The Well-Spoken Thesaurus",
+   "ex": [
+    "When she said her boss 'exploded,' she was speaking figuratively.",
+    "'Break the ice' is a figurative expression; no actual ice is involved.",
+    "Children often take figurative language literally and get confused.",
+    "Poetry relies heavily on figurative language such as metaphor and simile.",
+    "Butler argues that the language of 'wounding' words is not merely figurative: speech can injure in a real sense."
+   ],
+   "date": "2026-11-08"
+  },
+  {
+   "status": "new",
+   "cat": "5. Philosophy & analysis terms",
+   "sub": "5-1 Language & logic",
+   "word": "syntactic",
+   "en": "relating to sentence structure and word order",
+   "ko": "통사적인, 문법 구조상의",
+   "usage": "syntactic analysis / structure; syntactically correct",
+   "ety": "Greek syn- (together) + taxis (arrangement)",
+   "tip": "Syntax = how words are arranged together. Compare semantic = meaning.",
+   "text": "\"Syntactic analysis is an important part of this approach.\"",
+   "source": "Noddings Ch. 3, p. 43",
+   "ex": [
+    "The sentence is syntactically correct but semantically empty."
+   ],
+   "date": ""
+  },
+  {
+   "status": "new",
+   "cat": "5. Philosophy & analysis terms",
+   "sub": "5-1 Language & logic",
+   "word": "thesaurus",
+   "en": "a book or tool that lists words grouped by similar meaning (synonyms), and sometimes opposites, to help you find the right word",
+   "ko": "유의어 사전, 동의어 사전 (뜯이 비슷한 단어를 묶어 둔 사전)",
+   "usage": "look it up in a thesaurus; use a thesaurus to find a synonym for X; an online thesaurus; plural: thesauri / thesauruses; thesaurus vs. dictionary",
+   "ety": "Greek thesauros (treasure, storehouse), via Latin thesaurus; cf. treasure",
+   "tip": "Same root as 'treasure': a thesaurus is a treasure house of words. ⚠ Dictionary = what a word means; thesaurus = which other words mean something similar. Tip: check nuance in a dictionary before swapping a word, since synonyms are rarely identical.",
+   "text": "\"The Well-Spoken Thesaurus\" (book title)",
+   "source": "Heehler, The Well-Spoken Thesaurus",
+   "ex": [
+    "I couldn't think of another word for 'happy,' so I checked a thesaurus.",
+    "Writers keep a thesaurus nearby to avoid repeating the same word.",
+    "A thesaurus lists 'big,' 'huge,' and 'enormous' together, but each has a different feel.",
+    "Don't swap words blindly from a thesaurus; 'thin' and 'skinny' are not interchangeable in formal writing.",
+    "Her essay read as awkward because she had substituted rare thesaurus words for precise ones, so 'harm' became 'detriment' where it didn't fit."
+   ],
+   "date": "2026-11-08"
+  },
+  {
+   "status": "new",
+   "cat": "5. Philosophy & analysis terms",
+   "sub": "5-10 Necessity & chance",
+   "word": "arbitrary contingency / contingency / contingent (on)",
+   "en": "a fact or condition that happens to hold but could have been otherwise, and for no deeper reason or justification (a matter of mere chance, not of principle or desert) / contingency: (philosophy) the state of being possible but not necessary; (everyday) a possible future event, an emergency",
+   "ko": "자의적 우연(성), 아무 근거 없이 그저 그렇게 된 우연한 사실 / contingency = 우연성, 우발성 (↔ necessity 필연성); 만일의 사태, 비상사태; contingent on = ~에 달린 (⚠ 일관성은 consistency)",
+   "usage": "the arbitrary contingency of birth / history / X; X is (merely) an arbitrary contingency; treat X as an arbitrary contingency rather than a necessity; contingent on / upon Y (= depends on Y); morally arbitrary (Rawls); the contingency of + norms / meaning; a contingency plan; as a contingency",
+   "ety": "arbitrary: Latin arbiter (judge), i.e. left to someone's whim, not a rule; contingency: Latin con- (together) + tangere (to touch): things that 'touch' / happen together by chance; cf. tangent, contact, arbitration",
+   "tip": "arbitrary = no reason; contingent = could have been otherwise (opposite: necessary). Put together: it just happened to be so, and nothing justifies it. ⚠ Common critical move: showing that something presented as natural or necessary is really an arbitrary contingency. ⚠ contingency (tang = touch → chance) vs. consistency (sist = stand → standing steady, 일관성).",
+   "text": "",
+   "source": "",
+   "ex": [
+    "Where you are born is an arbitrary contingency, yet it shapes almost everything about your life.",
+    "The rule that the oldest child inherits the house is an arbitrary contingency of local custom, not a law of nature.",
+    "Rawls calls natural talents 'morally arbitrary': no one deserves the contingencies of the natural lottery.",
+    "Which words count as slurs is not an arbitrary contingency; it tracks histories of violence and exclusion.",
+    "By showing that gender norms are historical, Butler exposes as arbitrary contingency what had seemed a natural necessity.\n\ncontingency / contingent:",
+    "We packed extra water as a contingency in case the hike took longer.",
+    "The school has a contingency plan for snow days.",
+    "Our trip is contingent on the weather.",
+    "Historians stress the contingency of events: things could easily have turned out differently.",
+    "Showing the contingency of a slur's meaning opens the possibility that it can be resisted or resignified."
+   ],
+   "date": "2026-11-09"
+  },
+  {
+   "status": "new",
+   "cat": "5. Philosophy & analysis terms",
+   "sub": "5-11 Practical vs. principled",
+   "word": "expedient / expediency",
+   "en": "(adj.) convenient and useful for a purpose, though possibly not right or fair; (n.) a quick means to an end",
+   "ko": "(당장) 편리한, 편의주의적인, 방편적인; (n.) 방편, 임시방편; expediency = 편의주의",
+   "usage": "it is expedient (for someone) to + verb; politically / administratively expedient; a temporary / simple expedient; out of expediency; expediency over principle",
+   "ety": "Latin expedire 'to free the feet': ex- 'out' + pes, ped- 'foot' (freeing feet from a trap → making things go easily); cf. expedite, expedition, impede, pedal",
+   "tip": "ex + ped = feet out of the trap → things move fast and easily. But the 'easy way' often isn't the right way. ⚠ expedient (convenient, often morally suspect) vs. efficient (works well, neutral) vs. expeditious (done quickly).",
+   "text": "",
+   "source": "",
+   "ex": [
+    "It was expedient to take a taxi since the bus was late.",
+    "Taping the broken window was only a temporary expedient.",
+    "The politician changed his position because it was politically expedient.",
+    "Banning the book was an expedient response that avoided any real conversation about racism.",
+    "Treating hate speech as a mere discipline issue may be administratively expedient, but it ignores the harm to the students targeted."
+   ],
+   "date": "2026-11-14"
+  },
+  {
+   "status": "new",
+   "cat": "5. Philosophy & analysis terms",
+   "sub": "5-2 Standards & tests",
+   "word": "criterion / criteria",
+   "en": "a standard or test used to judge something (plural: criteria)",
+   "ko": "기준, 판단 기준",
+   "usage": "meet / satisfy a criterion; the criteria for X",
+   "ety": "Greek kritēs (judge); cf. critic, critical",
+   "tip": "⚠ One criterion, two criteria (like phenomenon / phenomena). Never \"a criteria.\"",
+   "text": "\"Scheffler argued that teaching is characterized by three criteria\"",
+   "source": "Noddings Ch. 3, p. 49",
+   "ex": [
+    "The intentionality criterion is the least controversial of the three."
+   ],
+   "date": ""
+  },
+  {
+   "status": "new",
+   "cat": "5. Philosophy & analysis terms",
+   "sub": "5-3 Mapping concepts",
+   "word": "continuum",
+   "en": "a range in which things change gradually from one end to the other",
+   "ko": "연속체, 스펙트럼",
+   "usage": "on a continuum; at one end of the continuum; a continuum from X to Y",
+   "ety": "Latin continuus (uninterrupted); cf. continue",
+   "tip": "Something that continues without breaks.",
+   "text": "\"With this continuum in place, Green invites us to consider a 'region of intelligence.'\"",
+   "source": "Noddings Ch. 3, p. 55",
+   "ex": [
+    "Instruction and indoctrination may sit on a continuum rather than in separate boxes."
+   ],
+   "date": ""
+  },
+  {
+   "status": "new",
+   "cat": "5. Philosophy & analysis terms",
+   "sub": "5-3 Mapping concepts",
+   "word": "facet",
+   "en": "one particular aspect or side of something complex; originally, one of the small flat surfaces of a cut gem",
+   "ko": "(복잡한 사물의) 한 측면, 양상; (보석의) 절단면",
+   "usage": "a facet of X; one / another / every facet of X; a key / overlooked / different facet; facets of identity; multifaceted / many-faceted (adj.)",
+   "ety": "French facette, a diminutive of face (from Latin facies, 'face'); i.e. 'little face'",
+   "tip": "A cut gem has many small flat faces, and each catches the light differently. In the same way, a complex issue has many facets, each showing one side of it. A 'facet' is a part you look at one at a time, so it's less than the 'whole', and it works well with multifaceted.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "Cooking is just one facet of her many talents.",
+    "The diamond's facets caught the light and scattered it across the wall.",
+    "Moving abroad changed every facet of his daily life.",
+    "Hate speech has a legal facet, a moral facet, and an educational facet.",
+    "This paper examines only one facet of the problem: how teachers respond in the moment."
+   ],
+   "date": "2026-11-07"
+  },
+  {
+   "status": "new",
+   "cat": "5. Philosophy & analysis terms",
+   "sub": "5-3 Mapping concepts",
+   "word": "proximity / proximate",
+   "en": "(n.) nearness in space, time, or relationship",
+   "ko": "근접(성), 가까움",
+   "usage": "in (close) proximity to X; the proximity of A to B; proximity between A and B; proximate cause (직접 원인) vs. distal/ultimate cause",
+   "ety": "Latin proximus 'nearest' (from prope 'near'). Related: approximate (거의 가까운, 근사치), proximal",
+   "tip": "approximate = almost (nearly) right → proximity = nearness. Formal version of 'closeness'",
+   "text": "",
+   "source": "",
+   "ex": [
+    "We chose the apartment for its proximity to campus.",
+    "The two cats sleep in close proximity on cold nights.",
+    "Living in close proximity to a highway can affect children's health.",
+    "Schools in close proximity to each other often compete for the same students.",
+    "Freud's account brings love and hate into uncomfortable proximity, suggesting they are closer than we usually admit."
+   ],
+   "date": "2026-11-14"
+  },
+  {
+   "status": "new",
+   "cat": "5. Philosophy & analysis terms",
+   "sub": "5-3 Mapping concepts",
+   "word": "topology",
+   "en": "a map of how things are positioned in relation to each other",
+   "ko": "위상, 개념 지형도",
+   "usage": "construct / offer a topology of X",
+   "ety": "Greek topos (place) + -logy (study)",
+   "tip": "topos = place, so a map of places. ⚠ Not typology (sorting into types).",
+   "text": "\"Thomas Green constructed a topology of the teaching concept.\"",
+   "source": "Noddings Ch. 3, p. 55",
+   "ex": [
+    "She offers a topology of harmful speech, from insults to threats."
+   ],
+   "date": ""
+  },
+  {
+   "status": "new",
+   "cat": "5. Philosophy & analysis terms",
+   "sub": "5-4 Teaching & learning concepts",
+   "word": "acquisition / acquire",
+   "en": "the process of gaining a skill, knowledge, or habit (e.g. language acquisition); also, something bought or obtained, or one company buying another",
+   "ko": "습득, 획득; 인수, 취득(물)",
+   "usage": "acquisition of + skill/knowledge/language; (second) language acquisition (제2언어 습득); vocabulary acquisition; acquire a habit/taste/skill; acquired taste (점차 좋아하게 되는 것); a recent acquisition",
+   "ety": "Latin ad- 'to' + quaerere 'to seek' → 'seek and get.' Same root: inquire, question, request, conquest, exquisite",
+   "tip": "quaer/quis = seek (question, inquire, request) → ac-QUIS-ition = what you sought and finally got. In SLA, 'acquisition' (natural, unconscious) is often contrasted with 'learning' (conscious study) — Krashen",
+   "text": "",
+   "source": "",
+   "ex": [
+    "The museum's newest acquisition is a painting from the 1800s.",
+    "Our cat's favorite new acquisition is a cardboard box.",
+    "The company announced its acquisition of a small tech startup.",
+    "Reading widely is one of the best ways to support vocabulary acquisition.",
+    "Krashen distinguishes language acquisition, which happens through meaningful input, from conscious learning of grammar rules."
+   ],
+   "date": "2026-11-14"
+  },
+  {
+   "status": "new",
+   "cat": "5. Philosophy & analysis terms",
+   "sub": "5-4 Teaching & learning concepts",
+   "word": "emulate / emulation",
+   "en": "to imitate someone you admire, trying to equal or surpass them",
+   "ko": "(존경하는 대상을) 본받다, 따라 하다, 필적하려 애쓰다; emulation = 본받음, 경쟁적 모방",
+   "usage": "emulate + person / model / success / system; try / hope / seek to emulate; the emulation of exemplars (virtue ethics); worthy of emulation",
+   "ety": "Latin aemulari (to rival, strive to equal), from aemulus (rivaling); cf. emulation, emulous",
+   "tip": "aemulus = rival → copy your role model as if racing to catch up. ⚠ imitate = neutral copy; mimic = surface copy, sometimes mocking; emulate = copy out of admiration, to equal or surpass.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "My nephew emulates his older brother in everything, even the way he walks.",
+    "She hoped to emulate her mother's patience with difficult people.",
+    "Many countries have tried to emulate Finland's education system.",
+    "Children learn virtues partly by emulating adults they admire.",
+    "When students see a respected teacher use slurs \"jokingly,\" they may emulate that speech as acceptable."
+   ],
+   "date": "2026-11-12"
+  },
+  {
+   "status": "new",
+   "cat": "5. Philosophy & analysis terms",
+   "sub": "5-4 Teaching & learning concepts",
+   "word": "indoctrination",
+   "en": "teaching that aims to make someone accept beliefs uncritically, without regard to reasons or evidence",
+   "ko": "주입, 교화, 세뇌 (교육철학에선 주로 '교화'·'주입')",
+   "usage": "indoctrinate someone (into / with + belief); indoctrination into + ideology; political / religious indoctrination; slide into indoctrination",
+   "ety": "Latin in- (into) + doctrina (teaching), from docere (to teach); cf. doctrine, doctor, docile",
+   "tip": "in + doctrine = pouring a doctrine IN. Contrast educate (e-ducere), leading OUT.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "Teaching about hate speech can slide into indoctrination if students are never invited to weigh the reasons for themselves."
+   ],
+   "date": ""
+  },
+  {
+   "status": "new",
+   "cat": "5. Philosophy & analysis terms",
+   "sub": "5-5 Responsibility & answerability",
+   "word": "accountability",
+   "en": "being answerable to others for one's actions and their results; in education policy, systems that judge schools and teachers by measured outcomes",
+   "ko": "책무성(교육정책 용어), 책임, 설명 책임",
+   "usage": "hold someone accountable (for X); be accountable to + people; accountability for + outcomes; test-based / school accountability; an accountability system",
+   "ety": "Latin ad- (to) + computare (to count); cf. account, count, compute",
+   "tip": "Accountable = able to be asked to give an account (\"count up\" what you did). ⚠ responsibility = duty before acting; accountability = answering for it afterward.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "Who should be held accountable for the harm a slur causes in a classroom: the speaker, the school, or both?"
+   ],
+   "date": ""
+  },
+  {
+   "status": "new",
+   "cat": "5. Philosophy & analysis terms",
+   "sub": "5-6 Schools of thought",
+   "word": "absolutism / absolutist",
+   "en": "1) the view that some truths or moral rules hold always and everywhere, without exception; 2) (politics) unlimited rule by one sovereign / absolutist (n./adj.): a person holding such a view; allowing no exceptions",
+   "ko": "절대주의 (↔ 상대주의 relativism) / absolutist = 절대주의자, 절대주의적인",
+   "usage": "moral absolutism; free speech absolutism / a free speech absolutist; reject absolutism; absolutist claims / an absolutist view / stance on + noun",
+   "ety": "Latin absolutus (loosened, set free, complete), from absolvere; cf. absolute, absolve",
+   "tip": "Absolute = untied from all conditions. An absolutist says \"no exceptions, ever.\" ⚠ Its rival is relativism, not pluralism. -ism → -ist (positivism → positivist). Everyday 'so absolutist' = too black-and-white.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "Free speech absolutism leaves no room to regulate even targeted slurs.\n\nabsolutist:",
+    "My dad is an absolutist about punctuality: late is late, even by one minute.",
+    "She takes an absolutist view on lying; she won't even tell white lies.",
+    "Free speech absolutists argue that even offensive speech must be protected.",
+    "An absolutist zero-tolerance policy can punish a child who was only defending herself.",
+    "Waldron challenges the free speech absolutist by asking what such speech does to the dignity of its targets."
+   ],
+   "date": "2026-11-06"
+  },
+  {
+   "status": "new",
+   "cat": "5. Philosophy & analysis terms",
+   "sub": "5-6 Schools of thought",
+   "word": "atheism / atheist / atheistic",
+   "en": "the belief that God or gods do not exist",
+   "ko": "무신론; atheist = 무신론자 (↔ theism 유신론)",
+   "usage": "embrace / reject atheism; theism vs. atheism; an avowed / outspoken atheist; atheistic worldview",
+   "ety": "Greek a- (without) + theos (god) + -ism; cf. theism, theology, monotheism, pantheism",
+   "tip": "a- = without (amoral, apolitical), theos = god (theology) → 'without-god-ism'. ⚠ atheism = believes there is no God; agnosticism = holds we cannot know whether God exists.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "My grandfather was a devout Buddhist, but my uncle openly embraced atheism.",
+    "She describes herself as an atheist but still celebrates Christmas with her family.",
+    "Atheism remains socially stigmatized in some communities.",
+    "Public schools may teach about religion and atheism without endorsing either.",
+    "The debate between theism and atheism turns on what counts as evidence for God's existence."
+   ],
+   "date": "2026-11-12"
+  },
+  {
+   "status": "new",
+   "cat": "5. Philosophy & analysis terms",
+   "sub": "5-6 Schools of thought",
+   "word": "positivism",
+   "en": "the view that genuine knowledge comes only from observation, experience, and scientific method, not from metaphysics or value claims",
+   "ko": "실증주의",
+   "usage": "positivism / logical positivism; a positivist approach / account; critique positivism; positivist assumptions about knowledge",
+   "ety": "Latin positivus (laid down, given), from ponere (to place); cf. posit, position, deposit",
+   "tip": "Positive here = 'posited, given in experience', not 'optimistic'. Only what's laid before you (observable facts) counts. ⚠ logical positivism = the 1920s–30s Vienna Circle version (meaning = verifiability).",
+   "text": "",
+   "source": "",
+   "ex": [
+    "Critics argue that positivism in education research treats test scores as the only real evidence of learning."
+   ],
+   "date": "2026-11-05"
+  },
+  {
+   "status": "new",
+   "cat": "5. Philosophy & analysis terms",
+   "sub": "5-7 Knowledge & norms",
+   "word": "a priori / a posteriori",
+   "en": "(philosophy) known or justified independently of experience; (general) assumed beforehand without examining evidence",
+   "ko": "선험적인, 경험에 앞서는; (일반) 증거 없이 미리 정해 둔; a posteriori = 후험적인, 경험에 근거한",
+   "usage": "a priori knowledge / truth / reasoning; know / decide / reject X a priori; an a priori assumption (often critical); a priori vs. a posteriori",
+   "ety": "Latin a priori = 'from what is prior (earlier)'; a posteriori = 'from what comes after'; cf. prior, priority, posterior, postpone",
+   "tip": "a priori = in front of experience (prior); a posteriori = behind experience (post-). An 'a priori assumption' in a paper often signals criticism: decided before looking at the evidence.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "You can know a priori that a triangle has three sides; you don't need to measure one.",
+    "She rejected the idea a priori, without even looking at the evidence.",
+    "Policymakers often make a priori assumptions about what low-income families need.",
+    "Researchers should avoid deciding a priori which students will struggle.",
+    "Whether a word wounds cannot be settled a priori; it depends on its history and context of use."
+   ],
+   "date": "2026-11-12"
+  },
+  {
+   "status": "new",
+   "cat": "5. Philosophy & analysis terms",
+   "sub": "5-7 Knowledge & norms",
+   "word": "conceive / conception / (in)conceivable",
+   "en": "1) to form an idea of; to imagine or understand something in a certain way; 2) to become pregnant",
+   "ko": "1) 생각해 내다, 상상하다, (~로) 이해·개념화하다; 2) 임신하다",
+   "usage": "conceive of X as Y; conceive a plan / an idea; be conceived as; it is (in)conceivable that + clause; a conception of + noun",
+   "ety": "Latin con- (together, thoroughly) + capere (to take, seize); -ceive family: conceive, perceive, deceive, receive; nouns shift to -cept- (concept, perception, deception, reception)",
+   "tip": "-ceive = take. con- + take = gather an idea and hold it inside your mind (an idea or a baby: both take shape within). ⚠ Family: conceive (form an idea) / perceive (take in through the senses) / deceive (take the truth away) / receive (take back to yourself).",
+   "text": "",
+   "source": "",
+   "ex": [
+    "I can't conceive of living without my cats.",
+    "The couple had been trying to conceive for two years.",
+    "The plan was conceived over coffee and finished in a week.",
+    "Many teachers still conceive of learning as the transfer of information.",
+    "Butler conceives of hate speech not as a mere expression of attitude but as an act that wounds."
+   ],
+   "date": "2026-11-12"
+  },
+  {
+   "status": "new",
+   "cat": "5. Philosophy & analysis terms",
+   "sub": "5-7 Knowledge & norms",
+   "word": "epistemic / epistemological",
+   "en": "epistemic: having to do with knowledge, belief, and justification itself; epistemological: having to do with epistemology, the theory or study of knowledge",
+   "ko": "epistemic 인식적인, 앎에 관한 / epistemological 인식론적인, 인식론의",
+   "usage": "epistemic injustice / authority / humility / standing; epistemological assumptions / debates / framework",
+   "ety": "Greek epistēmē (knowledge, understanding); -logy (study of)",
+   "tip": "⚠ epistemic = about knowing itself (a knower's credibility); epistemological = about theories of knowing (assumptions, frameworks). Like ethical vs. meta-ethical.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "Fricker calls it epistemic injustice when a speaker is disbelieved because of prejudice; the study rests on constructivist epistemological assumptions."
+   ],
+   "date": "2026-11-06"
+  },
+  {
+   "status": "new",
+   "cat": "5. Philosophy & analysis terms",
+   "sub": "5-7 Knowledge & norms",
+   "word": "normative",
+   "en": "concerned with how things ought to be, setting standards or values (vs. describing how things are)",
+   "ko": "규범적인, 당위적인",
+   "usage": "a normative claim / question / theory / framework; normative vs. descriptive / empirical; normatively loaded",
+   "ety": "Latin norma (a carpenter's square, a rule); cf. norm, normal",
+   "tip": "A norma is a builder's square: the ruler you measure \"right\" by. ⚠ normative ≠ normal. Descriptive says what is; normative says what ought to be.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "Her claim that schools should protect students from slurs is normative, not empirical."
+   ],
+   "date": "2026-11-06"
+  },
+  {
+   "status": "new",
+   "cat": "5. Philosophy & analysis terms",
+   "sub": "5-7 Knowledge & norms",
+   "word": "perceive / perception",
+   "en": "to become aware of something through the senses; to understand or regard something in a particular way",
+   "ko": "인식하다, 지각하다, (~로) 여기다; perception = 인식, 지각",
+   "usage": "perceive X as Y; be perceived as + adj/noun; perceive that + clause; public perception of + noun; perceived threat / harm",
+   "ety": "Latin per- (through) + capere (to take); cf. conceive, deceive, receive; perceptible, perceptive",
+   "tip": "per- = through → what comes in THROUGH your eyes and ears. Perception is about how things appear to you, which may differ from how they are. ⚠ conceive = form an idea in the mind; perceive = take in from outside.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "Dogs can perceive sounds that humans cannot hear.",
+    "She perceived a note of sadness in his voice.",
+    "Students who are perceived as troublemakers are disciplined more harshly.",
+    "Public perception of the policy changed after the news report.",
+    "Whether an utterance is perceived as a threat depends partly on the speaker's social position."
+   ],
+   "date": "2026-11-12"
+  },
+  {
+   "status": "new",
+   "cat": "5. Philosophy & analysis terms",
+   "sub": "5-7 Knowledge & norms",
+   "word": "unwitting / witting (unwittingly)",
+   "en": "unwitting: not aware of what one is doing or of its effects; witting: aware, deliberate",
+   "ko": "자기도 모르는, 무심코 한 / 알면서 하는, 의도적인",
+   "usage": "an unwitting victim / accomplice / agent / participant; unwitting propaganda; unwittingly + verb (unwittingly share); a witting choice / participant (rare; usually deliberate, knowing, conscious)",
+   "ety": "Old English witan (to know); cf. wit, witness, wise, wisdom",
+   "tip": "wit = to know (a witness knows what they saw). witting = knowing; un-witting = not knowing. unwitting is far more common than witting.",
+   "text": "\"There is also the unwitting propaganda of the deluded but sincere Sandy Hook Conspiracy Theorist\"",
+   "source": "Cassam, Conspiracy Theories, Ch. 1, p. 12",
+   "ex": [
+    "unwitting:",
+    "She became an unwitting victim of the online scam.",
+    "He unwittingly left his keys in the car.",
+    "The tourists were unwitting extras in the movie scene.",
+    "Many users unwittingly share false news because the headline looks reliable.",
+    "Teachers can become unwitting agents of exclusion when they repeat stereotypes without noticing.\nwitting:",
+    "Was that a witting choice, or did it just happen?",
+    "Not every falsehood is a lie; a lie is a witting attempt to deceive.",
+    "He was a witting accomplice to the fraud.",
+    "The investigation asked whether the officials were witting participants.\n10. Cassam's point is that propaganda can be witting or unwitting, and either way it serves the same political function."
+   ],
+   "date": "2026-11-10"
+  },
+  {
+   "status": "new",
+   "cat": "5. Philosophy & analysis terms",
+   "sub": "5-8 Context & framing",
+   "word": "construe / misconstrue",
+   "en": "to interpret words or actions in a particular way",
+   "ko": "(말·행동을) 해석하다, (~로) 이해하다; misconstrue = 오해하다, 잘못 해석하다",
+   "usage": "construe X as Y; be construed as + noun/adj; broadly / narrowly construed; misconstrue + someone's words / intentions",
+   "ety": "Latin con- (together) + struere (to pile up, build); cf. construct, structure, instruct, misconstrue",
+   "tip": "con + struere = build together → stack up the words to build a meaning. Interpretation is a kind of construction. ⚠ perceive = meaning coming in; conceive = framing a concept; construe = reading the meaning of given words or actions.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "Please don't construe my silence as agreement.",
+    "Her quick reply was construed as rude, though she was just busy.",
+    "The court construed the law narrowly, so the protest was allowed.",
+    "A teacher's correction can be construed by a shy student as a personal rejection.",
+    "Whether a remark is construed as a joke or a threat often depends on who says it and to whom."
+   ],
+   "date": "2026-11-12"
+  },
+  {
+   "status": "new",
+   "cat": "5. Philosophy & analysis terms",
+   "sub": "5-8 Context & framing",
+   "word": "recontextualize",
+   "en": "to place words, ideas, or practices in a new context, which changes their meaning or force",
+   "ko": "재맥락화하다, 새로운 맥락에 옮겨 놓다",
+   "usage": "recontextualize + term / quotation / slur; recontextualization of X in / into Y; be recontextualized as",
+   "ety": "re- (again) + Latin con- (together) + texere (to weave); cf. text, textile, texture",
+   "tip": "Context = what is woven together with the words. Recontextualizing reweaves them into a new fabric, so they mean something else.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "Reclaimed slurs show how a word can be recontextualized to subvert its injurious force."
+   ],
+   "date": "2026-11-06"
+  },
+  {
+   "status": "new",
+   "cat": "5. Philosophy & analysis terms",
+   "sub": "5-9 Self & subject",
+   "word": "subjectivity",
+   "en": "1) (philosophy) the condition of being a subject: a self that experiences, thinks, and acts, and how that self is formed; 2) (everyday) being based on personal feelings or opinions rather than facts",
+   "ko": "1) 주체성, 주체로서의 자기 / 2) 주관성",
+   "usage": "the formation / constitution of subjectivity; political / gendered / racialized subjectivity; subjectivity is produced through + discourse / language; subjective (adj.)",
+   "ety": "Latin sub- (under) + iacere (to throw): subiectum, 'what lies underneath'; cf. subject, object, project",
+   "tip": "The subject is what lies underneath and does the experiencing. ⚠ subjectivity in theory (주체성) is NOT a criticism; subjectivity in methods talk (주관성) often is. Butler: we become subjects by being addressed, i.e., subjection = subjectivation.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "For Butler, being named, even injuriously, is part of how subjectivity is formed."
+   ],
+   "date": "2026-11-07"
+  },
+  {
+   "status": "new",
+   "cat": "6. Academic signposts",
+   "sub": "6-1 Latin abbreviations",
+   "word": "e.g.",
+   "en": "for example",
+   "ko": "예를 들어",
+   "usage": "X (e.g., A, B), with commas around e.g. in parentheses",
+   "ety": "Latin exempli gratia, \"for the sake of example\"",
+   "tip": "e.g. = Example Given. ⚠ i.e. = In Essence (that is, in other words).",
+   "text": "\"whether, e.g., the pupil is not systematically precluded from asking\"",
+   "source": "Noddings Ch. 3, p. 54",
+   "ex": [
+    "Some speech acts (e.g., slurs) wound by their very utterance."
+   ],
+   "date": ""
+  },
+  {
+   "status": "new",
+   "cat": "6. Academic signposts",
+   "sub": "6-2 Mentioning, naming & citing",
+   "word": "allude / allusion",
+   "en": "to mention or point to something indirectly, without naming it outright",
+   "ko": "넌지시 언급하다, 암시하다; allusion = 암시, 인유",
+   "usage": "allude to + noun (always with 'to'); allude to X without naming Y; make an allusion to + noun; a passing allusion",
+   "ety": "Latin ad- (toward) + ludere (to play); cf. allusion, delude, illusion, ludicrous, prelude",
+   "tip": "ludere = to play → playfully point toward something instead of saying it straight. Same lud- as delude (already in your bank). ⚠ refer to = mention directly; allude to = mention indirectly. ⚠ allude vs. elude (교묘히 피하다); allusion vs. illusion (착각).",
+   "text": "",
+   "source": "",
+   "ex": [
+    "She alluded to a \"difficult week\" but didn't say what had happened.",
+    "He kept alluding to his famous uncle, hoping someone would ask.",
+    "The senator alluded to the scandal without naming anyone involved.",
+    "The professor alluded to Dewey several times, assuming the students had read him.",
+    "Coded hate speech often alludes to a group through dog whistles rather than naming it outright."
+   ],
+   "date": "2026-11-12"
+  },
+  {
+   "status": "new",
+   "cat": "6. Academic signposts",
+   "sub": "6-2 Mentioning, naming & citing",
+   "word": "refer to",
+   "en": "v. (1) to mention; (2) refer to X as Y = to call X 'Y'; (3) (of a word) to mean or denote; (4) to consult/look at a source; (5) refer someone to = to send someone to another person/place for help",
+   "ko": "(1) 언급하다 (2) X를 Y라고 부르다 (3) 가리키다, 지칭하다 (4) 참고하다, 참조하다 (5) (다른 곳으로) 보내다, 소개하다",
+   "usage": "refer to X (never 'refer X'); refer to X as Y; X is referred to as Y (passive); the term X refers to Y; refer to Table 2 / your notes; refer someone to a specialist; spelling: referred, referring (stress on -FER); reference (n.), referent (n.)",
+   "ety": "Latin re- (back) + ferre (to carry); cf. transfer, offer, infer, reference",
+   "tip": "re + fer = carry back: you carry the reader's attention TO something. Think of 'to' as the arrow, so refer always needs 'to.' ⚠ refer to X AS Y: both little words are needed.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "In her speech, she referred to her childhood in Busan.",
+    "Austin refers to these utterances as 'performatives.'",
+    "The term 'hate speech' refers to expression that attacks people based on group identity.",
+    "For the full results, refer to Table",
+    "My doctor referred me to a specialist."
+   ],
+   "date": "2026-11-09"
+  },
+  {
+   "status": "new",
+   "cat": "6. Academic signposts",
+   "sub": "6-3 Latin phrases",
+   "word": "bona fide",
+   "en": "genuine, real; sincere, in good faith",
+   "ko": "진짜의, 진정한; 선의의",
+   "usage": "bona fide + noun (a bona fide expert / student / effort / argument); bona fides (n., credentials: establish one's bona fides)",
+   "ety": "Latin bona (good) + fide (faith); cf. fidelity, confide, infidel",
+   "tip": "In good faith' = the real deal you can trust. A bona fide degree is a real one, not fake. Pronounced BOH-nuh FYE-dee.",
+   "text": "\"I have the honour of being described by one eminent (if that's the right word) conspiracy theorist and fellow philosopher as a 'bona fide anti-conspiracy buffoon'.\"",
+   "source": "Cassam, Conspiracy Theories, Ch. 1, p. 2",
+   "ex": [
+    "Is this a bona fide antique or a cheap copy?",
+    "Only bona fide students can get the discount.",
+    "She made a bona fide effort to fix the problem.",
+    "The university checks whether applicants hold bona fide degrees.",
+    "Not every critique of free speech is a bona fide argument; some are just insults dressed up as theory."
+   ],
+   "date": "2026-11-10"
+  },
+  {
+   "status": "new",
+   "cat": "6. Academic signposts",
+   "sub": "6-4 Sequence & transitions",
+   "word": "subsequently / subsequent",
+   "en": "(adv.) afterward; at a later time, often as a result of what came before",
+   "ko": "그 후에, 이후에, 나중에 / subsequent: 뒤이은, 후속의",
+   "usage": "subsequently + verb (was subsequently published / revised); subsequent + noun (subsequent studies / chapters / years); subsequent to X (= after X, formal); in subsequent work",
+   "ety": "Latin sub- 'under, next' + sequi 'to follow' → 'following next.' Same root: sequence, consequence, sequel, consecutive",
+   "tip": "sequ = follow (sequence, sequel) → subsequently = in what followed. Formal version of 'later / afterward.' ⚠ subsequently (그 후에) vs. consequently (그 결과로)",
+   "text": "",
+   "source": "",
+   "ex": [
+    "She moved to Chicago in 2020 and subsequently found a job downtown.",
+    "The cat ate too fast and was subsequently sick on the rug.",
+    "The paper was presented at a conference and subsequently published in a journal.",
+    "Subsequent studies failed to replicate the original findings.",
+    "Austin's account of speech acts was subsequently developed by Searle and later challenged by Butler."
+   ],
+   "date": "2026-11-14"
+  },
+  {
+   "status": "new",
+   "cat": "7. Power & social justice",
+   "sub": "7-1 Exclusion & power relations",
+   "word": "anti-Semitism / anti-Semitic (also antisemitism)",
+   "en": "hostility toward, prejudice against, or hatred of Jews",
+   "ko": "반유대주의 / 반유대주의적인",
+   "usage": "right-wing / left-wing anti-Semitism; coded anti-Semitism; an anti-Semitic conspiracy theory / slur / trope; advance the cause of anti-Semitism",
+   "ety": "anti- (against) + Semite (from Shem, son of Noah; once used for speakers of Semitic languages); term coined in Germany in 1879 to give Jew-hatred a 'scientific' label",
+   "tip": "Read it as one word meaning hostility toward Jews specifically. There is no separate ideology called 'Semitism'.",
+   "text": "\"the point of Conspiracy Theories about the Holocaust is to advance the cause of right-wing anti-Semitism.\"",
+   "source": "Cassam, Conspiracy Theories, Ch. 1, p. 7",
+   "ex": [
+    "The school held a workshop on recognizing anti-Semitism online.",
+    "Swastika graffiti on the synagogue was condemned as an act of anti-Semitism.",
+    "She wrote her thesis on the history of anti-Semitism in nineteenth-century Europe.",
+    "Critics argued that the politician's remarks about \"global bankers\" were coded anti-Semitism.",
+    "Like other forms of hate speech, anti-Semitic slurs can wound through their history of use, not just their literal meaning."
+   ],
+   "date": "2026-11-10"
+  },
+  {
+   "status": "new",
+   "cat": "7. Power & social justice",
+   "sub": "7-1 Exclusion & power relations",
+   "word": "cultural capital",
+   "en": "(Bourdieu) the knowledge, tastes, manners, language and credentials that give a person social advantage, especially in school",
+   "ko": "문화자본",
+   "usage": "have / possess / lack cultural capital; accumulate / acquire / transmit cultural capital; cultural capital + translates into / is converted into + noun; cf. economic capital, social capital",
+   "ety": "capital (Latin caput, head → 대표 자산, 밑천) used by Pierre Bourdieu for non-economic resources; three forms: embodied, objectified, institutionalized",
+   "tip": "돈(economic capital)처럼 '쌓고, 물려주고, 바꿀 수 있는' 문화 → 학교가 보상하는 취향·말투·학벌. 짝꿉 세트: economic / social / cultural capital",
+   "text": "",
+   "source": "",
+   "ex": [
+    "Knowing which fork to use at a formal dinner is a small piece of cultural capital.",
+    "Her parents took her to museums every weekend, giving her plenty of cultural capital.",
+    "Students who lack cultural capital may struggle to read the unspoken rules of a classroom.",
+    "Bourdieu argued that schools reward cultural capital while presenting the result as individual merit.",
+    "A standard accent can function as cultural capital, while a stigmatized dialect is treated as a deficit."
+   ],
+   "date": "2026-11-12"
+  },
+  {
+   "status": "new",
+   "cat": "7. Power & social justice",
+   "sub": "7-1 Exclusion & power relations",
+   "word": "marginalize",
+   "en": "to push a person or group to the edge of a society or conversation, treating them as unimportant or powerless",
+   "ko": "주변화하다, 소외시키다, 변두리로 밀어내다",
+   "usage": "marginalize + group / voices; marginalized communities / students; be marginalized by / within + institution",
+   "ety": "Latin margo (edge, border); cf. margin, marginal",
+   "tip": "Picture the margin of a page: what's pushed there is outside the main text. ⚠ Often passive/adjective: marginalized groups.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "Curricula that ignore immigrant histories marginalize students from those communities."
+   ],
+   "date": "2026-11-06"
+  },
+  {
+   "status": "new",
+   "cat": "7. Power & social justice",
+   "sub": "7-1 Exclusion & power relations",
+   "word": "purge / purgation",
+   "en": "(v.) to get rid of unwanted people or things; to cleanse someone of a bad feeling or impurity. (n.) a sudden removal of opponents from an organization",
+   "ko": "숙청(하다), 제거하다, 없애다, (마음을) 정화하다 / purgation: 정화, 배설",
+   "usage": "purge A of B (cleanse A by removing B); purge B from A; purge oneself of guilt/fear; a political purge; purgation of emotions (Aristotle's catharsis)",
+   "ety": "Latin purgare 'to make clean' (purus 'pure' + agere 'to make'). Related: pure, purify, purgatory (연옥)",
+   "tip": "purge = make PURE: clear out what's 'dirty' or unwanted. Purgatory is where souls get cleaned. Note the two directions: purge the party OF dissenters = purge dissenters FROM the party",
+   "text": "",
+   "source": "",
+   "ex": [
+    "I purged my closet of clothes I haven't worn in years.",
+    "She tried to purge the memory from her mind, but it kept coming back.",
+    "The new leader purged the party of anyone who disagreed with him.",
+    "Some readers interpret Aristotle's catharsis as a purgation of pity and fear.",
+    "Attempts to purge classrooms of all offensive language may leave students unprepared to respond to hate speech."
+   ],
+   "date": "2026-11-14"
+  },
+  {
+   "status": "new",
+   "cat": "7. Power & social justice",
+   "sub": "7-1 Exclusion & power relations",
+   "word": "subordinate / subordination",
+   "en": "adj. lower in rank or importance; n. a person under another's authority; v. to place under control or treat as less important",
+   "ko": "adj. 하위의, 종속된; n. 부하; v. 종속시키다, (~보다) 뒤로 두다; subordination = 종속, 예속",
+   "usage": "be subordinate to + noun; subordinate X to Y; one's subordinates; the subordination of + group; speech that subordinates (Langton). Pronunciation: adj./n. -nət, v. -neɪt",
+   "ety": "Latin sub- (under) + ordinare (to arrange, put in order), from ordo (order, rank); cf. order, ordinary, coordinate, insubordinate",
+   "tip": "sub- = under, ordin = order/rank → put someone in a lower slot of the ranking. coordinate = place side by side in the same rank; insubordinate = refusing the lower slot (반항하는).",
+   "text": "",
+   "source": "",
+   "ex": [
+    "The manager treats her subordinates with respect.",
+    "In the army, a lieutenant is subordinate to a captain.",
+    "She subordinated her own career to her children's needs for years.",
+    "A curriculum that subordinates students' voices to standardized test scores teaches them that their thinking matters less.",
+    "Langton argues that hate speech does not merely express contempt; it subordinates its targets by ranking them as inferior."
+   ],
+   "date": "2026-11-12"
+  },
+  {
+   "status": "new",
+   "cat": "7. Power & social justice",
+   "sub": "7-1 Exclusion & power relations",
+   "word": "symmetrical / asymmetrical",
+   "en": "symmetrical: balanced, equal on both sides; asymmetrical: unequal or unbalanced, especially in power or position",
+   "ko": "대칭적인 / 비대칭적인 (힘·관계가 불균형한)",
+   "usage": "asymmetrical power relations; an asymmetry of power / between X and Y; the relationship is asymmetrical",
+   "ety": "Greek a- (not) + syn- (together) + metron (measure); cf. meter, geometry",
+   "tip": "sym-metry = same measure on both sides. A-symmetry: one side weighs more. In critical theory it almost always means power imbalance.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "A slur from a teacher to a student wounds differently because the relationship is asymmetrical."
+   ],
+   "date": "2026-11-06"
+  },
+  {
+   "status": "new",
+   "cat": "7. Power & social justice",
+   "sub": "7-2 Action & change",
+   "word": "activism",
+   "en": "organized action to bring about social or political change",
+   "ko": "(사회·정치) 운동, 행동주의",
+   "usage": "engage in activism; student / grassroots / anti-racist activism; scholar-activist; activism and scholarship",
+   "ety": "Latin agere / actus (to do, act); cf. action, agent, active",
+   "tip": "Activism = action aimed at change, not just study. ⚠ activist research = scholarship tied to that goal.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "Some philosophers worry that activism compromises the neutrality of scholarship."
+   ],
+   "date": "2026-11-06"
+  },
+  {
+   "status": "new",
+   "cat": "7. Power & social justice",
+   "sub": "7-2 Action & change",
+   "word": "cause (n., 대의)",
+   "en": "a principle, aim, or movement that people support and work for (not 'reason' here)",
+   "ko": "대의, (지지하는) 목표·운동",
+   "usage": "advance / further / promote a cause; support / champion / fight for / take up a cause; the cause of X (the cause of children's rights); a good cause; a lost cause; political causes",
+   "ety": "Latin causa: 1) reason → cause (원인), because; 2) lawsuit, case in court → the side you plead for → a principle you fight for; cf. excuse, accuse",
+   "tip": "From the courtroom: you plead someone's cause = take their side. Today's 'cause' = the side you push forward. Tell them apart: cause OF + result = 원인; ADVANCE / SUPPORT + cause = 대의.",
+   "text": "\"Conspiracy Theories are part of a conspiracy to advance right-wing political causes.\" / \"to advance the cause of right-wing anti-Semitism\"",
+   "source": "Cassam, Conspiracy Theories, Ch. 1, pp. 7, 9",
+   "ex": [
+    "She has devoted her life to the cause of children's rights.",
+    "The concert raised money for a good cause.",
+    "Trying to change his mind is a lost cause.",
+    "Many students joined the cause after the protest.",
+    "Hate speech is often defended in the name of free speech, even when it advances causes that silence others."
+   ],
+   "date": "2026-11-10"
+  },
+  {
+   "status": "new",
+   "cat": "7. Power & social justice",
+   "sub": "7-3 Conflict & discord",
+   "word": "gulf",
+   "en": "(n.) a wide gap or difference between people, groups, or ideas; (literal) a large bay of sea",
+   "ko": "(생각·입장 사이의) 큰 격차, 간극, 단절; 만(灣)",
+   "usage": "a gulf between A and B; a widening/growing gulf; bridge the gulf (간극을 잇다/메우다); a gulf separates A from B; the Gulf of Mexico",
+   "ety": "Greek kolpos 'bosom, bay' → Italian golfo → French golfe. Related: engulf (삼키다, 휩쓸다)",
+   "tip": "Picture the Gulf of Mexico: a huge stretch of water between two shores → a gulf between two people is a wide space they can't easily cross. Stronger than 'gap'; close to 'chasm', 'divide'",
+   "text": "",
+   "source": "",
+   "ex": [
+    "There's a wide gulf between what he says and what he does.",
+    "After the argument, a gulf opened up between the two sisters.",
+    "The gulf between rich and poor neighborhoods keeps widening.",
+    "Good teachers try to bridge the gulf between theory and classroom practice.",
+    "Austin's distinction exposes a gulf between what a speaker means and what a word does to its target."
+   ],
+   "date": "2026-11-14"
+  },
+  {
+   "status": "new",
+   "cat": "7. Power & social justice",
+   "sub": "7-3 Conflict & discord",
+   "word": "strife",
+   "en": "bitter, ongoing conflict or struggle between people or groups; discord, often with a sense of unrest that runs deep",
+   "ko": "갈등, 분쟁, 다투임, 불화",
+   "usage": "civil / social / political / ethnic / religious strife; internal strife; marital / family strife; be torn apart / riven by strife; a source of strife; stir up / sow strife; a time of strife",
+   "ety": "Old French estrif (quarrel, dispute) from estriver (to strive); related to Germanic roots; cf. strive",
+   "tip": "strife = what you get when people strive against each other: strive (verb) → strife (noun). Broader and more literary than 'fight'; it names the lasting state of conflict, not a single quarrel.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "Years of civil strife drove thousands of families to leave the country.",
+    "Money was a constant source of strife in their marriage.",
+    "The new policy stirred up strife among the teachers.",
+    "The school, torn by racial strife, struggled to teach students to listen to one another.",
+    "Hobbes pictured life without a sovereign as a state of constant strife, a 'war of all against all'."
+   ],
+   "date": "2026-11-07"
+  },
+  {
+   "status": "new",
+   "cat": "7. Power & social justice",
+   "sub": "7-4 Resistance & defiance",
+   "word": "defiance / defy / defiant",
+   "en": "n. open, bold refusal to obey or respect authority, a rule, or an opponent; v. defy = to openly resist; also to resist explanation (defy description / logic / the odds)",
+   "ko": "n. (공공연한) 반항, 저항, 도전 / v. 거역하다, 맞서다; (설명·예상 등을) 무색하게 하다",
+   "usage": "in defiance of + law / order / rules; an act / gesture of defiance; open / quiet defiance; defy authority / the odds / description; defiant (adj.), defiantly (adv.) ⚠ vs. resistance: defiance is open and bold, often provocative; resistance can be quiet or structural",
+   "ety": "Old French defier (to challenge, renounce allegiance), from de- (away, un-) + fier (to trust), Latin fidus (faithful); cf. fidelity, confide, fiancé",
+   "tip": "de + fi(des) = un-faith: you withdraw your loyalty and openly say \"No.\" Same 'fi' as fidelity (faithfulness), so defiance is the opposite of obedient fidelity.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "The toddler shook her head in defiance when told to go to bed.",
+    "He kept smoking on the balcony in open defiance of the building rules.",
+    "Wearing black to the ceremony was a small act of defiance.",
+    "Rosa Parks's refusal to give up her seat became a lasting symbol of defiance against segregation laws.",
+    "Reclaiming a slur can be read as an act of defiance: the targeted group turns the wounding word against the authority that coined it."
+   ],
+   "date": "2026-11-09"
+  },
+  {
+   "status": "new",
+   "cat": "7. Power & social justice",
+   "sub": "7-5 Manipulation & propaganda",
+   "word": "propaganda / propagandist / propagate",
+   "en": "information, often biased or misleading, spread to shape people's beliefs and actions in favor of a political cause",
+   "ko": "(정치적) 선전 / 선전가 / 전파하다",
+   "usage": "political / wartime / state / hate propaganda; a piece of propaganda; spread / produce / peddle propaganda; dismiss X as propaganda; sincere / unwitting propaganda (Stanley, Cassam)",
+   "ety": "Latin propagare (to spread, multiply); from Congregatio de Propaganda Fide (1622, Catholic body 'for spreading the faith'); turned negative after WWI and WWII; cf. propagate",
+   "tip": "Originally just 'spreading the faith' (neutral). Today: spreading beliefs to steer people, bypassing their judgment. ⚠ persuasion = giving reasons (neutral or good); propaganda = manipulating for a political end; indoctrination = in the guise of education.",
+   "text": "\"Conspiracy Theories are first and foremost forms of political propaganda.\"",
+   "source": "Cassam, Conspiracy Theories, Ch. 1, pp. 7, 10–12",
+   "ex": [
+    "The poster was wartime propaganda urging citizens to hate the enemy.",
+    "The state-run TV channel broadcasts government propaganda every night.",
+    "Critics dismissed the documentary as pure propaganda.",
+    "Social media bots spread propaganda faster than fact-checkers can respond.",
+    "Hate propaganda often works by portraying a minority group as a threat to \"us.\""
+   ],
+   "date": "2026-11-10"
+  },
+  {
+   "status": "new",
+   "cat": "8. Character & attitudes",
+   "sub": "8-1 Firmness & resolve",
+   "word": "resoluteness",
+   "en": "firm determination; the quality of having decided and holding to it without wavering",
+   "ko": "단호함, 결연함, 결의",
+   "usage": "act / face X with resoluteness; resoluteness in the face of + difficulty; be resolute in doing / in one's commitment; resolutely refuse / defend",
+   "ety": "Latin resolvere (to loosen, settle), re- + solvere (to untie); cf. resolve, resolution, solve",
+   "tip": "Once a question is resolved (settled), you stop wavering. ⚠ In Heidegger, resoluteness (Entschlossenheit) is a technical term: owning one's situation and choices authentically.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "After the setback, she faced the next round of interviews with quiet resoluteness.",
+    "His resoluteness in refusing the bribe earned him the town's respect.",
+    "The coach admired the team's resoluteness in the face of a brutal schedule.",
+    "Teachers who interrupt a slur in class need resoluteness, not just good intentions.",
+    "In Heidegger, resoluteness (Entschlossenheit) means owning one's situation and choices authentically."
+   ],
+   "date": "2026-11-07"
+  },
+  {
+   "status": "new",
+   "cat": "8. Character & attitudes",
+   "sub": "8-1 Firmness & resolve",
+   "word": "tenacious / tenaciously",
+   "en": "holding on firmly and persistently, refusing to let go or give up",
+   "ko": "끈질기게, 집요하게, 굳건하게",
+   "usage": "cling / hold on / defend + tenaciously; a tenacious belief / myth / stereotype; tenacity (n.); with tenacity",
+   "ety": "Latin tenere (to hold); cf. tenant, tenet, retain, maintain",
+   "tip": "Same root as tenant (one who holds a place) and tenet (a belief one holds): tenacious = keeps holding. ⚠ Can be praise (a tenacious researcher) or negative (a stereotype that persists tenaciously).",
+   "text": "",
+   "source": "",
+   "ex": [
+    "Stereotypes embedded in slurs persist tenaciously even after the words themselves fall out of use."
+   ],
+   "date": "2026-11-07"
+  },
+  {
+   "status": "new",
+   "cat": "8. Character & attitudes",
+   "sub": "8-2 Individual & peculiar",
+   "word": "eccentricity",
+   "en": "1) unusual, odd behavior or habits that depart from what is conventional (usually harmless, even charming); 2) an odd habit itself (countable: eccentricities); 3) (math/astronomy) how far an orbit or curve departs from a perfect circle",
+   "ko": "1) 별남, 기이함, 괴짜 기질; 2) 기벽, 별난 버릇; 3) (수학·천문) 이심률",
+   "usage": "the eccentricity of + person / style; an eccentricity (= one odd habit); harmless / charming eccentricities; tolerate / indulge someone's eccentricities; eccentric (adj./n.): an eccentric professor; eccentrically",
+   "ety": "Greek ek- (out of) + kentron (center; originally the sharp point of a compass); cf. center, concentric, egocentric, ethnocentric",
+   "tip": "ec-centric = off-center: someone whose life doesn't circle the usual center. ⚠ vs. idiosyncratic: idiosyncratic = peculiar to one person (often about a view or style); eccentric = noticeably odd behavior, usually harmless. vs. eccentricity as orbit term = how off-center an orbit is.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "His only eccentricity was wearing a bow tie to the gym.",
+    "The town tolerated the old painter's eccentricities: the purple house, the parrot on his shoulder.",
+    "Earth's orbit has low eccentricity, so it is close to a circle.",
+    "What one culture calls eccentricity, another may see as perfectly ordinary behavior.",
+    "Mill defended eccentricity as a safeguard against the 'tyranny of the majority' in On Liberty."
+   ],
+   "date": "2026-11-07"
+  },
+  {
+   "status": "new",
+   "cat": "8. Character & attitudes",
+   "sub": "8-2 Individual & peculiar",
+   "word": "idiosyncratic",
+   "en": "peculiar to one individual; unusual and personal rather than shared or standard",
+   "ko": "개인 특유의, 별난, 독특한",
+   "usage": "an idiosyncratic reading / style / view / use of a term; idiosyncrasy (n.); highly idiosyncratic",
+   "ety": "Greek idios (one's own, private) + syn- (together) + krasis (mixture); cf. idiom, idiot (orig. 'private person')",
+   "tip": "idio- = one's own (idiom = a language's own expression). Your own personal mix. ⚠ In academic writing it can be mildly critical: 'not generalizable, just this author's quirk.'",
+   "text": "",
+   "source": "",
+   "ex": [
+    "He has an idiosyncratic way of organizing his books: he sorts them by color rather than by author.",
+    "Her handwriting is so idiosyncratic that only her close friends can read it.",
+    "The film's idiosyncratic style, with long silences and odd camera angles, isn't for everyone.",
+    "Rawls uses 'justice' in a fairly standard way, but Derrida's use of the term is highly idiosyncratic.",
+    "The reviewer called the author's reading of Austin idiosyncratic: it reflects the author's own take and wouldn't be widely accepted."
+   ],
+   "date": "2026-11-07"
+  },
+  {
+   "status": "new",
+   "cat": "8. Character & attitudes",
+   "sub": "8-3 Cleverness & invention",
+   "word": "ingenious",
+   "en": "(of a person, idea, or device) clever, original, and inventive",
+   "ko": "기발한, 독창적인, 재간 있는",
+   "usage": "an ingenious solution / argument / device / way of doing X; ingenuity (n.); ingeniously argue / combine",
+   "ety": "Latin ingenium (natural talent, inborn cleverness), in- + gignere (to beget); cf. engine, engineer, genius",
+   "tip": "Same root as engine / engineer: an ingenious idea is one an engineer would admire. ⚠ ingenuous = naive, innocent (in-genuous = genuine, no tricks).",
+   "text": "",
+   "source": "",
+   "ex": [
+    "Langton offers an ingenious way to apply Austin's speech act theory to pornography."
+   ],
+   "date": "2026-11-07"
+  },
+  {
+   "status": "new",
+   "cat": "8. Character & attitudes",
+   "sub": "8-4 Shyness & boldness",
+   "word": "shrinking violet",
+   "en": "(idiom) a very shy, timid person who avoids attention",
+   "ko": "수줍음 많은 사람, 나서지 않는 사람",
+   "usage": "mostly negative: not exactly / hardly / no shrinking violet (= bold, outspoken); be a shrinking violet",
+   "ety": "shrink (to draw back, cower) + violet (a small flower growing low, half-hidden in grass); idiom from the early 19th century",
+   "tip": "A tiny violet hiding low in the grass and pulling back from view. Usually ironic: 'not exactly a shrinking violet' = loud, pushy, unafraid.",
+   "text": "\"perhaps it's worth remembering that they aren't exactly shrinking violets. They are vociferous defenders of their theories\"",
+   "source": "Cassam, Conspiracy Theories, Ch. 1, p. 2",
+   "ex": [
+    "My little sister is no shrinking violet; she'll talk to anyone.",
+    "He was a shrinking violet at parties but confident in the lab.",
+    "You can't be a shrinking violet if you want to sell your ideas to investors.",
+    "At the faculty meeting, she was hardly a shrinking violet; she challenged the dean twice.",
+    "Critics of the policy are not exactly shrinking violets; they have filled the comment section with angry replies."
+   ],
+   "date": "2026-11-10"
+  },
+  {
+   "status": "new",
+   "cat": "8. Character & attitudes",
+   "sub": "8-5 Foolishness & mockery",
+   "word": "buffoon / buffoonery",
+   "en": "a ridiculous fool; a clown who makes people laugh, often unintentionally",
+   "ko": "어릿광대, 바보 같은 사람 / 얼간이 짓",
+   "usage": "act like / play the buffoon; dismiss someone as a buffoon; a pompous buffoon; political buffoonery",
+   "ety": "Italian buffone (jester), from buffa (joke, puff of the cheeks); cf. opera buffa (comic opera), buffo",
+   "tip": "Buffoon makes buffa (jokes): picture a clown in a comic opera. Fetzer calls Cassam a 'bona fide anti-conspiracy buffoon' = a genuine clown who blindly opposes conspiracy theories.",
+   "text": "\"described ... as a 'bona fide anti-conspiracy buffoon'\"",
+   "source": "Cassam, Conspiracy Theories, Ch. 1, p. 2",
+   "ex": [
+    "He acted like a buffoon at the wedding and embarrassed everyone.",
+    "The cartoon shows the king as a pompous buffoon.",
+    "Stop playing the buffoon and take this seriously.",
+    "Critics dismissed the politician as a buffoon, but he won anyway.",
+    "Calling an opponent a buffoon is an ad hominem move: it mocks the person instead of answering the argument."
+   ],
+   "date": "2026-11-10"
+  },
+  {
+   "status": "new",
+   "cat": "8. Character & attitudes",
+   "sub": "8-6 Shameless & brazen",
+   "word": "blatant / blatantly",
+   "en": "done openly and obviously, without trying to hide it (usually about something bad)",
+   "ko": "노골적인, 뻔뻔한, 숨길 생각도 없는",
+   "usage": "a blatant lie / disregard / foul / violation / discrimination; a blatant example / piece of X; blatantly false / obvious; opp. subtle, covert",
+   "ety": "Coined by Edmund Spenser (1596) for the noisy 'Blatant Beast'; possibly from Latin blatire (to babble)",
+   "tip": "A loud, in-your-face beast: the wrongdoing isn't hidden, it's shouting at you. ⚠ blatant (shameless, not even trying to hide) vs. flagrant (obvious and serious, often a rule-breaking).",
+   "text": "\"the Sandy Hook conspiracy theory is a blatant piece of political propaganda\" / \"a blatant example of fake news\"",
+   "source": "Cassam, Conspiracy Theories, Ch. 1, pp. 8, 16",
+   "ex": [
+    "That's a blatant lie; I saw you take the cookie.",
+    "The referee ignored a blatant foul right in front of him.",
+    "The company showed a blatant disregard for worker safety.",
+    "The essay was rejected for blatant plagiarism.",
+    "Some slurs are blatant, while other forms of hate speech work through subtle, coded language."
+   ],
+   "date": "2026-11-10"
+  },
+  {
+   "status": "new",
+   "cat": "8. Character & attitudes",
+   "sub": "8-7 Evil & cruelty",
+   "word": "fiendish / fiendishly / fiend",
+   "en": "extremely cruel or wicked; cleverly evil (of a plan); (informal) very difficult or clever",
+   "ko": "악마 같은, 극악무도한; 교활하고 사악한; (구어) 엄청나게 어려운",
+   "usage": "a fiendish plot / scheme / plan / trick; fiendishly difficult / clever / complex; fiend (n.) = demon, or informal 'fan, addict' (a coffee fiend)",
+   "ety": "fiend (demon) + -ish; Old English fēond (enemy); cf. German Feind (enemy)",
+   "tip": "fiend = demon → fiendish = demon-like: the cartoon villain's evil master plan. ⚠ 'fiendishly difficult' = just very hard (not evil).",
+   "text": "\"a member of a group of Jewish elders outlines a fiendish plot for world domination\"",
+   "source": "Cassam, Conspiracy Theories, Ch. 1, p. 14",
+   "ex": [
+    "The villain in the movie had a fiendish plan to poison the city's water.",
+    "The puzzle was fiendishly difficult; nobody solved it in an hour.",
+    "The prisoners were subjected to fiendish tortures.",
+    "She came up with a fiendish trick to make her brother do the dishes.",
+    "Anti-Semitic propaganda has long portrayed Jews as masterminds of a fiendish plot to control the world."
+   ],
+   "date": "2026-11-10"
+  },
+  {
+   "status": "new",
+   "cat": "8. Character & attitudes",
+   "sub": "8-8 Self-control & excess",
+   "word": "indulge / indulgence / self-indulgent",
+   "en": "to allow yourself or someone else to have or do something enjoyable, often without restraint",
+   "ko": "(욕구를) 마음껏 채우다, 탐닉하다; (남의 바람을) 너그럽게 들어주다, 응석을 받아 주다; indulgence = 탐닉, 관대, 면죄부; self-indulgent = 자기만족적인",
+   "usage": "indulge in + noun (chocolate / speculation / nostalgia); indulge + person (a child); indulge someone's wish / whim; Indulge me (for a moment); self-indulgent writing",
+   "ety": "Latin indulgere (to be kind, yield, grant); cf. indulgent, indulgence (historical: 면죄부)",
+   "tip": "indulgere = be lenient → 'just this once, go ahead.' indulgence = the medieval pardon that let sins slide. ⚠ Academic use is often critical: indulge in speculation, self-indulgent prose.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "On Fridays I indulge in a big bowl of ice cream.",
+    "Grandparents often indulge their grandchildren with sweets and toys.",
+    "Please indulge me for a moment; I want to tell you a short story.",
+    "Teachers who indulge every off-topic question may lose the thread of the lesson.",
+    "To dismiss victims' pain as \"oversensitivity\" is to indulge the speaker's comfort at the target's expense."
+   ],
+   "date": "2026-11-12"
+  },
+  {
+   "status": "new",
+   "cat": "8. Character & attitudes",
+   "sub": "8-9 Imposing & impressive",
+   "word": "formidable",
+   "en": "inspiring fear or awe because of great power, size, or ability",
+   "ko": "위압적인, 만만치 않은, 대단한",
+   "usage": "a formidable figure / opponent / critic / task / challenge / presence; formidably (adv.)",
+   "ety": "Latin formidabilis, from formido (fear, dread); cf. formidably",
+   "tip": "formido = fear. Something formidable makes you a little afraid at first, then impressed. Often a compliment: 'a formidable scholar' = impressively capable.",
+   "text": "\"Freud presents himself as such a formidable figure that it may at first be difficult to imagine him creating an atmosphere in which it is sufficiently safe for the patient...\"",
+   "source": "Lear, Love and Its Place in Nature, Ch. 2, p. 59",
+   "ex": [
+    "The mountain looked formidable from the bottom, but the trail was easier than we expected.",
+    "She's a formidable chess player; I've never beaten her.",
+    "Learning a new language as an adult is a formidable task.",
+    "Butler is a formidable critic of the view that speech simply reflects existing power.",
+    "Freud's formidable presence may have made it hard for patients to speak freely."
+   ],
+   "date": "2026-11-14"
+  },
+  {
+   "status": "new",
+   "cat": "9. Time & change",
+   "sub": "9-1 Outdated & replaced",
+   "word": "obsolete",
+   "en": "no longer used or useful because something newer has replaced it; out of date to the point of being abandoned",
+   "ko": "더 이상 쓰이지 않는, 시대에 뒤떨어진, 구식의, 폐기된",
+   "usage": "become obsolete; render / make X obsolete; be rendered obsolete by Y; obsolete technology / word / law / method / assumption; obsolescence (n.); planned obsolescence",
+   "ety": "Latin obsolescere (to fall into disuse), from ob- (away) + solere (to be accustomed); cf. insolent (originally 'unaccustomed')",
+   "tip": "ob- (away) + solere (be accustomed): no longer what people are accustomed to using. Stronger than 'outdated': obsolete means the field has moved on, not just that the thing is old.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "Floppy disks became obsolete once USB drives and cloud storage took over.",
+    "The word 'thou' is obsolete in everyday English, though you still see it in old texts.",
+    "The new software rendered our old workflow obsolete overnight.",
+    "Critics argue that standardized testing is an obsolete way to measure what students actually understand.",
+    "Calling a theory obsolete is stronger than calling it wrong: it implies that the field has simply moved on."
+   ],
+   "date": "2026-11-07"
+  },
+  {
+   "status": "new",
+   "cat": "9. Time & change",
+   "sub": "9-2 Getting worse",
+   "word": "deteriorate / deterioration",
+   "en": "to become progressively worse over time",
+   "ko": "악화되다, 나빠지다; deterioration = 악화 (↔ ameliorate 개선하다)",
+   "usage": "X deteriorates; deteriorate rapidly / steadily / sharply; deteriorate into + worse state; the deterioration of/in + noun",
+   "ety": "Latin deterior (worse), comparative form related to de- (down); cf. deteriorative; opposite: ameliorate (from melior, better)",
+   "tip": "de- = down, deterior = worse → going down step by step, getting worse and worse. Pair it with its opposite ameliorate (melior = better).",
+   "text": "",
+   "source": "",
+   "ex": [
+    "The old wooden fence has deteriorated badly over the years.",
+    "His health deteriorated quickly after the surgery.",
+    "Relations between the two countries deteriorated after the trade dispute.",
+    "Teachers warn that classroom discussion deteriorates when students feel unsafe to speak.",
+    "Repeated exposure to slurs can cause a group's sense of standing in the community to deteriorate."
+   ],
+   "date": "2026-11-12"
+  },
+  {
+   "status": "new",
+   "cat": "9. Time & change",
+   "sub": "9-3 Getting better",
+   "word": "ameliorate / amelioration",
+   "en": "to make something bad or unsatisfactory better; to lessen a problem",
+   "ko": "개선하다, (나쁜 상황을) 완화하다; amelioration = 개선, 완화 (↔ deteriorate 악화되다)",
+   "usage": "ameliorate + problem / conditions / effects / harm / suffering; ameliorate but not eliminate; efforts to ameliorate + noun; the amelioration of + noun",
+   "ety": "Latin ad- (toward) + melior (better), via French améliorer; cf. meliorism (belief that the world can be improved); opposite: deteriorate (from deterior, worse)",
+   "tip": "melior = better → a + melior = move toward better. Pair with deteriorate: deterior (worse) ↘ / melior (better) ↗. Nuance: it eases something already bad rather than removing it.",
+   "text": "",
+   "source": "",
+   "ex": [
+    "A cup of warm tea ameliorated my sore throat a little.",
+    "The city built more shelters to ameliorate conditions for the homeless in winter.",
+    "Free school meals can ameliorate, but not eliminate, the effects of poverty on learning.",
+    "Policies that only ameliorate symptoms may leave the underlying injustice untouched.",
+    "Counter-speech may ameliorate the harm of a slur, but it cannot undo the wound entirely."
+   ],
+   "date": "2026-11-12"
+  },
+  {
+   "status": "new",
+   "cat": "9. Time & change",
+   "sub": "9-3 Getting better",
+   "word": "mitigate / mitigation / mitigating",
+   "en": "to make something bad less severe, harmful, or painful",
+   "ko": "완화하다, 줄이다, 경감하다",
+   "usage": "mitigate + harm/risk/effects/damage/impact; mitigate the effects of X; mitigation strategies; mitigating circumstances (정상참작의 사유)",
+   "ety": "Latin mitis 'soft, mild' + agere 'to make' → 'make milder'. Related: (un)mitigated (an unmitigated disaster = 완전한 재앙)",
+   "tip": "mit = mild → mitigate = make the bad thing milder (it doesn't remove it). ⚠ mitigate (완화하다) vs. militate against (~에 불리하게 작용하다). Compare ameliorate (make a bad situation better)",
+   "text": "",
+   "source": "",
+   "ex": [
+    "Drinking water can help mitigate a headache.",
+    "Planting trees helps mitigate the effects of summer heat in cities.",
+    "The judge considered his young age a mitigating circumstance.",
+    "Schools adopted new policies to mitigate the risk of bullying online.",
+    "Counter-speech may mitigate, but not fully undo, the harm of a racial slur."
+   ],
+   "date": "2026-11-14"
+  },
+  {
+   "status": "new",
+   "cat": "9. Time & change",
+   "sub": "9-4 Origins & beginnings",
+   "word": "nascent",
+   "en": "just beginning to exist or develop; still in an early, not fully formed stage",
+   "ko": "발생 단계의, 초기의, 막 생겨나는",
+   "usage": "nascent + noun (a nascent movement / field / industry / democracy / idea); in its nascent stage; still nascent",
+   "ety": "Latin nasci 'to be born' → nascens 'being born'. Same root: native, nation, nature, prenatal, Renaissance ('re-birth')",
+   "tip": "nasc = born (native, Renaissance) → nascent = 'still being born,' not grown up yet. Compare primordial (맨 처음의, existing from the very start)",
+   "text": "",
+   "source": "",
+   "ex": [
+    "Our nascent friendship grew stronger after the trip.",
+    "The startup is still nascent, with only three employees.",
+    "Her nascent interest in painting turned into a lifelong hobby.",
+    "In the 1990s, the internet was a nascent technology.",
+    "Students' nascent understanding of injustice can be nurtured through careful classroom discussion."
+   ],
+   "date": "2026-11-14"
+  },
+  {
+   "status": "new",
+   "cat": "9. Time & change",
+   "sub": "9-4 Origins & beginnings",
+   "word": "primordial",
+   "en": "existing from the very beginning; most basic and fundamental",
+   "ko": "원초적인, 태초의; 근원적인",
+   "usage": "primordial + noun (soup / forest / fear / instinct / desire / unity); primordial in + noun; (philosophy) the primordial = what comes first, before anything else",
+   "ety": "Latin primordium (the very beginning) = primus (first) + ordiri (to begin, to lay the first threads of a weave); cf. primary, prime, primitive, primeval",
+   "tip": "primus (first) + ordiri (start weaving) → the very first thread of the cloth: what comes before everything else. ⚠ Spelling: pri-MORD-ial (not 'primodial'). ⚠ primordial vs. primitive: primordial = 'first / most basic' (neutral or deep); primitive = 'undeveloped, crude' (often negative).",
+   "text": "",
+   "source": "",
+   "ex": [
+    "Some scientists believe life began in a primordial soup of chemicals.",
+    "The hikers walked through a primordial forest that had never been logged.",
+    "A baby's fear of falling seems almost primordial.",
+    "For many myths, the world begins in primordial darkness and chaos.",
+    "Some philosophers treat our openness to others as primordial, prior to any social rule or contract."
+   ],
+   "date": "2026-11-12"
+  },
+  {
+   "status": "new",
+   "cat": "9. Time & change",
+   "sub": "9-5 Sudden change & disruption",
+   "word": "upheaval / upheavals",
+   "en": "a sudden, violent, or major change that disrupts a situation, society, or someone's life",
+   "ko": "격변, 대변동, 대격변, 혼란",
+   "usage": "(a) social/political/emotional upheaval; personal upheaval; cause/bring upheaval; go through/undergo an upheaval; a period/time of upheaval; upheavals in + area (upheavals in education)",
+   "ety": "up + heave 'lift with effort' → the ground literally heaved up (originally of earthquakes). Related: heave (들어 올리다, 기복)",
+   "tip": "Picture an earthquake heaving the ground UP → everything that was stable gets turned over. Stronger than 'change'; close to 'turmoil', 'disruption'",
+   "text": "",
+   "source": "",
+   "ex": [
+    "Moving to a new country was a huge upheaval for the whole family.",
+    "The kids needed time to adjust after the upheaval of changing schools.",
+    "The pandemic caused major upheavals in how people work.",
+    "Periods of political upheaval often lead to sweeping changes in school curricula.",
+    "For Freud, early emotional upheavals leave traces that shape how a person later relates to the world."
+   ],
+   "date": "2026-11-14"
+  }
+ ]
+}
