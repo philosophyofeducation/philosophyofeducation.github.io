@@ -7,7 +7,7 @@
 
   var REPO = 'philosophyofeducation/philosophyofeducation.github.io';
   var app = document.getElementById('app');
-  var D = { study: null, logs: [], posts: [], library: [] };
+  var D = { study: null, logs: [], posts: [], library: [], habits: { goals: {}, days: {} } };
   var LOGS = {};        // date -> log
   var SUBJ = {};        // slug -> name
   var logState = { mode: 'month', anchor: null };
@@ -168,7 +168,7 @@
       navCard('#studylog', 'Study Log', 'Hours by month, week, day and year, and my thoughts by subject.') +
       navCard('#library', 'Library', 'The books and papers I am reading, shelved and annotated.') +
       navCard('#blog', 'Blog', 'Longer pieces on what I read and think about.') +
-      navCard('#research', 'Research', 'Hate speech, linguistic injury, and the task of education.') +
+      navCard('#habits', 'Habits', 'Wake-up, sleep, exercise, food and fasting, day by day.') +
       '</div></section></div>';
     app.innerHTML = html;
     var items = [];
@@ -423,47 +423,107 @@
     return '<div class="cv">' + rows.map(function (r) { return '<div class="cv-row"><span class="num muted">' + r[0] + '</span><div>' + r[1] + '</div></div>'; }).join('') + '</div>';
   }
 
-  function viewResearch() {
-    var interests = ['Philosophy of education', 'Hate speech and linguistic injury', 'Speech act theory and performativity', 'Subject formation and interpellation', 'Ethics of alterity, hospitality, and recognition', 'Democratic and political education', 'Memory, silencing, and educational responses to hate in post-authoritarian societies'];
-    app.innerHTML = '<div class="view"><section style="display:grid;gap:14px"><span class="kicker">Research</span><h1>Language, power, and harm.</h1>' +
-      '<p class="lede">I study the wound of hate speech and how education can respond to it, drawing on Austin, Butler, and Derrida.</p></section>' +
-      '<section class="two"><div><div class="sec-head"><h2>Research interests</h2></div><div class="chips">' + interests.map(function (i) { return '<span class="pill">' + esc(i) + '</span>'; }).join('') + '</div>' +
-      '<div class="sec-head" style="margin-top:32px"><h2>Thesis</h2></div><p style="margin:0"><strong>The Wound of Hate Speech and Educational Response: A Philosophical Inquiry via Judith Butler</strong><br><span class="muted">M.A. thesis, Seoul National University, 2026. Advisor: Duck-Joo Kwak</span></p>' +
-      '<div class="chips" style="margin-top:24px">' + ['final-paper', 'post-structuralism', 'psychoanalysis', 'philosophy-of-edu'].map(function (s) { return '<a class="pill soft" href="#subject-' + s + '">' + esc(subjName(s)) + ' →</a>'; }).join('') + '</div></div>' +
-      '<div><div class="sec-head"><h2>Conference presentations</h2></div>' + cvRows([
-        ['Aug 2026', '<strong>When words wound: Linguistic injury and the task of education</strong><br><span class="muted">20th International Network of Philosophers of Education (INPE) Conference, Université du Québec à Montréal, Canada</span>'],
-        ['Aug 2026', '<strong>Commencing conversation through commensality: Openness, enjoyment, and hospitality in a divided world</strong> (round table, with H. Jeong and T. Kim)<br><span class="muted">20th INPE Conference, Montréal, Canada</span>'],
-        ['Nov 2024', '<strong>Rethinking hate speech and identity: Limits of existing discourses and the need for a new educational approach</strong><br><span class="muted">60th Anniversary International Conference, Korean Philosophy of Education Society, Sungkyunkwan University, Seoul</span>'],
-        ['Aug 2024', '<strong>How to interpret “community” for educational purposes</strong><br><span class="muted">Asian Link of Philosophy of Education (ALPE) Annual Seminar, National Chiayi University, Taiwan</span>']
-      ]) + '<div class="sec-head" style="margin-top:32px"><h2>Other presentations</h2></div>' + cvRows([
-        ['Jun 2025', '<strong>The subject in citation: Revisiting speech act theory from Austin to Derrida</strong><br><span class="muted">Graduate Seminar, Department of Education, Seoul National University</span>']
-      ]) + '</div></section></div>';
-  }
 
-  function viewAbout() {
-    app.innerHTML = '<div class="view"><section style="display:grid;gap:14px"><span class="kicker">About</span><h1>Hi, I\'m Jinny.</h1>' +
-      '<p class="lede">I\'m Hyunjin (Jinny) Kim, a PhD student in Education Policy, Organization &amp; Leadership at the University of Illinois Urbana-Champaign, advised by Rebecca M. Taylor. Before coming here, I taught elementary school in Seoul, where I used picture books and creative writing to work with children on hate speech, discrimination, and identity.</p>' +
-      '<div class="btn-row"><a class="btn primary" href="#research">Research →</a><a class="btn" href="#studylog">Study log</a><a class="btn" href="mailto:hk80@illinois.edu">hk80@illinois.edu</a></div></section>' +
-      '<section class="two"><div><div class="sec-head"><h2>Education</h2></div>' + cvRows([
-        ['2026–', '<strong>Ph.D., Education Policy, Organization &amp; Leadership</strong><br><span class="muted">University of Illinois Urbana-Champaign · Advisor: Rebecca M. Taylor</span>'],
-        ['2026', '<strong>M.A., Foundations of Education (Philosophy of Education)</strong><br><span class="muted">Seoul National University · Advisor: Duck-Joo Kwak</span>'],
-        ['2018', '<strong>B.Ed., Elementary Education</strong><br><span class="muted">Seoul National University of Education</span>']
-      ]) + '<div class="sec-head" style="margin-top:32px"><h2>University teaching</h2></div>' + cvRows([
-        ['2026', '<strong>Teaching Assistant, KOR 203: Intermediate Korean I</strong><br><span class="muted">Korean Language Program, East Asian Languages &amp; Cultures, UIUC</span>'],
-        ['2023–24', '<strong>Speaking Lab Teaching Assistant, College English I</strong><br><span class="muted">Seoul National University · 3 semesters of weekly sessions on academic speaking, argumentation, and presentation</span>']
-      ]) + '</div>' +
-      '<div><div class="sec-head"><h2>Teaching in schools</h2></div>' + cvRows([
-        ['2020–', '<strong>Elementary School Teacher</strong><br><span class="muted">Seoul Metropolitan Office of Education (on study leave since Sep 2026). Workshops with picture books and creative writing on hate speech, discrimination, and identity.</span>'],
-        ['2021, 22', '<strong>Lead Teacher, Picturebook-based Citizenship Project</strong><br><span class="muted">Seoul Metropolitan Office of Education · grades 4–6, exploring love, hate, war, and solidarity</span>'],
-        ['2018–20', '<strong>Contract Teacher and Part-Time Instructor</strong><br><span class="muted">Public elementary schools in Seoul and Gyeonggi Province</span>']
-      ]) + '<div class="sec-head" style="margin-top:32px"><h2>Service</h2></div>' + cvRows([
-        ['2019–20', '<strong>Teacher Community for Engagement on History, Democracy, and Justice</strong><br><span class="muted">Gyeonggi Provincial Office of Education · field experiences at sites of Korea\'s democratization history; forums on human rights and environmental justice</span>'],
-        ['2016', '<strong>Delegate, Global Youth Exchange Program</strong><br><span class="muted">Ministry of Gender Equality and Family &amp; National Youth Policy Institute</span>']
-      ]) + '</div></section></div>';
+  // ---------- habits ----------
+  function tmin(t) { if (!t) return null; var p = String(t).split(':'); return +p[0] * 60 + (+p[1] || 0); }
+  function tfmt(m) { if (m == null) return '–'; m = Math.round(m); var h = Math.floor(m / 60) % 24, r = m % 60, ap = h < 12 ? 'am' : 'pm'; return ((h + 11) % 12 + 1) + ':' + String(r).padStart(2, '0') + ap; }
+  function avg(a) { a = a.filter(function (v) { return v != null; }); return a.length ? a.reduce(function (x, y) { return x + y; }, 0) / a.length : null; }
+  function isWeekend(k) { var w = pd(k).getDay(); return w === 0 || w === 6; }
+  function sleepHours(e) { if (!e || !e.bed || !e.wake) return null; return ((tmin(e.wake) - tmin(e.bed) + 1440) % 1440) / 60; }
+  var HABITS = [
+    { id: 'wake', name: 'Woke up', val: function (k, e) { return e && e.wake ? tmin(e.wake) : null; }, show: tfmt,
+      met: function (v, g) { return g.wake ? v <= tmin(g.wake) : true; }, goal: function (g) { return g.wake ? 'by ' + tfmt(tmin(g.wake)) : ''; } },
+    { id: 'sleep', name: 'Slept', val: function (k, e) { return sleepHours(e); }, show: function (v) { return v == null ? '–' : v.toFixed(1) + 'h'; },
+      met: function (v, g) { return v >= (g.sleepHours || 0); }, goal: function (g) { return g.sleepHours ? g.sleepHours + 'h+' : ''; } },
+    { id: 'start', name: 'Started studying', val: function (k) { var t = (D.study.starts || {})[k]; return t ? tmin(t) : null; }, show: tfmt,
+      met: function (v, g) { return g.studyStart ? v <= tmin(g.studyStart) : true; }, goal: function (g) { return g.studyStart ? 'by ' + tfmt(tmin(g.studyStart)) + ' · from YPT' : 'from YPT'; } },
+    { id: 'exercise', name: 'Exercised', val: function (k, e) { return e && Array.isArray(e.exercise) ? e.exercise : null; }, show: function (v) { return v == null ? '–' : (v.length ? v.join(', ') : 'rest day'); },
+      met: function (v) { return v.length > 0; }, goal: function (g) { return g.exerciseDaysPerWeek ? g.exerciseDaysPerWeek + ' days a week' : ''; } },
+    { id: 'food', name: 'No processed food', val: function (k, e) { return e && typeof e.processed === 'boolean' ? e.processed : null; }, show: function (v, k) { return v == null ? '–' : (v ? (isWeekend(k) ? 'weekend treat' : 'had some') : 'clean'); },
+      met: function (v, g, k) { return !v || isWeekend(k); }, goal: function () { return 'weekdays clean, weekend treats OK'; } },
+    { id: 'fast', name: 'Fasted', val: function (k, e) { return e && e.fastHours != null ? +e.fastHours : null; }, show: function (v) { return v == null ? '–' : v + 'h'; },
+      met: function (v, g) { return v >= (g.fastHours || 0); }, goal: function (g) { return g.fastHours ? g.fastHours + 'h+' : ''; } }
+  ];
+  function habitCell(h, k) {
+    var e = D.habits.days[k], g = D.habits.goals || {}, v = h.val(k, e);
+    if (v == null) return { state: 'none', text: 'no record' };
+    return { state: h.met(v, g, k) ? 'met' : 'miss', text: h.show(v, k), v: v };
+  }
+  function timeChart(box, keys, series, opt) {
+    function draw() {
+      box.innerHTML = '';
+      var tip = document.createElement('div'); tip.className = 'tip'; box.appendChild(tip);
+      var W = Math.max(280, box.clientWidth || 600), H = W < 520 ? 210 : 250, m = { t: 14, r: 8, b: 26, l: 52 }, iw = W - m.l - m.r, ih = H - m.t - m.b;
+      var vals = []; series.forEach(function (s) { keys.forEach(function (k) { var v = s.get(k); if (v != null) vals.push(v); }); if (s.goal != null) vals.push(s.goal); });
+      var lo = Math.floor(((vals.length ? Math.min.apply(null, vals) : 360) - 30) / 60) * 60, hi = Math.ceil(((vals.length ? Math.max.apply(null, vals) : 720) + 30) / 60) * 60;
+      var span = hi - lo, step = span > 600 ? 180 : (span > 300 ? 120 : 60);
+      var y = function (v) { return m.t + (v - lo) / span * ih; };
+      var x = function (i) { return m.l + (i + 0.5) * iw / keys.length; };
+      var svg = sv('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img', 'aria-label': opt.label });
+      for (var t = lo; t <= hi; t += step) { svg.appendChild(sv('line', { x1: m.l, x2: W - m.r, y1: y(t), y2: y(t), stroke: '#e2e2e2' })); var tx = sv('text', { x: m.l - 6, y: y(t) + 4, 'text-anchor': 'end' }); tx.textContent = tfmt(t); svg.appendChild(tx); }
+      var every = Math.ceil(keys.length / 10);
+      keys.forEach(function (k, i) { if (i % every === 0 || i === keys.length - 1) { var d = pd(k), lt = sv('text', { x: x(i), y: H - 8, 'text-anchor': 'middle' }); lt.textContent = (d.getMonth() + 1) + '/' + d.getDate(); svg.appendChild(lt); } });
+      series.forEach(function (s) {
+        if (s.goal != null) svg.appendChild(sv('line', { x1: m.l, x2: W - m.r, y1: y(s.goal), y2: y(s.goal), stroke: s.color, 'stroke-width': 1.5, 'stroke-dasharray': '6 4', opacity: 0.8 }));
+        var pts = []; keys.forEach(function (k, i) { var v = s.get(k); if (v != null) pts.push([x(i), y(v), k, v]); });
+        if (pts.length > 1) svg.appendChild(sv('polyline', { points: pts.map(function (p) { return p[0] + ',' + p[1]; }).join(' '), fill: 'none', stroke: s.color, 'stroke-width': 1.5, opacity: 0.55 }));
+        pts.forEach(function (p) {
+          var c = sv('circle', { cx: p[0], cy: p[1], r: 4.5, fill: s.color, stroke: '#fff', 'stroke-width': 1.5, tabindex: 0 });
+          var txt = s.name + ' · ' + fmtDate(p[2]) + ': ' + tfmt(p[3]); c.setAttribute('aria-label', txt);
+          function show() { tip.textContent = txt; tip.style.opacity = 1; var sc = box.clientWidth / W; tip.style.left = Math.min(Math.max(0, p[0] * sc - tip.offsetWidth / 2), box.clientWidth - tip.offsetWidth) + 'px'; tip.style.top = Math.max(0, p[1] * sc - 36) + 'px'; }
+          function hide() { tip.style.opacity = 0; }
+          c.addEventListener('mouseenter', show); c.addEventListener('focus', show); c.addEventListener('mouseleave', hide); c.addEventListener('blur', hide); c.addEventListener('touchstart', show, { passive: true });
+          svg.appendChild(c);
+        });
+      });
+      box.insertBefore(svg, tip);
+    }
+    draw(); box._redraw = draw;
+  }
+  function viewHabits() {
+    var tk = todayKey(), g = D.habits.goals || {}, N = 28, keys = [];
+    for (var i = N - 1; i >= 0; i--) keys.push(key(addDays(pd(tk), -i)));
+    var wkKeys = []; for (var d = monday(pd(tk)); key(d) <= tk; d = addDays(d, 1)) wkKeys.push(key(d));
+    function weekVals(id) { var h = HABITS.find(function (x) { return x.id === id; }); return wkKeys.map(function (k) { return h.val(k, D.habits.days[k]); }); }
+    var exDays = weekVals('exercise').filter(function (v) { return v && v.length; }).length;
+    var foodRec = wkKeys.filter(function (k) { return habitCell(HABITS[4], k).state !== 'none'; });
+    var clean = foodRec.filter(function (k) { return habitCell(HABITS[4], k).state === 'met'; }).length;
+    var aFast = avg(weekVals('fast')), aSleep = avg(weekVals('sleep'));
+    // streak: consecutive recorded days ending today/yesterday where every recorded habit was met
+    var owner = isOwner(), any = Object.keys(D.habits.days || {}).length;
+    function tile(label, value, sub, hl) { return '<div class="tile' + (hl ? ' hl' : '') + '"><span class="label">' + label + '</span><span class="value">' + value + '</span><span class="sub">' + sub + '</span></div>'; }
+    var html = '<div class="view"><section style="display:grid;gap:14px"><span class="kicker">Habits</span><h1>Small things, every day.</h1>' +
+      '<div class="legend"><span><i style="background:#e1ad01"></i>On target</span><span><i style="background:#fff;border:1.5px solid #111"></i>Recorded, off target</span><span><i style="background:#ececec"></i>No record</span></div>' +
+      (owner ? '<div class="btn-row"><a class="btn accent" href="https://github.com/' + REPO + '/edit/main/data/habits.json" target="_blank" rel="noopener">✎ Edit habits</a></div>' : '') + '</section>' +
+      '<section><div class="sec-head"><h2>This week</h2><span class="muted">since Monday</span></div><div class="tiles">' +
+      tile('Avg wake-up', tfmt(avg(weekVals('wake'))), g.wake ? 'goal: by ' + tfmt(tmin(g.wake)) : '') +
+      tile('Avg sleep', aSleep == null ? '–' : aSleep.toFixed(1) + 'h', g.sleepHours ? 'goal: ' + g.sleepHours + 'h+' : '') +
+      tile('Avg study start', tfmt(avg(weekVals('start'))), (g.studyStart ? 'goal: by ' + tfmt(tmin(g.studyStart)) + ' · ' : '') + 'from YPT') +
+      tile('Exercise days', exDays + ' / ' + (g.exerciseDaysPerWeek || 7), 'this week', exDays >= (g.exerciseDaysPerWeek || 99)) +
+      tile('Clean-eating days', foodRec.length ? clean + ' / ' + foodRec.length : '–', 'days recorded, weekend treats OK') +
+      tile('Avg fasting', aFast == null ? '–' : aFast.toFixed(1) + 'h', g.fastHours ? 'goal: ' + g.fastHours + 'h+' : '') +
+      '</div></section>' +
+      '<section><div class="sec-head"><h2>The last 4 weeks</h2><span class="muted">hover a square for the details</span></div>' +
+      '<div class="hgrid-wrap"><table class="hgrid"><thead><tr><th></th>' + keys.map(function (k) { var d = pd(k); return '<th class="' + (k === tk ? 'today' : '') + (d.getDay() === 1 ? ' mon' : '') + '" title="' + esc(fmtDate(k)) + '"><span>' + (d.getDay() === 1 ? (d.getMonth() + 1) + '/' + d.getDate() : '') + '</span></th>'; }).join('') + '</tr></thead><tbody>' +
+      HABITS.map(function (h) {
+        return '<tr><th scope="row"><span class="hn">' + esc(h.name) + '</span><span class="hg">' + esc(h.goal(g)) + '</span></th>' + keys.map(function (k) {
+          var c = habitCell(h, k), lab = h.name + ' · ' + fmtDate(k) + ': ' + c.text;
+          return '<td><span class="hc ' + c.state + (pd(k).getDay() === 1 ? ' mon' : '') + '" title="' + esc(lab) + '" aria-label="' + esc(lab) + '" tabindex="0"></span></td>';
+        }).join('') + '</tr>';
+      }).join('') + '</tbody></table></div>' +
+      (any ? '' : '<p class="muted" style="margin-top:14px">Daily entries start now. Study start already comes in from my YPT timer.</p>') + '</section>' +
+      '<section class="two"><div><div class="sec-head"><h2>Mornings</h2><span class="legend"><span><i style="background:#111"></i>Woke up</span><span><i style="background:#e1ad01"></i>Started studying</span></span></div><div class="chart" id="h-morning"></div></div>' +
+      '<div><div class="sec-head"><h2>Fasting</h2><span class="muted">hours between last and first meal</span></div><div class="chart" id="h-fast"></div></div></section></div>';
+    app.innerHTML = html;
+    timeChart(document.getElementById('h-morning'), keys, [
+      { name: 'Woke up', color: '#111', get: function (k) { return HABITS[0].val(k, D.habits.days[k]); }, goal: g.wake ? tmin(g.wake) : null },
+      { name: 'Started studying', color: '#e1ad01', get: function (k) { return HABITS[2].val(k); }, goal: g.studyStart ? tmin(g.studyStart) : null }
+    ], { label: 'Wake-up and study start times, last 4 weeks' });
+    barChart(document.getElementById('h-fast'), keys.map(function (k) { var v = HABITS[5].val(k, D.habits.days[k]), d = pd(k); return { label: (d.getMonth() + 1) + '/' + d.getDate(), value: v == null ? 0 : v * 60, tip: fmtDate(k) + ': ' + (v == null ? 'no record' : v + 'h') }; }), { goal: g.fastHours ? g.fastHours * 60 : 0, label: 'Fasting hours, last 4 weeks' });
   }
 
   // ---------- router ----------
-  var routes = { home: viewHome, studylog: viewStudyLog, library: viewLibrary, blog: viewBlog, research: viewResearch, about: viewAbout };
+  var routes = { home: viewHome, studylog: viewStudyLog, library: viewLibrary, habits: viewHabits, blog: viewBlog };
   function render() {
     var h = (location.hash || '#home').slice(1);
     if (h === 'owner') { try { localStorage.setItem('owner', '1'); } catch (e) {} location.replace('#home'); return; }
@@ -483,14 +543,14 @@
     var bar = document.getElementById('owner-bar');
     if (!isOwner()) { bar.innerHTML = ''; return; }
     var tk = todayKey();
-    bar.innerHTML = '<div class="owner-bar"><div class="shell"><strong>Owner mode</strong><a href="' + ghNew('logs', tk + '.md', logTemplate(tk)) + '" target="_blank" rel="noopener">Write today\'s log ↗</a><a href="' + ghNew('posts', tk + '-new-post.md', postTemplate(tk)) + '" target="_blank" rel="noopener">Write a post ↗</a><a href="https://github.com/' + REPO + '" target="_blank" rel="noopener">Repository ↗</a><a href="#guest">Leave owner mode</a></div></div>';
+    bar.innerHTML = '<div class="owner-bar"><div class="shell"><strong>Owner mode</strong><a href="' + ghNew('logs', tk + '.md', logTemplate(tk)) + '" target="_blank" rel="noopener">Write today\'s log ↗</a><a href="' + ghNew('posts', tk + '-new-post.md', postTemplate(tk)) + '" target="_blank" rel="noopener">Write a post ↗</a><a href="https://github.com/' + REPO + '/edit/main/data/habits.json" target="_blank" rel="noopener">Edit habits ↗</a><a href="https://github.com/' + REPO + '" target="_blank" rel="noopener">Repository ↗</a><a href="#guest">Leave owner mode</a></div></div>';
   }
   window.addEventListener('hashchange', function () { render(); window.scrollTo(0, 0); });
 
   function getJSON(p) { return fetch(p, { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw new Error(p); return r.json(); }); }
-  Promise.all([getJSON('data/study.json'), getJSON('logs/index.json').catch(function () { return []; }), getJSON('posts/index.json').catch(function () { return []; }), getJSON('data/library.json').catch(function () { return { items: [] }; })])
+  Promise.all([getJSON('data/study.json'), getJSON('logs/index.json').catch(function () { return []; }), getJSON('posts/index.json').catch(function () { return []; }), getJSON('data/library.json').catch(function () { return { items: [] }; }), getJSON('data/habits.json').catch(function () { return { goals: {}, days: {} }; })])
     .then(function (res) {
-      D.study = res[0]; D.logs = res[1]; D.posts = res[2]; D.library = res[3].items || [];
+      D.study = res[0]; D.logs = res[1]; D.posts = res[2]; D.library = res[3].items || []; D.habits = res[4];
       SUBJ = Object.assign({}, D.study.subjects || {});
       var byName = {}; Object.keys(SUBJ).forEach(function (k) { byName[SUBJ[k].toLowerCase()] = k; byName[k] = k; });
       D.logs.forEach(function (l) {

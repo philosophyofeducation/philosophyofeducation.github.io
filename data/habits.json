@@ -1,0 +1,11 @@
+{
+ "goals": {
+  "wake": "07:00",
+  "sleepHours": 7,
+  "studyStart": "10:00",
+  "exerciseDaysPerWeek": 4,
+  "fastHours": 12
+ },
+ "notes": "One entry per day. wake/bed: HH:MM (bed = the time you went to sleep the night before). exercise: list of what you did, [] if none. processed: true if you ate processed food or snacks. fastHours: hours between last meal and first meal. Study start comes from YPT automatically.",
+ "days": {}
+}

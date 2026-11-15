@@ -40,3 +40,13 @@ Write in Markdown here.
 
 ## Syncing study time
 `python3 scripts/ypt_to_study.py <timelines.json>` turns a YPT timeline export into `data/study.json`, mapping old YPT subject names onto the current ones.
+
+## Habits
+
+`data/habits.json` holds one entry per day, for example:
+
+```json
+"2026-11-15": { "wake": "07:10", "bed": "23:40", "exercise": ["swim"], "processed": false, "fastHours": 13 }
+```
+
+`bed` is the time I fell asleep the night before. `exercise` is `[]` on a rest day. Study start time comes from YPT (`starts` in `data/study.json`). Goals live under `goals` at the top of the file.

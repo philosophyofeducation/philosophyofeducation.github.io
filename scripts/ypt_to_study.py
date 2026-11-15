@@ -9,6 +9,9 @@ import json
 import os
 import sys
 from datetime import datetime, timezone, timedelta
+from zoneinfo import ZoneInfo
+
+LOCAL = ZoneInfo("America/Chicago")
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -50,7 +53,11 @@ def main(path):
     study_path = os.path.join(ROOT, "data", "study.json")
     study = json.load(open(study_path, encoding="utf-8"))
     days = study.get("days", {})
+    starts = study.get("starts", {})
     for day in raw["days"]:
+        first = next((t for t in day.get("timeline", []) if t.get("type") == "study" and (t.get("duration_min") or 0) > 0), None)
+        if first:
+            starts[day["date"]] = datetime.fromisoformat(first["start_at"]).astimezone(LOCAL).strftime("%H:%M")
         by = {}
         if day.get("subjects"):
             for s in day["subjects"]:
@@ -75,6 +82,7 @@ def main(path):
         SUBJECTS.setdefault(k, k.replace("-", " ").title())
     study["subjects"] = SUBJECTS
     study["days"] = dict(sorted(days.items()))
+    study["starts"] = dict(sorted(starts.items()))
     study["updated"] = datetime.now(timezone(timedelta(hours=-6))).isoformat(timespec="minutes")
     json.dump(study, open(study_path, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print("days:", len(study["days"]), "subjects:", sorted({s for d in days.values() for s in d}))
