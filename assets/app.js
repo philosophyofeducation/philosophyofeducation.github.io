@@ -324,34 +324,64 @@
       (books.length ? '<div class="shelf">' + books.map(function (b) {
         return '<a class="spine s-' + b.status + '" href="#book-' + esc(b.id) + '" style="height:' + spineHeight(b.title) + 'px" title="' + esc(b.title + ' · ' + b.author) + '"><span class="t">' + esc(b.title) + '</span><span class="a">' + esc(b.author.split(',')[0].split(' (')[0]) + '</span></a>';
       }).join('') + '</div>' : '<div class="empty-state">No books here.</div>') + '</section>' +
-      '<section><div class="sec-head"><h2>Papers</h2><span class="muted">' + papers.length + '</span></div>' +
+      '<section><div class="sec-head"><h2>Papers &amp; chapters</h2><span class="muted">' + papers.length + '</span></div>' +
       (papers.length ? '<div class="papers">' + papers.map(function (b) {
-        return '<a class="paper s-' + b.status + '" href="#book-' + esc(b.id) + '"><span class="band"><span>' + esc(b.year) + '</span><span>' + STATUS[b.status] + '</span></span><span class="pt">' + esc(b.title) + '</span><span class="pa">' + esc(b.author) + '</span><span class="pv">' + esc(b.venue || '') + '</span></a>';
+        return '<a class="paper s-' + b.status + '" href="#book-' + esc(b.id) + '"><span class="band"><span>' + esc(b.year) + ' · ' + esc(KIND[b.kind] || '') + '</span><span>' + STATUS[b.status] + '</span></span><span class="pt">' + esc(b.title) + '</span><span class="pa">' + esc(b.author) + '</span><span class="pv">' + esc(b.venue || '') + '</span></a>';
       }).join('') + '</div>' : '<div class="empty-state">No papers here.</div>') + '</section></div>';
     app.querySelectorAll('[data-lf]').forEach(function (b) { b.addEventListener('click', function () { libFilter = b.getAttribute('data-lf'); render(); }); });
   }
-  function listBlock(title, arr, ordered) {
-    if (!arr || !arr.length) return '';
-    var tag = ordered ? 'ol' : 'ul';
-    return '<div class="lib-block"><h3>' + esc(title) + '</h3><' + tag + '>' + arr.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</' + tag + '></div>';
-  }
+  var KIND = { book: 'Book', paper: 'Article', chapter: 'Chapter', entry: 'Encyclopedia' };
   function viewBook(id) {
     var b = D.library.find(function (x) { return x.id === id; });
     if (!b) { app.innerHTML = '<div class="empty-state">That item is not on the shelf. <a href="#library">Back to the library</a></div>'; return; }
-    var left = (b.question ? '<div class="lib-block"><h3>Question</h3><p>' + esc(b.question) + '</p></div>' : '') +
-      listBlock('Main argument', b.argument) + listBlock('Chapters', b.parts) + listBlock('Key concepts', b.concepts) + listBlock('Structure', b.structure, true) +
-      listBlock('Quotes I keep', b.quotes) + listBlock('Related readings', b.related);
-    var mine = (b.mine || []).map(function (t) { return '<p class="thought">' + esc(t) + '</p>'; }).join('') +
-      ((b.questions && b.questions.length) ? '<h3 style="margin-top:20px">Questions I have</h3>' + b.questions.map(function (t) { return '<p class="thought">' + esc(t) + '</p>'; }).join('') : '');
-    app.innerHTML = '<article class="view"><header style="display:grid;gap:12px"><a class="kicker" href="#library" style="text-decoration:none">← Library</a><h1>' + esc(b.title) + '</h1>' +
+    var ov = b.overview, H = '';
+    H += '<article class="view"><header class="note-head"><a class="kicker" href="#library" style="text-decoration:none">← Library</a>' +
+      '<span class="kicker">' + esc(KIND[b.kind] || 'Reading') + (b.part ? ' · ' + esc(b.part) : '') + '</span><h1>' + esc(b.title) + '</h1>' +
       (b.subtitle ? '<p class="lede" style="margin:0">' + esc(b.subtitle) + '</p>' : '') +
-      '<div class="chips"><span class="pill soft">' + esc(b.author) + '</span><span class="pill soft">' + esc(b.year) + '</span>' + (b.venue ? '<span class="pill soft">' + esc(b.venue) + '</span>' : '') +
-      '<span class="pill ' + (b.status === 'reading' ? 'goal' : '') + '">' + STATUS[b.status] + '</span>' + (b.dateRead ? '<span class="pill soft">read ' + esc(fmtDate(b.dateRead, true)) + '</span>' : '') +
-      (b.subject ? '<a class="pill" href="#subject-' + esc(b.subject) + '">' + esc(subjName(b.subject)) + ' →</a>' : '') + '</div>' +
-      (b.keywords ? '<div class="chips">' + b.keywords.map(function (k) { return '<span class="pill soft">' + esc(k) + '</span>'; }).join('') + '</div>' : '') +
-      (b.note ? '<p class="muted" style="margin:0">' + esc(b.note) + '</p>' : '') + '</header>' +
-      (left || mine ? '<section class="two"><div>' + (left || '<div class="empty-state">Notes will appear here as I read.</div>') + '</div><div><div class="sec-head"><h2>My thoughts</h2></div>' + (mine || '<p class="thought empty">My thoughts on this go here.</p>') + '</div></section>' : '<div class="empty-state">Not started yet. Notes will appear here as I read.</div>') +
-      '</article>';
+      '<p class="byline"><strong>' + esc(b.author) + '</strong> · ' + esc(b.year) + (b.venue ? ' · <span class="muted">' + esc(b.venue) + '</span>' : '') + '</p>' +
+      '<div class="chips"><span class="pill ' + (b.status === 'reading' ? 'goal' : '') + '">' + STATUS[b.status] + '</span>' +
+      (b.dateRead ? '<span class="pill soft">read ' + esc(fmtDate(b.dateRead, true)) + '</span>' : '') +
+      (b.subject ? '<a class="pill" href="#subject-' + esc(b.subject) + '">' + esc(subjName(b.subject)) + ' →</a>' : '') +
+      (b.keywords || []).map(function (k) { return '<span class="pill soft">' + esc(k) + '</span>'; }).join('') + '</div>' +
+      (b.note ? '<p class="muted" style="margin:0">' + esc(b.note) + '</p>' : '') +
+      (isOwner() && b.sources ? '<div class="chips">' + b.sources.map(function (s) { return '<a class="pill soft" href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.label) + ' ↗</a>'; }).join('') + '</div>' : '') + '</header>';
+    if (!ov && !b.map) {
+      H += '<div class="empty-state">On my list to read. Notes will appear here once I start.</div></article>';
+      app.innerHTML = H; window.scrollTo(0, 0); return;
+    }
+    if (ov) {
+      H += '<section class="ov">' + (ov.question ? '<div><span class="kicker">The question</span><p class="ov-q">' + esc(ov.question) + '</p></div>' : '') +
+        '<div><span class="kicker">The answer, in short</span><ol class="ov-c">' + (ov.claim || []).map(function (c) { return '<li>' + esc(c) + '</li>'; }).join('') + '</ol>' +
+        (ov.stance ? '<p class="muted" style="margin:10px 0 0">' + esc(ov.stance) + '</p>' : '') + '</div></section>';
+    }
+    var main = '';
+    if (b.map) {
+      main += '<section><div class="sec-head"><h2>Reading map</h2><span class="muted">' + b.map.length + ' parts</span></div><ol class="rmap">' + b.map.map(function (m, i) {
+        return '<li><span class="rn num">' + String(i + 1).padStart(2, '0') + '</span><div class="rb"><div class="rt"><strong>' + esc(m.title) + '</strong>' + (m.pages ? '<span class="pp num">pp. ' + esc(m.pages) + '</span>' : '') + '</div>' +
+          (m.q ? '<p class="rq">' + esc(m.q) + '</p>' : '') + (m.gist ? '<p>' + esc(m.gist) + '</p>' : '') +
+          (m.sub ? '<ul>' + m.sub.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>' : '') + '</div></li>';
+      }).join('') + '</ol></section>';
+    }
+    (b.tables || []).forEach(function (t) {
+      main += '<section><div class="sec-head"><h2>' + esc(t.title) + '</h2></div><div class="tscroll"><table class="ntable"><thead><tr>' + t.columns.map(function (c) { return '<th>' + esc(c) + '</th>'; }).join('') + '</tr></thead><tbody>' +
+        t.rows.map(function (r) { return '<tr>' + r.map(function (c, i) { return i === 0 ? '<th scope="row">' + esc(c) + '</th>' : '<td>' + esc(c) + '</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table></div>' +
+        (t.note ? '<p class="muted" style="font-size:.85rem;margin:8px 0 0">' + esc(t.note) + '</p>' : '') + '</section>';
+    });
+    if (b.concepts) {
+      main += '<section><div class="sec-head"><h2>Key concepts</h2><span class="muted">' + b.concepts.length + '</span></div><div class="concepts">' + b.concepts.map(function (c) {
+        return '<div class="concept"><dt>' + esc(c[0]) + '</dt><dd>' + esc(c[1]) + '</dd></div>';
+      }).join('') + '</div></section>';
+    }
+    if (b.quotes) {
+      main += '<section><div class="sec-head"><h2>Lines I keep</h2></div>' + b.quotes.map(function (q) { return '<blockquote class="kq">“' + esc(q.text) + '”<cite>p. ' + esc(q.page) + '</cite></blockquote>'; }).join('') + '</section>';
+    }
+    var side = '';
+    side += '<div class="sec-head"><h2>My thoughts</h2></div>' + ((b.mine && b.mine.length) ? b.mine.map(function (t) { return '<p class="thought">' + esc(t) + '</p>'; }).join('') : '<p class="thought empty">My thoughts on this go here.</p>');
+    if (b.questions && b.questions.length) side += '<h3 class="side-h">Questions I have</h3>' + b.questions.map(function (t) { return '<p class="thought q">' + esc(t) + '</p>'; }).join('');
+    if (b.related && b.related.length) side += '<h3 class="side-h">Connections</h3><ul class="side-list">' + b.related.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>';
+    if (b.next && b.next.length) side += '<h3 class="side-h">Next</h3><ul class="side-list check">' + b.next.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>';
+    H += '<div class="note-grid"><div class="note-main">' + main + '</div><aside class="note-side">' + side + '</aside></div></article>';
+    app.innerHTML = H;
     window.scrollTo(0, 0);
   }
 

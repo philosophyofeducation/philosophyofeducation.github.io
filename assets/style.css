@@ -217,3 +217,41 @@ footer .shell { display: flex; justify-content: space-between; gap: 16px; flex-w
 .lib-block ul, .lib-block ol { padding-left: 20px; }
 .lib-block li { margin: 3px 0; }
 .legend i { border: 1px solid transparent; }
+
+/* Reading note page */
+.note-head { display: grid; gap: 10px; max-width: 820px; }
+.byline { margin: 0; font-size: 1rem; }
+.ov { display: grid; grid-template-columns: 1fr 1.3fr; gap: 28px; border: 1px solid var(--ink); border-left: 6px solid var(--mustard); padding: 22px 24px; }
+.ov-q { font-family: var(--display); font-size: 1.25rem; line-height: 1.35; margin: 6px 0 0; }
+.ov-c { margin: 8px 0 0; padding-left: 20px; display: grid; gap: 6px; }
+@media (max-width: 760px) { .ov { grid-template-columns: 1fr; } }
+.note-grid { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr); gap: 40px; align-items: start; }
+.note-main { display: grid; gap: 36px; }
+.note-side { display: block; }
+@media (max-width: 900px) { .note-grid { grid-template-columns: 1fr; } .note-side { position: static; max-height: none; } }
+.side-h { font-family: var(--body); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; margin: 22px 0 6px; }
+.thought.q { position: relative; padding-left: 36px; }
+.thought.q::before { content: "?"; position: absolute; left: 12px; top: 9px; font-family: var(--mono); font-weight: 500; }
+.side-list { margin: 0; padding-left: 18px; font-size: 0.92rem; display: grid; gap: 4px; }
+.side-list.check { list-style: none; padding-left: 0; }
+.side-list.check li::before { content: "☐ "; color: var(--mute); }
+.rmap { list-style: none; margin: 0; padding: 0; display: grid; }
+.rmap > li { display: grid; grid-template-columns: 44px 1fr; gap: 14px; padding: 14px 0; border-top: 1px solid var(--rule); }
+.rmap > li:first-child { border-top: 0; padding-top: 0; }
+.rn { font-size: 0.85rem; color: var(--mute); padding-top: 2px; }
+.rt { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.pp { font-size: 0.75rem; color: var(--mute); border: 1px solid var(--rule); padding: 0 6px; }
+.rb p { margin: 4px 0 0; }
+.rq { font-family: var(--display); font-style: italic; color: var(--ink-2); }
+.rb ul { margin: 6px 0 0; padding-left: 18px; font-size: 0.93rem; color: var(--ink-2); }
+.tscroll { overflow-x: auto; }
+.ntable { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+.ntable th, .ntable td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--rule); }
+.ntable thead th { border-bottom: 2px solid var(--ink); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; }
+.ntable tbody th { font-weight: 600; min-width: 140px; }
+.concepts { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; margin: 0; }
+.concept { border: 1px solid var(--rule); border-top: 3px solid var(--ink); padding: 12px 14px; }
+.concept dt { font-family: var(--display); font-weight: 600; font-size: 1.02rem; margin-bottom: 4px; }
+.concept dd { margin: 0; font-size: 0.9rem; color: var(--ink-2); }
+.kq { margin: 0 0 12px; font-family: var(--display); font-size: 1.15rem; border-left: 3px solid var(--ink); padding: 4px 0 4px 16px; }
+.kq cite { display: block; font-family: var(--mono); font-style: normal; font-size: 0.78rem; color: var(--mute); margin-top: 4px; }

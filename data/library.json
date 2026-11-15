@@ -1,160 +1,433 @@
 {
- "source": "Reading log (Google Sheets)",
+ "source": "Reading log (Google Sheets) and reading notes (Google Docs)",
  "items": [
   {
    "id": "lear-love",
    "kind": "book",
+   "status": "reading",
+   "subject": "psychoanalysis",
    "title": "Love and Its Place in Nature",
    "subtitle": "A Philosophical Interpretation of Freudian Psychoanalysis",
    "author": "Jonathan Lear",
    "year": 1990,
-   "status": "reading",
-   "subject": "psychoanalysis",
-   "parts": [
-    "Ch. 1 Introduction (pp. 3–28)",
-    "Ch. 2 Catharsis: Fantasy and Reality (pp. 29–68)",
-    "Ch. 3 The Interpretation of Dreams (pp. 69–97)",
-    "Ch. 4 Interpretation and Transformation: The Case of Little Hans (pp. 98–119)",
-    "Ch. 5 What Is Sex? (pp. 120–155)",
-    "Ch. 6 Where It Was, There I Shall Become (pp. 156–182)",
-    "Ch. 7 Radical Evaluation (pp. 183–222)"
+   "venue": "Yale University Press",
+   "overview": {
+    "question": "What did Freud actually start, and why do we still not understand it?",
+    "claim": [
+     "Freud's revolution has three related elements: a science of subjectivity, the discovery of an archaic form of mental functioning, and love as a basic force in nature (p. 3).",
+     "Lear reads Freud the way an analyst reads a patient: working through Freud's theory to recover what his practice was actually doing."
+    ]
+   },
+   "map": [
+    {
+     "title": "Introduction",
+     "pages": "3–28",
+     "q": "What did Freud actually start, and why does Lear think we still don't understand it?",
+     "sub": [
+      "A science of subjectivity: why the detached-observer model cannot study subjectivity (3–6)",
+      "Archaic mind and interpretation: recognizing the mental in the bodily (6–12)",
+      "Love as a basic force; setting the death drive aside (12–15)",
+      "This book as a developmental interpretation of Freud (15–18)",
+      "Psychoanalysis and the individual: the 'true eccentric', the mass, relativism (18–26)",
+      "Who are we? Psychoanalysis as a history of battles in the soul (26–28)"
+     ]
+    },
+    {
+     "title": "Catharsis: Fantasy and Reality",
+     "pages": "29–68",
+     "q": "What actually cured Freud's early patients, and why did Freud's own theory misdescribe it?",
+     "sub": [
+      "Catharsis as discharge: Anna O., Elisabeth von R.; transference as a 'false connection' (29–43)",
+      "Why discharge fails: only the truth cures (43–47)",
+      "Aristotle on the emotions: an orientation to the world that claims its own rationality (47–52)",
+      "Rereading Freud's cathartic practice: Lucy R. and Elisabeth von R. (52–65)",
+      "Catharsis and responsibility: holding oneself responsible vs. accepting responsibility (65–68)"
+     ]
+    },
+    {
+     "title": "The Interpretation of Dreams",
+     "pages": "69–97",
+     "q": "What kind of mental activity is a dream, and what does it reveal about the unconscious?",
+     "sub": [
+      "Dreams as meaningful: a dream is like an action (69–75)",
+      "What is a wish? Wish vs. desire; pleasure and reality principles (75–84)",
+      "A developmental continuum: primary process as proto-conceptual (84–87)",
+      "Emotion, repression and the unconscious: infantile proto-emotions (87–97)"
+     ]
+    },
+    {
+     "title": "Interpretation and Transformation: The Case of Little Hans",
+     "pages": "98–119",
+     "q": "What is an infantile wish, and what does an interpretation do to it?",
+     "sub": [
+      "What does Hans mean by 'widdler'? Mind vs. community in meaning (98–103)",
+      "Hans's phobia and its transformation: intrapsychic transference, knowledge vs. understanding (103–119)"
+     ]
+    },
+    {
+     "title": "What Is Sex?",
+     "pages": "120–155",
+     "q": "What is the sexual drive, and why does Freud's concept of sexuality expand into love?",
+     "sub": [
+      "What is a drive? Trieb vs. Instinkt (120–125)",
+      "Identifying the sexual drive: refinding the object (125–132)",
+      "Narcissism and the emergence of the I (132–142)",
+      "Love as a force in nature: Eros, Aristophanes, a loving world (142–155)"
+     ]
+    },
+    {
+     "title": "Where It Was, There I Shall Become",
+     "pages": "156–182",
+     "q": "How does an I come into being, and what does it mean to make one's drives one's own?",
+     "sub": [
+      "Taking love seriously; the good-enough world (156–158)",
+      "Melancholia and identification: how the I is formed (158–168)",
+      "The I, the it and responsibility: Oedipus, guilt, the super-I (168–177)",
+      "Love and individuation: sublimation, interpretation as a loving response (177–182)"
+     ]
+    },
+    {
+     "title": "Radical Evaluation",
+     "pages": "183–222",
+     "q": "What follows for philosophy if the individual is a manifestation of love?",
+     "sub": [
+      "Philosophy and psychoanalysis; the good-enough world and nihilism (183–186)",
+      "The individual and freedom (186–190)",
+      "Archaic mind and the bounds of mind (190–196)",
+      "Love, the mass and the crime of individuation (196–204)",
+      "Radical evaluation: autonomy as self-validating (204–211)",
+      "Validation from within: no external perspective on love (211–222)"
+     ]
+    }
+   ],
+   "next": [
+    "Write the book's main claim in 2–3 sentences in my own words",
+    "Fill in the chapter map as I finish each chapter"
+   ],
+   "sources": [
+    {
+     "label": "Reading notes",
+     "url": "https://docs.google.com/document/d/1Ip4f35NSJUmcHtp2UA7tcjnlxy5r_91E2cDtNhwb90E/edit"
+    },
+    {
+     "label": "Worksheet",
+     "url": "https://docs.google.com/document/d/1IlllTg0Krj2iCG4n5-M4QuCxu9laosxoMaThuQdq_Fo/edit"
+    }
    ]
   },
   {
    "id": "lear-freud",
    "kind": "book",
-   "title": "Freud",
-   "author": "Jonathan Lear",
-   "year": 2005,
    "status": "reading",
    "subject": "psychoanalysis",
-   "note": "Read with my Sunday psychoanalysis group."
+   "title": "Freud",
+   "subtitle": "Second edition",
+   "author": "Jonathan Lear",
+   "year": 2015,
+   "venue": "Routledge",
+   "overview": {
+    "question": "What is psychoanalysis, if we read Freud inside the ethical tradition that asks how to live?",
+    "claim": [
+     "Psychoanalysis is an activity organized by the fundamental rule (say whatever comes to mind) that helps self-conscious thought develop.",
+     "The unconscious shows itself in the breaks that appear when we try to follow the rule, so analysis studies those breaks.",
+     "Read this way, psychoanalysis continues the account of psychic integration that ancient virtue ethics left unfinished."
+    ]
+   },
+   "map": [
+    {
+     "title": "Introduction: The peculiar conversation",
+     "gist": "Psychoanalysis develops self-conscious thought and is a path to psychic integration. The unconscious is a peculiar form of thinking, not a store of hidden wishes, so the Platonic picture of reason ruling desire rests on an inadequate anthropology."
+    },
+    {
+     "title": "1. Interpreting the unconscious",
+     "gist": "The unconscious is not a hidden 'second mind' with its own rationality but archaic mental activity, such as anxiety, that breaks the flow of thought. Interpretation is a practical skill of recognizing these forms of activity here and now."
+    },
+    {
+     "title": "2. Sex, Eros and life",
+     "gist": "Freud changes what sexuality means: a drive entangled with imagination, with no fixed object or aim, finally reconceived as Eros reaching beyond itself toward greater unity."
+    },
+    {
+     "title": "3. The interpretation of dreams",
+     "gist": "The royal road is the waking activity of interpreting dreams: the dreamer's self-interpretation, which yields practical rather than theoretical knowledge. Responsibility for dreams means making one's drives one's own, not blaming oneself for them."
+    },
+    {
+     "title": "4. Transference",
+     "gist": "Transference is not a single feeling carried onto the analyst within a stable world, but an idiosyncratic world coming into view in analysis. People can come to see their own activity in structures they had taken as an independent world."
+    },
+    {
+     "title": "5. Principles of mental functioning",
+     "gist": "The pleasure and reality principles are ethical concepts. Lear rejects the idea that repetition is the aim of compulsion: the real question is why and how the mind disrupts itself."
+    },
+    {
+     "title": "6. The structure of the psyche and the birth of 'object' relations",
+     "gist": "Freud found the mind's structure by studying distorted self-relations such as melancholia. The psyche is a psychological achievement built up through identifications, so therapy aims to change that structure. Lear leaves open whether a milder superego is freedom or a new identification with the analyst."
+    },
+    {
+     "title": "7. Morality and religion",
+     "gist": "Freud's critique is a naturalistic genealogy. It shows that people can use morality and religion for unconscious wish-fulfilment, but it is a stretch to call that their hidden meaning. Freud's own argument rests on a wish: that science and progress will tell us how to live."
+    },
+    {
+     "title": "Conclusion: Freud's legacy",
+     "gist": "Freud's legacy is a method, the fundamental rule. Psychoanalysis is a quintessential activity of reason that integrates the psyche, and our humanity is an ethical task."
+    }
+   ],
+   "quotes": [
+    {
+     "text": "We need to understand the unconscious as a peculiar form of thinking.",
+     "page": "5"
+    },
+    {
+     "text": "Our humanity ... is not a biological given, but an ethical task.",
+     "page": "214"
+    }
+   ],
+   "questions": [
+    "If Mr. R's fear is a primitive emotion that has not yet taken the structure of a propositional attitude, how can we name or interpret it in language without smuggling it back into the 'second mind' model Lear rejects? (pp. 8–9)"
+   ],
+   "sources": [
+    {
+     "label": "Full summary (Korean)",
+     "url": "https://docs.google.com/document/d/1nNuw_sptso6sTPVOJh4QeRcCEgA-eeuB4pIpga3HU1w/edit"
+    },
+    {
+     "label": "Reading questions log",
+     "url": "https://docs.google.com/document/d/1eQkTKKTGzB1qNxAWwKU6xGuTJkh4nknV7uuoQPYgev4/edit"
+    }
+   ]
   },
   {
    "id": "collins-bft",
    "kind": "book",
+   "status": "reading",
+   "dateRead": "2026-10-30",
    "title": "Black Feminist Thought",
    "subtitle": "Knowledge, Consciousness, and the Politics of Empowerment (2nd ed.)",
    "author": "Patricia Hill Collins",
    "year": 2000,
-   "status": "reading",
-   "dateRead": "2026-10-30",
-   "parts": [
-    "Ch. 11 Black Feminist Epistemology (pp. 251–271) · in progress",
-    "Ch. 4 Mammies, Matriarchs, and Other Controlling Images · to read"
+   "venue": "Routledge",
+   "part": "Ch. 11 Black Feminist Epistemology (pp. 251–271)",
+   "overview": {
+    "question": "What standards decide whose knowledge counts, and what alternative epistemology do U.S. Black women use to validate knowledge?",
+    "claim": [
+     "Knowledge validation in the U.S. is controlled by elite White men, so Black women's knowledge is excluded both institutionally and epistemologically.",
+     "Black women draw on an alternative epistemology with four dimensions: lived experience, dialogue, an ethic of caring, and an ethic of personal accountability.",
+     "Partiality, not universality, is the condition of being heard; alternative epistemologies challenge the very process that validates truth."
+    ]
+   },
+   "map": [
+    {
+     "title": "Opening: Black feminist thought as subjugated knowledge",
+     "pages": "251–252",
+     "gist": "Who produces knowledge shapes what it shows (the statue of a man defeating a lion). Collins separates epistemology, paradigms, and methodology; Black women intellectuals face two epistemologies at once."
+    },
+    {
+     "title": "Eurocentric knowledge validation and U.S. power relations",
+     "pages": "253–256",
+     "gist": "Institutions plus Eurocentric epistemologies legitimate knowledge. Exclusion is both institutional and epistemological; positivism, with its four requirements, is the illustration."
+    },
+    {
+     "title": "Lived experience as a criterion of meaning",
+     "pages": "257–260",
+     "gist": "Knowledge vs. wisdom. Those who have lived an experience are more credible than those who have only read or thought about it."
+    },
+    {
+     "title": "The use of dialogue",
+     "pages": "260–262",
+     "gist": "Claims are tested in community through call-and-response, not adversarial debate; connectedness is essential to validation."
+    },
+    {
+     "title": "The ethics of caring",
+     "pages": "262–265",
+     "gist": "Individual uniqueness, the appropriateness of emotion, and the capacity for empathy. Reason and emotion work together."
+    },
+    {
+     "title": "The ethic of personal accountability",
+     "pages": "265–266",
+     "gist": "Every idea has an owner, and assessing a claim also assesses the speaker's character, values, and ethics."
+    },
+    {
+     "title": "Black women as agents of knowledge",
+     "pages": "266–269",
+     "gist": "Black women scholars answer to three groups; outsider-within status brings both frustration and creativity. The task is to rearticulate a standpoint, not to seek universal claims."
+    },
+    {
+     "title": "Toward truth",
+     "pages": "269–271",
+     "gist": "Black feminist thought is situated, partial knowledge. Ranking oppressions resembles positivism; the most 'objective' truths come from many partial perspectives in dialogue."
+    }
    ],
-   "question": "What standards decide whose knowledge counts, and what alternative epistemology do U.S. Black women use to validate knowledge?",
-   "argument": [
-    "Knowledge validation in the U.S. is controlled by elite White men, so Black women's knowledge is excluded both institutionally and epistemologically (positivism as the example).",
-    "Black women draw on an alternative epistemology with four dimensions: lived experience, dialogue, ethic of caring, ethic of personal accountability.",
-    "Black feminist thought is partial, situated knowledge; partiality, not universality, is the condition of being heard, and alternative epistemologies challenge the process of validating truth itself."
+   "tables": [
+    {
+     "title": "Positivism vs. Black feminist epistemology",
+     "note": "A study aid: Collins does not pair these explicitly.",
+     "columns": [
+      "Positivist requirement",
+      "Black feminist epistemology"
+     ],
+     "rows": [
+      [
+       "Distance between researcher and 'object'",
+       "Lived experience as a criterion of meaning"
+      ],
+      [
+       "Adversarial debate",
+       "Use of dialogue"
+      ],
+      [
+       "Absence of emotion",
+       "Ethic of caring"
+      ],
+      [
+       "Absence of ethics and values",
+       "Ethic of personal accountability"
+      ]
+     ]
+    }
    ],
    "concepts": [
-    "subjugated knowledge: knowledge suppressed within dominant institutions",
-    "knowledge validation processes: institutions + Eurocentric epistemologies that legitimate knowledge",
-    "lived experience as a criterion of meaning: those who lived an experience are more credible (knowledge vs. wisdom)",
-    "dialogue: claims tested in community, not adversarial debate (call-and-response)",
-    "ethic of caring: individual uniqueness, emotion, empathy",
-    "ethic of personal accountability: claims assessed with the speaker's character and values",
-    "outsider-within: Black women in the academy moving between interpretive communities"
+    [
+     "subjugated knowledge",
+     "knowledge suppressed within dominant institutions"
+    ],
+    [
+     "knowledge validation processes",
+     "institutions plus Eurocentric epistemologies that legitimate knowledge"
+    ],
+    [
+     "lived experience as a criterion of meaning",
+     "those who lived an experience are more credible (knowledge vs. wisdom)"
+    ],
+    [
+     "dialogue",
+     "claims tested in community, not adversarial debate (call-and-response)"
+    ],
+    [
+     "ethic of caring",
+     "individual uniqueness, emotion, empathy"
+    ],
+    [
+     "ethic of personal accountability",
+     "claims assessed with the speaker's character and values"
+    ],
+    [
+     "outsider-within",
+     "Black women in the academy moving between interpretive communities"
+    ]
    ],
-   "structure": [
-    "Eurocentric knowledge validation & power (positivism's 4 requirements)",
-    "Lived experience",
-    "Dialogue",
-    "Ethic of caring",
-    "Ethic of personal accountability",
-    "Black women as agents of knowledge (3 groups)",
-    "Toward truth (partiality)",
-    "Method: theoretical argument + Black women's voices, literature, interviews"
+   "next": [
+    "Ch. 4 Mammies, Matriarchs, and Other Controlling Images"
+   ],
+   "sources": [
+    {
+     "label": "Ch. 11 reading notes",
+     "url": "https://docs.google.com/document/d/1Qzk1IL6lDyDlQMILsxKm_2fqNiL2_V79v9DNOIAY9y8/edit"
+    },
+    {
+     "label": "Reading log",
+     "url": "https://docs.google.com/spreadsheets/d/1UpfLjEt_ZKGi-WgO99NiNL4fV67bOek8ZObjw_qf85I/edit"
+    }
+   ]
+  },
+  {
+   "id": "cassam-ct",
+   "kind": "book",
+   "status": "reading",
+   "title": "Conspiracy Theories",
+   "author": "Quassim Cassam",
+   "year": 2019,
+   "venue": "Polity",
+   "overview": {
+    "question": "What are Conspiracy Theories really for?",
+    "claim": [
+     "Conspiracy Theories (capitalized) are best understood as political propaganda, whether or not the people who spread them sincerely believe them.",
+     "They are speculative, contrarian, esoteric, amateurish, and premodern, which makes them unlikely to be true."
+    ]
+   },
+   "map": [
+    {
+     "title": "conspiracy theories vs. Conspiracy Theories",
+     "pages": "Preface, 1–7",
+     "gist": "Why a theory about a conspiracy is not yet a Conspiracy Theory, and why Cassam starts using capital letters."
+    },
+    {
+     "title": "Conspiracy Theories as propaganda",
+     "pages": "7–15",
+     "gist": "The political function of Conspiracy Theories, explained by analogy, and why sincere belief does not stop a theory from being propaganda."
+    },
+    {
+     "title": "Speculative and contrarian",
+     "pages": "15–22",
+     "gist": "Why Operation Northwoods was a real conspiracy but not a Conspiracy Theory; two senses of 'contrarian'."
+    },
+    {
+     "title": "Esoteric, amateurish, premodern; taking stock",
+     "pages": "22–31",
+     "gist": "Three more features, then the case that Conspiracy Theories are unlikely to be true, which leads back to propaganda."
+    }
+   ],
+   "mine": [
+    "In 2015, Cassam saw conspiracy theories as a result of bad intellectual character traits. Now he understands them as political propaganda.",
+    "Fetzer defines a conspiracy as an illegal act carried out by two or more people. Cassam argues this leaves out that conspiracies are supposed to be secret, and so involve a small group of conspirators."
+   ],
+   "sources": [
+    {
+     "label": "Worksheet",
+     "url": "https://docs.google.com/document/d/1d74ba4dYxG8AWh23bwukv4pSJeXO7pBUYBED6eke5hI/edit"
+    }
    ]
   },
   {
    "id": "fricker-ei",
    "kind": "book",
+   "status": "to-read",
    "title": "Epistemic Injustice",
-   "subtitle": "Power and the Ethics of Knowing",
    "author": "Miranda Fricker",
    "year": 2007,
-   "status": "to-read",
-   "stars": 3,
-   "parts": [
-    "Ch. 1–2 Testimonial Injustice; Prejudice in the Credibility Economy"
-   ]
+   "venue": "Oxford University Press",
+   "subtitle": "Power and the Ethics of Knowing",
+   "part": "Ch. 1–2 Testimonial Injustice; Prejudice in the Credibility Economy"
   },
   {
    "id": "medina-resistance",
    "kind": "book",
+   "status": "to-read",
    "title": "The Epistemology of Resistance",
-   "subtitle": "Gender and Racial Oppression, Epistemic Injustice, and Resistant Imaginations",
    "author": "José Medina",
    "year": 2013,
-   "status": "to-read",
-   "stars": 3,
-   "parts": [
-    "Ch. 1 Active Ignorance, Epistemic Others, and Epistemic Friction"
-   ]
+   "venue": "Oxford University Press",
+   "subtitle": "Gender and Racial Oppression, Epistemic Injustice, and Resistant Imaginations",
+   "part": "Ch. 1 Active Ignorance, Epistemic Others, and Epistemic Friction"
   },
   {
    "id": "medina-protest",
    "kind": "book",
+   "status": "to-read",
    "title": "The Epistemology of Protest",
-   "subtitle": "Silencing, Epistemic Activism, and the Communicative Life of Resistance",
    "author": "José Medina",
    "year": 2023,
-   "status": "to-read",
-   "stars": 1
+   "venue": "Oxford University Press",
+   "subtitle": "Silencing, Epistemic Activism, and the Communicative Life of Resistance"
   },
   {
    "id": "handbook-ei",
    "kind": "book",
+   "status": "to-read",
    "title": "The Routledge Handbook of Epistemic Injustice",
    "author": "Ian James Kidd, José Medina, Gaile Pohlhaus Jr. (eds.)",
    "year": 2017,
-   "status": "to-read",
-   "stars": 1,
-   "note": "Selected chapters only."
-  },
-  {
-   "id": "mw-vocab",
-   "kind": "book",
-   "title": "Merriam-Webster's Vocabulary Builder",
-   "author": "Mary Wood Cornog",
-   "year": 2010,
-   "status": "reading",
-   "subject": "language",
-   "note": "30 units of Greek and Latin roots, two roots a day."
-  },
-  {
-   "id": "well-spoken",
-   "kind": "book",
-   "title": "The Well-Spoken Thesaurus",
-   "author": "Tom Heehler",
-   "year": 2011,
-   "status": "reading",
-   "subject": "language"
-  },
-  {
-   "id": "hp7",
-   "kind": "book",
-   "title": "Harry Potter and the Deathly Hallows",
-   "author": "J.K. Rowling",
-   "year": 2007,
-   "status": "reading",
-   "subject": "language",
-   "note": "Listening on audiobook during my commute."
+   "venue": "Routledge",
+   "part": "Selected chapters (Kotzee's chapter is on the papers shelf)"
   },
   {
    "id": "dotson-2011",
    "kind": "paper",
+   "status": "done",
+   "dateRead": "2026-10-23",
+   "subject": "final-paper",
    "title": "Tracking Epistemic Violence, Tracking Practices of Silencing",
    "author": "Kristie Dotson",
    "year": 2011,
-   "venue": "Hypatia 26(2)",
-   "status": "done",
-   "stars": 3,
-   "dateRead": "2026-10-23",
-   "subject": "final-paper",
+   "venue": "Hypatia 26(2), 236–257",
    "keywords": [
     "epistemic violence",
     "silencing",
@@ -164,109 +437,491 @@
     "situated ignorance",
     "reciprocity"
    ],
-   "question": "How can we identify and distinguish practices of silencing that members of oppressed groups face when they testify? (p. 236)",
-   "argument": [
-    "Dotson defines epistemic violence as an audience's failure to communicatively reciprocate, owing to pernicious ignorance.",
-    "Using this definition, she distinguishes two practices of silencing: testimonial quieting (the audience fails to recognize the speaker as a knower) and testimonial smothering (the speaker cuts short her own risky testimony).",
-    "Because silencing is located in the audience's failure, the burden of proof shifts away from the silenced speaker."
+   "overview": {
+    "question": "How can we identify and distinguish practices of silencing that members of oppressed groups face when they testify? (p. 236)",
+    "claim": [
+     "Epistemic violence is an audience's failure to communicatively reciprocate, owing to pernicious ignorance.",
+     "Two practices of silencing follow: testimonial quieting (the audience fails to see the speaker as a knower) and testimonial smothering (the speaker cuts short her own risky testimony).",
+     "Because silencing lies in the audience's failure, the burden of proof shifts away from the silenced speaker."
+    ]
+   },
+   "map": [
+    {
+     "title": "The problem",
+     "pages": "236–237",
+     "gist": "Members of oppressed groups are routinely silenced. How? Two practices: testimonial quieting and testimonial smothering. The term 'epistemic violence' comes from Spivak."
+    },
+    {
+     "title": "Reciprocity and speaker dependency (Hornsby)",
+     "pages": "237–238",
+     "gist": "A successful exchange needs an audience who understands and takes words as they are meant. Speakers depend on audiences and are vulnerable: no one can be forced to hear."
+    },
+    {
+     "title": "Defining epistemic violence",
+     "pages": "238–242",
+     "gist": "Pernicious ignorance = reliable ignorance + harm. Reliable ignorance makes silencing a practice, not a one-off; harm is context-dependent; intention and culpability are not required."
+    },
+    {
+     "title": "Testimonial quieting",
+     "pages": "242–244",
+     "gist": "An audience fails to identify a speaker as a knower, through controlling images and false, negative stereotypes that render some people 'not knowers'."
+    },
+    {
+     "title": "Testimonial smothering",
+     "pages": "244–251",
+     "gist": "Coerced self-silencing. Three circumstances: the content is unsafe and risky; the audience shows testimonial incompetence (often through microaggressions); that incompetence follows from pernicious ignorance."
+    },
+    {
+     "title": "Conclusion",
+     "pages": "251–252",
+     "gist": "The account disperses the burden of proof between speaker and audience, so locating silencing is less about the victim and more about the socio-epistemic setting."
+    }
+   ],
+   "tables": [
+    {
+     "title": "Two capacities in smothering",
+     "columns": [
+      "Accurate intelligibility",
+      "Testimonial (in)competence"
+     ],
+     "rows": [
+      [
+       "The audience's ability to understand the content and to detect a failure to understand",
+       "The speaker's assessment of whether the audience can do so"
+      ]
+     ]
+    }
    ],
    "concepts": [
-    "epistemic violence: an audience's failure to communicatively reciprocate, intentionally or not, owing to pernicious ignorance",
-    "pernicious ignorance: reliable ignorance that, in a given context, causes harm",
-    "reliable ignorance: counterfactual incompetence; consistently failing to track the truth in some domain",
-    "testimonial quieting: an audience fails to identify a speaker as a knower",
-    "testimonial smothering: a speaker truncates her own testimony to what the audience demonstrates competence for (coerced self-silencing)",
-    "testimonial competence: the speaker's judgment that an audience has shown it can find her testimony accurately intelligible",
-    "situated ignorance: ignorance that follows from one's social position or epistemic location"
-   ],
-   "structure": [
-    "Hornsby's reciprocity → speakers depend on audiences",
-    "Define epistemic violence + answer 3 objections (incl. the 3-year-old case)",
-    "Testimonial quieting (Collins)",
-    "Testimonial smothering: 3 circumstances (Crenshaw, Harvin, Narayan)",
-    "Conclusion: dispersing the burden of proof",
-    "Method: conceptual analysis + cases"
+    [
+     "epistemic violence",
+     "an audience's failure to communicatively reciprocate, intentionally or not, owing to pernicious ignorance"
+    ],
+    [
+     "pernicious ignorance",
+     "reliable ignorance that, in a given context, causes harm"
+    ],
+    [
+     "reliable ignorance",
+     "counterfactual incompetence; consistently failing to track the truth in some domain"
+    ],
+    [
+     "testimonial quieting",
+     "an audience fails to identify a speaker as a knower"
+    ],
+    [
+     "testimonial smothering",
+     "a speaker truncates her own testimony to what the audience shows competence for (coerced self-silencing)"
+    ],
+    [
+     "testimonial competence",
+     "the speaker's judgment that an audience can find her testimony accurately intelligible"
+    ],
+    [
+     "situated ignorance",
+     "ignorance that follows from one's social position or epistemic location"
+    ]
    ],
    "quotes": [
-    "\"Epistemic violence does not require intention, nor does it require capacity.\" (p. 240)"
+    {
+     "text": "Epistemic violence does not require intention, nor does it require capacity.",
+     "page": "240"
+    }
    ],
    "mine": [
-    "Evidence that the harm of hate speech does not end at the moment of utterance but produces later silencing (smothering).",
-    "Shifts the focus from speaker to audience → educational question: a classroom (as audience) must demonstrate testimonial competence to students who have been hurt, and refuse uptake to hate speech.",
-    "Smothering → experiences go unspoken → gaps in hermeneutical resources: support for the vicious cycle of testimonial and hermeneutical injustice."
+    "I am the owner of what I say, yet my words may float in the air, never reaching anyone, unless they meet an audience willing to listen and able to understand. The speaker's vulnerability points to our dependency and the risks we face in the world.",
+    "The harm of hate speech does not end at the moment of utterance; it produces later silencing (smothering).",
+    "Shifting the focus from speaker to audience raises an educational question: a classroom, as an audience, must show testimonial competence to students who have been hurt, and refuse uptake to hate speech.",
+    "Smothering leaves experiences unspoken, which creates gaps in hermeneutical resources: a vicious cycle of testimonial and hermeneutical injustice."
    ],
    "questions": [
-    "If we all see from distorted positions, who can judge an audience's ignorance to be \"pernicious,\" and from what position? (cf. pp. 241, 243 vs. 248)",
+    "If we all see the world from distorted positions, who can judge an audience's ignorance to be 'pernicious', and from what position? (cf. pp. 241, 243 vs. 248)",
     "What harms of silencing escape a framework built on testimony and truth?",
-    "If harm is context-dependent, what criteria can identify it without inflating the concept or flattening context?",
-    "Is the norm of reciprocity itself an idealization?",
-    "Three-year-old case: must the harm of epistemic violence fall on the speaker, or does any bad outcome count?"
+    "How can harm be identified without either inflating the concept or flattening context?",
+    "If all identities are already marked by power, is an undistorted, successful exchange ever available? Is the norm of reciprocity itself an idealization?"
    ],
    "related": [
-    "Fricker (2007): testimonial injustice. The hearer judges the speaker's credibility; in Dotson, the speaker judges the hearer's competence (the opposite direction).",
+    "Fricker (2007): the hearer judges the speaker's credibility; in Dotson, the speaker judges the hearer's competence. The direction is reversed.",
     "Langton (1993): locutionary silencing; compare with smothering (n. 12).",
-    "Butler (1997): speech forms the subject → grounds for my critique (the reciprocity norm as an idealization)."
+    "Butler (1997): speech forms the subject, which grounds my critique of the reciprocity norm."
+   ],
+   "next": [
+    "Fricker (2007), ch. 1–2",
+    "Collins (2000), ch. 4",
+    "Dotson (2014)",
+    "Medina (2013), ch. 1",
+    "Pohlhaus (2012)",
+    "Maitra (2009)"
+   ],
+   "sources": [
+    {
+     "label": "Reading notes",
+     "url": "https://docs.google.com/document/d/1WOashnLgzlWlf0lHjAONdXzlPasob6dYYZU_rreM-as/edit"
+    },
+    {
+     "label": "Reading log",
+     "url": "https://docs.google.com/spreadsheets/d/1UpfLjEt_ZKGi-WgO99NiNL4fV67bOek8ZObjw_qf85I/edit"
+    }
+   ]
+  },
+  {
+   "id": "kotzee-2017",
+   "kind": "chapter",
+   "status": "done",
+   "title": "Education and Epistemic Injustice",
+   "author": "Ben Kotzee",
+   "year": 2017,
+   "venue": "In Kidd, Medina & Pohlhaus (eds.), The Routledge Handbook of Epistemic Injustice, 324–335",
+   "subject": "course-work",
+   "note": "I presented this chapter in class.",
+   "overview": {
+    "question": "What does epistemic justice require in education, given that teaching is by nature an asymmetric relation of epistemic authority?",
+    "claim": [
+     "Teaching presupposes authority on the teacher's side and receptivity on the learner's side, so the asymmetry itself is not unjust.",
+     "Injustice occurs when credibility is assigned by who people are rather than what they deserve; schools multiply the sites where this can happen.",
+     "Education's developmental aims raise problems that Fricker's framework does not settle."
+    ],
+    "stance": "Broadly Frickerian and moderate: defends teacher authority (with Hand, against Murris), values diversity for the sake of justice (with Frank), and favors sufficiency over equality."
+   },
+   "map": [
+    {
+     "title": "Introduction: education's place in epistemology",
+     "pages": "324",
+     "gist": "Education returns to philosophy through social and virtue epistemology; Fricker draws on both."
+    },
+    {
+     "title": "The concept of 'education'",
+     "pages": "325–326",
+     "gist": "Teaching as a triad: T teaches L something W (Passmore). It requires intention on both sides, has learning as its success condition, and presupposes T's authority over W."
+    },
+    {
+     "title": "Specifically educational dimensions",
+     "pages": "326–328",
+     "gist": "Seven sites in schooling where credibility can be misallocated, in both testimonial and hermeneutical forms, and in both directions (deficit and excess)."
+    },
+    {
+     "title": "Approaches in the literature",
+     "pages": "328–331",
+     "gist": "Three debates: children's credibility (Murris vs. Hand), the value of epistemic diversity (Siegel, Frank), and distributive justice (sufficiency vs. equality)."
+    },
+    {
+     "title": "Particular challenges",
+     "pages": "331–334",
+     "gist": "Uneducatedness vs. hermeneutical injustice; shifting the social imaginary without dishonesty; education's double epistemic function."
+    }
+   ],
+   "tables": [
+    {
+     "title": "Seven sites of (in)justice in education",
+     "columns": [
+      "Site",
+      "Testimonial form",
+      "Hermeneutical form"
+     ],
+     "rows": [
+      [
+       "Credibility given to learners or children",
+       "Learners' testimony taken less seriously because of a stereotype",
+       "'Adult' modes of thinking and talk are privileged"
+      ],
+      [
+       "Which learners teachers credit",
+       "Students from privileged groups are believed or praised more",
+       "School culture engages privileged perspectives more naturally"
+      ],
+      [
+       "What teachers teach",
+       "Works of privileged groups are taught more often",
+       "Curriculum makes some traditions accessible and forecloses others"
+      ],
+      [
+       "Which students are admitted",
+       "Excluded students are undervalued as knowers",
+       "Some fields are marked as 'for' certain groups"
+      ],
+      [
+       "Who becomes teachers and scholars",
+       "Some voices are heard more in classrooms and conferences",
+       "Their concerns shape fields, making unfamiliar voices harder to hear"
+      ],
+      [
+       "Which teachers students credit",
+       "Teachers from less privileged backgrounds are judged by irrelevant standards",
+       "Not developed"
+      ],
+      [
+       "Which students other students credit",
+       "Who becomes a student leader or represents others",
+       "Not developed"
+      ]
+     ]
+    }
+   ],
+   "concepts": [
+    [
+     "triadic relation of teaching",
+     "T teaches L W (Passmore); presupposes T's authority over W"
+    ],
+    [
+     "epistemic authority",
+     "proper, rational authority regarding some matter, not power over someone"
+    ],
+    [
+     "epistemic receptivity",
+     "the learner's capacity to be taught W, both possessed and accorded"
+    ],
+    [
+     "credibility excess",
+     "more credit than deserved, which can harm others by comparison"
+    ],
+    [
+     "social imaginary",
+     "Medina's term for the background that makes some experiences visible and others unintelligible"
+    ],
+    [
+     "sufficiency",
+     "justice requires reaching a threshold, not equal inputs or outputs"
+    ],
+    [
+     "double epistemic function",
+     "education both transmits cognitive goods and forms epistemic character"
+    ]
+   ],
+   "quotes": [
+    {
+     "text": "part of the point of education is to prepare people to take part appropriately, fairly and justly in knowledge exchange",
+     "page": "329"
+    }
+   ],
+   "mine": [
+    "Calling learner receptivity 'a form of epistemic authority' may obscure what learners are owed: recognition as a knower in progress.",
+    "Fricker's calibration standard fits poorly with education's forward-looking aims. In teaching, credibility might be calibrated to the learner's trajectory rather than present desert.",
+    "Challenge 1 merges two problems: a gap in collective resources (Fricker) and existing resources unevenly distributed (closer to Pohlhaus's willful hermeneutical ignorance or Dotson's contributory injustice).",
+    "The skinhead case turns on moral content, the art student case on quality. They need different tests, and judging work 'sentimental' may reflect dominant aesthetic standards.",
+    "A sufficiency threshold defined as comprehending expertise may leave the ability to contribute to shared meanings unaddressed."
+   ],
+   "questions": [
+    "Can a classroom be asymmetric in authority yet non-hierarchical in respect?",
+    "What criteria should distinguish hermeneutical injustice from a need for education, and who has the standing to judge?",
+    "When a teacher inflates or deflates credibility for pedagogical reasons, is this injustice, a justified exception, or not a credibility judgment at all?",
+    "Can a teacher shift the social imaginary without judging students by group membership?"
+   ],
+   "sources": [
+    {
+     "label": "Presentation handout",
+     "url": "https://docs.google.com/document/d/1_mv0rrm_3K6CrspxobeJxtQ7ammNLS-cgsCsqrmFIsI/edit"
+    }
+   ]
+  },
+  {
+   "id": "sep-hate-speech",
+   "kind": "entry",
+   "status": "reading",
+   "subject": "final-paper",
+   "title": "Hate Speech",
+   "author": "Luvell Anderson & Michael Barnes",
+   "year": 2022,
+   "venue": "Stanford Encyclopedia of Philosophy",
+   "overview": {
+    "question": "What is hate speech, what are its harms, and what can be done about it?",
+    "claim": [
+     "No single definition works; 'hate speech' may be an essentially contested term.",
+     "Its harms are individual and social at once, and cumulative.",
+     "Three responses: ban it, protect it, or protect it while supporting targets' counterspeech."
+    ]
+   },
+   "tables": [
+    {
+     "title": "The entry's five questions",
+     "columns": [
+      "Question",
+      "Where",
+      "What the entry concludes"
+     ],
+     "rows": [
+      [
+       "What does the 'hate' refer to? How to define it?",
+       "§1",
+       "No single definition; definitions differ by basis (harm, content, intrinsic properties, dignity)"
+      ],
+      [
+       "Can it target dominant groups?",
+       "§1, §3.1",
+       "Raised but not settled"
+      ],
+      [
+       "Is hate speech always 'speech'?",
+       "§3.2, §4",
+       "Raised but not settled; coded language and pornography stretch the category"
+      ],
+      [
+       "What are its harms?",
+       "§1.1, §4",
+       "Individual and social, cumulative; constitutive vs. consequential; silencing"
+      ],
+      [
+       "What can or should be done?",
+       "§5",
+       "Ban, protect, or protect while supporting counterspeech"
+      ]
+     ]
+    },
+    {
+     "title": "Four bases for defining hate speech (§1)",
+     "columns": [
+      "Basis",
+      "Who",
+      "Core idea",
+      "Main problem"
+     ],
+     "rows": [
+      [
+       "Harm",
+       "Brison; Gelber",
+       "Defined by what it does to targets",
+       "Contested cases"
+      ],
+      [
+       "Content",
+       "Parekh; Post",
+       "Speech that expresses or incites hatred against a group",
+       "Whose civility norms decide?"
+      ],
+      [
+       "Intrinsic properties",
+       "Slurs; Butler as a challenge",
+       "Certain words are inherently derogatory",
+       "Too narrow and too broad at once"
+      ],
+      [
+       "Dignity",
+       "Waldron; Heyman",
+       "Speech that undermines targets' social standing",
+       "Blurs the line with political speech"
+      ]
+     ]
+    },
+    {
+     "title": "Kinds of silencing (§4)",
+     "columns": [
+      "Type",
+      "What fails",
+      "Source"
+     ],
+     "rows": [
+      [
+       "Locutionary",
+       "The speaker cannot speak at all",
+       "Langton 1993"
+      ],
+      [
+       "Perlocutionary",
+       "The act is recognized but its effect fails",
+       "Langton 1993"
+      ],
+      [
+       "Illocutionary",
+       "The act itself fails (a 'no' not heard as refusal)",
+       "Langton 1993"
+      ],
+      [
+       "Essential, authority, sincerity, seriousness",
+       "Different conditions of uptake fail",
+       "Caponetto 2021"
+      ]
+     ]
+    }
+   ],
+   "map": [
+    {
+     "title": "§1 What is hate speech?",
+     "gist": "The term is descriptive and evaluative; each definitional basis includes too much or too little. Brown: 'systematically ambiguous'."
+    },
+    {
+     "title": "§1.1 The harms of hate speech",
+     "gist": "Assaultive vs. propagandistic; consequential (perlocutionary) vs. constitutive (illocutionary). Targets experience harms cumulatively, so neither line is sharp."
+    },
+    {
+     "title": "§2 Religious hatred and anti-Semitism",
+     "gist": "Doubts that religion deserves more protection than other beliefs; Holocaust denial laws treat denial as propaganda posing as history."
+    },
+    {
+     "title": "§3 Slurs, code words, and dogwhistles",
+     "gist": "Five theories of how slurs derogate (Hom, Camp, Jeshion, inferentialism, prohibitionism); Saul's types of dogwhistles; how code words carry racial meaning."
+    },
+    {
+     "title": "§4 Pornography, hate speech, and silencing",
+     "gist": "Langton uses Austin: some speech makes a woman's 'no' fail as refusal. Racist hate speech silences too, turning the regulation debate into speech vs. speech."
+    },
+    {
+     "title": "§5 Counteracting hate speech",
+     "gist": "Bans (ICCPR, Waldron), objections to bans (Parekh's six, Baker), and state-supported counterspeech (Gelber)."
+    }
+   ],
+   "next": [
+    "Finish from p. 11 (constitutive harms) through §5",
+    "Pick quotes in Zotero, section by section"
+   ],
+   "sources": [
+    {
+     "label": "Reading map",
+     "url": "https://docs.google.com/document/d/1v0NQMKg3RTR4U-k5kxuCZjylWoS90s18p3j9alU9OKc/edit"
+    }
    ]
   },
   {
    "id": "dotson-2014",
    "kind": "paper",
+   "status": "to-read",
    "title": "Conceptualizing Epistemic Oppression",
    "author": "Kristie Dotson",
    "year": 2014,
-   "venue": "Social Epistemology 28(2)",
-   "status": "to-read",
-   "stars": 3
+   "venue": "Social Epistemology 28(2)"
   },
   {
    "id": "dotson-2012",
    "kind": "paper",
+   "status": "to-read",
    "title": "A Cautionary Tale: On Limiting Epistemic Oppression",
    "author": "Kristie Dotson",
    "year": 2012,
-   "venue": "Frontiers 33(1)",
-   "status": "to-read",
-   "stars": 2
+   "venue": "Frontiers 33(1)"
   },
   {
    "id": "maitra-2009",
    "kind": "paper",
+   "status": "to-read",
    "title": "Silencing Speech",
    "author": "Ishani Maitra",
    "year": 2009,
-   "venue": "Canadian Journal of Philosophy 39(2)",
-   "status": "to-read",
-   "stars": 2
+   "venue": "Canadian Journal of Philosophy 39(2)"
   },
   {
    "id": "pohlhaus-2012",
    "kind": "paper",
+   "status": "to-read",
    "title": "Relational Knowing and Epistemic Injustice: Toward a Theory of Willful Hermeneutical Ignorance",
    "author": "Gaile Pohlhaus Jr.",
    "year": 2012,
-   "venue": "Hypatia 27(4)",
-   "status": "to-read",
-   "stars": 2
+   "venue": "Hypatia 27(4)"
   },
   {
    "id": "mills-2007",
    "kind": "paper",
+   "status": "to-read",
    "title": "White Ignorance",
    "author": "Charles W. Mills",
    "year": 2007,
-   "venue": "In Sullivan & Tuana (eds.), Race and Epistemologies of Ignorance",
-   "status": "to-read",
-   "stars": 2
+   "venue": "In Sullivan & Tuana (eds.), Race and Epistemologies of Ignorance"
   },
   {
    "id": "leslie-2017",
    "kind": "paper",
+   "status": "to-read",
    "title": "The Original Sin of Cognition: Fear, Prejudice, and Generalization",
    "author": "Sarah-Jane Leslie",
    "year": 2017,
-   "venue": "Journal of Philosophy 114(8)",
-   "status": "to-read",
-   "stars": 1
+   "venue": "Journal of Philosophy 114(8)"
   }
  ]
 }
