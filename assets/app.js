@@ -163,6 +163,8 @@
       '<div class="cal big">' + ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(function (x) { return '<span class="dow">' + x + '</span>'; }).join('') + calCells(mStart, mEnd, tk) + '</div>' +
       '<div class="legend hc-legend"><span><i style="background:#e1ad01"></i>5h+ studied</span><span><i style="background:#8f8f8f"></i>some study</span><span><i class="dotk"></i>wrote a thought</span><span>✓ habits on target</span></div></div>' +
       '<aside class="hc-day" id="hc-day" aria-live="polite"></aside></section>' +
+      '<section class="two"><div><div class="sec-head"><h2>The last 30 days</h2><a class="more" href="#studylog">Study Log →</a></div><div class="chart" id="home-chart"></div></div>' +
+      '<div><div class="sec-head"><h2>' + esc(md.toLocaleString('en-US', { month: 'long' })) + ' by subject</h2></div>' + breakdownHTML(month.by || {}) + '</div></section>' +
       '<section><div class="sec-head"><h2>At a glance</h2></div><div class="stats">' +
       stat('Study · ' + esc(md.toLocaleString('en-US', { month: 'long' })), hm(month.total), month.met + ' days at 5h+', '#studylog') +
       stat('5h streak', streak() + (streak() === 1 ? ' day' : ' days'), 'in a row', '#studylog') +
@@ -182,6 +184,8 @@
     app.querySelectorAll('[data-hm]').forEach(function (bt) { bt.addEventListener('click', function () { var dd = pd(homeState.month + '-01'); dd.setMonth(dd.getMonth() + (+bt.getAttribute('data-hm'))); homeState.month = key(dd).slice(0, 7); viewHome(); }); });
     app.querySelectorAll('.cal.big [data-k]').forEach(function (bt) { bt.addEventListener('click', function () { homeState.sel = bt.getAttribute('data-k'); app.querySelectorAll('.cal.big [data-k]').forEach(function (x) { x.classList.toggle('sel', x === bt); x.setAttribute('aria-pressed', x === bt); }); drawDayPanel(homeState.sel); }); });
     drawDayPanel(homeState.sel);
+    var items = []; for (var i = 29; i >= 0; i--) { (function (k) { var d = pd(k); items.push({ label: (d.getMonth() + 1) + '/' + d.getDate(), value: dayMin(k), tip: fmtDate(k) + ': ' + hm(dayMin(k)), onClick: function () { homeState.sel = k; homeState.month = k.slice(0, 7); viewHome(); } }); })(key(addDays(pd(tk), -i))); }
+    barChart(document.getElementById('home-chart'), items, { goal: goal(), label: 'Study hours, last 30 days' });
   }
   function calCells(mStart, mEnd, tk) {
     var first = pd(mStart), pad = (first.getDay() + 6) % 7, out = '', g = goal();
@@ -477,8 +481,6 @@
       met: function (v, g) { return g.studyStart ? v <= tmin(g.studyStart) : true; }, goal: function (g) { return g.studyStart ? 'by ' + tfmt(tmin(g.studyStart)) + ' · from YPT' : 'from YPT'; } },
     { id: 'hours', name: 'Studied 5h+', val: function (k) { var ks = Object.keys(D.study.days).sort(); if (!ks.length || k < ks[0] || k > todayKey()) return null; var d = D.study.days[k] || {}, m = 0; for (var x in d) m += d[x]; if (k === todayKey() && m < (D.habits.goals.studyMinutes || 300)) return null; return m; }, show: function (v) { return v == null ? '–' : hm(v); },
       met: function (v, g) { return v >= (g.studyMinutes || 300); }, goal: function (g) { return hm(g.studyMinutes || 300) + '+ · from YPT'; } },
-    { id: 'phone', name: 'Phone while studying', val: function (k) { var a = (D.study.appMinutes || {})[k]; return a == null ? null : a; }, show: function (v) { return v == null ? '–' : v + ' min'; },
-      met: function (v, g) { return v <= (g.phoneMaxMinutes || 30); }, goal: function (g) { return 'under ' + (g.phoneMaxMinutes || 30) + ' min · from YPT'; } },
     { id: 'vocab', name: 'Vocabulary Builder', val: function (k, e) { return e && typeof e.vocabBuilder === 'boolean' ? e.vocabBuilder : null; }, show: function (v) { return v == null ? '–' : (v ? 'done' : 'skipped'); },
       met: function (v) { return v; }, goal: function () { return 'every day'; } },
     { id: 'analytic', name: 'Analytic philosophy', val: function (k, e) { return e && typeof e.analytic === 'boolean' ? e.analytic : null; }, show: function (v) { return v == null ? '–' : (v ? 'read' : 'skipped'); },
@@ -548,6 +550,25 @@
         '</ul>' + (e.mealNote ? '<p class="mnote">' + esc(e.mealNote) + '</p>' : '') + '</article>';
     }).join('') + '</div></section>';
   }
+  function weeklyTableHTML() {
+    var tk = todayKey(), g = D.habits.goals || {}, rows = [];
+    for (var w = 0; w < 6; w++) {
+      var mon = addDays(monday(pd(tk)), -7 * w), ks = [];
+      for (var i = 0; i < 7; i++) { var k = key(addDays(mon, i)); if (k <= tk) ks.push(k); }
+      var vals = function (id) { return ks.map(function (k) { return H(id).val(k, D.habits.days[k]); }); };
+      var met = function (id) { return ks.filter(function (k) { return habitCell(H(id), k).state === 'met'; }).length; };
+      var rec = function (id) { return ks.filter(function (k) { return habitCell(H(id), k).state !== 'none'; }).length; };
+      var tot = ks.reduce(function (n, k) { return n + dayMin(k); }, 0);
+      var sl = avg(vals('sleep')), wk = avg(vals('wake')), st = avg(vals('start'));
+      var frac = function (id) { return rec(id) ? met(id) + '/' + rec(id) : '–'; };
+      rows.push('<tr' + (w === 0 ? ' class="cur"' : '') + '><th scope="row">' + (w === 0 ? 'This week' : 'Week of ' + esc(MON[mon.getMonth()] + ' ' + mon.getDate())) + '</th>' +
+        '<td>' + hm(tot) + '</td><td class="' + (met('hours') ? 'ok' : '') + '">' + met('hours') + '</td>' +
+        '<td>' + tfmt(st) + '</td><td>' + tfmt(wk) + '</td><td>' + (sl == null ? '–' : sl.toFixed(1) + 'h') + '</td>' +
+        '<td class="' + (rec('exercise') && met('exercise') >= (g.exerciseDaysPerWeek || 4) ? 'ok' : '') + '">' + (rec('exercise') ? met('exercise') : '–') + '</td>' +
+        '<td>' + frac('food') + '</td><td>' + frac('vocab') + '</td><td>' + frac('analytic') + '</td><td>' + (met('thought') || '–') + '</td></tr>');
+    }
+    return '<section><div class="sec-head"><h2>Week by week</h2><span class="muted">mustard = on target</span></div><div class="wtable-wrap"><table class="wtable"><thead><tr><th></th><th>Study</th><th>5h+ days</th><th>Avg start</th><th>Avg wake</th><th>Avg sleep</th><th>Exercise days</th><th>Clean eating</th><th>Vocab Builder</th><th>Analytic</th><th>Thoughts</th></tr></thead><tbody>' + rows.join('') + '</tbody></table></div></section>';
+  }
   function viewHabits() {
     var tk = todayKey(), g = D.habits.goals || {}, N = 28, keys = [];
     for (var i = N - 1; i >= 0; i--) keys.push(key(addDays(pd(tk), -i)));
@@ -568,7 +589,6 @@
       tile('Avg sleep', aSleep == null ? '–' : aSleep.toFixed(1) + 'h', g.sleepHours ? 'goal: ' + g.sleepHours + 'h+' : '') +
       tile('Avg study start', tfmt(avg(weekVals('start'))), (g.studyStart ? 'goal: by ' + tfmt(tmin(g.studyStart)) + ' · ' : '') + 'from YPT') +
       tile('Avg study / day', hm(avg(weekVals('hours')) || 0), 'goal: ' + hm(g.studyMinutes || 300) + '+ · from YPT') +
-      tile('Phone while studying', (function () { var a = avg(weekVals('phone')); return a == null ? '–' : Math.round(a) + ' min'; })(), 'daily avg · goal: under ' + (g.phoneMaxMinutes || 30) + ' min') +
       tile('Exercise days', exDays + ' / ' + (g.exerciseDaysPerWeek || 7), 'this week', exDays >= (g.exerciseDaysPerWeek || 99)) +
       tile('Clean-eating days', foodRec.length ? clean + ' / ' + foodRec.length : '–', 'days recorded, weekend treats OK') +
       tile('Avg fasting', aFast == null ? '–' : aFast.toFixed(1) + 'h', g.fastHours ? 'goal: ' + g.fastHours + 'h+' : '') +
@@ -583,13 +603,18 @@
       }).join('') + '</tbody></table></div>' +
       (any ? '' : '<p class="muted" style="margin-top:14px">Daily entries start now. Study start already comes in from my YPT timer.</p>') + '</section>' +
       mealsHTML(keys) +
+      weeklyTableHTML() +
       '<section class="two"><div><div class="sec-head"><h2>Mornings</h2><span class="legend"><span><i style="background:#111"></i>Woke up</span><span><i style="background:#e1ad01"></i>Started studying</span></span></div><div class="chart" id="h-morning"></div></div>' +
+      '<div><div class="sec-head"><h2>Sleep</h2><span class="muted">hours a night · mustard = goal met</span></div><div class="chart" id="h-sleep"></div></div></section>' +
+      '<section class="two"><div><div class="sec-head"><h2>Study time</h2><span class="muted">hours a day · mustard = 5h+</span></div><div class="chart" id="h-study"></div></div>' +
       '<div><div class="sec-head"><h2>Fasting</h2><span class="muted">hours between last and first meal</span></div><div class="chart" id="h-fast"></div></div></section></div>';
     app.innerHTML = html;
     timeChart(document.getElementById('h-morning'), keys, [
       { name: 'Woke up', color: '#111', get: function (k) { return H('wake').val(k, D.habits.days[k]); }, goal: g.wake ? tmin(g.wake) : null },
       { name: 'Started studying', color: '#e1ad01', get: function (k) { return H('start').val(k); }, goal: g.studyStart ? tmin(g.studyStart) : null }
     ], { label: 'Wake-up and study start times, last 4 weeks' });
+    barChart(document.getElementById('h-sleep'), keys.map(function (k) { var v = H('sleep').val(k, D.habits.days[k]), d = pd(k); return { label: (d.getMonth() + 1) + '/' + d.getDate(), value: v == null ? 0 : v * 60, tip: fmtDate(k) + ': ' + (v == null ? 'no record' : v.toFixed(1) + 'h') }; }), { goal: (g.sleepHours || 7) * 60, label: 'Sleep hours, last 4 weeks' });
+    barChart(document.getElementById('h-study'), keys.map(function (k) { var d = pd(k); return { label: (d.getMonth() + 1) + '/' + d.getDate(), value: dayMin(k), tip: fmtDate(k) + ': ' + hm(dayMin(k)), onClick: function () { location.hash = 'day-' + k; } }; }), { goal: goal(), label: 'Study hours, last 4 weeks' });
     barChart(document.getElementById('h-fast'), keys.map(function (k) { var v = H('fast').val(k, D.habits.days[k]), d = pd(k); return { label: (d.getMonth() + 1) + '/' + d.getDate(), value: v == null ? 0 : v * 60, tip: fmtDate(k) + ': ' + (v == null ? 'no record' : v + 'h') }; }), { goal: g.fastHours ? g.fastHours * 60 : 0, label: 'Fasting hours, last 4 weeks' });
   }
 
@@ -717,14 +742,23 @@
       '<label>Status<select data-wf="status">' + opt('', 'Any', W.status) + opt('new', 'New', W.status) + opt('shaky', 'Shaky', W.status) + opt('got it', '★ Got it', W.status) + '</select></label>' +
       '<label>Search<input type="search" data-wf="q" value="' + esc(W.q) + '" placeholder="word or meaning"></label>' +
       '</div><p class="muted wcount">' + set.length + ' word' + (set.length === 1 ? '' : 's') + ' in this set' + (W.cat || W.sub || W.mine || W.status || W.q ? ' · <button type="button" class="linkbtn" data-wclear>clear filters</button>' : '') + '</p></section>' +
-      '<section id="wbody"></section></div>';
+      '<section id="wbody"></section>' + wordCatsHTML() + '</div>';
     app.innerHTML = html;
     app.querySelectorAll('[data-wm]').forEach(function (b) { b.addEventListener('click', function () { W.mode = b.getAttribute('data-wm'); W.quiz = null; W.flip = false; viewWords(); }); });
     app.querySelector('[data-wf="group"]').addEventListener('change', function (e) { var v = e.target.value; W.cat = v.indexOf('c:') === 0 ? v.slice(2) : ''; W.sub = v.indexOf('s:') === 0 ? v.slice(2) : ''; W.idx = 0; W.quiz = null; viewWords(); });
     ['mine', 'status'].forEach(function (k) { app.querySelector('[data-wf="' + k + '"]').addEventListener('change', function (e) { W[k] = e.target.value; W.idx = 0; W.quiz = null; viewWords(); }); });
     var qi = app.querySelector('[data-wf="q"]'); qi.addEventListener('change', function () { W.q = qi.value; W.idx = 0; W.quiz = null; viewWords(); });
     var cl = app.querySelector('[data-wclear]'); if (cl) cl.addEventListener('click', function () { W.cat = W.sub = W.mine = W.status = W.q = ''; W.idx = 0; W.quiz = null; viewWords(); });
+    app.querySelectorAll('[data-wcat]').forEach(function (b) { b.addEventListener('click', function () { W.cat = b.getAttribute('data-wcat'); W.sub = ''; W.idx = 0; W.quiz = null; W.mode = 'list'; viewWords(); window.scrollTo(0, 0); }); });
     drawWordBody(set);
+  }
+  function wordCatsHTML() {
+    var by = {}; (D.words || []).forEach(function (w) { var c = w.cat || 'Other'; var o = by[c] = by[c] || { n: 0, got: 0, shaky: 0 }; o.n++; if (w.status === 'got it') o.got++; if (w.status === 'shaky') o.shaky++; });
+    var cats = Object.keys(by).sort(function (a, b) { return catNum(a) - catNum(b); }), max = Math.max.apply(null, cats.map(function (c) { return by[c].n; }).concat([1]));
+    return '<section><div class="sec-head"><h2>By meaning</h2><span class="legend"><span><i style="background:#e1ad01"></i>Got it</span><span><i style="background:#8f8f8f"></i>Shaky</span><span><i style="background:#d9d9d9"></i>New</span></span></div><div class="wcats">' + cats.map(function (c) {
+      var o = by[c], nw = o.n - o.got - o.shaky;
+      return '<button type="button" class="wcat" data-wcat="' + esc(c) + '"><span class="wc-name">' + esc(c.replace(/^\d+\.\s*/, '')) + '</span><span class="wc-bar" style="width:' + (o.n / max * 100).toFixed(1) + '%"><i style="flex:' + o.got + ';background:#e1ad01"></i><i style="flex:' + o.shaky + ';background:#8f8f8f"></i><i style="flex:' + nw + ';background:#d9d9d9"></i></span><span class="wc-n">' + o.got + ' / ' + o.n + '</span></button>';
+    }).join('') + '</div></section>';
   }
   function wordPages(w) {
     var mk = marks()[w.word];
