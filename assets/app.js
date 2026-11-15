@@ -697,7 +697,7 @@
 
   // ---------- words (Vocabulary Bank) ----------
   // Live link to the Vocabulary Bank (Google Apps Script web app bound to the sheet).
-  var WORDS_API = '';
+  var WORDS_API = 'https://script.google.com/macros/s/AKfycbxnFSIlL-eLszpHq754L7dZQFZCcMo80zi7xeRtznT1NM_9RtjkNkiy4dh4Ybx2v1nxXw/exec';
   var MASTERY = 3;
   function vocabKey() { try { return localStorage.getItem('vocabkey') || ''; } catch (e) { return ''; } }
   function mapApiRow(r) {
