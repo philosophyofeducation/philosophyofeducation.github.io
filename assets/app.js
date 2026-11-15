@@ -322,7 +322,12 @@
       '<div class="legend"><span><i style="background:#e1ad01"></i>Reading</span><span><i style="background:#111"></i>Done</span><span><i style="background:#fff;border:1px solid #111"></i>To read</span></div></section>' +
       '<section><div class="sec-head"><h2>Books</h2><span class="muted">' + books.length + '</span></div>' +
       (books.length ? '<div class="shelf">' + books.map(function (b) {
-        return '<a class="spine s-' + b.status + '" href="#book-' + esc(b.id) + '" style="height:' + spineHeight(b.title) + 'px" title="' + esc(b.title + ' · ' + b.author) + '"><span class="t">' + esc(b.title) + '</span><span class="a">' + esc(b.author.split(',')[0].split(' (')[0]) + '</span></a>';
+        var who = b.author.split(',')[0].split(' (')[0];
+        return '<a class="book s-' + b.status + '" href="#book-' + esc(b.id) + '" style="--h:' + spineHeight(b.title) + 'px" aria-label="' + esc(b.title + ' by ' + b.author + ', ' + STATUS[b.status]) + '">' +
+          '<span class="spine" aria-hidden="true"><span class="t">' + esc(b.title) + '</span><span class="a">' + esc(who) + '</span></span>' +
+          '<span class="cover" aria-hidden="true"><span class="c-top"><span>' + esc(STATUS[b.status]) + '</span><span>' + esc(b.year || '') + '</span></span>' +
+          '<span class="c-title">' + esc(b.title) + '</span>' + (b.subtitle ? '<span class="c-sub">' + esc(b.subtitle) + '</span>' : '') +
+          '<span class="c-rule"></span><span class="c-author">' + esc(b.author) + '</span>' + (b.venue ? '<span class="c-pub">' + esc(b.venue) + '</span>' : '') + '</span></a>';
       }).join('') + '</div>' : '<div class="empty-state">No books here.</div>') + '</section>' +
       '<section><div class="sec-head"><h2>Papers &amp; chapters</h2><span class="muted">' + papers.length + '</span></div>' +
       (papers.length ? '<div class="papers">' + papers.map(function (b) {
