@@ -369,3 +369,46 @@ footer .shell { display: flex; justify-content: space-between; gap: 16px; flex-w
 .mday li { display: grid; grid-template-columns: 64px 1fr; gap: 8px; font-size: 0.9rem; line-height: 1.4; }
 .mday .mt { font-family: var(--mono); font-size: 0.78rem; color: var(--mute); padding-top: 2px; }
 .mnote { margin: 8px 0 0; font-size: 0.85rem; color: var(--ink-2); }
+
+/* Home: calendar + day panel + stats */
+.home-head { display: grid; gap: 10px; }
+.home-head h1 { font-size: clamp(1.7rem, 3.6vw, 2.5rem); max-width: 30ch; }
+.home-cal { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(280px, 1fr); gap: 28px; align-items: start; }
+.hc-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.hc-top h2 { font-size: 1.35rem; }
+.hc-top .btn[disabled] { opacity: .3; cursor: default; }
+.cal.big { max-width: none; gap: 5px; }
+.cal.big button { aspect-ratio: auto; min-height: 76px; position: relative; padding: 7px 8px; transition: transform .12s, box-shadow .12s; }
+.cal.big button:hover:not([disabled]) { transform: translateY(-1px); box-shadow: 0 4px 10px rgba(0,0,0,.08); }
+.cal.big button .d { font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 4px; }
+.cal.big button .m { font-size: 0.78rem; }
+.cal.big button .hb { position: absolute; right: 6px; bottom: 5px; font-size: 0.68rem; font-family: var(--mono); }
+.cal.big button .hb small { opacity: .6; }
+.cal.big button.sel { outline: 3px solid var(--ink); outline-offset: 2px; z-index: 1; }
+.cal.big button.fut { background: transparent; border-style: dashed; cursor: default; }
+.dotk { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--ink); }
+.cal.big button.l3 .dotk, .cal.big button.l4 .dotk { background: var(--mustard); }
+.hc-legend { margin-top: 10px; font-size: 0.78rem; }
+.hc-legend .dotk { width: 9px; height: 9px; }
+.hc-day { border: 1.5px solid var(--ink); padding: 20px; display: grid; gap: 10px; background: #fbf8ef; position: sticky; top: 84px; }
+.hc-day h3 { font-size: 1.15rem; }
+.hc-big { font-family: var(--mono); font-size: 2rem; }
+.hc-sec { border-top: 1px solid var(--rule); padding-top: 10px; }
+.hc-habits, .hc-meals, .hc-cov { list-style: none; margin: 0; padding: 0; display: grid; gap: 5px; font-size: 0.86rem; }
+.hc-habits li { display: grid; grid-template-columns: 14px auto 1fr; gap: 8px; align-items: center; }
+.hc-habits .muted { text-align: right; }
+.hc-habits .sq { width: 12px; height: 12px; }
+.hc-habits .met .sq { background: var(--mustard); }
+.hc-habits .miss .sq { box-shadow: inset 0 0 0 1.5px var(--ink); }
+.hc-meals li { display: grid; grid-template-columns: 64px 1fr; gap: 6px; }
+.hc-cov li { line-height: 1.45; }
+.hc-day .thought { margin: 8px 0 0; font-size: 0.9rem; }
+.hc-day .btn { justify-self: start; margin-top: 4px; }
+.stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(200px, 46%), 1fr)); border-top: 1px solid var(--ink); border-left: 1px solid var(--rule); }
+.stat { display: grid; gap: 4px; padding: 16px 18px; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); text-decoration: none; color: var(--ink); transition: background .15s; }
+.stat:hover { background: var(--soft); }
+.stat.hl { background: var(--mustard-soft); }
+.stat .label { font-size: 0.78rem; color: var(--mute); }
+.stat .value { font-family: var(--mono); font-size: 1.55rem; }
+.stat .sub { font-size: 0.78rem; color: var(--mute); }
+@media (max-width: 860px) { .home-cal { grid-template-columns: 1fr; } .hc-day { position: static; } .cal.big button { min-height: 58px; padding: 5px; } .cal.big button .hb { display: none; } }
