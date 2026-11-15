@@ -450,11 +450,19 @@
       met: function (v) { return v > 0; }, goal: function () { return 'in my Study Log' } },
     { id: 'exercise', name: 'Exercised', val: function (k, e) { return e && Array.isArray(e.exercise) ? e.exercise : null; }, show: function (v) { return v == null ? '–' : (v.length ? v.join(', ') : 'rest day'); },
       met: function (v) { return v.length > 0; }, goal: function (g) { return g.exerciseDaysPerWeek ? g.exerciseDaysPerWeek + ' days a week' : ''; } },
-    { id: 'food', name: 'No processed food', val: function (k, e) { return e && typeof e.processed === 'boolean' ? e.processed : null; }, show: function (v, k) { return v == null ? '–' : (v ? (isWeekend(k) ? 'weekend treat' : 'had some') : 'clean'); },
+    { id: 'food', name: 'No processed food', val: function (k, e) { if (e && typeof e.processed === 'boolean') return e.processed; if (e && Array.isArray(e.meals) && e.meals.length) return e.meals.some(function (m) { return m.processed; }); return null; }, show: function (v, k) { return v == null ? '–' : (v ? (isWeekend(k) ? 'weekend treat' : 'had some') : 'clean'); },
       met: function (v, g, k) { return !v || isWeekend(k); }, goal: function () { return 'weekdays clean, weekend treats OK'; } },
-    { id: 'fast', name: 'Fasted', val: function (k, e) { return e && e.fastHours != null ? +e.fastHours : null; }, show: function (v) { return v == null ? '–' : v + 'h'; },
+    { id: 'fast', name: 'Fasted', val: function (k, e) { if (e && e.fastHours != null) return +e.fastHours; return mealFast(k); }, show: function (v) { return v == null ? '–' : v + 'h'; },
       met: function (v, g) { return v >= (g.fastHours || 0); }, goal: function (g) { return g.fastHours ? g.fastHours + 'h+' : ''; } }
   ];
+  function mealTimes(k) { var e = D.habits.days[k]; return e && Array.isArray(e.meals) ? e.meals.map(function (m) { return tmin(m.time); }).filter(function (t) { return t != null; }).sort(function (a, b) { return a - b; }) : []; }
+  function mealFast(k) {
+    var today = mealTimes(k), prev = mealTimes(key(addDays(pd(k), -1)));
+    if (!today.length || !prev.length) return null;
+    var last = prev[prev.length - 1], first = today[0];
+    if (last < 300) last += 1440; // a meal after midnight belongs to the previous day
+    return Math.round((first + 1440 - last) / 6) / 10;
+  }
   function H(id) { return HABITS.find(function (x) { return x.id === id; }); }
   function habitCell(h, k) {
     var e = D.habits.days[k], g = D.habits.goals || {}, v = h.val(k, e);
@@ -492,6 +500,17 @@
     }
     draw(); box._redraw = draw;
   }
+  function mealsHTML(keys) {
+    var days = keys.slice().reverse().filter(function (k) { var e = D.habits.days[k]; return e && Array.isArray(e.meals) && e.meals.length; }).slice(0, 7);
+    if (!days.length) return '<section><div class="sec-head"><h2>Meals</h2><span class="muted">what I ate, day by day</span></div><p class="muted">Meal entries start now.</p></section>';
+    return '<section><div class="sec-head"><h2>Meals</h2><span class="muted">the last 7 days with entries</span></div><div class="meals">' + days.map(function (k) {
+      var e = D.habits.days[k], f = H('fast').val(k, e);
+      var ms = e.meals.slice().sort(function (a, b) { return (tmin(a.time) || 0) - (tmin(b.time) || 0); });
+      return '<article class="mday"><header><strong>' + esc(fmtDate(k)) + '</strong>' + (f != null ? '<span class="muted">fasted ' + f + 'h</span>' : '') + '</header><ul>' +
+        ms.map(function (m) { return '<li><span class="mt">' + (m.time ? tfmt(tmin(m.time)) : '') + '</span><span class="mw">' + esc(m.what || '') + (m.processed ? ' <span class="pill">processed</span>' : '') + '</span></li>'; }).join('') +
+        '</ul>' + (e.mealNote ? '<p class="mnote">' + esc(e.mealNote) + '</p>' : '') + '</article>';
+    }).join('') + '</div></section>';
+  }
   function viewHabits() {
     var tk = todayKey(), g = D.habits.goals || {}, N = 28, keys = [];
     for (var i = N - 1; i >= 0; i--) keys.push(key(addDays(pd(tk), -i)));
@@ -526,6 +545,7 @@
         }).join('') + '</tr>';
       }).join('') + '</tbody></table></div>' +
       (any ? '' : '<p class="muted" style="margin-top:14px">Daily entries start now. Study start already comes in from my YPT timer.</p>') + '</section>' +
+      mealsHTML(keys) +
       '<section class="two"><div><div class="sec-head"><h2>Mornings</h2><span class="legend"><span><i style="background:#111"></i>Woke up</span><span><i style="background:#e1ad01"></i>Started studying</span></span></div><div class="chart" id="h-morning"></div></div>' +
       '<div><div class="sec-head"><h2>Fasting</h2><span class="muted">hours between last and first meal</span></div><div class="chart" id="h-fast"></div></div></section></div>';
     app.innerHTML = html;

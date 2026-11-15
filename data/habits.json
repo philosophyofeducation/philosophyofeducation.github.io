@@ -8,7 +8,7 @@
   "studyMinutes": 300,
   "phoneMaxMinutes": 30
  },
- "notes": "One entry per day. wake/bed: HH:MM (bed = when I fell asleep the night before). exercise: list of what I did, [] if none. processed: true if I ate processed food or snacks. fastHours: hours between last and first meal. vocabBuilder / analytic: true if I did that day's Vocabulary Builder unit / analytic philosophy reading. Study start, study time and phone use during study come from YPT; 'wrote a thought' comes from the day's Study Log.",
+ "notes": "One entry per day. wake/bed: HH:MM (bed = when I fell asleep the night before). exercise: list of what I did, [] if none. processed: true if I ate processed food or snacks. fastHours: hours between last and first meal. vocabBuilder / analytic: true if I did that day's Vocabulary Builder unit / analytic philosophy reading. Study start, study time and phone use during study come from YPT; 'wrote a thought' comes from the day's Study Log. meals: list of {time: HH:MM, what: text, processed: optional true}; fasting hours are worked out from the last meal of the day before and the first meal of the day when fastHours isn't given.",
  "days": {
   "2026-11-15": {
    "wake": "08:30",
