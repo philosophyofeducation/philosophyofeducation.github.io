@@ -32,8 +32,8 @@ button { font: inherit; color: inherit; }
 .nav a:hover { color: var(--ink); border-bottom-color: var(--rule); }
 .nav a[aria-current="page"] { color: var(--ink); border-bottom-color: var(--mustard); font-weight: 500; }
 @media (max-width: 720px) {
-  .nav { flex-wrap: nowrap; overflow-x: auto; width: 100%; margin: 0 -20px; padding: 0 14px; scrollbar-width: none; }
-  .nav a { white-space: nowrap; }
+  .nav { display: grid; grid-template-columns: repeat(3, 1fr); width: 100%; gap: 2px; }
+  .nav a { white-space: nowrap; text-align: center; padding: 8px 4px; }
 }
 
 main { padding: 40px 0 72px; min-height: 70vh; }
@@ -217,7 +217,7 @@ footer .shell { display: flex; justify-content: space-between; gap: 16px; flex-w
 @media (prefers-reduced-motion: reduce) { .book, .book .spine, .book .cover { transition: none; } }
 
 /* Library: papers */
-.papers { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+.papers { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr)); gap: 16px; padding-right: 6px; }
 .paper { position: relative; border: 1px solid var(--ink); text-decoration: none; display: grid; gap: 8px; padding: 0 0 14px; background: var(--paper); align-content: start; box-shadow: 3px 3px 0 var(--rule), 6px 6px 0 #f0f0f0; transition: transform .12s, box-shadow .12s; min-height: 210px; }
 .paper:hover, .paper:focus-visible { transform: translate(-2px, -3px); box-shadow: 5px 6px 0 var(--ink); }
 .paper .band { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 0.75rem; padding: 6px 12px; border-bottom: 1px solid var(--ink); }
@@ -429,3 +429,35 @@ footer .shell { display: flex; justify-content: space-between; gap: 16px; flex-w
 .wc-bar i { display: block; }
 .wc-n { font-family: var(--mono); font-size: 0.82rem; text-align: right; }
 @media (max-width: 640px) { .wcat { grid-template-columns: 1fr 56px; } .wc-bar { grid-column: 1 / -1; grid-row: 2; } }
+
+/* layout guards */
+.view > *, .two > *, .home-cal > * { min-width: 0; }
+.cal .dotk { width: 6px; height: 6px; margin-left: 3px; vertical-align: 2px; }
+.cal button.l3 .dotk, .cal button.l4 .dotk { background: var(--mustard); }
+
+/* Home: today */
+.home-head h1 { font-size: clamp(1.5rem, 3vw, 2.1rem); }
+.today { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); border: 1.5px solid var(--ink); }
+.td-main { padding: 22px 24px; display: grid; gap: 10px; align-content: start; background: var(--ink); color: var(--paper); }
+.td-main .kicker, .td-main .muted { color: #cfcfcf; }
+.td-main .bar { background: #3a3a3a; }
+.td-main .pill.soft { background: transparent; color: var(--paper); border-color: #6b6b6b; }
+.td-big { font-family: var(--mono); font-size: clamp(2.2rem, 5vw, 3.2rem); line-height: 1; }
+.td-list { padding: 18px 24px; }
+.td-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+.td-count { font-family: var(--mono); font-size: 0.95rem; }
+.td-list ul { list-style: none; margin: 0; padding: 0; }
+.td-list li { display: grid; grid-template-columns: 26px 1fr auto; gap: 10px; align-items: center; padding: 9px 0; border-bottom: 1px solid var(--rule); }
+.td-list li:last-child { border-bottom: 0; }
+.td-list .ck { width: 20px; height: 20px; border: 1.5px solid var(--ink); display: grid; place-items: center; font-size: 0.8rem; font-weight: 700; }
+.td-list li.done .ck { background: var(--mustard); border-color: var(--mustard); }
+.td-list li.done .tl { color: var(--mute); text-decoration: line-through; text-decoration-color: var(--mustard); text-decoration-thickness: 2px; }
+.td-list li.off .ck { border-style: dashed; }
+.td-list .tl { font-size: 0.95rem; }
+.td-list .tn { font-size: 0.8rem; color: var(--mute); font-family: var(--mono); }
+@media (max-width: 760px) { .today { grid-template-columns: 1fr; } }
+
+.hgrid tbody th { position: sticky; left: 0; background: var(--paper); z-index: 1; }
+@media (max-width: 640px) { .hgrid tbody th { padding-right: 8px; } .hgrid .hg { display: none; } .hgrid .hn { font-size: 0.8rem; white-space: normal; max-width: 92px; } }
+.hgrid thead th:first-child { position: sticky; left: 0; background: var(--paper); z-index: 2; }
+.legend .dotk { width: 8px; height: 8px; border-radius: 50%; }

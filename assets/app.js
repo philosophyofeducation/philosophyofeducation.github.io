@@ -132,7 +132,7 @@
         var left = '<div><a class="subject-name" href="#subject-' + esc(s.slug) + '">' + esc(s.name) + '</a>' +
           (s.covered.length ? '<ul>' + s.covered.map(function (c) { return '<li>' + esc(c) + '</li>'; }).join('') + '</ul>' : '') + '</div>';
         var right = s.thoughts.length ? '<div class="thoughts">' + s.thoughts.map(function (t) { return '<p class="thought">' + esc(t) + '</p>'; }).join('') + '</div>'
-          : (compact ? '' : '<div class="thoughts"><p class="thought empty">My thought on this goes here.</p></div>');
+          : (compact || !isOwner() ? '<div class="thoughts"></div>' : '<div class="thoughts"><p class="thought empty">My thought on this goes here.</p></div>');
         return compact ? left + right : '<div class="pair">' + left + right + '</div>';
       }).join('') + (log.intro ? '<p class="muted">' + esc(log.intro) + '</p>' : '') + '</div></article>';
   }
@@ -141,7 +141,7 @@
   var homeState = { month: null, sel: null };
   function viewHome() {
     var tk = todayKey(), g = goal();
-    if (!homeState.sel) homeState.sel = tk;
+    if (!homeState.sel) homeState.sel = key(addDays(pd(tk), -1));
     if (!homeState.month) homeState.month = tk.slice(0, 7);
     var life = lifetime(), lg = (D.study.lifetimeGoalHours || 10000) * 60;
     var mStart = homeState.month + '-01', md = pd(mStart), mEnd = key(new Date(md.getFullYear(), md.getMonth() + 1, 0));
@@ -158,10 +158,11 @@
     var thoughtsN = D.logs.reduce(function (n, l) { return n + l.sections.reduce(function (m, s) { return m + s.thoughts.length; }, 0); }, 0);
     function stat(label, value, sub, href, hl) { return '<a class="stat' + (hl ? ' hl' : '') + '" href="' + href + '"><span class="label">' + label + '</span><span class="value">' + value + '</span><span class="sub">' + sub + '</span></a>'; }
     var html = '<div class="view">' +
-      '<section class="home-head"><span class="kicker">PhD student · Philosophy of Education</span><h1>I study how <em>words wound</em>, and what education can do about it.</h1></section>' +
+      '<section class="home-head"><span class="kicker">Jinny Hyunjin Kim · PhD student, Philosophy of Education</span><h1>I study how <em>words wound</em>, and what education can do about it.</h1></section>' +
+      todayHTML(tk) +
       '<section class="home-cal"><div class="hc-cal"><div class="hc-top"><button type="button" class="btn" data-hm="-1" aria-label="Previous month">←</button><h2>' + esc(md.toLocaleString('en-US', { month: 'long', year: 'numeric' })) + '</h2><button type="button" class="btn" data-hm="1" aria-label="Next month"' + (homeState.month >= tk.slice(0, 7) ? ' disabled' : '') + '>→</button></div>' +
       '<div class="cal big">' + ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(function (x) { return '<span class="dow">' + x + '</span>'; }).join('') + calCells(mStart, mEnd, tk) + '</div>' +
-      '<div class="legend hc-legend"><span><i style="background:#e1ad01"></i>5h+ studied</span><span><i style="background:#8f8f8f"></i>some study</span><span><i class="dotk"></i>wrote a thought</span><span>✓ habits on target</span></div></div>' +
+      '<div class="legend hc-legend"><span><i style="background:#e1ad01"></i>5h+ studied</span><span><i style="background:#8f8f8f"></i>some study</span><span><i class="dotk"></i>wrote a thought</span><span>Click a day to see it</span></div></div>' +
       '<aside class="hc-day" id="hc-day" aria-live="polite"></aside></section>' +
       '<section class="two"><div><div class="sec-head"><h2>The last 30 days</h2><a class="more" href="#studylog">Study Log →</a></div><div class="chart" id="home-chart"></div></div>' +
       '<div><div class="sec-head"><h2>' + esc(md.toLocaleString('en-US', { month: 'long' })) + ' by subject</h2></div>' + breakdownHTML(month.by || {}) + '</div></section>' +
@@ -187,6 +188,25 @@
     var items = []; for (var i = 29; i >= 0; i--) { (function (k) { var d = pd(k); items.push({ label: (d.getMonth() + 1) + '/' + d.getDate(), value: dayMin(k), tip: fmtDate(k) + ': ' + hm(dayMin(k)), onClick: function () { homeState.sel = k; homeState.month = k.slice(0, 7); viewHome(); } }); })(key(addDays(pd(tk), -i))); }
     barChart(document.getElementById('home-chart'), items, { goal: goal(), label: 'Study hours, last 30 days' });
   }
+  function todayHTML(tk) {
+    var m = dayMin(tk), g = goal(), e = D.habits.days[tk], gl = D.habits.goals || {};
+    var sl = H('sleep').val(tk, e), wk = H('wake').val(tk, e), th = H('thought').val(tk), vb = H('vocab').val(tk, e), an = H('analytic').val(tk, e);
+    var wkMet = 0; for (var d = monday(pd(tk)); key(d) <= tk; d = addDays(d, 1)) if (dayMin(key(d)) >= g) wkMet++;
+    function item(state, label, note) { return '<li class="' + state + '"><span class="ck" aria-hidden="true">' + (state === 'done' ? '✓' : '') + '</span><span class="tl">' + label + '</span><span class="tn">' + note + '</span></li>'; }
+    var items =
+      item(m >= g ? 'done' : 'todo', 'Study 5 hours', hm(m) + ' so far') +
+      item(vb ? 'done' : 'todo', 'Vocabulary Builder', vb ? 'done' : (vb === false ? 'skipped' : 'not yet')) +
+      item(an ? 'done' : 'todo', 'Analytic philosophy reading', an ? 'done' : (an === false ? 'skipped' : 'not yet')) +
+      item(th ? 'done' : 'todo', 'A thought in my own words', th ? th + ' written' : 'not yet') +
+      item(wk != null && gl.wake && wk <= tmin(gl.wake) ? 'done' : (wk != null ? 'off' : 'todo'), 'Up by ' + tfmt(tmin(gl.wake || '07:00')), wk != null ? 'woke ' + tfmt(wk) : 'no record') +
+      item(sl != null && sl >= (gl.sleepHours || 7) ? 'done' : (sl != null ? 'off' : 'todo'), 'Sleep ' + (gl.sleepHours || 7) + 'h+', sl != null ? sl.toFixed(1) + 'h' : 'no record');
+    var doneN = (m >= g) + !!vb + !!an + !!th + (wk != null && gl.wake && wk <= tmin(gl.wake)) + (sl != null && sl >= (gl.sleepHours || 7));
+    return '<section class="today"><div class="td-main"><span class="kicker">Today · ' + esc(fmtDate(tk)) + '</span><div class="td-big">' + hm(m) + '</div>' +
+      '<div class="bar goal"><span style="width:' + Math.min(100, m / g * 100).toFixed(1) + '%"></span></div>' +
+      '<span class="muted">' + (m >= g ? '5-hour goal met. Well done.' : hm(g - m) + ' to go for 5 hours') + '</span>' +
+      '<div class="chips"><span class="pill ' + (streak() ? 'goal' : 'soft') + '">' + (streak() ? streak() + '-day 5h streak' : 'Start a 5h streak today') + '</span><span class="pill soft">' + wkMet + ' day' + (wkMet === 1 ? '' : 's') + ' at 5h+ this week</span></div></div>' +
+      '<div class="td-list"><div class="td-head"><span class="kicker">Today\'s list</span><span class="td-count">' + doneN + ' / 6</span></div><ul>' + items + '</ul></div></section>';
+  }
   function calCells(mStart, mEnd, tk) {
     var first = pd(mStart), pad = (first.getDay() + 6) % 7, out = '', g = goal();
     for (var i = 0; i < pad; i++) out += '<button type="button" class="empty" tabindex="-1" aria-hidden="true"></button>';
@@ -197,7 +217,7 @@
       var th = H('thought').val(k);
       out += '<button type="button" data-k="' + k + '" class="' + lvl + (k === tk ? ' today' : '') + (k === homeState.sel ? ' sel' : '') + (fut ? ' fut' : '') + '"' + (fut ? ' disabled' : '') + ' aria-pressed="' + (k === homeState.sel) + '" aria-label="' + esc(fmtDate(k)) + ': ' + hm(m) + '">' +
         '<span class="d">' + d.getDate() + (th ? '<i class="dotk"></i>' : '') + '</span>' + (m ? '<span class="m">' + (m / 60).toFixed(1) + 'h</span>' : '<span class="m"></span>') +
-        (rec ? '<span class="hb">✓' + met + '<small>/' + rec + '</small></span>' : '') + '</button>';
+'</button>';
     }
     return out;
   }
@@ -248,7 +268,7 @@
         '<div class="tile"><span class="label">Daily average</span><span class="value">' + hm(sum.total / avgDays) + '</span><span class="sub">over ' + avgDays + ' day' + (avgDays > 1 ? 's' : '') + '</span></div>' +
         '<div class="tile ' + (sum.met ? 'hl' : '') + '"><span class="label">Days at 5h+</span><span class="value">' + sum.met + '</span><span class="sub">goal days</span></div>' +
         '<div class="tile"><span class="label">Days studied</span><span class="value">' + sum.studied + '</span><span class="sub">at least one session</span></div></div>';
-      html += '<div id="period-vis"></div><div class="legend"><span><i style="background:#111"></i>Study time</span><span><i style="background:#e1ad01"></i>5-hour goal met</span>' + (mode === 'year' ? '' : '<span>Tap a day to open it</span>') + '</div>';
+      html += '<div id="period-vis"></div><div class="legend"><span><i style="background:#111"></i>Study time</span><span><i style="background:#e1ad01"></i>5-hour goal met</span>' + (mode === 'month' ? '<span><i class="dotk"></i>has notes</span>' : '') + (mode === 'year' ? '' : '<span>Tap a day to open it</span>') + '</div>';
       html += '<div><div class="sec-head"><h2>By subject</h2></div>' + breakdownHTML(sum.by) + '</div>';
     }
     html += '</section>';
@@ -278,9 +298,9 @@
         var k = key(new Date(f.getFullYear(), f.getMonth(), dd)), v = dayMin(k);
         var cls = v >= goal() ? 'goal' : (v >= 180 ? 'l4' : v >= 120 ? 'l3' : v >= 60 ? 'l2' : v > 0 ? 'l1' : '');
         if (k === tk) cls += ' today';
-        cells += '<button type="button" class="' + cls + '" data-day="' + k + '" aria-label="' + esc(fmtDate(k)) + ': ' + hm(v) + (LOGS[k] ? ', has notes' : '') + '"><span class="d">' + dd + (LOGS[k] ? ' ·' : '') + '</span><span class="m">' + (v ? (v / 60).toFixed(1) + 'h' : '') + '</span></button>';
+        cells += '<button type="button" class="' + cls + '" data-day="' + k + '" aria-label="' + esc(fmtDate(k)) + ': ' + hm(v) + (LOGS[k] ? ', has notes' : '') + '"><span class="d">' + dd + (LOGS[k] ? '<i class="dotk" title="has notes"></i>' : '') + '</span><span class="m">' + (v ? (v / 60).toFixed(1) + 'h' : '') + '</span></button>';
       }
-      vis.innerHTML = '<div class="cal">' + cells + '</div>';
+      vis.innerHTML = '<div class="cal big">' + cells + '</div>';
       vis.querySelectorAll('[data-day]').forEach(function (b) { b.addEventListener('click', function () { openDay(b.getAttribute('data-day')); }); });
     } else if (mode === 'year') {
       var yr = pd(start).getFullYear(), its = [];
@@ -593,7 +613,7 @@
       tile('Clean-eating days', foodRec.length ? clean + ' / ' + foodRec.length : '–', 'days recorded, weekend treats OK') +
       tile('Avg fasting', aFast == null ? '–' : aFast.toFixed(1) + 'h', g.fastHours ? 'goal: ' + g.fastHours + 'h+' : '') +
       '</div></section>' +
-      '<section><div class="sec-head"><h2>The last 4 weeks</h2><span class="muted">hover a square for the details</span></div>' +
+      '<section><div class="sec-head"><h2>The last 4 weeks</h2><span class="muted">tap or hover a square for details</span></div>' +
       '<div class="hgrid-wrap"><table class="hgrid"><thead><tr><th></th>' + keys.map(function (k) { var d = pd(k); return '<th class="' + (k === tk ? 'today' : '') + (d.getDay() === 1 ? ' mon' : '') + '" title="' + esc(fmtDate(k)) + '"><span>' + (d.getDay() === 1 ? (d.getMonth() + 1) + '/' + d.getDate() : '') + '</span></th>'; }).join('') + '</tr></thead><tbody>' +
       HABITS.map(function (h) {
         return '<tr><th scope="row"><span class="hn">' + esc(h.name) + '</span><span class="hg">' + esc(h.goal(g)) + '</span></th>' + keys.map(function (k) {
@@ -602,13 +622,13 @@
         }).join('') + '</tr>';
       }).join('') + '</tbody></table></div>' +
       (any ? '' : '<p class="muted" style="margin-top:14px">Daily entries start now. Study start already comes in from my YPT timer.</p>') + '</section>' +
-      mealsHTML(keys) +
       weeklyTableHTML() +
       '<section class="two"><div><div class="sec-head"><h2>Mornings</h2><span class="legend"><span><i style="background:#111"></i>Woke up</span><span><i style="background:#e1ad01"></i>Started studying</span></span></div><div class="chart" id="h-morning"></div></div>' +
       '<div><div class="sec-head"><h2>Sleep</h2><span class="muted">hours a night · mustard = goal met</span></div><div class="chart" id="h-sleep"></div></div></section>' +
       '<section class="two"><div><div class="sec-head"><h2>Study time</h2><span class="muted">hours a day · mustard = 5h+</span></div><div class="chart" id="h-study"></div></div>' +
-      '<div><div class="sec-head"><h2>Fasting</h2><span class="muted">hours between last and first meal</span></div><div class="chart" id="h-fast"></div></div></section></div>';
+      '<div><div class="sec-head"><h2>Fasting</h2><span class="muted">hours between last and first meal</span></div><div class="chart" id="h-fast"></div></div></section>' + mealsHTML(keys) + '</div>';
     app.innerHTML = html;
+    var gw = app.querySelector('.hgrid-wrap'); if (gw) gw.scrollLeft = gw.scrollWidth;
     timeChart(document.getElementById('h-morning'), keys, [
       { name: 'Woke up', color: '#111', get: function (k) { return H('wake').val(k, D.habits.days[k]); }, goal: g.wake ? tmin(g.wake) : null },
       { name: 'Started studying', color: '#e1ad01', get: function (k) { return H('start').val(k); }, goal: g.studyStart ? tmin(g.studyStart) : null }
@@ -851,6 +871,8 @@
     else if (routes[h]) { routes[h](); }
     else { section = 'home'; viewHome(); }
     document.querySelectorAll('[data-nav]').forEach(function (a) { if (a.getAttribute('data-nav') === section) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
+    var T = { home: '', studylog: 'Study Log', library: 'Library', words: 'Words', habits: 'Habits', blog: 'Blog' };
+    document.title = (T[section] ? T[section] + ' · ' : '') + 'Jinny Hyunjin Kim';
     ownerBar();
   }
   function ownerBar() {
