@@ -1,0 +1,8 @@
+{
+  "notes": "goals: things I'm working toward. status: active, done, paused. progress: 0-100 (or auto: 'study10k'). bucket: things I want to do once in my life. done: date when I did it.",
+  "goals": [
+    { "title": "10,000 hours of study during my PhD", "area": "Study", "by": "2032", "status": "active", "auto": "study10k" },
+    { "title": "Finish Merriam-Webster's Vocabulary Builder (30 units)", "area": "English", "status": "active", "progress": null }
+  ],
+  "bucket": []
+}

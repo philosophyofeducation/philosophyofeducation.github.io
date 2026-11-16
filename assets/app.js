@@ -990,7 +990,7 @@
         (list.length ? '<ul>' + list.map(itemHTML).join('') + '</ul>' : '<p class="pl-empty">—</p>') + '</div>';
     }).join('');
     var e = pd(days[6]);
-    app.innerHTML = '<div class="view"><section style="display:grid;gap:14px"><span class="kicker">Week</span><h1>Our week, two time zones.</h1>' +
+    app.innerHTML = '<div class="view"><section style="display:grid;gap:14px"><span class="kicker">Yongkyu & Jinny</span><h1>Our week, two time zones.</h1>' +
       '<div class="pl-clocks"><span class="who-jinny"><i></i>' + esc(me.name) + ' · ' + esc(me.city || 'Champaign') + ' <b>' + a.wd + ' ' + t12(a.time) + '</b></span>' +
       '<span class="who-yongkyu"><i></i>' + esc(yk.name) + ' · ' + esc(yk.city || 'Seoul') + ' <b>' + b.wd + ' ' + t12(b.time) + '</b></span>' +
       '<span class="who-both"><i></i>Together ★</span></div></section>' +
@@ -1001,13 +1001,33 @@
     app.querySelectorAll('[data-wk]').forEach(function (bt) { bt.addEventListener('click', function () { var n = +bt.getAttribute('data-wk'); WK.anchor = n === 0 ? null : key(addDays(start, n)); viewWeek(); }); });
   }
 
+  // ---------- goals & bucket list ----------
+  function viewGoals() {
+    var G = D.goals || { goals: [], bucket: [] }, goals = G.goals || [], bucket = G.bucket || [];
+    function pct(g) { if (g.auto === 'study10k') return Math.min(100, lifetime() / 60 / 10000 * 100); return g.progress == null ? null : +g.progress; }
+    function goalHTML(g) {
+      var p = pct(g), done = g.status === 'done';
+      return '<li class="gl-item' + (done ? ' done' : '') + (g.status === 'paused' ? ' paused' : '') + '"><div class="gl-top"><span class="kicker">' + esc(g.area || 'Goal') + (g.by ? ' · by ' + esc(g.by) : '') + '</span>' + (done ? '<span class="pill goal">done</span>' : (g.status === 'paused' ? '<span class="pill">paused</span>' : '')) + '</div>' +
+        '<h3>' + esc(g.title) + '</h3>' + (g.note ? '<p class="muted">' + esc(g.note) + '</p>' : '') +
+        (p != null ? '<div class="gl-bar"><span style="width:' + (done ? 100 : p).toFixed(1) + '%"></span></div><span class="gl-pct">' + (done ? 100 : p).toFixed(p < 10 && !done ? 2 : 0) + '%</span>' : '') + '</li>';
+    }
+    var open = bucket.filter(function (b) { return !b.done; }), did = bucket.filter(function (b) { return b.done; });
+    function bHTML(b) { return '<li class="bk-item' + (b.done ? ' done' : '') + '"><span class="ck" aria-hidden="true">' + (b.done ? '✓' : '') + '</span><span><strong>' + esc(b.title) + '</strong>' + (b.done && b.done !== true ? ' <span class="muted">· ' + esc(b.done) + '</span>' : '') + (b.with ? ' <span class="muted">· with ' + esc(b.with) + '</span>' : '') + (b.note ? '<br><span class="muted">' + esc(b.note) + '</span>' : '') + '</span></li>'; }
+    app.innerHTML = '<div class="view"><section style="display:grid;gap:14px"><span class="kicker">Goals</span><h1>Where I\'m headed.</h1></section>' +
+      '<section><div class="sec-head"><h2>Goals</h2><span class="muted">' + goals.filter(function (g) { return g.status !== 'done'; }).length + ' in progress</span></div>' +
+      (goals.length ? '<ul class="gl-list">' + goals.map(goalHTML).join('') + '</ul>' : '<div class="empty-state">No goals yet.</div>') + '</section>' +
+      '<section><div class="sec-head"><h2>Bucket list</h2><span class="muted">' + did.length + ' / ' + bucket.length + ' done</span></div>' +
+      (bucket.length ? '<ul class="bk-list">' + open.concat(did).map(bHTML).join('') + '</ul>' : '<div class="empty-state">The list is waiting for its first wish.</div>') + '</section></div>';
+  }
+
   // ---------- router ----------
-  var routes = { home: viewHome, studylog: viewStudyLog, library: viewLibrary, habits: viewHabits, words: viewWords, week: viewWeek };
+  var routes = { home: viewHome, studylog: viewStudyLog, library: viewLibrary, habits: viewHabits, words: viewWords, yongkyu: viewWeek, week: viewWeek, goals: viewGoals };
   function render() {
     var h = (location.hash || '#home').slice(1);
     if (h === 'owner') { try { localStorage.setItem('owner', '1'); } catch (e) {} location.replace('#home'); return; }
     if (h.indexOf('key-') === 0) { try { localStorage.setItem('vocabkey', h.slice(4)); localStorage.setItem('owner', '1'); } catch (e) {} location.replace('#words'); return; }
     if (h === 'guest') { try { localStorage.removeItem('owner'); } catch (e) {} location.replace('#home'); return; }
+    if (h === 'week') { location.replace('#yongkyu'); return; }
     var section = h;
     if (/^day-\d{4}-\d{2}-\d{2}$/.test(h)) { logState.mode = 'day'; logState.anchor = h.slice(4); section = 'studylog'; viewStudyLog(); }
     else if (h === 'subjects') { section = 'studylog'; viewStudyLog(); }
@@ -1017,7 +1037,7 @@
     else if (routes[h]) { routes[h](); }
     else { section = 'home'; viewHome(); }
     document.querySelectorAll('[data-nav]').forEach(function (a) { if (a.getAttribute('data-nav') === section) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
-    var T = { home: '', studylog: 'Study Log', library: 'Library', words: 'Words', habits: 'Habits', week: 'Week' };
+    var T = { home: '', studylog: 'Study Log', library: 'Library', words: 'Words', habits: 'Habits', yongkyu: 'Yongkyu', goals: 'Goals' };
     document.title = (T[section] ? T[section] + ' · ' : '') + 'Jinny Hyunjin Kim';
     ownerBar();
   }
@@ -1030,10 +1050,10 @@
   window.addEventListener('hashchange', function () { render(); window.scrollTo(0, 0); });
 
   function getJSON(p) { return fetch(p, { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw new Error(p); return r.json(); }); }
-  Promise.all([getJSON('data/study.json'), getJSON('logs/index.json').catch(function () { return []; }), getJSON('posts/index.json').catch(function () { return []; }), getJSON('data/library.json').catch(function () { return { items: [] }; }), getJSON('data/habits.json').catch(function () { return { goals: {}, days: {} }; }), getJSON('data/plans.json').catch(function () { return { people: {}, items: [] }; }), (WORDS_API ? fetch(WORDS_API, { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (j) { return { words: j.rows.map(mapApiRow).filter(function (w) { return w.word; }), live: true, habits: j.habits || {} }; }).catch(function () { return getJSON('data/words.json'); }) : getJSON('data/words.json')).catch(function () { return { words: [] }; })])
+  Promise.all([getJSON('data/study.json'), getJSON('logs/index.json').catch(function () { return []; }), getJSON('posts/index.json').catch(function () { return []; }), getJSON('data/library.json').catch(function () { return { items: [] }; }), getJSON('data/habits.json').catch(function () { return { goals: {}, days: {} }; }), getJSON('data/plans.json').catch(function () { return { people: {}, items: [] }; }), getJSON('data/goals.json').catch(function () { return { goals: [], bucket: [] }; }), (WORDS_API ? fetch(WORDS_API, { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (j) { return { words: j.rows.map(mapApiRow).filter(function (w) { return w.word; }), live: true, habits: j.habits || {} }; }).catch(function () { return getJSON('data/words.json'); }) : getJSON('data/words.json')).catch(function () { return { words: [] }; })])
     .then(function (res) {
-      D.study = res[0]; D.logs = res[1]; D.posts = res[2]; D.library = res[3].items || []; D.habits = res[4]; D.plans = res[5]; D.words = res[6].words || []; D.wordsLive = !!res[6].live;
-      var hb = res[6].habits || {}; D.habits.days = D.habits.days || {}; Object.keys(hb).forEach(function (d) { D.habits.days[d] = Object.assign({}, D.habits.days[d] || {}, hb[d]); });
+      D.study = res[0]; D.logs = res[1]; D.posts = res[2]; D.library = res[3].items || []; D.habits = res[4]; D.plans = res[5]; D.goals = res[6]; D.words = res[7].words || []; D.wordsLive = !!res[7].live;
+      var hb = res[7].habits || {}; D.habits.days = D.habits.days || {}; Object.keys(hb).forEach(function (d) { D.habits.days[d] = Object.assign({}, D.habits.days[d] || {}, hb[d]); });
       SUBJ = Object.assign({}, D.study.subjects || {});
       var byName = {}; Object.keys(SUBJ).forEach(function (k) { byName[SUBJ[k].toLowerCase()] = k; byName[k] = k; });
       D.logs.forEach(function (l) {

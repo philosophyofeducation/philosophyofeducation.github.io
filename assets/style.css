@@ -529,3 +529,17 @@ footer .shell { display: flex; justify-content: space-between; gap: 16px; flex-w
 .pl-meta { font-size: 0.78rem; color: var(--mute); } .pl-note { font-size: 0.8rem; color: var(--ink-2); }
 .pl-empty { color: #c9c9c9; margin: 0; }
 @media (max-width: 820px) { .pl-week { grid-template-columns: 1fr; } .pl-day { border-right: 0; border-bottom: 1px solid var(--rule); min-height: 0; } }
+
+/* Goals & bucket list */
+.gl-list, .bk-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.gl-list { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+.gl-item { border: 1px solid var(--rule); border-top: 3px solid var(--ink); padding: 14px 16px; display: grid; gap: 8px; }
+.gl-item.done { border-top-color: var(--mustard); } .gl-item.paused { opacity: .6; }
+.gl-item h3 { margin: 0; font-family: var(--display); font-size: 1.15rem; }
+.gl-top { display: flex; justify-content: space-between; align-items: center; }
+.gl-bar { height: 8px; background: #ececec; } .gl-bar span { display: block; height: 100%; background: var(--mustard); }
+.gl-pct { font-family: var(--mono); font-size: 0.8rem; color: var(--mute); }
+.bk-item { display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--rule); }
+.bk-item .ck { width: 20px; height: 20px; border: 1.5px solid var(--ink); flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; font-size: 0.8rem; }
+.bk-item.done .ck { background: var(--mustard); border-color: var(--mustard); }
+.bk-item.done strong { text-decoration: line-through; text-decoration-color: var(--mustard); text-decoration-thickness: 2px; }
