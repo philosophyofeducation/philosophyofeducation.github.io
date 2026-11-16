@@ -521,10 +521,10 @@ footer .shell { display: flex; justify-content: space-between; gap: 16px; flex-w
 .pl-dh { display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--mute); margin-bottom: 8px; }
 .pl-dh b { font-family: var(--mono); color: var(--ink); font-weight: 500; }
 .pl-day ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
-.pl-item { border-left: 4px solid var(--who); background: var(--paper); border-top: 1px solid var(--rule); border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 7px 8px; display: grid; gap: 2px; font-size: 0.86rem; }
+.pl-item { border-left: 4px solid var(--mustard); background: var(--paper); border-top: 1px solid var(--rule); border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 7px 8px; display: grid; gap: 2px; font-size: 0.86rem; }
 .pl-item.who-both { background: var(--soft); }
 .pl-item.done strong { text-decoration: line-through; color: var(--mute); }
-.pl-time { font-family: var(--mono); font-size: 0.8rem; } .pl-time small { color: var(--mute); }
+.pl-time { font-size: 0.8rem; color: var(--mute); } .pl-time small { color: var(--mute); }
 .pl-other { font-family: var(--mono); font-size: 0.72rem; color: var(--mute); }
 .pl-meta { font-size: 0.78rem; color: var(--mute); } .pl-note { font-size: 0.8rem; color: var(--ink-2); }
 .pl-empty { color: #c9c9c9; margin: 0; }

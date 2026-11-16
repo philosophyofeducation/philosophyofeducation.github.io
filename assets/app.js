@@ -942,62 +942,36 @@
     if (b && !b.disabled) b.click();
   });
 
-  // ---------- week (Jinny & Yongkyu) ----------
+  // ---------- 용규 (date plans, Korean) ----------
   var WK = { anchor: null };
-  var TZ = { 'America/Chicago': 'Champaign', 'Asia/Seoul': 'Seoul' };
-  function tzOffsetMin(tz, ms) {
-    var p = {}; new Intl.DateTimeFormat('en-US', { timeZone: tz, hourCycle: 'h23', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }).formatToParts(new Date(ms)).forEach(function (x) { p[x.type] = x.value; });
-    return (Date.UTC(+p.year, +p.month - 1, +p.day, +p.hour % 24, +p.minute) - ms) / 60000;
-  }
-  function toUTC(date, time, tz) {
-    var d = date.split('-'), t = (time || '00:00').split(':');
-    var guess = Date.UTC(+d[0], +d[1] - 1, +d[2], +t[0], +t[1]);
-    var ms = guess - tzOffsetMin(tz, guess) * 60000;
-    return guess - tzOffsetMin(tz, ms) * 60000;
-  }
-  function inTZ(ms, tz) {
-    var p = {}; new Intl.DateTimeFormat('en-US', { timeZone: tz, hourCycle: 'h23', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', weekday: 'short' }).formatToParts(new Date(ms)).forEach(function (x) { p[x.type] = x.value; });
-    return { date: p.year + '-' + p.month + '-' + p.day, time: (p.hour % 24) + ':' + p.minute, wd: p.weekday };
-  }
-  function t12(hhmm) { var a = hhmm.split(':'), h = +a[0], m = a[1]; return (h % 12 || 12) + ':' + m + (h < 12 ? ' AM' : ' PM'); }
+  var KWD = ['일', '월', '화', '수', '목', '금', '토'];
+  function k12(hhmm) { var a = hhmm.split(':'), h = +a[0]; return (h < 12 ? '오전 ' : '오후 ') + (h % 12 || 12) + (+a[1] ? ':' + a[1] : '시'); }
   function viewWeek() {
-    var P = D.plans || { people: {}, items: [] }, ppl = P.people || {};
-    var me = ppl.jinny || { tz: 'America/Chicago', name: 'Jinny' }, yk = ppl.yongkyu || { tz: 'Asia/Seoul', name: 'Yongkyu' };
+    var P = D.plans || { items: [] };
     var start = WK.anchor ? pd(WK.anchor) : monday(new Date()), tk = todayKey();
     var days = []; for (var i = 0; i < 7; i++) days.push(key(addDays(start, i)));
-    var items = (P.items || []).map(function (it, i) {
-      var tz = it.tz || (it.who === 'yongkyu' ? yk.tz : me.tz);
-      var ms = toUTC(it.date, it.time, tz), other = tz === me.tz ? yk.tz : me.tz;
-      return Object.assign({ _i: i, _tz: tz, _ms: ms, _other: other }, it);
-    });
-    var now = Date.now(), a = inTZ(now, me.tz), b = inTZ(now, yk.tz);
-    var WHO = { jinny: me.name, yongkyu: yk.name, both: 'Together' };
+    var items = P.items || [];
     function itemHTML(it) {
-      var when = '';
-      if (it.time) {
-        var o = inTZ(it._ms, it._other), shift = o.date === it.date ? '' : (o.date > it.date ? ' (+1 day)' : ' (−1 day)');
-        when = '<span class="pl-time">' + t12(it.time) + ' <small>' + esc(TZ[it._tz] || it._tz) + '</small></span><span class="pl-other">' + o.wd + ' ' + t12(o.time) + ' ' + esc(TZ[it._other] || it._other) + shift + '</span>';
-      } else when = '<span class="pl-time">All day</span>';
-      return '<li class="pl-item who-' + esc(it.who || 'both') + (it.done ? ' done' : '') + '">' + when +
-        '<strong>' + (it.who === 'both' ? '★ ' : '') + esc(it.title) + '</strong>' +
-        '<span class="pl-meta">' + esc(WHO[it.who] || 'Together') + (it.place ? ' · ' + esc(it.place) : '') + '</span>' +
+      return '<li class="pl-item' + (it.done ? ' done' : '') + '"><span class="pl-time">' + (it.time ? k12(it.time) : '하루 종일') + '</span>' +
+        '<strong>' + esc(it.title) + '</strong>' + (it.place ? '<span class="pl-meta">📍 ' + esc(it.place) + '</span>' : '') +
         (it.note ? '<span class="pl-note">' + esc(it.note) + '</span>' : '') + '</li>';
     }
+    var count = 0;
     var cols = days.map(function (k) {
-      var list = items.filter(function (it) { return it.date === k; }).sort(function (x, y) { return (x.time ? 1 : 0) - (y.time ? 1 : 0) || x._ms - y._ms; });
-      var d = pd(k);
-      return '<div class="pl-day' + (k === tk ? ' pl-today' : '') + '"><div class="pl-dh"><span>' + WD[d.getDay()] + '</span><b>' + (d.getMonth() + 1) + '/' + d.getDate() + '</b></div>' +
+      var list = items.filter(function (it) { return it.date === k; }).sort(function (x, y) { return (x.time || '') < (y.time || '') ? -1 : 1; });
+      count += list.length; var d = pd(k);
+      return '<div class="pl-day' + (k === tk ? ' pl-today' : '') + (list.length ? ' has' : '') + '"><div class="pl-dh"><span>' + KWD[d.getDay()] + '</span><b>' + (d.getMonth() + 1) + '/' + d.getDate() + '</b></div>' +
         (list.length ? '<ul>' + list.map(itemHTML).join('') + '</ul>' : '<p class="pl-empty">—</p>') + '</div>';
     }).join('');
     var e = pd(days[6]);
-    app.innerHTML = '<div class="view"><section style="display:grid;gap:14px"><span class="kicker">Yongkyu & Jinny</span><h1>Our week, two time zones.</h1>' +
-      '<div class="pl-clocks"><span class="who-jinny"><i></i>' + esc(me.name) + ' · ' + esc(me.city || 'Champaign') + ' <b>' + a.wd + ' ' + t12(a.time) + '</b></span>' +
-      '<span class="who-yongkyu"><i></i>' + esc(yk.name) + ' · ' + esc(yk.city || 'Seoul') + ' <b>' + b.wd + ' ' + t12(b.time) + '</b></span>' +
-      '<span class="who-both"><i></i>Together ★</span></div></section>' +
-      '<section><div class="sec-head"><h2>' + MON[start.getMonth()] + ' ' + start.getDate() + ' – ' + MON[e.getMonth()] + ' ' + e.getDate() + '</h2>' +
-      '<span class="btn-row"><button class="btn" data-wk="-7">← Prev</button><button class="btn" data-wk="0">This week</button><button class="btn" data-wk="7">Next →</button></span></div>' +
+    var upcoming = items.filter(function (it) { return it.date >= tk && !it.done; }).sort(function (x, y) { return x.date < y.date ? -1 : 1; })[0];
+    var dd = upcoming ? Math.round((pd(upcoming.date) - pd(tk)) / 864e5) : null;
+    app.innerHTML = '<div class="view" lang="ko"><section style="display:grid;gap:14px"><span class="kicker">용규 & 현진</span><h1>우리의 데이트 계획</h1>' +
+      (upcoming ? '<p class="lede">다음 만남: <b>' + esc(upcoming.title) + '</b> · ' + (upcoming.date.slice(5).replace('-', '/')) + ' (' + KWD[pd(upcoming.date).getDay()] + ') · ' + (dd === 0 ? '오늘!' : 'D-' + dd) + '</p>' : '') + '</section>' +
+      '<section><div class="sec-head"><h2>' + (start.getMonth() + 1) + '월 ' + start.getDate() + '일 – ' + (e.getMonth() + 1) + '월 ' + e.getDate() + '일</h2>' +
+      '<span class="btn-row"><button class="btn" data-wk="-7">← 지난주</button><button class="btn" data-wk="0">이번 주</button><button class="btn" data-wk="7">다음 주 →</button></span></div>' +
       '<div class="pl-week">' + cols + '</div>' +
-      '<p class="muted" style="margin-top:12px">Each plan shows its own local time and the time in the other city.</p></section></div>';
+      (count ? '' : '<p class="muted" style="margin-top:12px">이번 주는 아직 계획이 없어요.</p>') + '</section></div>';
     app.querySelectorAll('[data-wk]').forEach(function (bt) { bt.addEventListener('click', function () { var n = +bt.getAttribute('data-wk'); WK.anchor = n === 0 ? null : key(addDays(start, n)); viewWeek(); }); });
   }
 
@@ -1037,7 +1011,7 @@
     else if (routes[h]) { routes[h](); }
     else { section = 'home'; viewHome(); }
     document.querySelectorAll('[data-nav]').forEach(function (a) { if (a.getAttribute('data-nav') === section) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
-    var T = { home: '', studylog: 'Study Log', library: 'Library', words: 'Words', habits: 'Habits', yongkyu: 'Yongkyu', goals: 'Goals' };
+    var T = { home: '', studylog: 'Study Log', library: 'Library', words: 'Words', habits: 'Habits', yongkyu: '용규', goals: 'Goals' };
     document.title = (T[section] ? T[section] + ' · ' : '') + 'Jinny Hyunjin Kim';
     ownerBar();
   }

@@ -1,8 +1,4 @@
 {
-  "notes": "Plans for Jinny and Yongkyu. One item per plan. date + time are in the item's own time zone (tz). who: jinny, yongkyu, or both. time can be empty for all-day plans. done: true once it happened.",
-  "people": {
-    "jinny": { "name": "Jinny", "tz": "America/Chicago", "city": "Champaign" },
-    "yongkyu": { "name": "Yongkyu", "tz": "Asia/Seoul", "city": "Seoul" }
-  },
+  "notes": "현진과 용규의 데이트 계획. date: YYYY-MM-DD, time: HH:MM (비우면 하루 종일), title, place, note, done: true면 지난 일정.",
   "items": []
 }
