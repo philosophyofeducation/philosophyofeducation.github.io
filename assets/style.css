@@ -414,7 +414,7 @@ footer .shell { display: flex; justify-content: space-between; gap: 16px; flex-w
 @media (max-width: 860px) { .home-cal { grid-template-columns: 1fr; } .hc-day { position: static; } .cal.big button { min-height: 58px; padding: 5px; } .cal.big button .hb { display: none; } }
 
 .wtable-wrap { overflow-x: auto; }
-.wtable { border-collapse: collapse; width: 100%; font-size: 0.88rem; min-width: 820px; }
+.wtable { border-collapse: collapse; width: 100%; font-size: 0.88rem; min-width: 900px; }
 .wtable th, .wtable td { padding: 10px; border-bottom: 1px solid var(--rule); text-align: right; white-space: nowrap; }
 .wtable thead th { font-weight: 500; font-size: 0.72rem; color: var(--mute); text-transform: uppercase; letter-spacing: 0.04em; border-bottom: 1px solid var(--ink); }
 .wtable th[scope=row] { text-align: left; font-weight: 600; }
@@ -548,3 +548,8 @@ footer .shell { display: flex; justify-content: space-between; gap: 16px; flex-w
 .wstat button:last-child { border-right: 0; }
 .wstat button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
 .wstat button[data-wset="got it"][aria-pressed="true"] { background: var(--mustard); color: var(--ink); }
+
+.td-act { display: grid; grid-template-columns: 26px 1fr auto; gap: 10px; align-items: center; width: 100%; background: none; border: 0; padding: 0; font: inherit; color: inherit; text-align: left; cursor: pointer; }
+.td-list li:has(.td-act) { display: block; }
+.td-act:hover .tl { text-decoration: underline; }
+.td-act:focus-visible { outline: 2px solid var(--mustard); outline-offset: 3px; }

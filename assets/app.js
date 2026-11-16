@@ -141,7 +141,10 @@
   // ---------- habit check-in (owner, saved to the Habits tab of the Vocabulary Bank) ----------
   var CI = { date: null, status: '' };
   function canEdit() { return !!(WORDS_API && vocabKey()); }
+  function sheetHas(f) { return f !== 'supplements' || !!(D.habitCols && D.habitCols.indexOf(f) >= 0); }
   function saveHabit(date, patch) {
+    var blocked = Object.keys(patch).filter(function (f) { return !sheetHas(f); });
+    if (blocked.length) { CI.status = 'Supplements can\'t be saved here yet. Tell Claude for now.'; paintStatus(); return Promise.resolve(); }
     var cur = D.habits.days[date] = Object.assign({}, D.habits.days[date] || {}, patch);
     var body = { token: vocabKey(), habit: Object.assign({ date: date }, cur) };
     CI.status = 'Saving…'; paintStatus();
@@ -168,7 +171,7 @@
       '<div class="ci-grid"><div>' +
       '<div class="ci-row"><span class="ci-lab">Woke up</span><input type="time" data-ci-time="wake" value="' + esc(e.wake || '') + '"></div>' +
       '<div class="ci-row"><span class="ci-lab">Fell asleep <small>(the night before)</small></span><input type="time" data-ci-time="bed" value="' + esc(e.bed || '') + '"></div>' +
-      yn('vocabBuilder', 'Vocabulary Builder') + yn('analytic', 'Analytic philosophy') +
+      yn('vocabBuilder', 'English words') + yn('supplements', 'Supplements') + yn('analytic', 'Analytic philosophy') +
       '<div class="ci-row"><span class="ci-lab">Processed food or snacks</span><div class="seg sm"><button type="button" data-ci-bool="processed" data-v="false" aria-pressed="' + (e.processed === false) + '">None</button><button type="button" data-ci-bool="processed" data-v="true" aria-pressed="' + (e.processed === true) + '">Had some</button></div></div>' +
       '<div class="ci-row col"><span class="ci-lab">Exercise</span><div class="chips">' + EXERCISES.map(function (x) { return '<button type="button" class="chip" data-ci-ex="' + x + '" aria-pressed="' + !!(ex && ex.indexOf(x) >= 0) + '">' + x + '</button>'; }).join('') +
       '<button type="button" class="chip" data-ci-ex="__rest" aria-pressed="' + !!(ex && !ex.length) + '">rest day</button></div></div>' +
@@ -233,31 +236,46 @@
       '<section><div class="sec-head"><h2>Reading now</h2><a class="more" href="#library">Library →</a></div>' +
       (reading.length ? '<div class="post-list">' + reading.slice(0, 4).map(function (b) { return '<a class="post-item" href="#book-' + esc(b.id) + '"><span class="muted">' + esc(b.author.split(',')[0]) + '</span><h3>' + esc(b.title) + '</h3></a>'; }).join('') + '</div>' : '<div class="empty-state">Nothing on the desk.</div>') + '</section></div>';
     app.innerHTML = html;
-    if (canEdit()) bindCheckin(app, function () { var y = window.scrollY; viewHome(); window.scrollTo(0, y); });
+    if (canEdit()) { var rd = function () { var y = window.scrollY; viewHome(); window.scrollTo(0, y); }; bindCheckin(app, rd); bindToday(rd); }
     app.querySelectorAll('[data-hm]').forEach(function (bt) { bt.addEventListener('click', function () { var dd = pd(homeState.month + '-01'); dd.setMonth(dd.getMonth() + (+bt.getAttribute('data-hm'))); homeState.month = key(dd).slice(0, 7); viewHome(); }); });
     app.querySelectorAll('.cal.big [data-k]').forEach(function (bt) { bt.addEventListener('click', function () { homeState.sel = bt.getAttribute('data-k'); app.querySelectorAll('.cal.big [data-k]').forEach(function (x) { x.classList.toggle('sel', x === bt); x.setAttribute('aria-pressed', x === bt); }); drawDayPanel(homeState.sel); }); });
     drawDayPanel(homeState.sel);
     var items = []; for (var i = 29; i >= 0; i--) { (function (k) { var d = pd(k); items.push({ label: (d.getMonth() + 1) + '/' + d.getDate(), value: dayMin(k), tip: fmtDate(k) + ': ' + hm(dayMin(k)), onClick: function () { homeState.sel = k; homeState.month = k.slice(0, 7); viewHome(); } }); })(key(addDays(pd(tk), -i))); }
     barChart(document.getElementById('home-chart'), items, { goal: goal(), label: 'Study hours, last 30 days' });
   }
+  function wordsToday(tk) { return (D.words || []).some(function (w) { return w.last === tk; }); }
   function todayHTML(tk) {
-    var m = dayMin(tk), g = goal(), e = D.habits.days[tk], gl = D.habits.goals || {};
-    var sl = H('sleep').val(tk, e), wk = H('wake').val(tk, e), th = H('thought').val(tk), vb = H('vocab').val(tk, e), an = H('analytic').val(tk, e);
+    var m = dayMin(tk), g = goal(), e = D.habits.days[tk] || {}, edit = canEdit();
+    var vb = e.vocabBuilder === true || wordsToday(tk), ex = H('exercise').val(tk, e), proc = H('food').val(tk, e), sup = e.supplements;
     var wkMet = 0; for (var d = monday(pd(tk)); key(d) <= tk; d = addDays(d, 1)) if (dayMin(key(d)) >= g) wkMet++;
-    function item(state, label, note) { return '<li class="' + state + '"><span class="ck" aria-hidden="true">' + (state === 'done' ? '✓' : '') + '</span><span class="tl">' + label + '</span><span class="tn">' + note + '</span></li>'; }
-    var items =
-      item(m >= g ? 'done' : 'todo', 'Study 5 hours', hm(m) + ' so far') +
-      item(vb ? 'done' : 'todo', 'Vocabulary Builder', vb ? 'done' : (vb === false ? 'skipped' : 'not yet')) +
-      item(an ? 'done' : 'todo', 'Analytic philosophy reading', an ? 'done' : (an === false ? 'skipped' : 'not yet')) +
-      item(th ? 'done' : 'todo', 'A thought in my own words', th ? th + ' written' : 'not yet') +
-      item(wk != null && gl.wake && wk <= tmin(gl.wake) ? 'done' : (wk != null ? 'off' : 'todo'), 'Up by ' + tfmt(tmin(gl.wake || '07:00')), wk != null ? 'woke ' + tfmt(wk) : 'no record') +
-      item(sl != null && sl >= (gl.sleepHours || 7) ? 'done' : (sl != null ? 'off' : 'todo'), 'Sleep ' + (gl.sleepHours || 7) + 'h+', sl != null ? sl.toFixed(1) + 'h' : 'no record');
-    var doneN = (m >= g) + !!vb + !!an + !!th + (wk != null && gl.wake && wk <= tmin(gl.wake)) + (sl != null && sl >= (gl.sleepHours || 7));
+    function item(state, label, note, act) {
+      var inner = '<span class="ck" aria-hidden="true">' + (state === 'done' ? '✓' : '') + '</span><span class="tl">' + label + '</span><span class="tn">' + note + '</span>';
+      return '<li class="' + state + '">' + (edit && act ? '<button type="button" class="td-act" data-td="' + act + '" aria-pressed="' + (state === 'done') + '">' + inner + '</button>' : inner) + '</li>';
+    }
+    var foodDone = proc === false || (proc === true && isWeekend(tk));
+    var rows = [
+      [m >= g, item(m >= g ? 'done' : 'todo', 'Study 5 hours', hm(m) + ' so far', null)],
+      [vb, item(vb ? 'done' : (e.vocabBuilder === false ? 'off' : 'todo'), 'English words', vb ? (e.vocabBuilder ? 'done' : 'quizzed today') : (e.vocabBuilder === false ? 'skipped' : 'not yet'), 'vocabBuilder')],
+      [foodDone, item(foodDone ? 'done' : (proc ? 'off' : 'todo'), 'No processed food', proc == null ? 'not yet' : (proc ? (isWeekend(tk) ? 'weekend treat' : 'had some') : 'clean'), 'processed')],
+      [!!(ex && ex.length), item(ex && ex.length ? 'done' : (ex ? 'off' : 'todo'), 'Exercise', ex ? (ex.length ? ex.join(', ') : 'rest day') : 'not yet', 'exercise')],
+      [sup === true, item(sup === true ? 'done' : (sup === false ? 'off' : 'todo'), 'Supplements', sup === true ? 'taken' : (sup === false ? 'skipped' : 'not yet'), 'supplements')]
+    ];
+    var doneN = rows.filter(function (r) { return r[0]; }).length;
     return '<section class="today"><div class="td-main"><span class="kicker">Today · ' + esc(fmtDate(tk)) + '</span><div class="td-big">' + hm(m) + '</div>' +
       '<div class="bar goal"><span style="width:' + Math.min(100, m / g * 100).toFixed(1) + '%"></span></div>' +
       '<span class="muted">' + (m >= g ? '5-hour goal met. Well done.' : hm(g - m) + ' to go for 5 hours') + '</span>' +
       '<div class="chips"><span class="pill ' + (streak() ? 'goal' : 'soft') + '">' + (streak() ? streak() + '-day 5h streak' : 'Start a 5h streak today') + '</span><span class="pill soft">' + wkMet + ' day' + (wkMet === 1 ? '' : 's') + ' at 5h+ this week</span></div></div>' +
-      '<div class="td-list"><div class="td-head"><span class="kicker">Today\'s list</span><span class="td-count">' + doneN + ' / 6</span></div><ul>' + items + '</ul></div></section>';
+      '<div class="td-list"><div class="td-head"><span class="kicker">Today\'s list' + (edit ? ' · tap to check' : '') + '</span><span class="td-count">' + doneN + ' / ' + rows.length + '</span></div><ul>' + rows.map(function (r) { return r[1]; }).join('') + '</ul></div></section>';
+  }
+  function bindToday(redraw) {
+    var tk = todayKey();
+    app.querySelectorAll('[data-td]').forEach(function (b) { b.addEventListener('click', function () {
+      var f = b.getAttribute('data-td'), e = D.habits.days[tk] || {}, p = {};
+      if (f === 'processed') p.processed = e.processed === false ? true : false;
+      else if (f === 'exercise') { CI.date = tk; var c = document.getElementById('checkin'); if (c) { c.scrollIntoView({ behavior: 'smooth', block: 'center' }); var chip = c.querySelector('[data-ci-ex]'); if (chip) chip.focus({ preventScroll: true }); } return; }
+      else p[f] = e[f] === true ? false : true;
+      CI.date = tk; saveHabit(tk, p).then(redraw); redraw();
+    }); });
   }
   function calCells(mStart, mEnd, tk) {
     var first = pd(mStart), pad = (first.getDay() + 6) % 7, out = '', g = goal();
@@ -553,7 +571,9 @@
       met: function (v, g) { return g.studyStart ? v <= tmin(g.studyStart) : true; }, goal: function (g) { return g.studyStart ? 'by ' + tfmt(tmin(g.studyStart)) + ' · from YPT' : 'from YPT'; } },
     { id: 'hours', name: 'Studied 5h+', val: function (k) { var ks = Object.keys(D.study.days).sort(); if (!ks.length || k < ks[0] || k > todayKey()) return null; var d = D.study.days[k] || {}, m = 0; for (var x in d) m += d[x]; if (k === todayKey() && m < (D.habits.goals.studyMinutes || 300)) return null; return m; }, show: function (v) { return v == null ? '–' : hm(v); },
       met: function (v, g) { return v >= (g.studyMinutes || 300); }, goal: function (g) { return hm(g.studyMinutes || 300) + '+ · from YPT'; } },
-    { id: 'vocab', name: 'Vocabulary Builder', val: function (k, e) { return e && typeof e.vocabBuilder === 'boolean' ? e.vocabBuilder : null; }, show: function (v) { return v == null ? '–' : (v ? 'done' : 'skipped'); },
+    { id: 'supp', name: 'Supplements', val: function (k, e) { return e && typeof e.supplements === 'boolean' ? e.supplements : null; }, show: function (v) { return v == null ? '–' : (v ? 'taken' : 'skipped'); },
+      met: function (v) { return v; }, goal: function () { return 'every day'; } },
+    { id: 'vocab', name: 'English words', val: function (k, e) { if (e && e.vocabBuilder === true) return true; if ((D.words || []).some(function (w) { return w.last === k; })) return true; return e && typeof e.vocabBuilder === 'boolean' ? e.vocabBuilder : null; }, show: function (v) { return v == null ? '–' : (v ? 'done' : 'skipped'); },
       met: function (v) { return v; }, goal: function () { return 'every day'; } },
     { id: 'analytic', name: 'Analytic philosophy', val: function (k, e) { return e && typeof e.analytic === 'boolean' ? e.analytic : null; }, show: function (v) { return v == null ? '–' : (v ? 'read' : 'skipped'); },
       met: function (v) { return v; }, goal: function () { return 'every day'; } },
@@ -637,9 +657,9 @@
         '<td>' + hm(tot) + '</td><td class="' + (met('hours') ? 'ok' : '') + '">' + met('hours') + '</td>' +
         '<td>' + tfmt(st) + '</td><td>' + tfmt(wk) + '</td><td>' + (sl == null ? '–' : sl.toFixed(1) + 'h') + '</td>' +
         '<td class="' + (rec('exercise') && met('exercise') >= (g.exerciseDaysPerWeek || 4) ? 'ok' : '') + '">' + (rec('exercise') ? met('exercise') : '–') + '</td>' +
-        '<td>' + frac('food') + '</td><td>' + frac('vocab') + '</td><td>' + frac('analytic') + '</td><td>' + (met('thought') || '–') + '</td></tr>');
+        '<td>' + frac('food') + '</td><td>' + frac('vocab') + '</td><td>' + frac('supp') + '</td><td>' + frac('analytic') + '</td><td>' + (met('thought') || '–') + '</td></tr>');
     }
-    return '<section><div class="sec-head"><h2>Week by week</h2><span class="muted">mustard = on target</span></div><div class="wtable-wrap"><table class="wtable"><thead><tr><th></th><th>Study</th><th>5h+ days</th><th>Avg start</th><th>Avg wake</th><th>Avg sleep</th><th>Exercise days</th><th>Clean eating</th><th>Vocab Builder</th><th>Analytic</th><th>Thoughts</th></tr></thead><tbody>' + rows.join('') + '</tbody></table></div></section>';
+    return '<section><div class="sec-head"><h2>Week by week</h2><span class="muted">mustard = on target</span></div><div class="wtable-wrap"><table class="wtable"><thead><tr><th></th><th>Study</th><th>5h+ days</th><th>Avg start</th><th>Avg wake</th><th>Avg sleep</th><th>Exercise days</th><th>Clean eating</th><th>English words</th><th>Supplements</th><th>Analytic</th><th>Thoughts</th></tr></thead><tbody>' + rows.join('') + '</tbody></table></div></section>';
   }
   function viewHabits() {
     var tk = todayKey(), g = D.habits.goals || {}, N = 28, keys = [];
@@ -1042,10 +1062,10 @@
   window.addEventListener('hashchange', function () { render(); window.scrollTo(0, 0); });
 
   function getJSON(p) { return fetch(p, { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw new Error(p); return r.json(); }); }
-  Promise.all([getJSON('data/study.json'), getJSON('logs/index.json').catch(function () { return []; }), getJSON('posts/index.json').catch(function () { return []; }), getJSON('data/library.json').catch(function () { return { items: [] }; }), getJSON('data/habits.json').catch(function () { return { goals: {}, days: {} }; }), getJSON('data/plans.json').catch(function () { return { people: {}, items: [] }; }), getJSON('data/goals.json').catch(function () { return { goals: [], bucket: [] }; }), (WORDS_API ? fetch(WORDS_API, { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (j) { return { words: j.rows.map(mapApiRow).filter(function (w) { return w.word; }), live: true, habits: j.habits || {} }; }).catch(function () { return getJSON('data/words.json'); }) : getJSON('data/words.json')).catch(function () { return { words: [] }; })])
+  Promise.all([getJSON('data/study.json'), getJSON('logs/index.json').catch(function () { return []; }), getJSON('posts/index.json').catch(function () { return []; }), getJSON('data/library.json').catch(function () { return { items: [] }; }), getJSON('data/habits.json').catch(function () { return { goals: {}, days: {} }; }), getJSON('data/plans.json').catch(function () { return { people: {}, items: [] }; }), getJSON('data/goals.json').catch(function () { return { goals: [], bucket: [] }; }), (WORDS_API ? fetch(WORDS_API, { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (j) { return { words: j.rows.map(mapApiRow).filter(function (w) { return w.word; }), live: true, habits: j.habits || {}, habitCols: j.habitCols || null }; }).catch(function () { return getJSON('data/words.json'); }) : getJSON('data/words.json')).catch(function () { return { words: [] }; })])
     .then(function (res) {
       D.study = res[0]; D.logs = res[1]; D.posts = res[2]; D.library = res[3].items || []; D.habits = res[4]; D.plans = res[5]; D.goals = res[6]; D.words = res[7].words || []; D.wordsLive = !!res[7].live;
-      var hb = res[7].habits || {}; D.habits.days = D.habits.days || {}; Object.keys(hb).forEach(function (d) { D.habits.days[d] = Object.assign({}, D.habits.days[d] || {}, hb[d]); });
+      D.habitCols = res[7].habitCols || null; var hb = res[7].habits || {}; D.habits.days = D.habits.days || {}; Object.keys(hb).forEach(function (d) { D.habits.days[d] = Object.assign({}, D.habits.days[d] || {}, hb[d]); });
       SUBJ = Object.assign({}, D.study.subjects || {});
       var byName = {}; Object.keys(SUBJ).forEach(function (k) { byName[SUBJ[k].toLowerCase()] = k; byName[k] = k; });
       D.logs.forEach(function (l) {
