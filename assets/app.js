@@ -942,8 +942,67 @@
     if (b && !b.disabled) b.click();
   });
 
+  // ---------- week (Jinny & Yongkyu) ----------
+  var WK = { anchor: null };
+  var TZ = { 'America/Chicago': 'Champaign', 'Asia/Seoul': 'Seoul' };
+  function tzOffsetMin(tz, ms) {
+    var p = {}; new Intl.DateTimeFormat('en-US', { timeZone: tz, hourCycle: 'h23', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }).formatToParts(new Date(ms)).forEach(function (x) { p[x.type] = x.value; });
+    return (Date.UTC(+p.year, +p.month - 1, +p.day, +p.hour % 24, +p.minute) - ms) / 60000;
+  }
+  function toUTC(date, time, tz) {
+    var d = date.split('-'), t = (time || '00:00').split(':');
+    var guess = Date.UTC(+d[0], +d[1] - 1, +d[2], +t[0], +t[1]);
+    var ms = guess - tzOffsetMin(tz, guess) * 60000;
+    return guess - tzOffsetMin(tz, ms) * 60000;
+  }
+  function inTZ(ms, tz) {
+    var p = {}; new Intl.DateTimeFormat('en-US', { timeZone: tz, hourCycle: 'h23', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', weekday: 'short' }).formatToParts(new Date(ms)).forEach(function (x) { p[x.type] = x.value; });
+    return { date: p.year + '-' + p.month + '-' + p.day, time: (p.hour % 24) + ':' + p.minute, wd: p.weekday };
+  }
+  function t12(hhmm) { var a = hhmm.split(':'), h = +a[0], m = a[1]; return (h % 12 || 12) + ':' + m + (h < 12 ? ' AM' : ' PM'); }
+  function viewWeek() {
+    var P = D.plans || { people: {}, items: [] }, ppl = P.people || {};
+    var me = ppl.jinny || { tz: 'America/Chicago', name: 'Jinny' }, yk = ppl.yongkyu || { tz: 'Asia/Seoul', name: 'Yongkyu' };
+    var start = WK.anchor ? pd(WK.anchor) : monday(new Date()), tk = todayKey();
+    var days = []; for (var i = 0; i < 7; i++) days.push(key(addDays(start, i)));
+    var items = (P.items || []).map(function (it, i) {
+      var tz = it.tz || (it.who === 'yongkyu' ? yk.tz : me.tz);
+      var ms = toUTC(it.date, it.time, tz), other = tz === me.tz ? yk.tz : me.tz;
+      return Object.assign({ _i: i, _tz: tz, _ms: ms, _other: other }, it);
+    });
+    var now = Date.now(), a = inTZ(now, me.tz), b = inTZ(now, yk.tz);
+    var WHO = { jinny: me.name, yongkyu: yk.name, both: 'Together' };
+    function itemHTML(it) {
+      var when = '';
+      if (it.time) {
+        var o = inTZ(it._ms, it._other), shift = o.date === it.date ? '' : (o.date > it.date ? ' (+1 day)' : ' (−1 day)');
+        when = '<span class="pl-time">' + t12(it.time) + ' <small>' + esc(TZ[it._tz] || it._tz) + '</small></span><span class="pl-other">' + o.wd + ' ' + t12(o.time) + ' ' + esc(TZ[it._other] || it._other) + shift + '</span>';
+      } else when = '<span class="pl-time">All day</span>';
+      return '<li class="pl-item who-' + esc(it.who || 'both') + (it.done ? ' done' : '') + '">' + when +
+        '<strong>' + (it.who === 'both' ? '★ ' : '') + esc(it.title) + '</strong>' +
+        '<span class="pl-meta">' + esc(WHO[it.who] || 'Together') + (it.place ? ' · ' + esc(it.place) : '') + '</span>' +
+        (it.note ? '<span class="pl-note">' + esc(it.note) + '</span>' : '') + '</li>';
+    }
+    var cols = days.map(function (k) {
+      var list = items.filter(function (it) { return it.date === k; }).sort(function (x, y) { return (x.time ? 1 : 0) - (y.time ? 1 : 0) || x._ms - y._ms; });
+      var d = pd(k);
+      return '<div class="pl-day' + (k === tk ? ' pl-today' : '') + '"><div class="pl-dh"><span>' + WD[d.getDay()] + '</span><b>' + (d.getMonth() + 1) + '/' + d.getDate() + '</b></div>' +
+        (list.length ? '<ul>' + list.map(itemHTML).join('') + '</ul>' : '<p class="pl-empty">—</p>') + '</div>';
+    }).join('');
+    var e = pd(days[6]);
+    app.innerHTML = '<div class="view"><section style="display:grid;gap:14px"><span class="kicker">Week</span><h1>Our week, two time zones.</h1>' +
+      '<div class="pl-clocks"><span class="who-jinny"><i></i>' + esc(me.name) + ' · ' + esc(me.city || 'Champaign') + ' <b>' + a.wd + ' ' + t12(a.time) + '</b></span>' +
+      '<span class="who-yongkyu"><i></i>' + esc(yk.name) + ' · ' + esc(yk.city || 'Seoul') + ' <b>' + b.wd + ' ' + t12(b.time) + '</b></span>' +
+      '<span class="who-both"><i></i>Together ★</span></div></section>' +
+      '<section><div class="sec-head"><h2>' + MON[start.getMonth()] + ' ' + start.getDate() + ' – ' + MON[e.getMonth()] + ' ' + e.getDate() + '</h2>' +
+      '<span class="btn-row"><button class="btn" data-wk="-7">← Prev</button><button class="btn" data-wk="0">This week</button><button class="btn" data-wk="7">Next →</button></span></div>' +
+      '<div class="pl-week">' + cols + '</div>' +
+      '<p class="muted" style="margin-top:12px">Each plan shows its own local time and the time in the other city.</p></section></div>';
+    app.querySelectorAll('[data-wk]').forEach(function (bt) { bt.addEventListener('click', function () { var n = +bt.getAttribute('data-wk'); WK.anchor = n === 0 ? null : key(addDays(start, n)); viewWeek(); }); });
+  }
+
   // ---------- router ----------
-  var routes = { home: viewHome, studylog: viewStudyLog, library: viewLibrary, habits: viewHabits, words: viewWords };
+  var routes = { home: viewHome, studylog: viewStudyLog, library: viewLibrary, habits: viewHabits, words: viewWords, week: viewWeek };
   function render() {
     var h = (location.hash || '#home').slice(1);
     if (h === 'owner') { try { localStorage.setItem('owner', '1'); } catch (e) {} location.replace('#home'); return; }
@@ -958,7 +1017,7 @@
     else if (routes[h]) { routes[h](); }
     else { section = 'home'; viewHome(); }
     document.querySelectorAll('[data-nav]').forEach(function (a) { if (a.getAttribute('data-nav') === section) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
-    var T = { home: '', studylog: 'Study Log', library: 'Library', words: 'Words', habits: 'Habits' };
+    var T = { home: '', studylog: 'Study Log', library: 'Library', words: 'Words', habits: 'Habits', week: 'Week' };
     document.title = (T[section] ? T[section] + ' · ' : '') + 'Jinny Hyunjin Kim';
     ownerBar();
   }
@@ -971,10 +1030,10 @@
   window.addEventListener('hashchange', function () { render(); window.scrollTo(0, 0); });
 
   function getJSON(p) { return fetch(p, { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw new Error(p); return r.json(); }); }
-  Promise.all([getJSON('data/study.json'), getJSON('logs/index.json').catch(function () { return []; }), getJSON('posts/index.json').catch(function () { return []; }), getJSON('data/library.json').catch(function () { return { items: [] }; }), getJSON('data/habits.json').catch(function () { return { goals: {}, days: {} }; }), (WORDS_API ? fetch(WORDS_API, { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (j) { return { words: j.rows.map(mapApiRow).filter(function (w) { return w.word; }), live: true, habits: j.habits || {} }; }).catch(function () { return getJSON('data/words.json'); }) : getJSON('data/words.json')).catch(function () { return { words: [] }; })])
+  Promise.all([getJSON('data/study.json'), getJSON('logs/index.json').catch(function () { return []; }), getJSON('posts/index.json').catch(function () { return []; }), getJSON('data/library.json').catch(function () { return { items: [] }; }), getJSON('data/habits.json').catch(function () { return { goals: {}, days: {} }; }), getJSON('data/plans.json').catch(function () { return { people: {}, items: [] }; }), (WORDS_API ? fetch(WORDS_API, { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (j) { return { words: j.rows.map(mapApiRow).filter(function (w) { return w.word; }), live: true, habits: j.habits || {} }; }).catch(function () { return getJSON('data/words.json'); }) : getJSON('data/words.json')).catch(function () { return { words: [] }; })])
     .then(function (res) {
-      D.study = res[0]; D.logs = res[1]; D.posts = res[2]; D.library = res[3].items || []; D.habits = res[4]; D.words = res[5].words || []; D.wordsLive = !!res[5].live;
-      var hb = res[5].habits || {}; D.habits.days = D.habits.days || {}; Object.keys(hb).forEach(function (d) { D.habits.days[d] = Object.assign({}, D.habits.days[d] || {}, hb[d]); });
+      D.study = res[0]; D.logs = res[1]; D.posts = res[2]; D.library = res[3].items || []; D.habits = res[4]; D.plans = res[5]; D.words = res[6].words || []; D.wordsLive = !!res[6].live;
+      var hb = res[6].habits || {}; D.habits.days = D.habits.days || {}; Object.keys(hb).forEach(function (d) { D.habits.days[d] = Object.assign({}, D.habits.days[d] || {}, hb[d]); });
       SUBJ = Object.assign({}, D.study.subjects || {});
       var byName = {}; Object.keys(SUBJ).forEach(function (k) { byName[SUBJ[k].toLowerCase()] = k; byName[k] = k; });
       D.logs.forEach(function (l) {

@@ -507,3 +507,25 @@ footer .shell { display: flex; justify-content: space-between; gap: 16px; flex-w
 .wl-f .w-ex { margin: 4px 0 0; font-size: 0.92rem; }
 .wl-f blockquote { margin: 4px 0; font-size: 0.92rem; }
 @media (max-width: 720px) { .wl-tools { position: static; } }
+
+/* Week (Jinny & Yongkyu) */
+.who-jinny { --who: var(--mustard); } .who-yongkyu { --who: #8a8a8a; } .who-both { --who: var(--ink); }
+.pl-clocks { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 0.92rem; color: var(--ink-2); }
+.pl-clocks span { display: inline-flex; align-items: center; gap: 8px; }
+.pl-clocks i { width: 10px; height: 10px; background: var(--who); display: inline-block; }
+.pl-clocks b { font-family: var(--mono); font-weight: 500; color: var(--ink); }
+.pl-week { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); border-top: 1.5px solid var(--ink); }
+.pl-day { border-right: 1px solid var(--rule); padding: 10px 8px 14px; min-height: 160px; }
+.pl-day:last-child { border-right: 0; }
+.pl-day.pl-today { background: var(--mustard-soft); }
+.pl-dh { display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--mute); margin-bottom: 8px; }
+.pl-dh b { font-family: var(--mono); color: var(--ink); font-weight: 500; }
+.pl-day ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.pl-item { border-left: 4px solid var(--who); background: var(--paper); border-top: 1px solid var(--rule); border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 7px 8px; display: grid; gap: 2px; font-size: 0.86rem; }
+.pl-item.who-both { background: var(--soft); }
+.pl-item.done strong { text-decoration: line-through; color: var(--mute); }
+.pl-time { font-family: var(--mono); font-size: 0.8rem; } .pl-time small { color: var(--mute); }
+.pl-other { font-family: var(--mono); font-size: 0.72rem; color: var(--mute); }
+.pl-meta { font-size: 0.78rem; color: var(--mute); } .pl-note { font-size: 0.8rem; color: var(--ink-2); }
+.pl-empty { color: #c9c9c9; margin: 0; }
+@media (max-width: 820px) { .pl-week { grid-template-columns: 1fr; } .pl-day { border-right: 0; border-bottom: 1px solid var(--rule); min-height: 0; } }
