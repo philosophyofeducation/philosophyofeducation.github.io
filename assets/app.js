@@ -720,6 +720,23 @@
     } else if (!correct) { w.streak = 0; w.status = 'shaky'; }
     pending.push({ word: w.word, kind: kind, correct: !!correct }); sendResults();
   }
+  function setStatus(w, st) {
+    if (w.status === st) return;
+    w.status = st; w.streak = st === 'got it' ? Math.max(w.streak || 0, MASTERY) : 0;
+    pending.push({ word: w.word, kind: 'set', status: st }); sendResults();
+  }
+  function statusPicker(w) {
+    if (!(WORDS_API && vocabKey())) return '';
+    return '<span class="wstat" role="group" aria-label="Set status">' + [['new', 'New'], ['shaky', 'Shaky'], ['got it', '★ Got it']].map(function (o) {
+      return '<button type="button" data-wset="' + esc(o[0]) + '" data-wword="' + esc(w.word) + '" aria-pressed="' + (w.status === o[0]) + '">' + o[1] + '</button>';
+    }).join('') + '</span>';
+  }
+  function bindStatus(root, redraw) {
+    root.querySelectorAll('[data-wset]').forEach(function (b) { b.addEventListener('click', function (e) {
+      e.stopPropagation(); var w = D.words.find(function (x) { return x.word === b.getAttribute('data-wword'); });
+      if (w) { setStatus(w, b.getAttribute('data-wset')); redraw(); }
+    }); });
+  }
   function masteryHTML(w) {
     if (w.status === 'got it') return '<span class="mastery done" title="Got it">★ Got it</span>';
     var n = Math.min(MASTERY, w.streak || 0), dots = '';
@@ -840,7 +857,7 @@
       '<h2 class="w-word">' + esc(w.word) + '</h2><div class="w-ko">' + esc(w.ko) + '</div><p class="w-en">' + esc(w.en) + '</p>' +
       (w.usage ? '<div class="w-block"><span class="w-lab">How it\'s used</span><p>' + esc(w.usage) + '</p></div>' : '') +
       (w.ety ? '<div class="w-block"><span class="w-lab">Roots</span><p>' + esc(w.ety) + '</p></div>' : '') +
-      '<div class="pg-foot">' + masteryHTML(w) + '<span class="pill ' + (w.status === 'shaky' ? '' : 'soft') + '">' + esc(w.status) + '</span>' + (w.record ? '<span class="muted pg-rec">quiz ' + esc(w.record) + ' right</span>' : '') + '</div></div>';
+      '<div class="pg-foot">' + masteryHTML(w) + (statusPicker(w) || '<span class="pill ' + (w.status === 'shaky' ? '' : 'soft') + '">' + esc(w.status) + '</span>') + (w.record ? '<span class="muted pg-rec">quiz ' + esc(w.record) + ' right</span>' : '') + '</div></div>';
     var right = '<div class="page right">' + (w.tip ? '<div class="w-tip"><span class="w-lab">Memory tip</span><p>' + esc(w.tip) + '</p></div>' : '') +
       (w.text ? '<div class="w-block"><span class="w-lab">Where I met it</span><blockquote>' + esc(w.text) + '</blockquote>' + (w.source ? '<span class="muted w-src">' + esc(w.source) + '</span>' : '') + '</div>' : '') +
       (w.ex && w.ex.length ? '<div class="w-block"><span class="w-lab">Examples</span><ol class="w-ex">' + w.ex.map(function (x) { var re = blankRe(w.word); return '<li>' + (re ? esc(x).replace(re, function (m) { return '<mark>' + m + '</mark>'; }) : esc(x)) + '</li>'; }).join('') + '</ol></div>' : '') + '</div>';
@@ -861,7 +878,7 @@
     }
     if (W.mode === 'book') {
       box.innerHTML = '<div class="wbook" aria-live="polite">' + wordPages(w) + '</div>' + nav() + '<p class="muted wkeys">Tip: use the ← → keys to turn pages.</p>';
-      bindNav();
+      bindNav(); bindStatus(box, function () { drawWordBody(set); });
     } else if (W.mode === 'cards') {
       box.innerHTML = '<div class="fcard' + (W.flip ? ' flipped' : '') + '" tabindex="0" role="button" aria-label="Flip card"><div class="face front"><span class="w-lab">' + esc(w.sub || '') + '</span><h2 class="w-word">' + esc(w.word) + '</h2><span class="muted">Say the meaning, then click to flip</span></div>' +
         '<div class="face back"><div class="w-ko">' + esc(w.ko) + '</div><p class="w-en">' + esc(w.en) + '</p>' + (w.tip ? '<p class="w-tipline">' + esc(w.tip) + '</p>' : '') + '</div></div>' +
@@ -925,7 +942,7 @@
       if (cat !== lastCat) { head = '<h2 class="wl-cat">' + esc(cat) + '</h2>'; lastCat = cat; }
       return head + '<div class="wgroup"><h3>' + esc(sub || cat) + ' <span class="muted wl-n">' + groups[g].length + '</span></h3><div class="wl-items">' + groups[g].map(function (w) {
         var open = !!listOpen[w.word], fields = LIST_FIELDS.filter(function (f) { return show[f[0]] || open; }).map(function (f) { return field(w, f[0]); }).join('');
-        return '<article class="wl-item' + (open ? ' open' : '') + '"><div class="wl-head"><button type="button" class="wl-word" data-wlpeek="' + esc(w.word) + '" title="' + (open ? 'Hide details' : 'Show everything for this word') + '">' + esc(w.word) + '</button>' + masteryHTML(w) + (w.status === 'shaky' ? '<span class="pill">shaky</span>' : '') + '<button type="button" class="linkbtn wl-open" data-wopen="' + esc(w.word) + '">book ↗</button></div>' + (fields ? '<div class="wl-body">' + fields + '</div>' : '') + '</article>';
+        return '<article class="wl-item' + (open ? ' open' : '') + '"><div class="wl-head"><button type="button" class="wl-word" data-wlpeek="' + esc(w.word) + '" title="' + (open ? 'Hide details' : 'Show everything for this word') + '">' + esc(w.word) + '</button>' + masteryHTML(w) + (statusPicker(w) || (w.status === 'shaky' ? '<span class="pill">shaky</span>' : '')) + '<button type="button" class="linkbtn wl-open" data-wopen="' + esc(w.word) + '">book ↗</button></div>' + (fields ? '<div class="wl-body">' + fields + '</div>' : '') + '</article>';
       }).join('') + '</div></div>';
     }).join('');
     box.innerHTML = '<div class="wl-tools"><span class="w-lab">Show</span><div class="wl-toggles">' + LIST_FIELDS.map(function (f) { return '<button type="button" class="wl-tg" data-wltg="' + f[0] + '" aria-pressed="' + !!show[f[0]] + '">' + f[1] + '</button>'; }).join('') + '</div>' +
@@ -935,6 +952,7 @@
     box.querySelectorAll('[data-wlall]').forEach(function (b) { b.addEventListener('click', function () { var on = b.getAttribute('data-wlall') === '1', s2 = {}; LIST_FIELDS.forEach(function (f) { s2[f[0]] = on; }); lsSet('wordlistshow', s2); listOpen = {}; drawWordList(box, set); }); });
     box.querySelectorAll('[data-wlpeek]').forEach(function (b) { b.addEventListener('click', function () { var k = b.getAttribute('data-wlpeek'); listOpen[k] = !listOpen[k]; drawWordList(box, set); }); });
     box.querySelectorAll('[data-wopen]').forEach(function (b) { b.addEventListener('click', function () { W.idx = set.findIndex(function (x) { return x.word === b.getAttribute('data-wopen'); }); W.mode = 'book'; viewWords(); window.scrollTo(0, 0); }); });
+    bindStatus(box, function () { var y = window.scrollY; drawWordList(box, set); window.scrollTo(0, y); });
   }
   document.addEventListener('keydown', function (e) {
     if (location.hash !== '#words' || /INPUT|SELECT|TEXTAREA/.test((e.target || {}).tagName) || (W.mode !== 'book' && W.mode !== 'cards')) return;

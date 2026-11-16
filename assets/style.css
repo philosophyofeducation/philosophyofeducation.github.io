@@ -543,3 +543,8 @@ footer .shell { display: flex; justify-content: space-between; gap: 16px; flex-w
 .bk-item .ck { width: 20px; height: 20px; border: 1.5px solid var(--ink); flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; font-size: 0.8rem; }
 .bk-item.done .ck { background: var(--mustard); border-color: var(--mustard); }
 .bk-item.done strong { text-decoration: line-through; text-decoration-color: var(--mustard); text-decoration-thickness: 2px; }
+.wstat { display: inline-flex; border: 1px solid var(--ink); }
+.wstat button { font: inherit; font-size: 0.75rem; padding: 2px 8px; border: 0; border-right: 1px solid var(--ink); background: var(--paper); cursor: pointer; }
+.wstat button:last-child { border-right: 0; }
+.wstat button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.wstat button[data-wset="got it"][aria-pressed="true"] { background: var(--mustard); color: var(--ink); }
