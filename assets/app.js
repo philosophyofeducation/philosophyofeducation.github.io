@@ -696,7 +696,7 @@
   // ---------- words (Vocabulary Bank) ----------
   // Live link to the Vocabulary Bank (Google Apps Script web app bound to the sheet).
   var WORDS_API = 'https://script.google.com/macros/s/AKfycbxnFSIlL-eLszpHq754L7dZQFZCcMo80zi7xeRtznT1NM_9RtjkNkiy4dh4Ybx2v1nxXw/exec';
-  var MASTERY = 3;
+  var MASTERY = 2;
   function vocabKey() { try { return localStorage.getItem('vocabkey') || ''; } catch (e) { return ''; } }
   function mapApiRow(r) {
     var w = { status: r['Status'] || 'new', cat: r['Category'] || '', sub: r['Subcategory'] || '', word: (r['Word'] || '').trim(), en: r['English meaning'] || '', ko: r['Korean meaning'] || '', usage: r['Usage pattern'] || '', ety: r['Etymology'] || '', tip: r['Memory tip'] || '', text: r['Example from text'] || '', source: r['Source'] || '', date: r['Date added'] || '', streak: +r['Quiz streak'] || 0, record: r['Quiz record'] || '', last: r['Last quizzed'] || '' };
@@ -726,7 +726,7 @@
     for (var i = 0; i < MASTERY; i++) dots += '<i class="' + (i < n ? 'on' : '') + '"></i>';
     return '<span class="mastery" title="' + n + ' of ' + MASTERY + ' quiz answers right in a row">' + dots + '</span>';
   }
-  var W = { mode: 'book', cat: '', sub: '', status: '', mine: '', q: '', idx: 0, flip: false, quiz: null };
+  var W = { mode: 'list', cat: '', sub: '', status: '', mine: '', q: '', idx: 0, flip: false, quiz: null };
   function lsGet(k, d) { try { return JSON.parse(localStorage.getItem(k)) || d; } catch (e) { return d; } }
   function lsSet(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
   function marks() { return lsGet('wordmarks', {}); }
@@ -809,7 +809,7 @@
       '<div class="tile"><span class="label">New · Shaky</span><span class="value">' + (cnt.new || 0) + ' · ' + (cnt.shaky || 0) + '</span><span class="sub">still learning</span></div>' +
       '<div class="tile hl"><span class="label">★ Got it</span><span class="value">' + got + ' / ' + all.length + '</span><div class="bar goal"><span style="width:' + Math.max(0.5, got / Math.max(1, all.length) * 100).toFixed(1) + '%"></span></div><span class="sub">' + MASTERY + ' quiz answers right in a row</span></div>' +
       '</div></section>' +
-      '<section class="wtools"><div class="seg" role="tablist" aria-label="Mode">' + [['book', 'Book'], ['cards', 'Flashcards'], ['quiz', 'Quiz'], ['list', 'List']].map(function (m) { return '<button type="button" role="tab" data-wm="' + m[0] + '" aria-selected="' + (W.mode === m[0]) + '">' + m[1] + '</button>'; }).join('') + '</div>' +
+      '<section class="wtools"><div class="seg" role="tablist" aria-label="Mode">' + [['list', 'Word list'], ['book', 'Book'], ['cards', 'Flashcards'], ['quiz', 'Quiz']].map(function (m) { return '<button type="button" role="tab" data-wm="' + m[0] + '" aria-selected="' + (W.mode === m[0]) + '">' + m[1] + '</button>'; }).join('') + '</div>' +
       '<div class="wfilters">' +
       '<label>Meaning<select data-wf="group">' + opt('', 'All categories', W.sub ? 's:' + W.sub : (W.cat ? 'c:' + W.cat : '')) + catKeys.map(function (c) { var cur = W.sub ? 's:' + W.sub : (W.cat ? 'c:' + W.cat : ''); return '<optgroup label="' + esc(c) + '">' + opt('c:' + c, 'All of ' + c.replace(/^\d+\.\s*/, ''), cur) + Object.keys(cats[c]).sort(function (a, b) { return catNum(a.replace('-', '.')) - catNum(b.replace('-', '.')) || a.localeCompare(b, undefined, { numeric: true }); }).map(function (s) { return opt('s:' + s, s, cur); }).join('') + '</optgroup>'; }).join('') + '</select></label>' +
       '<label>How well I know it<select data-wf="mine">' + opt('', 'Every word', W.mine) + opt('unseen', 'Not checked yet', W.mine) + opt('notyet', 'Not yet (flashcards)', W.mine) + opt('missed', 'Missed in a quiz', W.mine) + opt('knew', 'I knew it', W.mine) + opt('week', 'Added this week', W.mine) + '</select></label>' +
@@ -895,13 +895,46 @@
       }); });
       var nx = box.querySelector('[data-qnext]'); if (nx) nx.addEventListener('click', function () { Q.i++; Q.picked = null; drawWordBody(set); });
     } else {
-      var groups = {}; set.forEach(function (x) { (groups[x.sub || x.cat] = groups[x.sub || x.cat] || []).push(x); });
-      var mk = marks();
-      box.innerHTML = Object.keys(groups).sort(function (a, b) { return a.localeCompare(b, undefined, { numeric: true }); }).map(function (g) {
-        return '<div class="wgroup"><h3>' + esc(g) + '</h3><div class="wlist">' + groups[g].map(function (x) { return '<button type="button" class="witem" data-wopen="' + esc(x.word) + '"><span class="wi-w">' + esc(x.word) + ' ' + masteryHTML(x) + '</span><span class="wi-k">' + esc(x.ko) + '</span></button>'; }).join('') + '</div></div>';
-      }).join('');
-      box.querySelectorAll('[data-wopen]').forEach(function (b) { b.addEventListener('click', function () { W.idx = set.findIndex(function (x) { return x.word === b.getAttribute('data-wopen'); }); W.mode = 'book'; viewWords(); window.scrollTo(0, 0); }); });
+      drawWordList(box, set);
     }
+  }
+  // ---------- word list (study by category, choose what to show) ----------
+  var LIST_FIELDS = [['ko', 'Korean'], ['en', 'English'], ['usage', 'How it\'s used'], ['ex', 'Examples'], ['tip', 'Memory tip'], ['ety', 'Roots'], ['text', 'Where I met it']];
+  function listShow() { var d = { ko: true, en: false, usage: false, ex: false, tip: false, ety: false, text: false }; return Object.assign(d, lsGet('wordlistshow', {})); }
+  var listOpen = {};
+  function drawWordList(box, set) {
+    var show = listShow(), anyOn = LIST_FIELDS.some(function (f) { return show[f[0]]; });
+    var groups = {}, order = [];
+    set.slice().sort(function (a, b) { return catNum(a.cat) - catNum(b.cat) || (a.sub || '').localeCompare(b.sub || '', undefined, { numeric: true }) || a.word.localeCompare(b.word); }).forEach(function (x) {
+      var g = (x.cat || 'Other') + '\u0001' + (x.sub || ''); if (!groups[g]) { groups[g] = []; order.push(g); } groups[g].push(x);
+    });
+    function field(w, k) {
+      var re = blankRe(w.word);
+      if (k === 'ko') return w.ko ? '<div class="wl-ko">' + esc(w.ko) + '</div>' : '';
+      if (k === 'en') return w.en ? '<p class="wl-en">' + esc(w.en) + '</p>' : '';
+      if (k === 'usage') return w.usage ? '<div class="wl-f"><span class="w-lab">How it\'s used</span><p>' + esc(w.usage) + '</p></div>' : '';
+      if (k === 'ety') return w.ety ? '<div class="wl-f"><span class="w-lab">Roots</span><p>' + esc(w.ety) + '</p></div>' : '';
+      if (k === 'tip') return w.tip ? '<p class="w-tipline">' + esc(w.tip) + '</p>' : '';
+      if (k === 'text') return w.text ? '<div class="wl-f"><span class="w-lab">Where I met it</span><blockquote>' + esc(w.text) + '</blockquote>' + (w.source ? '<span class="muted w-src">' + esc(w.source) + '</span>' : '') + '</div>' : '';
+      if (k === 'ex') return w.ex && w.ex.length ? '<div class="wl-f"><span class="w-lab">Examples</span><ol class="w-ex">' + w.ex.map(function (x) { return '<li>' + (re ? esc(x).replace(re, function (m) { return '<mark>' + m + '</mark>'; }) : esc(x)) + '</li>'; }).join('') + '</ol></div>' : '';
+      return '';
+    }
+    var lastCat = '';
+    var body = order.map(function (g) {
+      var parts = g.split('\u0001'), cat = parts[0], sub = parts[1], head = '';
+      if (cat !== lastCat) { head = '<h2 class="wl-cat">' + esc(cat) + '</h2>'; lastCat = cat; }
+      return head + '<div class="wgroup"><h3>' + esc(sub || cat) + ' <span class="muted wl-n">' + groups[g].length + '</span></h3><div class="wl-items">' + groups[g].map(function (w) {
+        var open = !!listOpen[w.word], fields = LIST_FIELDS.filter(function (f) { return show[f[0]] || open; }).map(function (f) { return field(w, f[0]); }).join('');
+        return '<article class="wl-item' + (open ? ' open' : '') + '"><div class="wl-head"><button type="button" class="wl-word" data-wlpeek="' + esc(w.word) + '" title="' + (open ? 'Hide details' : 'Show everything for this word') + '">' + esc(w.word) + '</button>' + masteryHTML(w) + (w.status === 'shaky' ? '<span class="pill">shaky</span>' : '') + '<button type="button" class="linkbtn wl-open" data-wopen="' + esc(w.word) + '">book ↗</button></div>' + (fields ? '<div class="wl-body">' + fields + '</div>' : '') + '</article>';
+      }).join('') + '</div></div>';
+    }).join('');
+    box.innerHTML = '<div class="wl-tools"><span class="w-lab">Show</span><div class="wl-toggles">' + LIST_FIELDS.map(function (f) { return '<button type="button" class="wl-tg" data-wltg="' + f[0] + '" aria-pressed="' + !!show[f[0]] + '">' + f[1] + '</button>'; }).join('') + '</div>' +
+      '<div class="wl-quick"><button type="button" class="linkbtn" data-wlall="1">show all</button> · <button type="button" class="linkbtn" data-wlall="0">words only (test myself)</button></div>' +
+      '<p class="muted wl-hint">' + (anyOn ? 'Tap a word to see everything about it.' : 'Words only: say the meaning, then tap a word to check.') + '</p></div>' + body;
+    box.querySelectorAll('[data-wltg]').forEach(function (b) { b.addEventListener('click', function () { var s2 = listShow(), k = b.getAttribute('data-wltg'); s2[k] = !s2[k]; lsSet('wordlistshow', s2); drawWordList(box, set); }); });
+    box.querySelectorAll('[data-wlall]').forEach(function (b) { b.addEventListener('click', function () { var on = b.getAttribute('data-wlall') === '1', s2 = {}; LIST_FIELDS.forEach(function (f) { s2[f[0]] = on; }); lsSet('wordlistshow', s2); listOpen = {}; drawWordList(box, set); }); });
+    box.querySelectorAll('[data-wlpeek]').forEach(function (b) { b.addEventListener('click', function () { var k = b.getAttribute('data-wlpeek'); listOpen[k] = !listOpen[k]; drawWordList(box, set); }); });
+    box.querySelectorAll('[data-wopen]').forEach(function (b) { b.addEventListener('click', function () { W.idx = set.findIndex(function (x) { return x.word === b.getAttribute('data-wopen'); }); W.mode = 'book'; viewWords(); window.scrollTo(0, 0); }); });
   }
   document.addEventListener('keydown', function (e) {
     if (location.hash !== '#words' || /INPUT|SELECT|TEXTAREA/.test((e.target || {}).tagName) || (W.mode !== 'book' && W.mode !== 'cards')) return;

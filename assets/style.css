@@ -483,3 +483,27 @@ footer .shell { display: flex; justify-content: space-between; gap: 16px; flex-w
 .ci-addmeal { display: grid; grid-template-columns: 110px 1fr auto auto; gap: 8px; align-items: center; margin-top: 8px; }
 .ci-proc { font-size: 0.82rem; display: flex; gap: 4px; align-items: center; }
 @media (max-width: 760px) { .ci-grid { grid-template-columns: 1fr; } .ci-addmeal { grid-template-columns: 100px 1fr; } }
+
+/* word list */
+.wl-tools { display: grid; gap: 8px; padding: 14px 16px; border: 1px solid var(--ink); background: #fbf8ef; margin-bottom: 22px; position: sticky; top: 67px; z-index: 5; }
+.wl-toggles { display: flex; flex-wrap: wrap; gap: 6px; }
+.wl-tg { font: inherit; font-size: 0.86rem; padding: 6px 12px; border: 1px solid var(--ink); background: var(--paper); cursor: pointer; }
+.wl-tg[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.wl-quick { font-size: 0.86rem; }
+.wl-hint { margin: 0; font-size: 0.82rem; }
+.wl-cat { font-size: 1.3rem; border-bottom: 1px solid var(--ink); padding-bottom: 6px; margin: 30px 0 14px; }
+.wl-n { font-size: 0.8rem; font-weight: 400; }
+.wl-items { display: grid; gap: 0; border-top: 1px solid var(--rule); }
+.wl-item { border-bottom: 1px solid var(--rule); padding: 12px 4px; display: grid; gap: 6px; }
+.wl-item.open { background: #fdfbf4; }
+.wl-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.wl-word { font: inherit; font-family: var(--display); font-weight: 600; font-size: 1.12rem; background: none; border: 0; padding: 0; cursor: pointer; text-align: left; border-bottom: 1px dotted transparent; }
+.wl-word:hover { border-bottom-color: var(--ink); }
+.wl-open { margin-left: auto; font-size: 0.8rem; }
+.wl-body { display: grid; gap: 6px; padding-left: 2px; }
+.wl-ko { font-weight: 500; }
+.wl-en { margin: 0; color: var(--ink-2); font-size: 0.94rem; }
+.wl-f p { margin: 2px 0 0; font-size: 0.92rem; }
+.wl-f .w-ex { margin: 4px 0 0; font-size: 0.92rem; }
+.wl-f blockquote { margin: 4px 0; font-size: 0.92rem; }
+@media (max-width: 720px) { .wl-tools { position: static; } }

@@ -54,3 +54,5 @@ Write in Markdown here.
 ## Words
 
 The Words page reads `data/words.json`, built from the Vocabulary Bank sheet with `scripts/sheet_to_words.py`. To read the sheet live instead, publish the Words tab to the web as CSV and paste that link into `WORDS_CSV` at the top of the words section in `assets/app.js`. Flashcard and quiz marks ("I knew it", "Not yet", missed words) are kept in the browser, not in the sheet.
+
+The Words page opens on **Word list**: every word grouped by category and subcategory, with toggle buttons (Korean, English, usage, examples, memory tip, roots, where I met it) to choose what shows. Tapping a word shows everything for that word. A word becomes "got it" after 2 quiz answers right in a row (`MASTERY` in `assets/app.js` and in the Apps Script web app).
