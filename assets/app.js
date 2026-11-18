@@ -980,45 +980,58 @@
     if (b && !b.disabled) b.click();
   });
 
-  // ---------- 용규 (date plans, Korean) ----------
-  var WK = { anchor: null };
+  // ---------- 용규 (calendar + bucket list, Korean) ----------
+  var WK = { tab: 'cal', month: null, sel: null };
   var KWD = ['일', '월', '화', '수', '목', '금', '토'];
   function k12(hhmm) { var a = hhmm.split(':'), h = +a[0]; return (h < 12 ? '오전 ' : '오후 ') + (h % 12 || 12) + (+a[1] ? ':' + a[1] : '시'); }
   function viewWeek() {
-    var P = D.plans || { items: [] };
-    var start = WK.anchor ? pd(WK.anchor) : monday(new Date()), tk = todayKey();
-    var days = []; for (var i = 0; i < 7; i++) days.push(key(addDays(start, i)));
-    var items = P.items || [];
-    function itemHTML(it) {
-      return '<li class="pl-item' + (it.done ? ' done' : '') + '"><span class="pl-time">' + (it.time ? k12(it.time) : (it.when ? esc(it.when) : '하루 종일')) + '</span>' +
-        '<strong>' + esc(it.title) + '</strong>' + (it.place ? '<span class="pl-meta">📍 ' + esc(it.place) + '</span>' : '') +
-        (it.note ? '<span class="pl-note">' + esc(it.note) + '</span>' : '') + '</li>';
-    }
-    var count = 0;
-    var cols = days.map(function (k) {
-      var list = items.filter(function (it) { return it.date === k; }).sort(function (x, y) { return (x.time || '') < (y.time || '') ? -1 : 1; });
-      count += list.length; var d = pd(k);
-      var tg = (P.together || []).some(function (t) { return k >= t.from && k <= t.to; });
-      return '<div class="pl-day' + (tg ? ' pl-together' : '') + (k === tk ? ' pl-today' : '') + (list.length ? ' has' : '') + '"><div class="pl-dh"><span>' + KWD[d.getDay()] + '</span><b>' + (d.getMonth() + 1) + '/' + d.getDate() + '</b></div>' +
-        (list.length ? '<ul>' + list.map(itemHTML).join('') + '</ul>' : '<p class="pl-empty">—</p>') + '</div>';
-    }).join('');
-    var e = pd(days[6]);
+    var P = D.plans || { items: [] }, items = P.items || [], tk = todayKey(), together = P.together || [], bucket = P.bucket || [];
+    function byDate(k) { return items.filter(function (it) { return it.date === k; }).sort(function (x, y) { return (x.time || '') < (y.time || '') ? -1 : 1; }); }
+    function isTg(k) { return together.some(function (t) { return k >= t.from && k <= t.to; }); }
+    function md(k) { var d = pd(k); return (d.getMonth() + 1) + '/' + d.getDate() + ' (' + KWD[d.getDay()] + ')'; }
     var upcoming = items.filter(function (it) { return it.date >= tk && !it.done; }).sort(function (x, y) { return x.date < y.date ? -1 : 1; })[0];
+    if (!WK.month) WK.month = (upcoming ? upcoming.date : tk).slice(0, 7);
+    if (!WK.sel) WK.sel = byDate(tk).length ? tk : (upcoming ? upcoming.date : tk);
     var dd = upcoming ? Math.round((pd(upcoming.date) - pd(tk)) / 864e5) : null;
     var tgLine = '';
-    (P.together || []).forEach(function (t) {
+    together.forEach(function (t) {
       if (t.to < tk) return;
       var len = Math.round((pd(t.to) - pd(t.from)) / 864e5) + 1, rng = t.from.slice(5).replace('-', '/') + ' – ' + t.to.slice(5).replace('-', '/');
       if (tk < t.from) tgLine += '<p class="lede">💛 ' + esc(t.label || '함께하는 날') + ' ' + rng + ' (' + len + '일) · 시작까지 <b>D-' + Math.round((pd(t.from) - pd(tk)) / 864e5) + '</b></p>';
       else tgLine += '<p class="lede">💛 ' + esc(t.label || '함께하는 날') + ' ' + (Math.round((pd(tk) - pd(t.from)) / 864e5) + 1) + '일째 · ' + len + '일 중 <b>' + (Math.round((pd(t.to) - pd(tk)) / 864e5) + 1) + '일</b> 남았어요</p>';
     });
-    app.innerHTML = '<div class="view" lang="ko"><section style="display:grid;gap:14px"><span class="kicker">용규 & 현진</span><h1>우리의 데이트 계획</h1>' +
-      (upcoming ? '<p class="lede">다음 만남: <b>' + esc(upcoming.title) + '</b> · ' + (upcoming.date.slice(5).replace('-', '/')) + ' (' + KWD[pd(upcoming.date).getDay()] + ') · ' + (dd === 0 ? '오늘!' : 'D-' + dd) + '</p>' : '') + tgLine + '</section>' +
-      '<section><div class="sec-head"><h2>' + (start.getMonth() + 1) + '월 ' + start.getDate() + '일 – ' + (e.getMonth() + 1) + '월 ' + e.getDate() + '일</h2>' +
-      '<span class="btn-row"><button class="btn" data-wk="-7">← 지난주</button><button class="btn" data-wk="0">이번 주</button><button class="btn" data-wk="7">다음 주 →</button></span></div>' +
-      '<div class="pl-week">' + cols + '</div>' +
-      (count ? '' : '<p class="muted" style="margin-top:12px">이번 주는 아직 계획이 없어요.</p>') + '</section></div>';
-    app.querySelectorAll('[data-wk]').forEach(function (bt) { bt.addEventListener('click', function () { var n = +bt.getAttribute('data-wk'); WK.anchor = n === 0 ? null : key(addDays(start, n)); viewWeek(); }); });
+    var head = '<section style="display:grid;gap:14px"><span class="kicker">용규 & 현진</span><h1>우리의 데이트 계획</h1>' +
+      (upcoming ? '<p class="lede">다음 만남: <b>' + esc(upcoming.short || upcoming.title) + '</b> · ' + md(upcoming.date) + ' · ' + (dd === 0 ? '오늘!' : 'D-' + dd) + '</p>' : '') + tgLine +
+      '<div class="yk-tabs" role="tablist"><button class="btn' + (WK.tab === 'cal' ? ' on' : '') + '" data-yt="cal" role="tab" aria-selected="' + (WK.tab === 'cal') + '">📅 달력</button>' +
+      '<button class="btn' + (WK.tab === 'bucket' ? ' on' : '') + '" data-yt="bucket" role="tab" aria-selected="' + (WK.tab === 'bucket') + '">💛 버킷리스트 <span class="muted">' + bucket.filter(function (b) { return b.done; }).length + '/' + bucket.length + '</span></button></div></section>';
+    var body;
+    if (WK.tab === 'bucket') {
+      var open = bucket.filter(function (b) { return !b.done; }), did = bucket.filter(function (b) { return b.done; });
+      body = '<section><div class="sec-head"><h2>용규랑 하고 싶은 것</h2><span class="muted">' + did.length + ' / ' + bucket.length + ' 이룸</span></div>' +
+        (bucket.length ? '<ul class="bk-list">' + open.concat(did).map(function (b) { return '<li class="bk-item' + (b.done ? ' done' : '') + '"><span class="ck" aria-hidden="true">' + (b.done ? '✓' : '') + '</span><span><strong>' + esc(b.title) + '</strong>' + (b.done && b.done !== true ? ' <span class="muted">· ' + esc(b.done) + '</span>' : '') + (b.note ? '<br><span class="muted">' + esc(b.note) + '</span>' : '') + '</span></li>'; }).join('') + '</ul>'
+          : '<div class="empty-state">같이 하고 싶은 걸 하나씩 모아 봐요 💛</div>') + '</section>';
+    } else {
+      var m = pd(WK.month + '-01'), mEnd = new Date(m.getFullYear(), m.getMonth() + 1, 0), lead = (m.getDay() + 6) % 7, cells = '';
+      for (var i = 0; i < lead; i++) cells += '<span class="yk-cell empty"></span>';
+      for (var d = 1; d <= mEnd.getDate(); d++) {
+        var k = key(new Date(m.getFullYear(), m.getMonth(), d)), list = byDate(k), seen = {}, chips = [];
+        list.forEach(function (it) { var l = it.short || it.title; if (!seen[l]) { seen[l] = 1; chips.push(l); } });
+        cells += '<button type="button" class="yk-cell' + (isTg(k) ? ' tg' : '') + (k === tk ? ' today' : '') + (k === WK.sel ? ' sel' : '') + (list.length ? ' has' : '') + '" data-yd="' + k + '" aria-pressed="' + (k === WK.sel) + '"><span class="d">' + d + '</span>' +
+          chips.slice(0, 2).map(function (c) { return '<span class="chip">' + esc(c) + '</span>'; }).join('') + (chips.length > 2 ? '<span class="more">+' + (chips.length - 2) + '</span>' : '') + '</button>';
+      }
+      var sl = byDate(WK.sel);
+      var panel = '<div class="yk-panel"><h3>' + md(WK.sel) + (isTg(WK.sel) ? ' <span class="pill goal">함께</span>' : '') + '</h3>' +
+        (sl.length ? '<ul>' + sl.map(function (it) {
+          return '<li class="pl-item' + (it.done ? ' done' : '') + '"><span class="pl-time">' + (it.time ? k12(it.time) : (it.when ? esc(it.when) : '하루 종일')) + '</span><strong>' + esc(it.title) + '</strong>' +
+            (it.place ? '<span class="pl-meta">📍 ' + esc(it.place) + '</span>' : '') + (it.note ? '<span class="pl-note">' + esc(it.note) + '</span>' : '') + '</li>';
+        }).join('') + '</ul>' : '<p class="muted">이날은 아직 계획이 없어요.</p>') + '</div>';
+      body = '<section class="yk-cal"><div><div class="hc-top"><button type="button" class="btn" data-ym="-1" aria-label="지난달">←</button><h2>' + m.getFullYear() + '년 ' + (m.getMonth() + 1) + '월</h2><button type="button" class="btn" data-ym="1" aria-label="다음 달">→</button></div>' +
+        '<div class="yk-grid">' + ['월', '화', '수', '목', '금', '토', '일'].map(function (x) { return '<span class="dow">' + x + '</span>'; }).join('') + cells + '</div></div>' + panel + '</section>';
+    }
+    app.innerHTML = '<div class="view" lang="ko">' + head + body + '</div>';
+    app.querySelectorAll('[data-yt]').forEach(function (bt) { bt.addEventListener('click', function () { WK.tab = bt.getAttribute('data-yt'); viewWeek(); }); });
+    app.querySelectorAll('[data-ym]').forEach(function (bt) { bt.addEventListener('click', function () { var x = pd(WK.month + '-01'); x.setMonth(x.getMonth() + +bt.getAttribute('data-ym')); WK.month = key(x).slice(0, 7); viewWeek(); }); });
+    app.querySelectorAll('[data-yd]').forEach(function (bt) { bt.addEventListener('click', function () { WK.sel = bt.getAttribute('data-yd'); viewWeek(); var pn = app.querySelector('.yk-panel'); if (pn && window.innerWidth < 860) pn.scrollIntoView({ behavior: 'smooth', block: 'start' }); }); });
   }
 
   // ---------- goals & bucket list ----------

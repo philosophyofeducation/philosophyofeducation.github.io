@@ -554,3 +554,32 @@ footer .shell { display: flex; justify-content: space-between; gap: 16px; flex-w
 .td-list li:has(.td-act) { display: block; }
 .td-act:hover .tl { text-decoration: underline; }
 .td-act:focus-visible { outline: 2px solid var(--mustard); outline-offset: 3px; }
+
+/* 용규: calendar + bucket list */
+.yk-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+.yk-tabs .btn.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.yk-tabs .btn.on .muted { color: #cfcfcf; }
+.yk-cal { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 24px; align-items: start; }
+.yk-cal .hc-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.yk-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 5px; }
+.yk-grid .dow { font-size: 0.78rem; color: var(--mute); text-align: center; padding-bottom: 2px; }
+.yk-cell { min-height: 84px; border: 1px solid var(--rule); background: var(--paper); padding: 6px; display: flex; flex-direction: column; gap: 3px; align-items: stretch; text-align: left; cursor: pointer; min-width: 0; font: inherit; color: var(--ink); }
+.yk-cell.empty { border: 0; background: transparent; cursor: default; }
+.yk-cell .d { font-size: 0.82rem; font-weight: 600; font-family: var(--mono); }
+.yk-cell .chip { font-size: 0.72rem; line-height: 1.25; background: var(--ink); color: var(--paper); padding: 2px 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.yk-cell .more { font-size: 0.68rem; color: var(--mute); }
+.yk-cell.tg { background: #faf6ea; box-shadow: inset 0 3px 0 var(--mustard); }
+.yk-cell.today { outline: 2px solid var(--ink); outline-offset: -2px; }
+.yk-cell.sel { outline: 3px solid var(--mustard); outline-offset: 1px; position: relative; z-index: 1; }
+.yk-cell:hover:not(.empty) { box-shadow: 0 4px 10px rgba(0,0,0,.08); }
+.yk-panel { border-top: 1.5px solid var(--ink); padding-top: 12px; position: sticky; top: 16px; }
+.yk-panel h3 { margin: 0 0 10px; display: flex; align-items: center; gap: 8px; }
+.yk-panel ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.yk-panel .pl-item { font-size: 0.92rem; padding: 9px 10px; }
+@media (max-width: 860px) {
+  .yk-cal { grid-template-columns: 1fr; }
+  .yk-panel { position: static; }
+  .yk-grid { gap: 3px; }
+  .yk-cell { min-height: 58px; padding: 4px 3px; }
+  .yk-cell .chip { font-size: 0.62rem; padding: 1px 3px; white-space: normal; word-break: keep-all; overflow: visible; }
+}
