@@ -1025,12 +1025,13 @@
           return '<li class="pl-item' + (it.done ? ' done' : '') + '"><span class="pl-time">' + (it.time ? k12(it.time) : (it.when ? esc(it.when) : '하루 종일')) + '</span><strong>' + esc(it.title) + '</strong>' +
             (it.place ? '<span class="pl-meta">📍 ' + esc(it.place) + '</span>' : '') + (it.note ? '<span class="pl-note">' + esc(it.note) + '</span>' : '') + '</li>';
         }).join('') + '</ul>' : '<p class="muted">이날은 아직 계획이 없어요.</p>') + '</div>';
-      body = '<section class="yk-cal"><div><div class="hc-top"><button type="button" class="btn" data-ym="-1" aria-label="지난달">←</button><h2>' + m.getFullYear() + '년 ' + (m.getMonth() + 1) + '월</h2><button type="button" class="btn" data-ym="1" aria-label="다음 달">→</button></div>' +
+      body = '<section class="yk-cal"><div><div class="hc-top"><button type="button" class="btn" data-ym="-1" aria-label="지난달">←</button><label class="yk-mpick"><span class="sr-only">달 고르기</span><h2>' + m.getFullYear() + '년 ' + (m.getMonth() + 1) + '월 ▾</h2><input type="month" data-ymp value="' + WK.month + '"></label><button type="button" class="btn" data-ym="1" aria-label="다음 달">→</button></div>' +
         '<div class="yk-grid">' + ['월', '화', '수', '목', '금', '토', '일'].map(function (x) { return '<span class="dow">' + x + '</span>'; }).join('') + cells + '</div></div>' + panel + '</section>';
     }
     app.innerHTML = '<div class="view" lang="ko">' + head + body + '</div>';
     app.querySelectorAll('[data-yt]').forEach(function (bt) { bt.addEventListener('click', function () { WK.tab = bt.getAttribute('data-yt'); viewWeek(); }); });
     app.querySelectorAll('[data-ym]').forEach(function (bt) { bt.addEventListener('click', function () { var x = pd(WK.month + '-01'); x.setMonth(x.getMonth() + +bt.getAttribute('data-ym')); WK.month = key(x).slice(0, 7); viewWeek(); }); });
+    var mp = app.querySelector('[data-ymp]'); if (mp) mp.addEventListener('change', function () { if (mp.value) { WK.month = mp.value; viewWeek(); } });
     app.querySelectorAll('[data-yd]').forEach(function (bt) { bt.addEventListener('click', function () { WK.sel = bt.getAttribute('data-yd'); viewWeek(); var pn = app.querySelector('.yk-panel'); if (pn && window.innerWidth < 860) pn.scrollIntoView({ behavior: 'smooth', block: 'start' }); }); });
   }
 

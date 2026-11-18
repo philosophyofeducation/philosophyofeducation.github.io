@@ -583,3 +583,7 @@ footer .shell { display: flex; justify-content: space-between; gap: 16px; flex-w
   .yk-cell { min-height: 58px; padding: 4px 3px; }
   .yk-cell .chip { font-size: 0.62rem; padding: 1px 3px; white-space: normal; word-break: keep-all; overflow: visible; }
 }
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.yk-mpick { position: relative; cursor: pointer; }
+.yk-mpick h2 { margin: 0; }
+.yk-mpick input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; }
