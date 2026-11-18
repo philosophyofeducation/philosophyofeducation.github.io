@@ -990,7 +990,7 @@
     var days = []; for (var i = 0; i < 7; i++) days.push(key(addDays(start, i)));
     var items = P.items || [];
     function itemHTML(it) {
-      return '<li class="pl-item' + (it.done ? ' done' : '') + '"><span class="pl-time">' + (it.time ? k12(it.time) : '하루 종일') + '</span>' +
+      return '<li class="pl-item' + (it.done ? ' done' : '') + '"><span class="pl-time">' + (it.time ? k12(it.time) : (it.when ? esc(it.when) : '하루 종일')) + '</span>' +
         '<strong>' + esc(it.title) + '</strong>' + (it.place ? '<span class="pl-meta">📍 ' + esc(it.place) + '</span>' : '') +
         (it.note ? '<span class="pl-note">' + esc(it.note) + '</span>' : '') + '</li>';
     }
@@ -998,14 +998,22 @@
     var cols = days.map(function (k) {
       var list = items.filter(function (it) { return it.date === k; }).sort(function (x, y) { return (x.time || '') < (y.time || '') ? -1 : 1; });
       count += list.length; var d = pd(k);
-      return '<div class="pl-day' + (k === tk ? ' pl-today' : '') + (list.length ? ' has' : '') + '"><div class="pl-dh"><span>' + KWD[d.getDay()] + '</span><b>' + (d.getMonth() + 1) + '/' + d.getDate() + '</b></div>' +
+      var tg = (P.together || []).some(function (t) { return k >= t.from && k <= t.to; });
+      return '<div class="pl-day' + (tg ? ' pl-together' : '') + (k === tk ? ' pl-today' : '') + (list.length ? ' has' : '') + '"><div class="pl-dh"><span>' + KWD[d.getDay()] + '</span><b>' + (d.getMonth() + 1) + '/' + d.getDate() + '</b></div>' +
         (list.length ? '<ul>' + list.map(itemHTML).join('') + '</ul>' : '<p class="pl-empty">—</p>') + '</div>';
     }).join('');
     var e = pd(days[6]);
     var upcoming = items.filter(function (it) { return it.date >= tk && !it.done; }).sort(function (x, y) { return x.date < y.date ? -1 : 1; })[0];
     var dd = upcoming ? Math.round((pd(upcoming.date) - pd(tk)) / 864e5) : null;
+    var tgLine = '';
+    (P.together || []).forEach(function (t) {
+      if (t.to < tk) return;
+      var len = Math.round((pd(t.to) - pd(t.from)) / 864e5) + 1, rng = t.from.slice(5).replace('-', '/') + ' – ' + t.to.slice(5).replace('-', '/');
+      if (tk < t.from) tgLine += '<p class="lede">💛 ' + esc(t.label || '함께하는 날') + ' ' + rng + ' (' + len + '일) · 시작까지 <b>D-' + Math.round((pd(t.from) - pd(tk)) / 864e5) + '</b></p>';
+      else tgLine += '<p class="lede">💛 ' + esc(t.label || '함께하는 날') + ' ' + (Math.round((pd(tk) - pd(t.from)) / 864e5) + 1) + '일째 · ' + len + '일 중 <b>' + (Math.round((pd(t.to) - pd(tk)) / 864e5) + 1) + '일</b> 남았어요</p>';
+    });
     app.innerHTML = '<div class="view" lang="ko"><section style="display:grid;gap:14px"><span class="kicker">용규 & 현진</span><h1>우리의 데이트 계획</h1>' +
-      (upcoming ? '<p class="lede">다음 만남: <b>' + esc(upcoming.title) + '</b> · ' + (upcoming.date.slice(5).replace('-', '/')) + ' (' + KWD[pd(upcoming.date).getDay()] + ') · ' + (dd === 0 ? '오늘!' : 'D-' + dd) + '</p>' : '') + '</section>' +
+      (upcoming ? '<p class="lede">다음 만남: <b>' + esc(upcoming.title) + '</b> · ' + (upcoming.date.slice(5).replace('-', '/')) + ' (' + KWD[pd(upcoming.date).getDay()] + ') · ' + (dd === 0 ? '오늘!' : 'D-' + dd) + '</p>' : '') + tgLine + '</section>' +
       '<section><div class="sec-head"><h2>' + (start.getMonth() + 1) + '월 ' + start.getDate() + '일 – ' + (e.getMonth() + 1) + '월 ' + e.getDate() + '일</h2>' +
       '<span class="btn-row"><button class="btn" data-wk="-7">← 지난주</button><button class="btn" data-wk="0">이번 주</button><button class="btn" data-wk="7">다음 주 →</button></span></div>' +
       '<div class="pl-week">' + cols + '</div>' +

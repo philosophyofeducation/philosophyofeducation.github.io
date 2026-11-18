@@ -517,6 +517,7 @@ footer .shell { display: flex; justify-content: space-between; gap: 16px; flex-w
 .pl-week { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); border-top: 1.5px solid var(--ink); }
 .pl-day { border-right: 1px solid var(--rule); padding: 10px 8px 14px; min-height: 160px; }
 .pl-day:last-child { border-right: 0; }
+.pl-day.pl-together { background: #faf6ea; box-shadow: inset 0 3px 0 var(--mustard, #c9a227); }
 .pl-day.pl-today { background: var(--mustard-soft); }
 .pl-dh { display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--mute); margin-bottom: 8px; }
 .pl-dh b { font-family: var(--mono); color: var(--ink); font-weight: 500; }
