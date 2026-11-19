@@ -1,4 +1,4 @@
-/* Jinny Hyunjin Kim — personal site. Plain JS, no build step.
+/* 현진 — personal site. Plain JS, no build step.
    Data: data/study.json (minutes per subject per day, synced from YPT),
          logs/index.json (daily notes, built from logs/*.md),
          posts/index.json (blog posts, built from posts/*.md). */
@@ -214,7 +214,7 @@
     var thoughtsN = D.logs.reduce(function (n, l) { return n + l.sections.reduce(function (m, s) { return m + s.thoughts.length; }, 0); }, 0);
     function stat(label, value, sub, href, hl) { return '<a class="stat' + (hl ? ' hl' : '') + '" href="' + href + '"><span class="label">' + label + '</span><span class="value">' + value + '</span><span class="sub">' + sub + '</span></a>'; }
     var html = '<div class="view">' +
-      '<section class="home-head"><span class="kicker">Jinny Hyunjin Kim · PhD student, Philosophy of Education</span><h1>I study how <em>words wound</em>, and what education can do about it.</h1></section>' +
+      '<section class="home-head"><span class="kicker">현진 · PhD student, Philosophy of Education</span><h1>I study how <em>words wound</em>, and what education can do about it.</h1></section>' +
       todayHTML(tk) + (canEdit() ? checkinHTML() : '') +
       '<section class="home-cal"><div class="hc-cal"><div class="hc-top"><button type="button" class="btn" data-hm="-1" aria-label="Previous month">←</button><h2>' + esc(md.toLocaleString('en-US', { month: 'long', year: 'numeric' })) + '</h2><button type="button" class="btn" data-hm="1" aria-label="Next month"' + (homeState.month >= tk.slice(0, 7) ? ' disabled' : '') + '>→</button></div>' +
       '<div class="cal big">' + ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(function (x) { return '<span class="dow">' + x + '</span>'; }).join('') + calCells(mStart, mEnd, tk) + '</div>' +
@@ -1072,7 +1072,7 @@
     else { section = 'home'; viewHome(); }
     document.querySelectorAll('[data-nav]').forEach(function (a) { if (a.getAttribute('data-nav') === section) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
     var T = { home: '', studylog: 'Study Log', library: 'Library', words: 'Words', habits: 'Habits', yongkyu: '용규', goals: 'Goals' };
-    document.title = (T[section] ? T[section] + ' · ' : '') + 'Jinny Hyunjin Kim';
+    document.title = (T[section] ? T[section] + ' · ' : '') + '현진';
     ownerBar();
   }
   function ownerBar() {
